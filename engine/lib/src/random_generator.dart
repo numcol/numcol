@@ -1,7 +1,7 @@
 import 'dart:math';
 
-import '../enums.dart';
-import '../model/answer.dart';
+import 'enums.dart';
+import 'answer.dart';
 
 var colors = Color.values;
 var numbers = Number.values;
@@ -16,22 +16,22 @@ Color _randomColour() {
   return colors[random.nextInt(colors.length)];
 }
 
-class GameService {
-  static Answer newAnswer() {
+class RandomGenerator {
+  static Answer generateAnswer() {
     return new Answer(_randomColour(), _randomNumber());
   }
 
-  static List<Answer> newGameData() {
+  static List<Answer> generateAnswers() {
     var questions = new List<Answer>();
 
     for (var i = 0; i < 36; i++) {
-      questions.add(GameService.newAnswer());
+      questions.add(RandomGenerator.generateAnswer());
     }
 
     return questions;
   }
 
-  static Answer getRandomQuestion(List<Answer> answers) {
+  static Answer generateQuestion(List<Answer> answers) {
     final _random = new Random();
     return answers[_random.nextInt(answers.length)];
   }

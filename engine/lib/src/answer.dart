@@ -1,4 +1,4 @@
-import '../enums.dart';
+import 'enums.dart';
 
 class Answer {
   final Color color;

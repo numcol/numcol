@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import '../../../model/answer.dart';
+import 'package:numcolengine/numcolengine.dart';
 
 class AnswerWidget extends StatelessWidget {
   AnswerWidget(this._answer);

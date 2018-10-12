@@ -22,6 +22,12 @@ class _CountdownScreenState extends State<CountdownScreen> with TickerProviderSt
   }
 
   @override
+  void dispose() {
+    _controller.dispose();
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
     var animation = new StepTween(
       begin: startValue,

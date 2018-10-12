@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
-import '../../services/game_service.dart';
-import '../../model/answer.dart';
+import 'package:numcolengine/numcolengine.dart';
 import 'widgets/index.dart';
 
 class GameScreen extends StatefulWidget {
@@ -9,12 +8,12 @@ class GameScreen extends StatefulWidget {
 }
 
 class _GameScreenState extends State<GameScreen> {
-  List<Answer> _answers = GameService.newGameData();
+  List<Answer> _answers = RandomGenerator.generateAnswers();
   Answer _question;
 
   @override
   Widget build(BuildContext context) {
-    _question = GameService.getRandomQuestion(_answers);
+    _question = RandomGenerator.generateQuestion(_answers);
     return Scaffold(
       body: Column(
         mainAxisAlignment: MainAxisAlignment.center,

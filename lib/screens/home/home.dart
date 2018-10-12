@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+
+import '../../translations.dart';
 import '../../routes.dart';
 
 class HomeScreen extends StatelessWidget {
@@ -10,7 +12,7 @@ class HomeScreen extends StatelessWidget {
           onPressed: () {
             Navigator.pushNamed(context, Routes.countdown);
           },
-          child: Text('Play!'),
+          child: Text(Translations.of(context).text('play')),
         ),
       ),
     );

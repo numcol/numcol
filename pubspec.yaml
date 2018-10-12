@@ -9,6 +9,8 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
+  flutter_localizations:
+    sdk: flutter
   numcolengine:
       path: ./engine/
 
@@ -23,3 +25,11 @@ flutter:
     - family: Poiretone
       fonts:
         - asset: fonts/poiretone.ttf
+
+  assets:
+    - locale/i18n_en.json
+    - locale/i18n_fr.json
+    - locale/i18n_ca.json
+    - locale/i18n_es.json
+    - locale/i18n_gl.json
+    - locale/i18n_eu.json

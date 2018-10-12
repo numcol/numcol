@@ -8,12 +8,10 @@ class GameScreen extends StatefulWidget {
 }
 
 class _GameScreenState extends State<GameScreen> {
-  List<Answer> _answers = RandomGenerator.generateAnswers();
-  Answer _question;
+  final Game _game = new Game();
 
   @override
   Widget build(BuildContext context) {
-    _question = RandomGenerator.generateQuestion(_answers);
     return Scaffold(
       body: Column(
         mainAxisAlignment: MainAxisAlignment.center,
@@ -26,8 +24,8 @@ class _GameScreenState extends State<GameScreen> {
               ScoreWidget()
             ]
           ),
-          QuestionWidget(_question),
-          Expanded(child: AnswersWidget(_answers)),
+          QuestionWidget(_game.question),
+          Expanded(child: AnswersWidget(_game.answers)),
         ]
       )
     );

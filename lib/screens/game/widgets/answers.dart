@@ -15,7 +15,7 @@ class AnswersWidget extends StatelessWidget {
 
     return GridView.count(
       primary: false,
-      padding: const EdgeInsets.all(20.0),
+      mainAxisSpacing: 10.0,
       crossAxisSpacing: 10.0,
       crossAxisCount: 6,
       children: answers,

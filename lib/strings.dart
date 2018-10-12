@@ -1,5 +1,6 @@
 class Fonts {
   static const poiretone = 'Poiretone';
+  static const lemonMilk = 'LemonMilk';
 }
 
 class Locales {

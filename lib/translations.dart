@@ -12,15 +12,13 @@ class Translations {
   }
 
   Locale locale;
-  static Map<dynamic, dynamic> _localizedValues;
+  static Map<dynamic, dynamic> _localizedValues = new Map<dynamic, dynamic>();
 
   static Translations of(BuildContext context){
     return Localizations.of<Translations>(context, Translations);
   }
 
-  String text(String key) {
-    return _localizedValues[key] ?? '** $key not found';
-  }
+  String text(String key) => _localizedValues != null && _localizedValues[key] != null ? _localizedValues[key] : '';
 
   static Future<Translations> load(Locale locale) async {
     Translations translations = new Translations(locale);

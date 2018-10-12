@@ -7,12 +7,14 @@ class HomeScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Center(
-        child: RaisedButton(
-          onPressed: () {
-            Navigator.pushNamed(context, Routes.countdown);
-          },
-          child: Text(Translations.of(context).text('play')),
+      body: SafeArea(
+        child: Center(
+          child: RaisedButton(
+            onPressed: () {
+              Navigator.pushNamed(context, Routes.countdown);
+            },
+            child: Text(Translations.of(context).text('play')),
+          ),
         ),
       ),
     );

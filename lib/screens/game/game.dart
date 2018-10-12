@@ -13,20 +13,26 @@ class _GameScreenState extends State<GameScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        mainAxisSize: MainAxisSize.max,
-        crossAxisAlignment: CrossAxisAlignment.center,
-        children: <Widget>[
-          Row(
+      body: SafeArea(
+        child: Container(
+          padding: const EdgeInsets.all(15.0),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            mainAxisSize: MainAxisSize.max,
+            crossAxisAlignment: CrossAxisAlignment.center,
             children: <Widget>[
-              RemainingWidget(),
-              ScoreWidget()
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceAround,
+                children: <Widget>[
+                  RemainingWidget(),
+                  ScoreWidget()
+                ]
+              ),
+              QuestionWidget(_game.question),
+              Expanded(child: AnswersWidget(_game.answers)),
             ]
-          ),
-          QuestionWidget(_game.question),
-          Expanded(child: AnswersWidget(_game.answers)),
-        ]
+          )
+        )
       )
     );
   }

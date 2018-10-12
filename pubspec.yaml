@@ -25,6 +25,9 @@ flutter:
     - family: Poiretone
       fonts:
         - asset: fonts/poiretone.ttf
+    - family: LemonMilk
+      fonts:
+        - asset: fonts/LemonMilk.otf
 
   assets:
     - locale/i18n_en.json

@@ -23,6 +23,7 @@ class _CountdownScreenState extends State<CountdownScreen> with TickerProviderSt
 
   @override
   void dispose() {
+    _controller.stop();
     _controller.dispose();
     super.dispose();
   }

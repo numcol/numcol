@@ -1,4 +1,4 @@
-export 'answer.dart';
+export 'answer/answer.dart';
 export 'answers.dart';
 export 'question.dart';
 export 'remaining.dart';

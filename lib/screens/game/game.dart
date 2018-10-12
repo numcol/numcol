@@ -10,6 +10,17 @@ class GameScreen extends StatefulWidget {
 class _GameScreenState extends State<GameScreen> {
   final Game _game = new Game();
 
+  void answerTaped (Answer answer) {
+    if (_game.checkAnswer(answer)) {
+      setState(() {
+        _game.nextQuestion(answer);
+      });
+      print('Ok  Answer');
+      return;
+    }
+    print((answer == _game.question).toString() + 'Ko Answer');
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -29,7 +40,7 @@ class _GameScreenState extends State<GameScreen> {
                 ]
               ),
               QuestionWidget(_game.question),
-              Expanded(child: AnswersWidget(_game.answers)),
+              Expanded(child: AnswersWidget(_game.answers, answerTaped)),
             ]
           )
         )

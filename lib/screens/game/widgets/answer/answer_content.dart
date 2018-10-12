@@ -2,11 +2,11 @@ import 'dart:ui' as ui;
 import 'package:flutter/material.dart';
 import 'package:numcolengine/numcolengine.dart' hide Color;
 
-import '../../../strings.dart';
-import '../../../maps.dart';
+import '../../../../strings.dart';
+import '../../../../maps.dart';
 
-class AnswerWidget extends StatelessWidget {
-  AnswerWidget(this._answer);
+class AnswerContentWidget extends StatelessWidget {
+  AnswerContentWidget(this._answer);
 
   final Answer _answer;
 

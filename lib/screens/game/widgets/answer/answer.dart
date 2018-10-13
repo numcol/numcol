@@ -1,21 +1,21 @@
 import 'package:flutter/material.dart';
 import 'package:numcolengine/numcolengine.dart' hide Color;
 
-import 'answer_content.dart';
+import 'widgets/index.dart';
+import '../reply.dart';
 
 typedef void AnswerCallback(Answer val);
 
 class AnswerWidget extends StatelessWidget {
-  AnswerWidget(this._answer, this.callback);
+  const AnswerWidget(this._answer);
 
-  final AnswerCallback callback;
   final Answer _answer;
 
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
       onTapDown: (details) {
-        callback(_answer);
+        ReplyInheritedWidget.of(context).reply.value = _answer;
       },
       child: AnswerContentWidget(this._answer),
     );

@@ -3,19 +3,14 @@ import 'package:numcolengine/numcolengine.dart';
 import 'answer/answer.dart';
 
 class AnswersWidget extends StatelessWidget {
-  AnswersWidget(this._answers, this.callback);
+  AnswersWidget(this._answers);
 
-  final AnswerCallback callback;
   final List<Answer> _answers;
-
-  void answerTaped (Answer answer) {
-    callback(answer);
-  }
 
   @override
   Widget build(BuildContext context) {
     List<Widget> answers = _answers.map((answer) {
-      return AnswerWidget(answer, answerTaped);
+      return AnswerWidget(answer);
     }).toList();
 
     return GridView.count(

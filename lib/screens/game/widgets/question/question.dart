@@ -7,7 +7,8 @@ import '../../../../maps.dart';
 import '../../../../strings.dart';
 
 class QuestionWidget extends StatefulWidget {
-  QuestionWidget(this.question, this.isColorOk, this.isNumberOk);
+  QuestionWidget({Key key, @required this.question, @required this.isColorOk, @required this.isNumberOk})
+    : super(key: key);
 
   final Answer question;
   final ValueNotifier<bool> isColorOk;
@@ -36,7 +37,7 @@ class _QuestionWidgetState extends State<QuestionWidget> with TickerProviderStat
       if (status == AnimationStatus.completed) {
         controller.reverse();
       } else if (status == AnimationStatus.dismissed) {
-        controller.forward();
+        controller.stop();
       }
     })..addListener(() {
       setState((){});

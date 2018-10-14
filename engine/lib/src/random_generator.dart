@@ -6,17 +6,9 @@ import 'answer.dart';
 var colors = Color.values;
 var numbers = Number.values;
 
-Number _randomNumber() {
-  final random = new Random();
-  return numbers[random.nextInt(numbers.length)];
-}
-
-Color _randomColour() {
-  final random = new Random();
-  return colors[random.nextInt(colors.length)];
-}
-
 class RandomGenerator {
+  static final _random = new Random();
+
   static Answer generateAnswer() {
     return new Answer(_randomColour(), _randomNumber());
   }
@@ -25,14 +17,21 @@ class RandomGenerator {
     var questions = new List<Answer>();
 
     for (var i = 0; i < 36; i++) {
-      questions.add(RandomGenerator.generateAnswer());
+      questions.add(generateAnswer());
     }
 
     return questions;
   }
 
   static Answer generateQuestion(List<Answer> answers) {
-    final _random = new Random();
     return answers[_random.nextInt(answers.length)];
+  }
+
+  static Number _randomNumber() {
+    return numbers[_random.nextInt(numbers.length)];
+  }
+
+  static Color _randomColour() {
+    return colors[_random.nextInt(colors.length)];
   }
 }

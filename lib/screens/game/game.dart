@@ -10,7 +10,7 @@ class GameScreen extends StatefulWidget {
 }
 
 class _GameScreenState extends State<GameScreen> {
-  final Game _game = new Game();
+  Game _game = new Game();
   final ValueNotifier<Answer> _reply = ValueNotifier<Answer>(null);
   final ValueNotifier<bool> _isColorOk = ValueNotifier(true);
   final ValueNotifier<bool> _isNumberOk = ValueNotifier(true);
@@ -63,9 +63,15 @@ class _GameScreenState extends State<GameScreen> {
                     ScoreWidget()
                   ]
                 ),
-                QuestionWidget(_game.question, _isColorOk, _isNumberOk),
+                QuestionWidget(
+                  question: _game.question,
+                  isColorOk: _isColorOk,
+                  isNumberOk: _isNumberOk
+                ),
                 Expanded(
-                  child: AnswersWidget(_game.answers),
+                  child: AnswersWidget(
+                    answers: _game.answers
+                  ),
                 ),
               ]
             )

@@ -1,5 +1,7 @@
 {
-    "play": "Jolastu",
+    "settings": "Ezarpenak",
+
+    "play": "► Jolastu",
     "new": "Berria",
     "back_to_menu": "Itzuli",
     "top_score": "Puntuazioak",

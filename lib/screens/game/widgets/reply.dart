@@ -4,7 +4,7 @@ import 'package:numcolengine/numcolengine.dart';
 class ReplyInheritedWidget extends InheritedWidget {
   const ReplyInheritedWidget({
     Key key,
-    this.reply,
+    @required this.reply,
     Widget child}) : super(key: key, child: child);
 
   final ValueNotifier<Answer> reply;

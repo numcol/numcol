@@ -1,16 +1,18 @@
 import 'package:flutter/material.dart';
 import 'package:numcolengine/numcolengine.dart';
-import 'answer/answer.dart';
+import 'answer.dart';
 
 class AnswersWidget extends StatelessWidget {
-  AnswersWidget(this._answers);
+  AnswersWidget({Key key, @required this.answers}) : super(key: key);
 
-  final List<Answer> _answers;
+  final List<Answer> answers;
 
   @override
   Widget build(BuildContext context) {
-    List<Widget> answers = _answers.map((answer) {
-      return AnswerWidget(answer);
+    List<Widget> answerWidgets = answers.map((answer) {
+      return AnswerWidget(
+        answer: answer
+      );
     }).toList();
 
     return GridView.count(
@@ -18,7 +20,7 @@ class AnswersWidget extends StatelessWidget {
       mainAxisSpacing: 10.0,
       crossAxisSpacing: 10.0,
       crossAxisCount: 6,
-      children: answers,
+      children: answerWidgets,
     );
   }
 }

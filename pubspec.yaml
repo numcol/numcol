@@ -28,6 +28,9 @@ flutter:
     - family: LemonMilk
       fonts:
         - asset: fonts/LemonMilk.otf
+    - family: RobotoMono
+      fonts:
+        - asset: fonts/RobotoMono-Regular.ttf
 
   assets:
     - locale/i18n_en.json

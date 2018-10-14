@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import '../../../../strings.dart';
+
 class RemainingCounter extends AnimatedWidget {
   RemainingCounter({ Key key, @required this.animation }) : super(key: key, listenable: animation);
 
@@ -8,9 +10,9 @@ class RemainingCounter extends AnimatedWidget {
   @override
   build(BuildContext context){
     return new Text(
-      animation.value.toString(),
+      (animation.value / 1000).toStringAsFixed(3).padLeft(6, '0'),
       style: TextStyle(
-        fontWeight: FontWeight.bold,
+        fontFamily: Fonts.robotoMono,
       ),
     );
   }

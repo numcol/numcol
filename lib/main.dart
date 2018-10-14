@@ -38,12 +38,12 @@ class _NumcolState extends State<Numcol> {
     ]);
     return MaterialApp(
       title: 'NumCol',
-      //initialRoute: '/',
-      home: HomeScreen(),
+      initialRoute: '/',
       routes: {
-        //Routes.home: (context) => HomeScreen(),
+        Routes.home: (context) => HomeScreen(),
         Routes.game: (context) => GameScreen(),
         Routes.countdown: (context) => CountdownScreen(),
+        Routes.gameover: (context) => GameoverScreen(),
       },
       localizationsDelegates: [
         _newLocaleDelegate,

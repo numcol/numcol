@@ -14,7 +14,9 @@ class Application {
     Locales.galego
   ];
 
-  final int initialTimeInMilliseconds = 10000;
+  final int initialTimeInMilliseconds = 30000;
+  final double timePenaltyMultiplier = 0.66;
+  final int timeAdditionByAnswerInMilliseconds = 1800;
 
   Iterable<Locale> supportedLocales() => supportedLanguages.map<Locale>((lang) => new Locale(lang, ''));
 

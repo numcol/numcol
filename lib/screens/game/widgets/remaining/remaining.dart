@@ -13,16 +13,15 @@ class RemainingWidget extends StatefulWidget {
 }
 
 class _RemainingWidgetState extends State<RemainingWidget> with TickerProviderStateMixin {
-  Animation _animation;
+  void _setState() {
+    setState(() => null);
+  }
 
   @override
   void initState() {
     super.initState();
     widget.timer.start(this);
-    _animation = new StepTween(
-      begin: widget.timer.maxTimeInMilliseconds.round(),
-      end: 0,
-    ).animate(widget.timer.controller);
+    widget.timer.controller.addListener(_setState);
   }
 
   @override
@@ -31,9 +30,18 @@ class _RemainingWidgetState extends State<RemainingWidget> with TickerProviderSt
       children: <Widget>[
         Text('Time'),
         RemainingCounter(
-          animation: _animation,
+          animation: new StepTween(
+            begin: widget.timer.maxTimeInMilliseconds.round(),
+            end: 0,
+          ).animate(widget.timer.controller.value),
         ),
       ]
     );
+  }
+
+  @override
+  void dispose() {
+    widget.timer.controller.removeListener(_setState);
+    super.dispose();
   }
 }

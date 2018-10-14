@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:numcolengine/numcolengine.dart';
 
+import '../../routes.dart';
 import '../../application.dart';
 import '../../core/timer.dart';
 import 'widgets/reply.dart';
@@ -13,26 +14,38 @@ class GameScreen extends StatefulWidget {
 
 class _GameScreenState extends State<GameScreen> {
   final Game _game = new Game();
-  final Timer _timer = new Timer(application.initialTimeInMilliseconds);
   final ValueNotifier<Answer> _reply = ValueNotifier<Answer>(null);
   final ValueNotifier<bool> _isColorOk = ValueNotifier(true);
   final ValueNotifier<bool> _isNumberOk = ValueNotifier(true);
+  final ValueNotifier<int> _score = ValueNotifier(0);
 
+  Timer _timer;
   List<ValueNotifier<Answer>> _answers;
   ValueNotifier<Answer> _question;
 
   void _answerTaped (Answer answer) {
     if (answer != null) {
       if (_game.checkAnswer(answer)) {
-        var answerIndex = _game.nextQuestion(answer);
+        var answerIndex = _game.nextQuestion(answer, _timer.remainingInMilliseconds, _timer.maxTimeInMilliseconds);
+        _timer.success();
+
         _answers[answerIndex].value = _game.answers[answerIndex];
         _question.value = _game.question;
+        _score.value = _game.score;
       } else {
         _isColorOk.value = answer.color == _game.question.color;
         _isNumberOk.value = answer.number == _game.question.number;
+        var isGameOver = _timer.fail();
+        if (isGameOver) {
+          _gameover();
+        }
       }
       _reply.value = null;
     }
+  }
+
+  void _gameover() {
+    Navigator.popAndPushNamed(context, Routes.gameover);
   }
 
   @override
@@ -41,6 +54,12 @@ class _GameScreenState extends State<GameScreen> {
     _reply.addListener(() => _answerTaped(_reply.value));
     _answers = _game.answers.map((answer) => ValueNotifier(answer)).toList();
     _question = ValueNotifier(_game.question);
+    _timer = new Timer(
+      application.initialTimeInMilliseconds,
+      application.timePenaltyMultiplier,
+      application.timeAdditionByAnswerInMilliseconds,
+      _gameover
+    );
   }
 
   @override
@@ -60,7 +79,7 @@ class _GameScreenState extends State<GameScreen> {
                   mainAxisAlignment: MainAxisAlignment.spaceAround,
                   children: <Widget>[
                     RemainingWidget(timer: _timer),
-                    ScoreWidget()
+                    ScoreWidget(score: _score)
                   ]
                 ),
                 QuestionWidget(

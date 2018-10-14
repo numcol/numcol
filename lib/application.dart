@@ -14,7 +14,7 @@ class Application {
     Locales.galego
   ];
 
-  final int initialTimeInMilliseconds = 30000;
+  final int initialTimeInMilliseconds = 10000;
   final double timePenaltyMultiplier = 0.66;
   final int timeAdditionByAnswerInMilliseconds = 1800;
 

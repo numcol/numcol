@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart' hide Color;
 import 'package:numcolengine/numcolengine.dart';
 
-import '../../widgets/numcol_button.dart';
+import '../../widgets/menu_button.dart';
 import '../../strings.dart';
 import '../../styles.dart';
 import '../../translations.dart';
@@ -33,19 +33,11 @@ class GameoverScreen extends StatelessWidget {
                   ),
                 ),
               ),
-              Container(
-                padding: const EdgeInsets.only(
-                  top: 15.0,
-                ),
-                height: 60.0,
-                width: 240.0,
-                child: NumcolButton(
-                  color: Color.green,
-                  text: Translations.of(context).text('play'),
-                  onPressed: () => Navigator.pushNamed(context, Routes.countdown),
-                ),
+              MenuButton(
+                color: Color.green,
+                text: Translations.of(context).text('play'),
+                onPressed: () => Navigator.pushNamed(context, Routes.countdown),
               ),
-
             ],
           ),
         ),

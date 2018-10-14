@@ -10,4 +10,5 @@ class ScreenColors {
   static const blue = const Color(0xff31ceff);
   static const darkBlue = const Color(0xff16a8d4);
   static const black = const Color(0xff333333);
+  static const white = const Color(0xffffffff);
 }

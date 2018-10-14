@@ -8,48 +8,43 @@ class CountdownScreen extends StatefulWidget {
 }
 
 class _CountdownScreenState extends State<CountdownScreen> with TickerProviderStateMixin {
-  AnimationController _controller;
-
   static const int startValue = 4;
+
+  AnimationController _animationController;
+  Animation _animation;
 
   @override
   void initState() {
     super.initState();
-    _controller = new AnimationController(
+    var _animationController = new AnimationController(
       vsync: this,
       duration: new Duration(seconds: startValue),
     );
+    _animation = new StepTween(
+        begin: startValue,
+        end: 0,
+      ).animate(_animationController);
+    _animation.addStatusListener((animationStatus) {
+      if (animationStatus == AnimationStatus.completed) {
+        Navigator.popAndPushNamed(context, Routes.game);
+      }
+    });
+    _animationController.forward(from: 0.0);
   }
 
   @override
   void dispose() {
-    _controller.stop();
-    _controller.dispose();
+    _animationController?.dispose();
     super.dispose();
   }
 
   @override
   Widget build(BuildContext context) {
-    var animation = new StepTween(
-      begin: startValue,
-      end: 0,
-    ).animate(_controller);
-    animation.addStatusListener((animationStatus) {
-      if (animationStatus == AnimationStatus.completed) {
-        Navigator.popAndPushNamed(context, Routes.game);
-      }
-    });
-
-    _controller.forward(from: 0.0);
-
     return new Scaffold(
       body: new Container(
         child: new Center(
           child: new CountdownWidget(
-            animation: new StepTween(
-              begin: startValue,
-              end: 0,
-            ).animate(_controller),
+            animation: _animation,
           ),
         ),
       ),

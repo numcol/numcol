@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:numcolengine/numcolengine.dart';
 
+import '../../application.dart';
+import '../../core/timer.dart';
 import 'widgets/reply.dart';
 import 'widgets/index.dart';
 
@@ -10,28 +12,24 @@ class GameScreen extends StatefulWidget {
 }
 
 class _GameScreenState extends State<GameScreen> {
-  Game _game = new Game();
+  final Game _game = new Game();
+  final Timer _timer = new Timer(application.initialTimeInMilliseconds);
   final ValueNotifier<Answer> _reply = ValueNotifier<Answer>(null);
   final ValueNotifier<bool> _isColorOk = ValueNotifier(true);
   final ValueNotifier<bool> _isNumberOk = ValueNotifier(true);
 
+  List<ValueNotifier<Answer>> _answers;
+  ValueNotifier<Answer> _question;
+
   void _answerTaped (Answer answer) {
     if (answer != null) {
       if (_game.checkAnswer(answer)) {
-        setState(() {
-          _isColorOk.value = true;
-          _isNumberOk.value = true;
-          _game.nextQuestion(answer);
-        });
+        var answerIndex = _game.nextQuestion(answer);
+        _answers[answerIndex].value = _game.answers[answerIndex];
+        _question.value = _game.question;
       } else {
-        setState(() {
-          _isColorOk.value = answer.color == _game.question.color;
-          _isNumberOk.value = answer.number == _game.question.number;
-        });
-        setState(() {
-          _isColorOk.value = true;
-          _isNumberOk.value = true;
-        });
+        _isColorOk.value = answer.color == _game.question.color;
+        _isNumberOk.value = answer.number == _game.question.number;
       }
       _reply.value = null;
     }
@@ -41,6 +39,8 @@ class _GameScreenState extends State<GameScreen> {
   void initState() {
     super.initState();
     _reply.addListener(() => _answerTaped(_reply.value));
+    _answers = _game.answers.map((answer) => ValueNotifier(answer)).toList();
+    _question = ValueNotifier(_game.question);
   }
 
   @override
@@ -59,18 +59,18 @@ class _GameScreenState extends State<GameScreen> {
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceAround,
                   children: <Widget>[
-                    RemainingWidget(),
+                    RemainingWidget(timer: _timer),
                     ScoreWidget()
                   ]
                 ),
                 QuestionWidget(
-                  question: _game.question,
+                  question: _question,
                   isColorOk: _isColorOk,
                   isNumberOk: _isNumberOk
                 ),
                 Expanded(
                   child: AnswersWidget(
-                    answers: _game.answers
+                    answers: _answers,
                   ),
                 ),
               ]
@@ -83,7 +83,12 @@ class _GameScreenState extends State<GameScreen> {
 
   @override
   void dispose() {
+    _timer.dispose();
     _reply.dispose();
+    _isColorOk.dispose();
+    _isNumberOk.dispose();
+    _question.dispose();
+    _answers.forEach((answer) => answer.dispose());
     super.dispose();
   }
 }

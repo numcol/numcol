@@ -1,5 +1,5 @@
 export 'answer.dart';
-export 'question/question.dart';
+export 'question.dart';
 export 'answers.dart';
-export 'remaining.dart';
+export 'remaining/remaining.dart';
 export 'score.dart';

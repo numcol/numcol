@@ -7,17 +7,30 @@ import 'reply.dart';
 
 typedef void AnswerCallback(Answer val);
 
-class AnswerWidget extends StatelessWidget {
-  const AnswerWidget({Key key, @required this.answer}): super(key: key);
+class AnswerWidget extends StatefulWidget {
+  AnswerWidget({Key key, @required this.answer})
+    : super(key: key);
 
-  final Answer answer;
+  final ValueNotifier<Answer> answer;
+
+  @override
+  _AnswerWidgetState createState() => _AnswerWidgetState();
+}
+
+class _AnswerWidgetState extends State<AnswerWidget> {
+
+  @override
+  void initState() {
+    super.initState();
+    widget.answer.addListener(() => setState(() => null));
+  }
 
   @override
   Widget build(BuildContext context) {
     return NumcolButton(
-      color: answer.color,
-      text: numbers[answer.number],
-      onPressed: () => ReplyInheritedWidget.of(context).reply.value = answer,
+      color: widget.answer.value.color,
+      text: numbers[widget.answer.value.number],
+      onPressed: () => ReplyInheritedWidget.of(context).reply.value = widget.answer.value,
     );
   }
 }

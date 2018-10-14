@@ -21,9 +21,11 @@ class Game {
     return _question.color == answer.color && _question.number == answer.number;
   }
 
-  void nextQuestion(Answer answer) {
+  int nextQuestion(Answer answer) {
     var index = _answers.indexOf(answer);
     _answers[index] = RandomGenerator.generateAnswer();
     _question = RandomGenerator.generateQuestion(_answers);
+
+    return index;
   }
 }

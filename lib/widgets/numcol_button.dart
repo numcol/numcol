@@ -1,4 +1,3 @@
-import 'dart:ui' as ui;
 import 'package:flutter/material.dart';
 import 'package:numcolengine/numcolengine.dart' as Engine show Color;
 
@@ -35,7 +34,7 @@ class NumcolButton extends StatelessWidget {
 
     return GestureDetector(
       onTapDown: (details) {
-        onPressed(); /*ReplyInheritedWidget.of(context).reply.value = _answer;*/
+        onPressed();
       },
       child: Container(
         child: Center(
@@ -43,19 +42,16 @@ class NumcolButton extends StatelessWidget {
             child: new Stack(
               children: [
                 new Positioned(
-                  top: 1.0,
-                  left: 1.0,
+                  top: 2.0,
+                  left: 2.0,
                   child: Text(
                     text,
-                    style: style.copyWith(color: Colors.black.withOpacity(0.5)),
+                    style: style.copyWith(color: Colors.black.withOpacity(0.4)),
                   ),
                 ),
                 new Container(
                   padding: const EdgeInsets.all(1.0),
-                  child: BackdropFilter(
-                    filter: new ui.ImageFilter.blur(sigmaX: 1.0, sigmaY: 1.0),
-                    child: new Text(text, style: style),
-                  ),
+                  child: Text(text, style: style),
                 ),
               ],
             ),

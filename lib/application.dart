@@ -5,7 +5,7 @@ import 'strings.dart';
 typedef void LocaleChangeCallback(Locale locale);
 
 class Application {
-    final List<String> supportedLanguages = [
+  final List<String> supportedLanguages = [
     Locales.english,
     Locales.castellano,
     Locales.euskara,
@@ -13,6 +13,8 @@ class Application {
     Locales.catala,
     Locales.galego
   ];
+
+  final int initialTimeInMilliseconds = 10000;
 
   Iterable<Locale> supportedLocales() => supportedLanguages.map<Locale>((lang) => new Locale(lang, ''));
 

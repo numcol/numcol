@@ -1,16 +1,18 @@
 import 'package:flutter/material.dart';
 import 'package:numcolengine/numcolengine.dart';
 
-import '../../../../styles.dart';
-import '../../../../translations.dart';
-import '../../../../maps.dart';
-import '../../../../strings.dart';
+import '../../../styles.dart';
+import '../../../translations.dart';
+import '../../../maps.dart';
+import '../../../strings.dart';
+
+typedef void DismissAnimationCallback();
 
 class QuestionWidget extends StatefulWidget {
   QuestionWidget({Key key, @required this.question, @required this.isColorOk, @required this.isNumberOk})
     : super(key: key);
 
-  final Answer question;
+  final ValueNotifier<Answer> question;
   final ValueNotifier<bool> isColorOk;
   final ValueNotifier<bool> isNumberOk;
 
@@ -28,16 +30,17 @@ class _QuestionWidgetState extends State<QuestionWidget> with TickerProviderStat
   AnimationController _createAnimationController() {
     return new AnimationController(
       vsync: this,
-      duration: Duration(milliseconds: 1)
+      duration: Duration(milliseconds: 400)
     );
   }
 
-  Animation _createAnimation(AnimationController controller) {
+  Animation _createAnimation(AnimationController controller, DismissAnimationCallback dismissAnimationCallbak) {
     return colorTween.animate(controller)..addStatusListener((status) {
       if (status == AnimationStatus.completed) {
         controller.reverse();
       } else if (status == AnimationStatus.dismissed) {
         controller.stop();
+        dismissAnimationCallbak();
       }
     })..addListener(() {
       setState((){});
@@ -47,15 +50,17 @@ class _QuestionWidgetState extends State<QuestionWidget> with TickerProviderStat
   void _blinkColorWhenError() {
     if (!widget.isColorOk.value) {
       _colorAnimationController.forward();
-      print('isColorOk: FORWARD');
     }
   }
 
   void _blinkNumberWhenError() {
     if (!widget.isNumberOk.value) {
       _numberAnimationController.forward();
-      print('isNumberOk: FORWARD');
     }
+  }
+
+  void _setState() {
+    setState(() => null);
   }
 
   @override
@@ -63,10 +68,11 @@ class _QuestionWidgetState extends State<QuestionWidget> with TickerProviderStat
     super.initState();
     _colorAnimationController = _createAnimationController();
     _numberAnimationController = _createAnimationController();
-    _colorAnimation = _createAnimation(_colorAnimationController);
-    _numberAnimation = _createAnimation(_numberAnimationController);
+    _colorAnimation = _createAnimation(_colorAnimationController, () => widget.isColorOk.value = true);
+    _numberAnimation = _createAnimation(_numberAnimationController, () => widget.isNumberOk.value = true);
     widget.isColorOk.addListener(_blinkColorWhenError);
     widget.isNumberOk.addListener(_blinkNumberWhenError);
+    widget.question.addListener(_setState);
   }
 
   @override
@@ -77,20 +83,20 @@ class _QuestionWidgetState extends State<QuestionWidget> with TickerProviderStat
         mainAxisAlignment: MainAxisAlignment.center,
         children: <Widget>[
           Text(
-            Translations.of(context).text(numberWords[widget.question.number]).toUpperCase(),
+            Translations.of(context).text(numberWords[widget.question.value.number]).toUpperCase(),
             style: TextStyle(
               fontFamily: Fonts.poiretone,
               fontSize: 36.0,
-              color: _numberAnimation.value
+              color: _numberAnimation.value,
             ),
           ),
           Text(' '),
           Text(
-            Translations.of(context).text(colorWords[widget.question.color]).toUpperCase(),
+            Translations.of(context).text(colorWords[widget.question.value.color]).toUpperCase(),
             style: TextStyle(
               fontFamily: Fonts.poiretone,
               fontSize: 36.0,
-              color: _colorAnimation.value
+              color: _colorAnimation.value,
             ),
           ),
         ],
@@ -100,6 +106,7 @@ class _QuestionWidgetState extends State<QuestionWidget> with TickerProviderStat
 
   @override
   void dispose() {
+    widget.question.removeListener(_setState);
     widget.isColorOk.removeListener(_blinkColorWhenError);
     widget.isNumberOk.removeListener(_blinkNumberWhenError);
     _colorAnimationController.dispose();

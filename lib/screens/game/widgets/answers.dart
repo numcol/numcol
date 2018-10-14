@@ -5,7 +5,7 @@ import 'answer.dart';
 class AnswersWidget extends StatelessWidget {
   AnswersWidget({Key key, @required this.answers}) : super(key: key);
 
-  final List<Answer> answers;
+  final List<ValueNotifier<Answer>> answers;
 
   @override
   Widget build(BuildContext context) {

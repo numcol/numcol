@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 import 'remaining_counter.dart';
-import '../../../../core/timer.dart';
+import '../../../../core/index.dart';
 
 class RemainingWidget extends StatefulWidget {
   RemainingWidget({Key key, @required this.timer}) : super(key: key);

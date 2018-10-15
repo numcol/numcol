@@ -1,0 +1,2 @@
+
+export 'translations.dart';

@@ -1,6 +1,6 @@
 import 'package:numcolengine/numcolengine.dart';
 
-import 'styles.dart';
+import '../../styles.dart';
 
 var colors = {
   Color.blue: ScreenColors.blue,

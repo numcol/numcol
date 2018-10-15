@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:numcolengine/numcolengine.dart' hide Color;
 
 import '../../../widgets/numcol_button.dart';
-import '../../../maps.dart';
+import '../../../core/index.dart';
 import 'reply.dart';
 
 typedef void AnswerCallback(Answer val);

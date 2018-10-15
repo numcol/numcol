@@ -3,7 +3,7 @@ import 'package:numcolengine/numcolengine.dart';
 
 import '../../routes.dart';
 import '../../application.dart';
-import '../../core/timer.dart';
+import '../../core/index.dart';
 import 'widgets/reply.dart';
 import 'widgets/index.dart';
 

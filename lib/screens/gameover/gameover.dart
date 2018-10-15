@@ -4,7 +4,7 @@ import 'package:numcolengine/numcolengine.dart';
 import '../../widgets/menu_button.dart';
 import '../../strings.dart';
 import '../../styles.dart';
-import '../../translations.dart';
+import '../../core/index.dart';
 import '../../routes.dart';
 
 class GameoverScreen extends StatelessWidget {

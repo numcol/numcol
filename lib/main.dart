@@ -3,7 +3,7 @@ import 'package:flutter/services.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 
 import 'application.dart';
-import 'translations.dart';
+import 'core/services/translations.dart';
 import 'routes.dart';
 import 'screens/index.dart';
 

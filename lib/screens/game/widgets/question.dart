@@ -2,8 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:numcolengine/numcolengine.dart';
 
 import '../../../styles.dart';
-import '../../../translations.dart';
-import '../../../maps.dart';
+import '../../../core/index.dart';
 import '../../../strings.dart';
 
 typedef void DismissAnimationCallback();

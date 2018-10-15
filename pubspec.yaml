@@ -12,7 +12,8 @@ dependencies:
   flutter_localizations:
     sdk: flutter
   numcolengine:
-      path: ./engine/
+    path: ./engine/
+  shared_preferences: "0.4.3"
 
 dev_dependencies:
   flutter_test:

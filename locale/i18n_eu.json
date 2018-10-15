@@ -3,6 +3,9 @@
     "zen_mode": "\"Zen\" modua",
     "settings": "Ezarpenak",
     "top_score": "Puntuazioak",
+    "languages": "Languaiak",
+    "saved": "Gordeta!",
+    "savedError": "Errorea gordetzen!",
 
     "one": "Bat",
     "two": "Bi",
@@ -42,7 +45,6 @@
     "question": "<span id=\"question_number\">{{number}}</span> <span id=\"question_colour\">{{colour}}</span>",
     "classic_mode": "Betiko Modua",
     "sound": "Soinua",
-    "languages": "Languaiak",
     "signin": "Saioa hasi",
     "logout": "Saioa amaitu",
     "account": "Saioa",

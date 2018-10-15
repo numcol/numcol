@@ -41,6 +41,7 @@ class _RemainingWidgetState extends State<RemainingWidget> with TickerProviderSt
 
   @override
   void dispose() {
+    widget.timer.controller.value?.dispose();
     widget.timer.controller.removeListener(_setState);
     super.dispose();
   }

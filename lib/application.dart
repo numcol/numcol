@@ -1,18 +1,10 @@
 import 'package:flutter/material.dart';
-
-import 'strings.dart';
+import 'core/index.dart';
 
 typedef void LocaleChangeCallback(Locale locale);
 
 class Application {
-  final List<String> supportedLanguages = [
-    Locales.english,
-    Locales.castellano,
-    Locales.euskara,
-    Locales.francais,
-    Locales.catala,
-    Locales.galego
-  ];
+  final List<String> supportedLanguages = LanguageHelper.getAllLanguageCodes();
 
   final int initialTimeInMilliseconds = 10000;
   final double timePenaltyMultiplier = 0.66;

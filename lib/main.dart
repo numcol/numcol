@@ -3,7 +3,7 @@ import 'package:flutter/services.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 
 import 'application.dart';
-import 'core/services/translations.dart';
+import 'core/index.dart';
 import 'routes.dart';
 import 'screens/index.dart';
 
@@ -17,13 +17,19 @@ class _NumcolState extends State<Numcol> {
   TranslationsDelegate _newLocaleDelegate;
 
   @override
-  void initState(){
+  void initState() {
     super.initState();
     _newLocaleDelegate = new TranslationsDelegate(newLocale: null);
     application.onLocaleChanged = onLocaleChange;
+    Storage.getLanguage()
+      .then((chosenLocale) {
+        if (chosenLocale != null) {
+          onLocaleChange(new Locale(chosenLocale, ''));
+        }
+      });
   }
 
-  onLocaleChange(Locale locale){
+  onLocaleChange(Locale locale) {
     setState(() {
       _newLocaleDelegate = new TranslationsDelegate(newLocale: locale);
     });
@@ -36,6 +42,7 @@ class _NumcolState extends State<Numcol> {
       DeviceOrientation.portraitUp,
       DeviceOrientation.portraitDown,
     ]);
+
     return MaterialApp(
       title: 'NumCol',
       initialRoute: '/',
@@ -44,6 +51,7 @@ class _NumcolState extends State<Numcol> {
         Routes.game: (context) => GameScreen(),
         Routes.countdown: (context) => CountdownScreen(),
         Routes.gameover: (context) => GameoverScreen(),
+        Routes.settings: (context) => SettingsScreen(),
       },
       localizationsDelegates: [
         _newLocaleDelegate,

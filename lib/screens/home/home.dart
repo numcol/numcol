@@ -2,7 +2,6 @@ import 'package:flutter/material.dart' hide Color;
 import 'package:numcolengine/numcolengine.dart';
 
 import '../../widgets/menu_button.dart';
-import '../../strings.dart';
 import '../../styles.dart';
 import '../../core/index.dart';
 import '../../routes.dart';
@@ -56,8 +55,7 @@ class HomeScreen extends StatelessWidget {
               MenuButton(
                 color: Color.red,
                 text: Translations.of(context).text('settings'),
-
-                onPressed: () => Navigator.pushNamed(context, Routes.countdown),
+                onPressed: () => Navigator.pushNamed(context, Routes.settings),
               ),
             ],
           ),

@@ -12,3 +12,9 @@ class ScreenColors {
   static const black = const Color(0xff333333);
   static const white = const Color(0xffffffff);
 }
+
+class Fonts {
+  static const poiretone = 'Poiretone';
+  static const lemonMilk = 'LemonMilk';
+  static const robotoMono = 'RobotoMono';
+}

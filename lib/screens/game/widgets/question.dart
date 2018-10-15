@@ -3,7 +3,6 @@ import 'package:numcolengine/numcolengine.dart';
 
 import '../../../styles.dart';
 import '../../../core/index.dart';
-import '../../../strings.dart';
 
 typedef void DismissAnimationCallback();
 

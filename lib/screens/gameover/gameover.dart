@@ -2,7 +2,6 @@ import 'package:flutter/material.dart' hide Color;
 import 'package:numcolengine/numcolengine.dart';
 
 import '../../widgets/menu_button.dart';
-import '../../strings.dart';
 import '../../styles.dart';
 import '../../core/index.dart';
 import '../../routes.dart';

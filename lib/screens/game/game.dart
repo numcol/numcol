@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:numcolengine/numcolengine.dart';
 
+import '../../configuration.dart';
 import '../../routes.dart';
-import '../../application.dart';
 import '../../core/index.dart';
 import 'widgets/reply.dart';
 import 'widgets/index.dart';
@@ -54,10 +54,16 @@ class _GameScreenState extends State<GameScreen> {
     _reply.addListener(() => _answerTaped(_reply.value));
     _answers = _game.answers.map((answer) => ValueNotifier(answer)).toList();
     _question = ValueNotifier(_game.question);
+  }
+
+  @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+    final configuration = Configuration.of(context);
     _timer = new Timer(
-      application.initialTimeInMilliseconds,
-      application.timePenaltyMultiplier,
-      application.timeAdditionByAnswerInMilliseconds,
+      configuration.initialTimeInMilliseconds,
+      configuration.timePenaltyMultiplier,
+      configuration.timeAdditionByAnswerInMilliseconds,
       _gameover
     );
   }

@@ -16,12 +16,20 @@
 
 import 'package:flutter/material.dart';
 
+import 'configuration.dart';
 import 'numcol.dart';
 import 'services/index.dart';
 
 void main() {
-  runApp(Injector(
-    storage: Storage(),
-    child: Numcol(),
-  ));
+  runApp(
+    Configuration(
+      initialTimeInMilliseconds: 10000,
+      timePenaltyMultiplier: 0.66,
+      timeAdditionByAnswerInMilliseconds: 1800,
+      child: Injector(
+        storage: Storage(),
+        child: Numcol(),
+      ),
+    ),
+  );
 }

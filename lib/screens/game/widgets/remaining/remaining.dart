@@ -28,9 +28,9 @@ class _RemainingWidgetState extends State<RemainingWidget> with TickerProviderSt
   Widget build(BuildContext context) {
     return Column(
       children: <Widget>[
-        Text('Time'),
+        Text(Translations.of(context).text('time')),
         RemainingCounter(
-          animation: new StepTween(
+          animation: StepTween(
             begin: widget.timer.maxTimeInMilliseconds.round(),
             end: 0,
           ).animate(widget.timer.controller.value),

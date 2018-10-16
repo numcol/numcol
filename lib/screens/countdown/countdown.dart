@@ -27,7 +27,7 @@ class _CountdownScreenState extends State<CountdownScreen> with TickerProviderSt
       ).animate(_animationController);
     _animation.addStatusListener((animationStatus) {
       if (animationStatus == AnimationStatus.completed) {
-        Navigator.popAndPushNamed(context, Routes.game);
+        Navigator.pushReplacementNamed(context, Routes.game);
       }
     });
     _animationController.forward(from: 0.0);

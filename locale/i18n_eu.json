@@ -6,6 +6,9 @@
     "languages": "Languaiak",
     "saved": "Gordeta!",
     "savedError": "Errorea gordetzen!",
+    "try_again": "Saiatu berriro",
+    "score": "Puntuazioa",
+    "time": "Denbora",
 
     "one": "Bat",
     "two": "Bi",
@@ -33,10 +36,8 @@
     "infinite_level": "Hamaigabe",
     "infinite_mode": "Hamaigabe Modua",
     "round": "Txanda",
-    "time": "Denbora",
-    "score": "Puntuazioa",
+
     "gameover": "Game Over",
-    "try_again": "Saiatu berriro",
     "share_kids": "{{score}} puntu lortu ditut NumCol-en http://goo.gl/fMkZrJ #numcol",
     "share_normal": "{{score}} puntu lortu ditut NumCol-en http://goo.gl/fMkZrJ #numcol",
     "share_difficult": "{{score}} puntu lortu ditut NumCol-en http://goo.gl/fMkZrJ #numcol",

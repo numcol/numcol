@@ -12,6 +12,7 @@ class RemainingCounter extends AnimatedWidget {
     return new Text(
       (animation.value / 1000).toStringAsFixed(3).padLeft(6, '0'),
       style: TextStyle(
+        fontSize: 18.0,
         fontFamily: Fonts.robotoMono,
       ),
     );

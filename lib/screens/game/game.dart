@@ -45,7 +45,7 @@ class _GameScreenState extends State<GameScreen> {
   }
 
   void _gameover() {
-    Navigator.popAndPushNamed(context, Routes.gameover);
+    Navigator.pushReplacementNamed(context, Routes.gameover);
   }
 
   @override
@@ -62,6 +62,29 @@ class _GameScreenState extends State<GameScreen> {
     );
   }
 
+  List<Widget> _buildChildren() {
+    return <Widget>[
+      Row(
+        mainAxisAlignment: MainAxisAlignment.spaceAround,
+        children: <Widget>[
+          RemainingWidget(timer: _timer),
+          ScoreWidget(score: _score)
+        ]
+      ),
+      QuestionWidget(
+        question: _question,
+        isColorOk: _isColorOk,
+        isNumberOk: _isNumberOk
+      ),
+      Expanded(
+        child: AnswersWidget(
+          answers: _answers,
+        ),
+      ),
+      ProgressBarWidget(timer: _timer),
+    ];
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -74,25 +97,7 @@ class _GameScreenState extends State<GameScreen> {
               mainAxisAlignment: MainAxisAlignment.center,
               mainAxisSize: MainAxisSize.max,
               crossAxisAlignment: CrossAxisAlignment.center,
-              children: <Widget>[
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceAround,
-                  children: <Widget>[
-                    RemainingWidget(timer: _timer),
-                    ScoreWidget(score: _score)
-                  ]
-                ),
-                QuestionWidget(
-                  question: _question,
-                  isColorOk: _isColorOk,
-                  isNumberOk: _isNumberOk
-                ),
-                Expanded(
-                  child: AnswersWidget(
-                    answers: _answers,
-                  ),
-                ),
-              ]
+              children: _buildChildren(),
             )
           ),
         ),

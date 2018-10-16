@@ -34,8 +34,8 @@ class GameoverScreen extends StatelessWidget {
               ),
               MenuButton(
                 color: Color.green,
-                text: Translations.of(context).text('play'),
-                onPressed: () => Navigator.pushNamed(context, Routes.countdown),
+                text: Translations.of(context).text('try_again'),
+                onPressed: () => Navigator.pushReplacementNamed(context, Routes.countdown),
               ),
             ],
           ),

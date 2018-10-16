@@ -9,8 +9,10 @@ class ScreenColors {
   static const darkYellow = const Color(0xffe6d413);
   static const blue = const Color(0xff31ceff);
   static const darkBlue = const Color(0xff16a8d4);
-  static const black = const Color(0xff333333);
+  static const black = const Color(0xff444444);
+  static const darkBlack = const Color(0xff333333);
   static const white = const Color(0xffffffff);
+  static const lightGrey = const Color(0xffeeeeee);
 }
 
 class Fonts {

@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
 
+import '../../../styles.dart';
+import '../../../core/index.dart';
+
 class ScoreWidget extends StatefulWidget {
   ScoreWidget({Key key, @required this.score})
     : super(key: key);
@@ -22,11 +25,12 @@ class _ScoreWidgetState extends State<ScoreWidget> {
   Widget build(BuildContext context) {
     return Column(
       children: <Widget>[
-        Text('Score'),
+        Text(Translations.of(context).text('score')),
         Text(
           widget.score.value.toString(),
           style: TextStyle(
-            fontWeight: FontWeight.bold,
+            fontSize: 18.0,
+            fontFamily: Fonts.robotoMono,
           ),
         ),
       ],

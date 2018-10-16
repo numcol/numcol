@@ -1,9 +1,13 @@
+// Copyright (C) 2018 Alberto Varela Sánchez <alberto@berriart.com>
+// Use of this source code is governed by the version 3 of the
+// GNU General Public License that can be found in the LICENSE file.
+
 import 'package:flutter/material.dart' hide Color;
 import 'package:numcolengine/numcolengine.dart';
 
 import '../../widgets/menu_button.dart';
 import '../../styles.dart';
-import '../../core/index.dart';
+import '../../services/index.dart';
 import '../../routes.dart';
 
 class HomeScreen extends StatelessWidget {

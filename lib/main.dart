@@ -1,65 +1,27 @@
+// NumCol - The Brain Training Game About Matching Numbers And Colours.
+// Copyright (C) 2018 Alberto Varela Sánchez <alberto@berriart.com>
+
+// This program is free software: you can redistribute it and/or modify
+// it under the terms of the GNU General Public License as published by
+// the Free Software Foundation, either version 3 of the License, or
+// (at your option) any later version.
+
+// This program is distributed in the hope that it will be useful,
+// but WITHOUT ANY WARRANTY; without even the implied warranty of
+// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+// GNU General Public License for more details.
+
+// You should have received a copy of the GNU General Public License
+// along with this program.  If not, see <https://www.gnu.org/licenses/>.
+
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
-import 'package:flutter_localizations/flutter_localizations.dart';
 
-import 'application.dart';
-import 'core/index.dart';
-import 'routes.dart';
-import 'screens/index.dart';
+import 'numcol.dart';
+import 'services/index.dart';
 
-void main() => runApp(Numcol());
-
-class Numcol extends StatefulWidget {
-  @override
-  _NumcolState createState() => new _NumcolState();
-}
-class _NumcolState extends State<Numcol> {
-  TranslationsDelegate _newLocaleDelegate;
-
-  @override
-  void initState() {
-    super.initState();
-    _newLocaleDelegate = new TranslationsDelegate(newLocale: null);
-    application.onLocaleChanged = onLocaleChange;
-    Storage.getLanguage()
-      .then((chosenLocale) {
-        if (chosenLocale != null) {
-          onLocaleChange(new Locale(chosenLocale, ''));
-        }
-      });
-  }
-
-  onLocaleChange(Locale locale) {
-    setState(() {
-      _newLocaleDelegate = new TranslationsDelegate(newLocale: locale);
-    });
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    SystemChrome.setEnabledSystemUIOverlays([]);
-    SystemChrome.setPreferredOrientations([
-      DeviceOrientation.portraitUp,
-      DeviceOrientation.portraitDown,
-    ]);
-
-    return MaterialApp(
-      title: 'NumCol',
-      initialRoute: '/',
-      routes: {
-        Routes.home: (context) => HomeScreen(),
-        Routes.game: (context) => GameScreen(),
-        Routes.countdown: (context) => CountdownScreen(),
-        Routes.gameover: (context) => GameoverScreen(),
-        Routes.settings: (context) => SettingsScreen(),
-      },
-      localizationsDelegates: [
-        _newLocaleDelegate,
-        const TranslationsDelegate(),
-        GlobalMaterialLocalizations.delegate,
-        GlobalWidgetsLocalizations.delegate,
-      ],
-      supportedLocales: application.supportedLocales(),
-    );
-  }
+void main() {
+  runApp(Injector(
+    storage: Storage(),
+    child: Numcol(),
+  ));
 }

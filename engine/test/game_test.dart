@@ -1,3 +1,7 @@
+// Copyright (C) 2018 Alberto Varela Sánchez <alberto@berriart.com>
+// Use of this source code is governed by the version 3 of the
+// GNU General Public License that can be found in the LICENSE file.
+
 import 'dart:math';
 
 import 'package:test/test.dart';
@@ -16,6 +20,11 @@ void main() {
     test('Every game should have an answerable question', () {
       var game = new Game();
       expect(game.answers.indexOf(game.question) > 0, true);
+    });
+
+    test('Every game should start with 0 score', () {
+      var game = new Game();
+      expect(game.score, 0);
     });
   });
 
@@ -52,7 +61,7 @@ void main() {
       var randomIndex = _random.nextInt(game.answers.length);
       var randomAnswer =  game.answers[randomIndex];
 
-      game.nextQuestion(randomAnswer);
+      game.nextQuestion(randomAnswer, 2, 1);
 
       expect(randomAnswer == game.answers[randomIndex], false);
     });
@@ -64,9 +73,20 @@ void main() {
       var randomAnswer =  game.answers[randomIndex];
       var previousQuestion =  game.answers[randomIndex];
 
-      game.nextQuestion(randomAnswer);
+      game.nextQuestion(randomAnswer, 2, 1);
 
       expect(previousQuestion == game.question, false);
+    });
+
+    test('Should increase score', () {
+      var game = new Game();
+      final _random = new Random();
+      var randomIndex = _random.nextInt(game.answers.length);
+      var randomAnswer =  game.answers[randomIndex];
+
+      game.nextQuestion(randomAnswer, 2, 1);
+
+      expect(game.score > 0, true);
     });
   });
 }

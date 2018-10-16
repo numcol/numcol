@@ -1,9 +1,13 @@
+// Copyright (C) 2018 Alberto Varela Sánchez <alberto@berriart.com>
+// Use of this source code is governed by the version 3 of the
+// GNU General Public License that can be found in the LICENSE file.
+
 import 'dart:async';
 import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart' show  rootBundle;
 
-import '../../application.dart';
+import '../application.dart';
 
 class Translations {
   Translations(Locale locale) {
@@ -38,7 +42,7 @@ class TranslationsDelegate extends LocalizationsDelegate<Translations> {
   @override
   bool isSupported(Locale locale) => application.supportedLanguages.contains(locale.languageCode);
 
-@override
+  @override
   Future<Translations> load(Locale locale) {
     return Translations.load(newLocale ?? locale);
   }

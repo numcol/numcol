@@ -1,7 +1,12 @@
+// Copyright (C) 2018 Alberto Varela Sánchez <alberto@berriart.com>
+// Use of this source code is governed by the version 3 of the
+// GNU General Public License that can be found in the LICENSE file.
+
 import 'package:flutter/material.dart' hide Color;
 
 import '../../../application.dart';
 import '../../../core/index.dart';
+import '../../../services/index.dart';
 import '../../../widgets/index.dart';
 
 class LanguageSwitcher extends StatefulWidget {
@@ -12,11 +17,13 @@ class LanguageSwitcher extends StatefulWidget {
 class _LanguageSwitcherState extends State<LanguageSwitcher> {
   final GlobalKey<CustomExpansionTileState> expansionTile = new GlobalKey();
   Locales _locale;
+  Storage _storage;
 
   @override
-  void initState() {
-    super.initState();
-    Storage.getLanguage()
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+    _storage = Injector.of(context).storage;
+    _storage.getLanguage()
       .then((chosenLocale) {
         if (chosenLocale != null) {
           setState(() {
@@ -45,7 +52,7 @@ class _LanguageSwitcherState extends State<LanguageSwitcher> {
   void _onTap(Locales locale) {
     var languageCode = LanguageHelper.getLanguageCode(locale);
     var newLocale = new Locale(languageCode, '');
-    Storage.setLanguage(languageCode)
+    _storage.setLanguage(languageCode)
       .then((isSaved) {
         if (isSaved) {
           application.onLocaleChanged(newLocale);

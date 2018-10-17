@@ -5,7 +5,7 @@
 import 'package:flutter/material.dart' hide Color;
 
 import '../../../application.dart';
-import '../../../core/index.dart';
+import '../../../i18n/index.dart';
 import '../../../services/index.dart';
 import '../../../widgets/index.dart';
 
@@ -27,7 +27,7 @@ class _LanguageSwitcherState extends State<LanguageSwitcher> {
       .then((chosenLocale) {
         if (chosenLocale != null) {
           setState(() {
-            _locale = LanguageHelper.getLocaleByLanguageCode(chosenLocale);
+            _locale = Translations.getLocaleByLanguageCode(chosenLocale);
           });
         }
       });
@@ -50,7 +50,7 @@ class _LanguageSwitcherState extends State<LanguageSwitcher> {
   }
 
   void _onTap(Locales locale) {
-    var languageCode = LanguageHelper.getLanguageCode(locale);
+    var languageCode = Translations.getLanguageCode(locale);
     var newLocale = new Locale(languageCode, '');
     _storage.setLanguage(languageCode)
       .then((isSaved) {
@@ -70,7 +70,7 @@ class _LanguageSwitcherState extends State<LanguageSwitcher> {
   @override
   Widget build(BuildContext context) {
 
-    var locales = LanguageHelper.getLocales();
+    var locales = Translations.getLocales();
     if (_locale != null) {
       locales.remove(_locale);
     }
@@ -79,9 +79,9 @@ class _LanguageSwitcherState extends State<LanguageSwitcher> {
       width: 240.0,
       child: CustomExpansionTile(
         key: expansionTile,
-        title: Text(LanguageHelper.getLanguageText(_locale) ?? Translations.of(context).text('languages')),
+        title: Text(Translations.getLanguageText(_locale) ?? Translations.of(context).text('languages')),
         children: locales.map((locale) => ListTile(
-          title: Text(LanguageHelper.getLanguageText(locale)),
+          title: Text(Translations.getLanguageText(locale)),
           onTap: () => _onTap(locale),
         )).toList(),
       ),

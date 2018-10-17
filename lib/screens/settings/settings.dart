@@ -7,7 +7,7 @@ import 'package:numcolengine/numcolengine.dart';
 
 import 'widgets/index.dart';
 import '../../widgets/index.dart';
-import '../../services/index.dart';
+import '../../i18n/index.dart';
 import '../../styles.dart';
 
 class SettingsScreen extends StatelessWidget {

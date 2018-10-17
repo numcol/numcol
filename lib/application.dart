@@ -1,13 +1,12 @@
+// Copyright (C) 2018 Alberto Varela Sánchez <alberto@berriart.com>
+// Use of this source code is governed by the version 3 of the
+// GNU General Public License that can be found in the LICENSE file.
+
 import 'package:flutter/material.dart';
-import 'core/index.dart';
 
 typedef void LocaleChangeCallback(Locale locale);
 
 class Application {
-  final List<String> supportedLanguages = LanguageHelper.getAllLanguageCodes();
-
-  Iterable<Locale> supportedLocales() => supportedLanguages.map<Locale>((lang) => new Locale(lang, ''));
-
   LocaleChangeCallback onLocaleChanged;
 
   static final Application _application = new Application._internal();

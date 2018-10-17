@@ -4,4 +4,3 @@
 
 export 'injector.dart';
 export 'storage.dart';
-export 'translations.dart';

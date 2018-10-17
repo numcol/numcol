@@ -7,6 +7,7 @@ import 'package:flutter/services.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 
 import 'application.dart';
+import 'i18n/index.dart';
 import 'services/index.dart';
 import 'routes.dart';
 import 'screens/index.dart';
@@ -66,7 +67,7 @@ class _NumcolState extends State<Numcol> {
         GlobalMaterialLocalizations.delegate,
         GlobalWidgetsLocalizations.delegate,
       ],
-      supportedLocales: application.supportedLocales(),
+      supportedLocales: Translations.supportedLocales(),
     );
   }
 }

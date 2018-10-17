@@ -7,7 +7,7 @@ import 'package:numcolengine/numcolengine.dart';
 
 import '../../../styles.dart';
 import '../../../core/index.dart';
-import '../../../services/index.dart';
+import '../../../i18n/index.dart';
 
 typedef void DismissAnimationCallback();
 

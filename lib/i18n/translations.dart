@@ -7,7 +7,7 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart' show  rootBundle;
 
-import 'locales.dart';
+import 'translations_helper.dart';
 
 class Translations {
   Translations(Locale locale) {
@@ -33,52 +33,5 @@ class Translations {
 
   get currentLanguage => locale.languageCode;
 
-  static final _codes = {
-    Locales.english: 'en',
-    Locales.castellano: 'es',
-    Locales.francais: 'fr',
-    Locales.euskara: 'eu',
-    Locales.galego: 'gl',
-    Locales.catala: 'ca',
-  };
-
-  static final _texts = {
-    Locales.english: 'English',
-    Locales.castellano: 'Español',
-    Locales.francais: 'Français',
-    Locales.euskara: 'Euskara',
-    Locales.galego: 'Galego',
-    Locales.catala: 'Català',
-  };
-
-  static List<Locales> getLocales() {
-    return _codes.keys.toList();
-  }
-
-  static String getLanguageCode(Locales locale) {
-    return _codes[locale];
-  }
-
-  static List<String> getAllLanguageCodes() {
-    return _codes.values.toList();
-  }
-
-  static String getLanguageText(Locales locale) {
-    return _texts[locale];
-  }
-
-  static List<String> getAllLanguageTexts() {
-    return _codes.values.toList();
-  }
-
-  static Locales getLocaleByLanguageCode(String code) {
-    return _codes.keys.firstWhere(
-      (k) => _codes[k] == code,
-      orElse: () => null,
-    );
-  }
-
-  static final List<String> supportedLanguages = getAllLanguageCodes();
-
-  static Iterable<Locale> supportedLocales() => supportedLanguages.map<Locale>((lang) => new Locale(lang, ''));
+  static Iterable<Locale> supportedLocales() => TranslationsHelper.supportedLanguages.map<Locale>((lang) => new Locale(lang, ''));
 }

@@ -31,7 +31,7 @@ Or use VSCode/Itenllij to debug.
 ### Test
 
 ```sh
-flutter test ./engine
+flutter test ./ ./engine
 ```
 
 ## License

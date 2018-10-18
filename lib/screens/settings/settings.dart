@@ -9,8 +9,26 @@ import 'widgets/index.dart';
 import '../../widgets/index.dart';
 import '../../i18n/index.dart';
 import '../../styles.dart';
+import 'settings_presenter.dart';
 
-class SettingsScreen extends StatelessWidget {
+class SettingsScreen extends StatefulWidget {
+  @override
+  _SettingsScreenState createState() => _SettingsScreenState();
+}
+
+class _SettingsScreenState extends State<SettingsScreen> implements SettingsScreenViewContract {
+  SettingsScreenPresenter _settingsScreenPresenter;
+
+  @override
+  void initState() {
+    super.initState();
+    _settingsScreenPresenter = SettingsScreenPresenter(this);
+  }
+
+  @override
+  void navigateBack() {
+    Navigator.pop(context);
+  }
 
   Widget _buildTitle(BuildContext context) {
     return Center(
@@ -47,7 +65,7 @@ class SettingsScreen extends StatelessWidget {
                   MenuButton(
                     color: Color.blue,
                     text: Translations.of(context).text('back_to_menu'),
-                    onPressed: () => Navigator.pop(context),
+                    onPressed: _settingsScreenPresenter.onBackButtonClicked,
                   ),
                 ],
               ),

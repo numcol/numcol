@@ -5,14 +5,30 @@
 import 'package:flutter/material.dart' hide Color;
 import 'package:numcolengine/numcolengine.dart';
 
-import '../../widgets/menu_button.dart';
+import '../../widgets/index.dart';
 import '../../styles.dart';
 import '../../i18n/index.dart';
-import '../../routes.dart';
+import 'home_presenter.dart';
 
-class HomeScreen extends StatelessWidget {
+class HomeScreen extends StatefulWidget {
+  @override
+  _HomeScreenState createState() => _HomeScreenState();
+}
 
-  Container _title() {
+class _HomeScreenState extends State<HomeScreen> implements HomeScreenViewContract {
+  HomeScreenPresenter _homeScreenPresenter;
+
+  @override
+  initState() {
+    super.initState();
+    _homeScreenPresenter = new HomeScreenPresenter(this);
+  }
+
+  void navigateTo(String route) {
+    Navigator.pushNamed(context, route);
+  }
+
+  Widget _title() {
     return Container(
       padding: const EdgeInsets.only(
         bottom: 60.0
@@ -25,6 +41,14 @@ class HomeScreen extends StatelessWidget {
           fontFamily: Fonts.poiretone,
         ),
       ),
+    );
+  }
+
+  Widget _menuItem(Color color, String languageTag, NumcolButtonPressed command) {
+    return MenuButton(
+      color: color,
+      text: Translations.of(context).text(languageTag),
+      onPressed: command,
     );
   }
 
@@ -41,26 +65,10 @@ class HomeScreen extends StatelessWidget {
               Center(
                 child: _title(),
               ),
-              MenuButton(
-                color: Color.green,
-                text: Translations.of(context).text('play'),
-                onPressed: () => Navigator.pushNamed(context, Routes.countdown),
-              ),
-              MenuButton(
-                color: Color.yellow,
-                text: Translations.of(context).text('zen_mode'),
-                onPressed: () => Navigator.pushNamed(context, Routes.countdown),
-              ),
-              MenuButton(
-                color: Color.blue,
-                text: Translations.of(context).text('top_score'),
-                onPressed: () => Navigator.pushNamed(context, Routes.countdown),
-              ),
-              MenuButton(
-                color: Color.red,
-                text: Translations.of(context).text('settings'),
-                onPressed: () => Navigator.pushNamed(context, Routes.settings),
-              ),
+              _menuItem(Color.green, 'play', _homeScreenPresenter.onPlayButtonClicked),
+              _menuItem(Color.yellow, 'zen_mode', _homeScreenPresenter.onZenModeButtonClicked),
+              _menuItem(Color.blue, 'top_score', _homeScreenPresenter.onTopScoreButtonClicked),
+              _menuItem(Color.red, 'settings', _homeScreenPresenter.onSettingsButtonClicked),
             ],
           ),
         ),

@@ -5,3 +5,4 @@
 export 'delegate.dart';
 export 'locales.dart';
 export 'translations.dart';
+export 'translations_helper.dart';

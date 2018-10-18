@@ -1,5 +1,5 @@
 container:
-  image: cirrusci/flutter:latest
+  image: artberri/flutter:0.9.6
 
 test_task:
   pub_cache:

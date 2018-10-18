@@ -7,6 +7,7 @@ import 'package:numcolengine/numcolengine.dart';
 
 import 'widgets/index.dart';
 import '../../widgets/index.dart';
+import '../../mixins/index.dart';
 import '../../i18n/index.dart';
 import '../../styles.dart';
 import 'settings_presenter.dart';
@@ -16,18 +17,13 @@ class SettingsScreen extends StatefulWidget {
   _SettingsScreenState createState() => _SettingsScreenState();
 }
 
-class _SettingsScreenState extends State<SettingsScreen> implements SettingsScreenViewContract {
+class _SettingsScreenState extends State<SettingsScreen> with NavigatorMixin implements SettingsScreenViewContract {
   SettingsScreenPresenter _settingsScreenPresenter;
 
   @override
   void initState() {
     super.initState();
     _settingsScreenPresenter = SettingsScreenPresenter(this);
-  }
-
-  @override
-  void navigateBack() {
-    Navigator.pop(context);
   }
 
   Widget _buildTitle(BuildContext context) {

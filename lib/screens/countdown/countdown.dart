@@ -4,42 +4,36 @@
 
 import 'package:flutter/material.dart';
 
-import '../../routes.dart';
+import '../../mixins/index.dart';
+import '../../services/index.dart';
 import 'widgets/index.dart';
+import 'countdown_presenter.dart';
 
 class CountdownScreen extends StatefulWidget {
   @override
   _CountdownScreenState createState() => _CountdownScreenState();
 }
 
-class _CountdownScreenState extends State<CountdownScreen> with TickerProviderStateMixin {
-  static const int startValue = 4;
+class _CountdownScreenState extends State<CountdownScreen>
+    with TickerProviderStateMixin, NavigatorMixin
+    implements CountdownScreenViewContract {
 
-  AnimationController _animationController;
-  Animation _animation;
+  static const int countdownSeconds = 4;
+
+  CountdownScreenPresenter _presenter;
+  Animator _animator;
 
   @override
-  void initState() {
-    super.initState();
-    var _animationController = new AnimationController(
-      vsync: this,
-      duration: new Duration(seconds: startValue),
-    );
-    _animation = new StepTween(
-        begin: startValue,
-        end: 0,
-      ).animate(_animationController);
-    _animation.addStatusListener((animationStatus) {
-      if (animationStatus == AnimationStatus.completed) {
-        Navigator.pushReplacementNamed(context, Routes.game);
-      }
-    });
-    _animationController.forward(from: 0.0);
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+    _animator = Injector.of(context).animatorFactory.create(this, countdownSeconds);
+    _presenter = CountdownScreenPresenter(this, _animator);
+    _presenter.onLoad();
   }
 
   @override
   void dispose() {
-    _animationController?.dispose();
+    _presenter.dispose();
     super.dispose();
   }
 
@@ -49,7 +43,7 @@ class _CountdownScreenState extends State<CountdownScreen> with TickerProviderSt
       body: new Container(
         child: new Center(
           child: new CountdownWidget(
-            animation: _animation,
+            animation: _animator.animation,
           ),
         ),
       ),

@@ -4,10 +4,15 @@
 
 import 'package:flutter/material.dart';
 
+import 'animator.dart';
 import 'storage.dart';
 
 class Injector extends StatelessWidget {
-  const Injector({Key key, @required this.storage, @required this.child})
+  const Injector({
+    Key key,
+    @required this.storage,
+    @required this.animatorFactory,
+    @required this.child})
       : super(key: key);
 
   static _InheritedInjector of(BuildContext context) {
@@ -15,22 +20,29 @@ class Injector extends StatelessWidget {
   }
 
   final Storage storage;
+  final AnimatorFactory animatorFactory;
   final Widget child;
 
   @override
   Widget build(BuildContext context) {
     return new _InheritedInjector(
       storage: storage,
+      animatorFactory: animatorFactory,
       child: child,
     );
   }
 }
 
 class _InheritedInjector extends InheritedWidget {
-  _InheritedInjector({Key key, @required this.storage, @required child})
+  _InheritedInjector({
+    Key key,
+    @required this.storage,
+    @required this.animatorFactory,
+    @required child})
       : super(key: key, child: child);
 
   final Storage storage;
+  final AnimatorFactory animatorFactory;
 
   @override
   bool updateShouldNotify(_InheritedInjector oldWidget) {

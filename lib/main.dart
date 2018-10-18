@@ -28,6 +28,7 @@ void main() {
       timeAdditionByAnswerInMilliseconds: 1800,
       child: Injector(
         storage: Storage(),
+        animatorFactory: AnimatorFactory(),
         child: Numcol(),
       ),
     ),

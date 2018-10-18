@@ -5,6 +5,7 @@
 import 'package:flutter/material.dart' hide Color;
 import 'package:numcolengine/numcolengine.dart';
 
+import '../../mixins/index.dart';
 import '../../widgets/index.dart';
 import '../../styles.dart';
 import '../../i18n/index.dart';
@@ -15,17 +16,16 @@ class HomeScreen extends StatefulWidget {
   _HomeScreenState createState() => _HomeScreenState();
 }
 
-class _HomeScreenState extends State<HomeScreen> implements HomeScreenViewContract {
+class _HomeScreenState extends State<HomeScreen>
+    with NavigatorMixin
+    implements HomeScreenViewContract {
+
   HomeScreenPresenter _homeScreenPresenter;
 
   @override
   initState() {
     super.initState();
     _homeScreenPresenter = new HomeScreenPresenter(this);
-  }
-
-  void navigateTo(String route) {
-    Navigator.pushNamed(context, route);
   }
 
   Widget _title() {

@@ -5,11 +5,29 @@
 import 'package:flutter/material.dart';
 import 'package:numcolengine/numcolengine.dart';
 
-import '../../../styles.dart';
-import '../../../core/index.dart';
-import '../../../i18n/index.dart';
+import '../../../../view/index.dart';
+import '../../../../i18n/index.dart';
 
 typedef void DismissAnimationCallback();
+
+const gameColorWords = {
+  Color.blue: 'blue',
+  Color.red: 'red',
+  Color.green: 'green',
+  Color.yellow: 'yellow',
+};
+
+const gameNumberWords = {
+  Number.one: 'one',
+  Number.two: 'two',
+  Number.three: 'three',
+  Number.four: 'four',
+  Number.five: 'five',
+  Number.six: 'six',
+  Number.seven: 'seven',
+  Number.eight: 'eight',
+  Number.nine: 'nine',
+};
 
 class QuestionWidget extends StatefulWidget {
   QuestionWidget({Key key, @required this.question, @required this.isColorOk, @required this.isNumberOk})
@@ -86,7 +104,7 @@ class _QuestionWidgetState extends State<QuestionWidget> with TickerProviderStat
         mainAxisAlignment: MainAxisAlignment.center,
         children: <Widget>[
           Text(
-            Translations.of(context).text(numberWords[widget.question.value.number]).toUpperCase(),
+            Translations.of(context).text(gameNumberWords[widget.question.value.number]).toUpperCase(),
             style: TextStyle(
               fontFamily: Fonts.poiretone,
               fontSize: 36.0,
@@ -95,7 +113,7 @@ class _QuestionWidgetState extends State<QuestionWidget> with TickerProviderStat
           ),
           Text(' '),
           Text(
-            Translations.of(context).text(colorWords[widget.question.value.color]).toUpperCase(),
+            Translations.of(context).text(gameColorWords[widget.question.value.color]).toUpperCase(),
             style: TextStyle(
               fontFamily: Fonts.poiretone,
               fontSize: 36.0,

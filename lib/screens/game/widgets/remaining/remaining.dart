@@ -5,7 +5,7 @@
 import 'package:flutter/material.dart';
 
 import 'remaining_counter.dart';
-import '../../../../core/index.dart';
+import '../../../../services/index.dart';
 import '../../../../i18n/index.dart';
 
 class RemainingWidget extends StatefulWidget {

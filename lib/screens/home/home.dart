@@ -5,10 +5,7 @@
 import 'package:flutter/material.dart' hide Color;
 import 'package:numcolengine/numcolengine.dart';
 
-import '../../mixins/index.dart';
-import '../../widgets/index.dart';
-import '../../styles.dart';
-import '../../i18n/index.dart';
+import '../../view/index.dart';
 import 'home_presenter.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -17,7 +14,7 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen>
-    with NavigatorMixin
+    with NavigatorMixin, MenuItemMixin
     implements HomeScreenViewContract {
 
   HomeScreenPresenter _homeScreenPresenter;
@@ -44,14 +41,6 @@ class _HomeScreenState extends State<HomeScreen>
     );
   }
 
-  Widget _menuItem(Color color, String languageTag, NumcolButtonPressed command) {
-    return MenuButton(
-      color: color,
-      text: Translations.of(context).text(languageTag),
-      onPressed: command,
-    );
-  }
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -65,10 +54,10 @@ class _HomeScreenState extends State<HomeScreen>
               Center(
                 child: _title(),
               ),
-              _menuItem(Color.green, 'play', _homeScreenPresenter.onPlayButtonClicked),
-              _menuItem(Color.yellow, 'zen_mode', _homeScreenPresenter.onZenModeButtonClicked),
-              _menuItem(Color.blue, 'top_score', _homeScreenPresenter.onTopScoreButtonClicked),
-              _menuItem(Color.red, 'settings', _homeScreenPresenter.onSettingsButtonClicked),
+              menuItem(Color.green, 'play', _homeScreenPresenter.onPlayButtonClicked),
+              menuItem(Color.yellow, 'zen_mode', _homeScreenPresenter.onZenModeButtonClicked),
+              menuItem(Color.blue, 'top_score', _homeScreenPresenter.onTopScoreButtonClicked),
+              menuItem(Color.red, 'settings', _homeScreenPresenter.onSettingsButtonClicked),
             ],
           ),
         ),

@@ -5,12 +5,45 @@
 import 'package:flutter/material.dart' hide Color;
 import 'package:numcolengine/numcolengine.dart';
 
-import '../../widgets/menu_button.dart';
-import '../../styles.dart';
+import '../../view/index.dart';
 import '../../i18n/index.dart';
-import '../../routes.dart';
+import 'gameover_presenter.dart';
 
-class GameoverScreen extends StatelessWidget {
+class GameoverScreen extends StatefulWidget {
+  @override
+  _GameoverScreenState createState() => _GameoverScreenState();
+}
+
+class _GameoverScreenState extends State<GameoverScreen>
+    with NavigatorMixin, MenuItemMixin
+    implements GameoverScreenViewContract {
+
+  GameoverScreenPresenter _gameoverScreenPresenter;
+
+  @override
+  void initState() {
+    super.initState();
+    _gameoverScreenPresenter = GameoverScreenPresenter(this);
+  }
+
+  Widget _title() {
+    return Center(
+      child: Container(
+        padding: const EdgeInsets.only(
+          bottom: 60.0
+        ),
+        child: Text(
+          Translations.of(context).text('gameover').toUpperCase(),
+          style: TextStyle(
+            fontSize: 42.0,
+            color: ScreenColors.black,
+            fontFamily: Fonts.poiretone,
+          ),
+        ),
+      ),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -21,26 +54,9 @@ class GameoverScreen extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.center,
             crossAxisAlignment: CrossAxisAlignment.center,
             children: <Widget>[
-              Center(
-                child: Container(
-                  padding: const EdgeInsets.only(
-                    bottom: 60.0
-                  ),
-                  child: Text(
-                    'Game Over'.toUpperCase(),
-                    style: TextStyle(
-                      fontSize: 42.0,
-                      color: ScreenColors.black,
-                      fontFamily: Fonts.poiretone,
-                    ),
-                  ),
-                ),
-              ),
-              MenuButton(
-                color: Color.green,
-                text: Translations.of(context).text('try_again'),
-                onPressed: () => Navigator.pushReplacementNamed(context, Routes.countdown),
-              ),
+              _title(),
+              menuItem(Color.green, 'try_again', _gameoverScreenPresenter.onTryAgainButtonClicked),
+              menuItem(Color.blue, 'back_to_menu', _gameoverScreenPresenter.onBackButtonClicked),
             ],
           ),
         ),

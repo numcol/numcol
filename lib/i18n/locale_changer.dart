@@ -6,16 +6,16 @@ import 'package:flutter/material.dart';
 
 typedef void LocaleChangeCallback(Locale locale);
 
-class Application {
+class LocaleChanger {
   LocaleChangeCallback onLocaleChanged;
 
-  static final Application _application = new Application._internal();
+  static final LocaleChanger _localeChanger = new LocaleChanger._internal();
 
-  factory Application() {
-      return _application;
+  factory LocaleChanger() {
+      return _localeChanger;
   }
 
-  Application._internal();
+  LocaleChanger._internal();
 }
 
-Application application = new Application();
+LocaleChanger localeChanger = new LocaleChanger();

@@ -4,7 +4,7 @@
 
 import 'package:flutter/material.dart';
 
-import '../../../../styles.dart';
+import '../../../../view/index.dart';
 
 class RemainingCounter extends AnimatedWidget {
   RemainingCounter({ Key key, @required this.animation }) : super(key: key, listenable: animation);

@@ -3,8 +3,7 @@ import 'package:numcolengine/numcolengine.dart';
 
 import '../../configuration.dart';
 import '../../routes.dart';
-import '../../core/index.dart';
-import 'widgets/reply.dart';
+import '../../services/index.dart';
 import 'widgets/index.dart';
 
 class GameScreen extends StatefulWidget {

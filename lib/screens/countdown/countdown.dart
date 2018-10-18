@@ -4,7 +4,7 @@
 
 import 'package:flutter/material.dart';
 
-import '../../mixins/index.dart';
+import '../../view/index.dart';
 import '../../services/index.dart';
 import 'widgets/index.dart';
 import 'countdown_presenter.dart';

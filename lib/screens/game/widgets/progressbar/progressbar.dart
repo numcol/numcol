@@ -4,8 +4,8 @@
 
 import 'package:flutter/material.dart';
 
-import '../../../styles.dart';
-import '../../../core/index.dart';
+import '../../../../view/index.dart';
+import '../../../../services/index.dart';
 
 class ProgressBarWidget extends StatefulWidget {
   ProgressBarWidget({Key key, @required this.timer}) : super(key: key);

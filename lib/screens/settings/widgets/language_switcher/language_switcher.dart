@@ -4,7 +4,6 @@
 
 import 'package:flutter/material.dart' hide Color;
 
-import '../../../../application.dart';
 import '../../../../i18n/index.dart';
 import '../../../../services/index.dart';
 import '../../../../widgets/index.dart';
@@ -36,7 +35,7 @@ class _LanguageSwitcherState extends State<LanguageSwitcher> implements Language
   void onLanguageSaved(Locales chosenLocale) {
     var languageCode = TranslationsHelper.getLanguageCode(chosenLocale);
     var newLocale = new Locale(languageCode, '');
-    application.onLocaleChanged(newLocale);
+    localeChanger.onLocaleChanged(newLocale);
     setState(() {
       _locale = chosenLocale;
     });

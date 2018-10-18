@@ -9,6 +9,7 @@
     "try_again": "Saiatu berriro",
     "score": "Puntuazioa",
     "time": "Denbora",
+    "gameover": "Game Over",
 
     "one": "Bat",
     "two": "Bi",
@@ -36,8 +37,6 @@
     "infinite_level": "Hamaigabe",
     "infinite_mode": "Hamaigabe Modua",
     "round": "Txanda",
-
-    "gameover": "Game Over",
     "share_kids": "{{score}} puntu lortu ditut NumCol-en http://goo.gl/fMkZrJ #numcol",
     "share_normal": "{{score}} puntu lortu ditut NumCol-en http://goo.gl/fMkZrJ #numcol",
     "share_difficult": "{{score}} puntu lortu ditut NumCol-en http://goo.gl/fMkZrJ #numcol",

@@ -5,3 +5,4 @@
 export 'animator.dart';
 export 'injector.dart';
 export 'storage.dart';
+export 'timer.dart';

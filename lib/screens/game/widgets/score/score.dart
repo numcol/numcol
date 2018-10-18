@@ -4,8 +4,8 @@
 
 import 'package:flutter/material.dart';
 
-import '../../../styles.dart';
-import '../../../i18n/index.dart';
+import '../../../../view/index.dart';
+import '../../../../i18n/index.dart';
 
 class ScoreWidget extends StatefulWidget {
   ScoreWidget({Key key, @required this.score})

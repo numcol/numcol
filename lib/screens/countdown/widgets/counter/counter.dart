@@ -4,7 +4,7 @@
 
 import 'package:flutter/material.dart';
 
-import '../../../../styles.dart';
+import '../../../../view/index.dart';
 
 class CountdownWidget extends AnimatedWidget {
   CountdownWidget({ Key key, @required this.animation }) : super(key: key, listenable: animation);

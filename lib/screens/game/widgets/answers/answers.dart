@@ -5,7 +5,7 @@
 import 'package:flutter/material.dart';
 import 'package:numcolengine/numcolengine.dart';
 
-import 'answer.dart';
+import '../answer/answer.dart';
 
 class AnswersWidget extends StatelessWidget {
   AnswersWidget({Key key, @required this.answers}) : super(key: key);

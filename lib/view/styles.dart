@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:numcolengine/numcolengine.dart' as Engine;
 
 class ScreenColors {
   static const red = const Color(0xffff4545);
@@ -20,3 +21,17 @@ class Fonts {
   static const lemonMilk = 'LemonMilk';
   static const robotoMono = 'RobotoMono';
 }
+
+var colors = {
+  Engine.Color.blue: ScreenColors.blue,
+  Engine.Color.red: ScreenColors.red,
+  Engine.Color.green: ScreenColors.green,
+  Engine.Color.yellow: ScreenColors.yellow,
+};
+
+var darkColors = {
+  Engine.Color.blue: ScreenColors.darkBlue,
+  Engine.Color.red: ScreenColors.darkRed,
+  Engine.Color.green: ScreenColors.darkGreen,
+  Engine.Color.yellow: ScreenColors.darkYellow,
+};

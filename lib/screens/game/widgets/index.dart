@@ -2,9 +2,10 @@
 // Use of this source code is governed by the version 3 of the
 // GNU General Public License that can be found in the LICENSE file.
 
-export 'answer.dart';
-export 'question.dart';
-export 'answers.dart';
+export 'answer/answer.dart';
+export 'answers/answers.dart';
+export 'progressbar/progressbar.dart';
+export 'question/question.dart';
 export 'remaining/remaining.dart';
-export 'score.dart';
-export 'progress_bar.dart';
+export 'reply/reply.dart';
+export 'score/score.dart';

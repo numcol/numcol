@@ -6,7 +6,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 
-import 'application.dart';
 import 'i18n/index.dart';
 import 'services/index.dart';
 import 'routes.dart';
@@ -24,7 +23,7 @@ class _NumcolState extends State<Numcol> {
   void initState() {
     super.initState();
     _newLocaleDelegate = new TranslationsDelegate(newLocale: null);
-    application.onLocaleChanged = onLocaleChange;
+    localeChanger.onLocaleChanged = onLocaleChange;
   }
 
   onLocaleChange(Locale locale) {

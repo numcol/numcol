@@ -5,11 +5,9 @@
 import 'package:flutter/material.dart' hide Color;
 import 'package:numcolengine/numcolengine.dart';
 
-import 'widgets/index.dart';
-import '../../widgets/index.dart';
-import '../../mixins/index.dart';
 import '../../i18n/index.dart';
-import '../../styles.dart';
+import '../../view/index.dart';
+import 'widgets/index.dart';
 import 'settings_presenter.dart';
 
 class SettingsScreen extends StatefulWidget {
@@ -17,7 +15,10 @@ class SettingsScreen extends StatefulWidget {
   _SettingsScreenState createState() => _SettingsScreenState();
 }
 
-class _SettingsScreenState extends State<SettingsScreen> with NavigatorMixin implements SettingsScreenViewContract {
+class _SettingsScreenState extends State<SettingsScreen>
+    with NavigatorMixin, MenuItemMixin
+    implements SettingsScreenViewContract {
+
   SettingsScreenPresenter _settingsScreenPresenter;
 
   @override
@@ -58,11 +59,7 @@ class _SettingsScreenState extends State<SettingsScreen> with NavigatorMixin imp
                 children: <Widget>[
                   _buildTitle(context),
                   LanguageSwitcher(),
-                  MenuButton(
-                    color: Color.blue,
-                    text: Translations.of(context).text('back_to_menu'),
-                    onPressed: _settingsScreenPresenter.onBackButtonClicked,
-                  ),
+                  menuItem(Color.blue, 'back_to_menu', _settingsScreenPresenter.onBackButtonClicked),
                 ],
               ),
             ),

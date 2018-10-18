@@ -19,7 +19,7 @@ void main() {
 
     test('Every game should have an answerable question', () {
       var game = new Game();
-      expect(game.answers.indexOf(game.question) > 0, true);
+      expect(game.answers.indexOf(game.question) > -1, true);
     });
 
     test('Every game should start with 0 score', () {

@@ -2,6 +2,9 @@
 
 The Brain Training Game About Matching Numbers And Colours.
 
+[![Build Status](https://api.cirrus-ci.com/github/numcol/numcol.svg)](https://cirrus-ci.com/github/numcol/numcol)
+[![AUR](https://img.shields.io/aur/license/yaourt.svg)](LICENSE)
+
 This repo contains the source code of the latest versions of the [NumCol][0] Android Game.
 
 ## Get Started

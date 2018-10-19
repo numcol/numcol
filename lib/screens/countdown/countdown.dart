@@ -4,6 +4,7 @@
 
 import 'package:flutter/material.dart';
 
+import '../../configuration.dart';
 import '../../view/index.dart';
 import '../../services/index.dart';
 import 'widgets/index.dart';
@@ -18,15 +19,24 @@ class _CountdownScreenState extends State<CountdownScreen>
     with TickerProviderStateMixin, NavigatorMixin
     implements CountdownScreenViewContract {
 
-  static const int countdownSeconds = 4;
-
   CountdownScreenPresenter _presenter;
   Animator _animator;
+
+  void _onAnimationComplete() {
+    _presenter.onAnimationCompleted();
+  }
 
   @override
   void didChangeDependencies() {
     super.didChangeDependencies();
-    _animator = Injector.of(context).animatorFactory.create(this, countdownSeconds);
+    final configuration = Configuration.of(context);
+    _animator = Injector.of(context).animatorFactory.createCountdownAnimator(
+      vsync: this,
+      seconds: configuration.gameStartCountdownSeconds,
+      begin: configuration.gameStartCountdownSeconds,
+      end: 0,
+      onCompleted: _onAnimationComplete
+    );
     _presenter = CountdownScreenPresenter(this, _animator);
     _presenter.onLoad();
   }

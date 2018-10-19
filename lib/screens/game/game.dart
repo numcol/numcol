@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 
 import '../../configuration.dart';
 import '../../services/index.dart';
-import '../../engine/index.dart';
+import '../../domain/index.dart';
 import '../../view/index.dart';
 import 'widgets/index.dart';
 import 'game_presenter.dart';

@@ -10,7 +10,8 @@ class Configuration extends StatelessWidget {
     @required this.child,
     @required this.initialTimeInMilliseconds,
     @required this.timePenaltyMultiplier,
-    @required this.timeAdditionByAnswerInMilliseconds})
+    @required this.timeAdditionByAnswerInMilliseconds,
+    @required this.gameStartCountdownSeconds})
       : super(key: key);
 
   static _InheritedConfiguration of(BuildContext context) {
@@ -21,6 +22,7 @@ class Configuration extends StatelessWidget {
   final int initialTimeInMilliseconds;
   final double timePenaltyMultiplier;
   final int timeAdditionByAnswerInMilliseconds;
+  final int gameStartCountdownSeconds;
 
   @override
   Widget build(BuildContext context) {
@@ -29,6 +31,7 @@ class Configuration extends StatelessWidget {
       initialTimeInMilliseconds: initialTimeInMilliseconds,
       timePenaltyMultiplier: timePenaltyMultiplier,
       timeAdditionByAnswerInMilliseconds: timeAdditionByAnswerInMilliseconds,
+      gameStartCountdownSeconds: gameStartCountdownSeconds,
     );
   }
 }
@@ -39,12 +42,14 @@ class _InheritedConfiguration extends InheritedWidget {
     @required child,
     @required this.initialTimeInMilliseconds,
     @required this.timePenaltyMultiplier,
-    @required this.timeAdditionByAnswerInMilliseconds})
+    @required this.timeAdditionByAnswerInMilliseconds,
+    @required this.gameStartCountdownSeconds})
       : super(key: key, child: child);
 
   final int initialTimeInMilliseconds;
   final double timePenaltyMultiplier;
   final int timeAdditionByAnswerInMilliseconds;
+  final int gameStartCountdownSeconds;
 
   @override
   bool updateShouldNotify(_InheritedConfiguration oldWidget) {

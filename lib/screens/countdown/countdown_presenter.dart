@@ -2,7 +2,7 @@
 // Use of this source code is governed by the version 3 of the
 // GNU General Public License that can be found in the LICENSE file.
 
-import '../../services/index.dart';
+import '../../view/index.dart';
 import '../../routes.dart';
 
 abstract class CountdownScreenViewContract {
@@ -12,21 +12,12 @@ abstract class CountdownScreenViewContract {
 class CountdownScreenPresenter {
   CountdownScreenPresenter(this._view, this._animator);
 
-  static const int countdownSeconds = 4;
-
   final Animator _animator;
   final CountdownScreenViewContract _view;
 
-  void onLoad() {
-    _animator.loadIntegerAnimation(
-      begin: countdownSeconds,
-      end: 0,
-      onCompleted: () => _view.redirectTo(Routes.game),
-    );
-    _animator.forward(from: 0.0);
-  }
+  void onLoad() => _animator.forward();
 
-  void dispose() {
-    _animator.dispose();
-  }
+  void onAnimationCompleted() => _view.redirectTo(Routes.game);
+
+  void dispose() => _animator.dispose();
 }

@@ -4,7 +4,7 @@
 
 import 'package:flutter/material.dart';
 
-import 'animator.dart';
+import 'animator_factory.dart';
 import 'storage.dart';
 import 'timer.dart';
 

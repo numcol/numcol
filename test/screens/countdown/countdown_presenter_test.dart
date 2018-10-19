@@ -7,7 +7,7 @@ import 'package:mockito/mockito.dart';
 
 import '../../../lib/routes.dart';
 import '../../../lib/screens/countdown/countdown_presenter.dart';
-import '../../../lib/services/index.dart';
+import '../../../lib/view/index.dart';
 
 class MockCountdownScreenView extends Mock implements CountdownScreenViewContract {}
 class MockAnimator extends Mock implements Animator {}
@@ -25,27 +25,15 @@ void main() {
 
   group('Countdown Screen:', () {
     group('On load', () {
-      test('it runs a 4 second countdown animation from the beginning', () {
+      test('it starts the countdown animation', () {
         _countdownScreenPresenter.onLoad();
-        verifyInOrder([
-          _mockAnimator.loadIntegerAnimation(
-            begin: 4,
-            end: 0,
-            onCompleted: anyNamed('onCompleted'),
-          ),
-          _mockAnimator.forward(from: 0.0),
-        ]);
+
+        verify(_mockAnimator.forward());
       });
-
-      test('it redirects to the game screen after the animation', () {
-        _countdownScreenPresenter.onLoad();
-        var onAnimationCompleted = verify(_mockAnimator.loadIntegerAnimation(
-          begin: anyNamed('begin'),
-          end: anyNamed('end'),
-          onCompleted: captureAnyNamed('onCompleted'),
-        )).captured.single;
-
-        onAnimationCompleted();
+    });
+    group('On animation completed', () {
+      test('it redirects to the game screen', () {
+        _countdownScreenPresenter.onAnimationCompleted();
 
         verify(_mockCountdownScreenView.redirectTo(Routes.game));
       });

@@ -2,7 +2,7 @@
 // Use of this source code is governed by the version 3 of the
 // GNU General Public License that can be found in the LICENSE file.
 
-import '../../engine/index.dart';
+import '../../domain/index.dart';
 import '../../routes.dart';
 import '../../services/index.dart';
 

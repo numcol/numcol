@@ -26,6 +26,7 @@ void main() {
       initialTimeInMilliseconds: 10000,
       timePenaltyMultiplier: 0.66,
       timeAdditionByAnswerInMilliseconds: 1800,
+      gameStartCountdownSeconds: 4,
       child: Injector(
         storage: Storage(),
         animatorFactory: AnimatorFactory(),

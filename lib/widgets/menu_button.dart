@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart' hide Color;
-import 'package:numcolengine/numcolengine.dart';
 
+import '../engine/index.dart';
 import 'numcol_button.dart';
 
 class MenuButton extends StatelessWidget {

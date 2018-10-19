@@ -34,12 +34,12 @@ Or use VSCode/Itenllij to debug.
 ### Test
 
 ```sh
-flutter test ./ ./engine
+flutter test .
 ```
 
 ## License
 
-NumCol - The Brain Training Game About Matching Numbers And Colours.
+NumCol - The Brain Training Game About Matching Numbers And Colours.  
 Copyright (C) 2018 Alberto Varela Sánchez <alberto@berriart.com>
 
 This program is free software: you can redistribute it and/or modify

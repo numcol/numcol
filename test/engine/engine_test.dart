@@ -6,9 +6,7 @@ import 'dart:math';
 
 import 'package:test/test.dart';
 
-import '../lib/src/answer.dart';
-import '../lib/src/enums.dart';
-import '../lib/src/game.dart';
+import '../../lib/engine/index.dart';
 
 void main() {
   group('constructor', () {

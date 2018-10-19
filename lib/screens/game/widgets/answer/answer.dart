@@ -3,8 +3,8 @@
 // GNU General Public License that can be found in the LICENSE file.
 
 import 'package:flutter/material.dart';
-import 'package:numcolengine/numcolengine.dart' hide Color;
 
+import '../../../../engine/index.dart' hide Color;
 import '../../../../widgets/numcol_button.dart';
 import '../reply/reply.dart';
 

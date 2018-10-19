@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:numcolengine/numcolengine.dart' as Engine;
+
+import '../engine/index.dart' as Engine;
 
 class ScreenColors {
   static const red = const Color(0xffff4545);

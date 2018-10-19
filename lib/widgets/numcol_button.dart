@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:numcolengine/numcolengine.dart' as Engine show Color;
 
 import '../view/index.dart';
+import '../engine/index.dart' as Engine;
 
 typedef NumcolButtonPressed();
 

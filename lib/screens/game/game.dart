@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:numcolengine/numcolengine.dart';
 
 import '../../configuration.dart';
 import '../../routes.dart';
 import '../../services/index.dart';
+import '../../engine/index.dart';
 import 'widgets/index.dart';
 
 class GameScreen extends StatefulWidget {

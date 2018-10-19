@@ -55,8 +55,8 @@ class _GameoverScreenState extends State<GameoverScreen>
             crossAxisAlignment: CrossAxisAlignment.center,
             children: <Widget>[
               _title(),
-              menuItem(Color.green, 'try_again', _gameoverScreenPresenter.onTryAgainButtonClicked),
-              menuItem(Color.blue, 'back_to_menu', _gameoverScreenPresenter.onBackButtonClicked),
+              menuItem(Color.green, 'try_again', _gameoverScreenPresenter.onTryAgainButtonPressed),
+              menuItem(Color.blue, 'back_to_menu', _gameoverScreenPresenter.onBackButtonPressed),
             ],
           ),
         ),

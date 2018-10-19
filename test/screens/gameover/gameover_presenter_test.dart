@@ -19,17 +19,19 @@ void main() {
     _gameoverScreenPresenter = GameoverScreenPresenter(_mockGameoverScreenView);
   });
 
-  group('onTryAgainButtonClicked', () {
-    test('Should redirect to the countdown screen', () {
-      _gameoverScreenPresenter.onTryAgainButtonClicked();
-      verify(_mockGameoverScreenView.redirectTo(Routes.countdown));
+  group('Gameover Screen:', () {
+    group('On "try again" button pressed', () {
+      test('Should redirect to the countdown screen', () {
+        _gameoverScreenPresenter.onTryAgainButtonPressed();
+        verify(_mockGameoverScreenView.redirectTo(Routes.countdown));
+      });
     });
-  });
 
-  group('onBackButtonClicked', () {
-    test('Should navigate back', () {
-      _gameoverScreenPresenter.onBackButtonClicked();
-      verify(_mockGameoverScreenView.navigateBack());
+    group('On "back" button pressed', () {
+      test('Should navigate back', () {
+        _gameoverScreenPresenter.onBackButtonPressed();
+        verify(_mockGameoverScreenView.navigateBack());
+      });
     });
   });
 }

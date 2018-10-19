@@ -23,38 +23,40 @@ void main() {
     _countdownScreenPresenter = CountdownScreenPresenter(_mockCountdownScreenView, _mockAnimator);
   });
 
-  group('onLoad', () {
-    test('Should run a 4 second countdown animation from the beginning', () {
-      _countdownScreenPresenter.onLoad();
-      verifyInOrder([
-        _mockAnimator.loadIntegerAnimation(
-          begin: 4,
-          end: 0,
-          onCompleted: anyNamed('onCompleted'),
-        ),
-        _mockAnimator.forward(from: 0.0),
-      ]);
+  group('Countdown Screen:', () {
+    group('On load', () {
+      test('it runs a 4 second countdown animation from the beginning', () {
+        _countdownScreenPresenter.onLoad();
+        verifyInOrder([
+          _mockAnimator.loadIntegerAnimation(
+            begin: 4,
+            end: 0,
+            onCompleted: anyNamed('onCompleted'),
+          ),
+          _mockAnimator.forward(from: 0.0),
+        ]);
+      });
+
+      test('it redirects to the game screen after the animation', () {
+        _countdownScreenPresenter.onLoad();
+        var onAnimationCompleted = verify(_mockAnimator.loadIntegerAnimation(
+          begin: anyNamed('begin'),
+          end: anyNamed('end'),
+          onCompleted: captureAnyNamed('onCompleted'),
+        )).captured.single;
+
+        onAnimationCompleted();
+
+        verify(_mockCountdownScreenView.redirectTo(Routes.game));
+      });
     });
 
-    test('Should redirect to the game screen after the animation', () {
-      _countdownScreenPresenter.onLoad();
-      var onAnimationCompleted = verify(_mockAnimator.loadIntegerAnimation(
-        begin: anyNamed('begin'),
-        end: anyNamed('end'),
-        onCompleted: captureAnyNamed('onCompleted'),
-      )).captured.single;
+    group('On game end', () {
+      test('Destroys the countdown timer', () {
+        _countdownScreenPresenter.dispose();
 
-      onAnimationCompleted();
-
-      verify(_mockCountdownScreenView.redirectTo(Routes.game));
-    });
-  });
-
-  group('dispose', () {
-    test('Should dispose animator back', () {
-      _countdownScreenPresenter.dispose();
-
-      verify(_mockAnimator.dispose());
+        verify(_mockAnimator.dispose());
+      });
     });
   });
 }

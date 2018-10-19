@@ -27,7 +27,7 @@ class LanguageSwitcherPresenter {
       });
   }
 
-  void onLanguageClicked(Locales locale) {
+  void onLanguagePressed(Locales locale) {
     var languageCode = TranslationsHelper.getLanguageCode(locale);
 
     _storage.setLanguage(languageCode)

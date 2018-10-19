@@ -19,31 +19,33 @@ void main() {
     _homeScreenPresenter = HomeScreenPresenter(_mockHomeScreenView);
   });
 
-  group('onPlayButtonClicked', () {
-    test('Should navigate to countdown page', () {
-      _homeScreenPresenter.onPlayButtonClicked();
-      verify(_mockHomeScreenView.navigateTo(Routes.countdown));
+  group('Home Screen:', () {
+    group('On "Play" button pressed ', () {
+      test('it navigates to countdown page', () {
+        _homeScreenPresenter.onPlayButtonPressed();
+        verify(_mockHomeScreenView.navigateTo(Routes.countdown));
+      });
     });
-  });
 
-  group('onZenModeButtonClicked', () {
-    test('Should navigate to countdown page', () {
-      _homeScreenPresenter.onZenModeButtonClicked();
-      verify(_mockHomeScreenView.navigateTo(Routes.countdown));
+    group('On "Zen Mode" button pressed', () {
+      test('it navigates to countdown page', () {
+        _homeScreenPresenter.onZenModeButtonPressed();
+        verify(_mockHomeScreenView.navigateTo(Routes.countdown));
+      });
     });
-  });
 
-  group('onTopScoreButtonClicked', () {
-    test('Should navigate to countdown page', () {
-      _homeScreenPresenter.onTopScoreButtonClicked();
-      verify(_mockHomeScreenView.navigateTo(Routes.countdown));
+    group('On "Top Score" button pressed', () {
+      test('it navigates to countdown page', () {
+        _homeScreenPresenter.onTopScoreButtonPressed();
+        verify(_mockHomeScreenView.navigateTo(Routes.countdown));
+      });
     });
-  });
 
-  group('onSettingsButtonClicked', () {
-    test('Should navigate to countdown page', () {
-      _homeScreenPresenter.onSettingsButtonClicked();
-      verify(_mockHomeScreenView.navigateTo(Routes.settings));
+    group('On "Settings" button pressed', () {
+      test('it navigates to countdown page', () {
+        _homeScreenPresenter.onSettingsButtonPressed();
+        verify(_mockHomeScreenView.navigateTo(Routes.settings));
+      });
     });
   });
 }

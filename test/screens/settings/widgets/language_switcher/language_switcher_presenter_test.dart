@@ -23,55 +23,60 @@ void main() {
     _languageSwitcherPresenter = LanguageSwitcherPresenter(_mockLanguageSwitcherView, _mockStorage);
   });
 
-  group('loadChosenLanguage', () {
-    test('Should not call callback if language is null', () {
-      String value;
-      final future = new Future.value(value);
-      when(_mockStorage.getLanguage())
-        .thenAnswer((_) => future);
+  group('Language Switcher:', () {
+    group('On load', () {
+      test('it gets user preferred language and if it is empty it does not refresh UI', () {
+        String value;
+        final future = new Future.value(value);
+        when(_mockStorage.getLanguage())
+          .thenAnswer((_) => future);
 
-      _languageSwitcherPresenter.loadChosenLanguage();
+        _languageSwitcherPresenter.loadChosenLanguage();
 
-      future.then((_) {
-        verifyNever(_mockLanguageSwitcherView.onLoadChosenLanguageComplete(any));
+        future.then((_) {
+          verify(_mockStorage.getLanguage());
+          verifyNever(_mockLanguageSwitcherView.onLoadChosenLanguageComplete(any));
+        });
+      });
+
+      test('it gets user preferred language and it calls complete action to refresh screen with the loaded locale', () {
+        final future = new Future.value('eu');
+        when(_mockStorage.getLanguage())
+          .thenAnswer((_) => future);
+
+        _languageSwitcherPresenter.loadChosenLanguage();
+
+        future.then((_) {
+          verify(_mockStorage.getLanguage());
+          verify(_mockLanguageSwitcherView.onLoadChosenLanguageComplete(Locales.euskara));
+        });
       });
     });
 
-    test('Should call complete callback with proper locale', () {
-      final future = new Future.value('eu');
-      when(_mockStorage.getLanguage())
-        .thenAnswer((_) => future);
+    group('On language selected', () {
+      test('saves the changes and it notifies the UI about the saved changes', () {
+        final future = new Future.value(true);
+        when(_mockStorage.setLanguage('eu'))
+          .thenAnswer((_) => future);
 
-      _languageSwitcherPresenter.loadChosenLanguage();
+        _languageSwitcherPresenter.onLanguagePressed(Locales.euskara);
 
-      future.then((_) {
-        verify(_mockLanguageSwitcherView.onLoadChosenLanguageComplete(Locales.euskara));
+        future.then((_) {
+          verify(_mockStorage.setLanguage('eu'));
+          verify(_mockLanguageSwitcherView.onLanguageSaved(Locales.euskara));
+        });
       });
-    });
-  });
 
-  group('onLanguageClicked', () {
-    test('Should call saved callback after saving the language', () {
-      final future = new Future.value(true);
-      when(_mockStorage.setLanguage('eu'))
-        .thenAnswer((_) => future);
+      test('it notifies the UI about the errors saving changes', () {
+        final future = new Future.value(false);
+        when(_mockStorage.setLanguage('eu'))
+          .thenAnswer((_) => future);
 
-      _languageSwitcherPresenter.onLanguageClicked(Locales.euskara);
+        _languageSwitcherPresenter.onLanguagePressed(Locales.euskara);
 
-      future.then((_) {
-        verify(_mockLanguageSwitcherView.onLanguageSaved(Locales.euskara));
-      });
-    });
-
-    test('Should call error callback if language can not be save', () {
-      final future = new Future.value(false);
-      when(_mockStorage.setLanguage('eu'))
-        .thenAnswer((_) => future);
-
-      _languageSwitcherPresenter.onLanguageClicked(Locales.euskara);
-
-      future.then((_) {
-        verify(_mockLanguageSwitcherView.onLanguageSavedError());
+        future.then((_) {
+          verify(_mockLanguageSwitcherView.onLanguageSavedError());
+        });
       });
     });
   });

@@ -13,19 +13,19 @@ class HomeScreenPresenter {
 
   final HomeScreenViewContract _view;
 
-  void onPlayButtonClicked() {
+  void onPlayButtonPressed() {
     _view.navigateTo(Routes.countdown);
   }
 
-  void onZenModeButtonClicked() {
+  void onZenModeButtonPressed() {
     _view.navigateTo(Routes.countdown);
   }
 
-  void onTopScoreButtonClicked() {
+  void onTopScoreButtonPressed() {
     _view.navigateTo(Routes.countdown);
   }
 
-  void onSettingsButtonClicked() {
+  void onSettingsButtonPressed() {
     _view.navigateTo(Routes.settings);
   }
 }

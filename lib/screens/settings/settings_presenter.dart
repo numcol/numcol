@@ -11,7 +11,7 @@ class SettingsScreenPresenter {
 
   final SettingsScreenViewContract _view;
 
-  void onBackButtonClicked() {
+  void onBackButtonPressed() {
     _view.navigateBack();
   }
 }

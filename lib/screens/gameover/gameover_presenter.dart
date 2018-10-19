@@ -14,11 +14,11 @@ class GameoverScreenPresenter {
 
   final GameoverScreenViewContract _view;
 
-  void onTryAgainButtonClicked() {
+  void onTryAgainButtonPressed() {
     _view.redirectTo(Routes.countdown);
   }
 
-  void onBackButtonClicked() {
+  void onBackButtonPressed() {
     _view.navigateBack();
   }
 }

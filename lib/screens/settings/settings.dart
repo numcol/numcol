@@ -59,7 +59,7 @@ class _SettingsScreenState extends State<SettingsScreen>
                 children: <Widget>[
                   _buildTitle(context),
                   LanguageSwitcher(),
-                  menuItem(Color.blue, 'back_to_menu', _settingsScreenPresenter.onBackButtonClicked),
+                  menuItem(Color.blue, 'back_to_menu', _settingsScreenPresenter.onBackButtonPressed),
                 ],
               ),
             ),

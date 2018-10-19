@@ -6,17 +6,21 @@ import 'answer.dart';
 import 'random_generator.dart';
 
 class Game {
-  Game() {
-    _question = RandomGenerator.generateQuestion(_answers);
-  }
+  Game();
 
-  final List<Answer> _answers = RandomGenerator.generateAnswers();
+  List<Answer> _answers;
   Answer _question;
-  int _score = 0;
+  int _score;
 
   List<Answer> get answers => _answers;
   Answer get question => _question;
   int get score => _score;
+
+  void start() {
+    _answers = RandomGenerator.generateAnswers();
+    _question = RandomGenerator.generateQuestion(_answers);
+    _score = 0;
+  }
 
   bool checkAnswer(Answer answer) {
     return _question.color == answer.color && _question.number == answer.number;

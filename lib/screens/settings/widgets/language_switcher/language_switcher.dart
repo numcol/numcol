@@ -67,7 +67,7 @@ class _LanguageSwitcherState extends State<LanguageSwitcher> implements Language
 
     return locales.map((locale) => ListTile(
           title: Text(TranslationsHelper.getLanguageText(locale)),
-          onTap: () => _presenter.onLanguageClicked(locale),
+          onTap: () => _presenter.onLanguagePressed(locale),
         )).toList();
   }
 

@@ -18,10 +18,12 @@ void main() {
     _settingsScreenPresenter = SettingsScreenPresenter(_mockSettingsScreenView);
   });
 
-  group('onBackButtonClicked', () {
-    test('Should navigate back', () {
-      _settingsScreenPresenter.onBackButtonClicked();
-      verify(_mockSettingsScreenView.navigateBack());
+  group('Settings Screen:', () {
+    group('On back button pressed', () {
+      test('it navigates back', () {
+        _settingsScreenPresenter.onBackButtonPressed();
+        verify(_mockSettingsScreenView.navigateBack());
+      });
     });
   });
 }

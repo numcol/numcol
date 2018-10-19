@@ -19,7 +19,7 @@ class CountdownWidget extends AnimatedWidget {
       child: Center(
         child: Text(
           animation.value == 0 ? 'Go!' : animation.value.toString(),
-          style: new TextStyle(
+          style: TextStyle(
             fontSize: 92.0,
             fontFamily: Fonts.poiretone
           ),

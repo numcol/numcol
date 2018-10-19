@@ -22,7 +22,7 @@ class _HomeScreenState extends State<HomeScreen>
   @override
   initState() {
     super.initState();
-    _homeScreenPresenter = new HomeScreenPresenter(this);
+    _homeScreenPresenter = HomeScreenPresenter(this);
   }
 
   Widget _title() {

@@ -15,7 +15,7 @@ class LanguageSwitcher extends StatefulWidget {
 }
 
 class _LanguageSwitcherState extends State<LanguageSwitcher> implements LanguageSwitcherViewContract {
-  final GlobalKey<CustomExpansionTileState> expansionTile = new GlobalKey();
+  final GlobalKey<CustomExpansionTileState> expansionTile = GlobalKey();
   Locales _locale;
   LanguageSwitcherPresenter _presenter;
 
@@ -34,7 +34,7 @@ class _LanguageSwitcherState extends State<LanguageSwitcher> implements Language
 
   void onLanguageSaved(Locales chosenLocale) {
     var languageCode = TranslationsHelper.getLanguageCode(chosenLocale);
-    var newLocale = new Locale(languageCode, '');
+    var newLocale = Locale(languageCode, '');
     localeChanger.onLocaleChanged(newLocale);
     setState(() {
       _locale = chosenLocale;

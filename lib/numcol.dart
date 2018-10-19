@@ -13,7 +13,7 @@ import 'screens/index.dart';
 
 class Numcol extends StatefulWidget {
   @override
-  _NumcolState createState() => new _NumcolState();
+  _NumcolState createState() => _NumcolState();
 }
 class _NumcolState extends State<Numcol> {
   TranslationsDelegate _newLocaleDelegate;
@@ -22,13 +22,13 @@ class _NumcolState extends State<Numcol> {
   @override
   void initState() {
     super.initState();
-    _newLocaleDelegate = new TranslationsDelegate(newLocale: null);
+    _newLocaleDelegate = TranslationsDelegate(newLocale: null);
     localeChanger.onLocaleChanged = onLocaleChange;
   }
 
   onLocaleChange(Locale locale) {
     setState(() {
-      _newLocaleDelegate = new TranslationsDelegate(newLocale: locale);
+      _newLocaleDelegate = TranslationsDelegate(newLocale: locale);
     });
   }
 

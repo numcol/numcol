@@ -22,11 +22,11 @@ class NumcolButton extends StatelessWidget {
     );
     var buttonColor = colors[color];
     var buttonDarkColor = darkColors[color];
-    var borderColor = new BorderSide(
+    var borderColor = BorderSide(
       color: buttonColor,
       width: 3.0,
     );
-    var borderDarkColor = new BorderSide(
+    var borderDarkColor = BorderSide(
       color: buttonDarkColor,
       width: 3.0,
     );
@@ -38,9 +38,9 @@ class NumcolButton extends StatelessWidget {
       child: Container(
         child: Center(
 
-            child: new Stack(
+            child: Stack(
               children: [
-                new Positioned(
+                Positioned(
                   top: 2.0,
                   left: 2.0,
                   child: Text(
@@ -48,7 +48,7 @@ class NumcolButton extends StatelessWidget {
                     style: style.copyWith(color: Colors.black.withOpacity(0.4)),
                   ),
                 ),
-                new Container(
+                Container(
                   padding: const EdgeInsets.all(1.0),
                   child: Text(text, style: style),
                 ),
@@ -58,7 +58,7 @@ class NumcolButton extends StatelessWidget {
         ),
         decoration: BoxDecoration(
           color: buttonColor,
-          border: new Border(
+          border: Border(
             top: borderColor,
             left: borderColor,
             bottom: borderDarkColor,

@@ -13,7 +13,7 @@ class RemainingCounter extends AnimatedWidget {
 
   @override
   build(BuildContext context){
-    return new Text(
+    return Text(
       (animation.value / 1000).toStringAsFixed(3).padLeft(6, '0'),
       style: TextStyle(
         fontSize: 18.0,

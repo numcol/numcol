@@ -12,7 +12,7 @@ class GameScreen extends StatefulWidget {
 }
 
 class _GameScreenState extends State<GameScreen> {
-  final Game _game = new Game();
+  final Game _game = Game();
   final ValueNotifier<Answer> _reply = ValueNotifier<Answer>(null);
   final ValueNotifier<bool> _isColorOk = ValueNotifier(true);
   final ValueNotifier<bool> _isNumberOk = ValueNotifier(true);
@@ -59,7 +59,7 @@ class _GameScreenState extends State<GameScreen> {
   void didChangeDependencies() {
     super.didChangeDependencies();
     final configuration = Configuration.of(context);
-    _timer = new Timer(
+    _timer = Injector.of(context).timerFactory.create(
       configuration.initialTimeInMilliseconds,
       configuration.timePenaltyMultiplier,
       configuration.timeAdditionByAnswerInMilliseconds,

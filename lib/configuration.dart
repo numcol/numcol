@@ -24,7 +24,7 @@ class Configuration extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return new _InheritedConfiguration(
+    return _InheritedConfiguration(
       child: child,
       initialTimeInMilliseconds: initialTimeInMilliseconds,
       timePenaltyMultiplier: timePenaltyMultiplier,

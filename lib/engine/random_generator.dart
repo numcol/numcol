@@ -11,14 +11,14 @@ var colors = Color.values;
 var numbers = Number.values;
 
 class RandomGenerator {
-  static final _random = new Random();
+  static final _random = Random();
 
   static Answer generateAnswer() {
-    return new Answer(_randomColour(), _randomNumber());
+    return Answer(_randomColour(), _randomNumber());
   }
 
   static List<Answer> generateAnswers() {
-    var questions = new List<Answer>();
+    var questions = List<Answer>();
 
     for (var i = 0; i < 36; i++) {
       questions.add(generateAnswer());

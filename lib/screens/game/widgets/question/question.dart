@@ -49,7 +49,7 @@ class _QuestionWidgetState extends State<QuestionWidget> with TickerProviderStat
   Animation _numberAnimation;
 
   AnimationController _createAnimationController() {
-    return new AnimationController(
+    return AnimationController(
       vsync: this,
       duration: Duration(milliseconds: 400)
     );

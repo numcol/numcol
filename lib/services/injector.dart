@@ -6,12 +6,14 @@ import 'package:flutter/material.dart';
 
 import 'animator.dart';
 import 'storage.dart';
+import 'timer.dart';
 
 class Injector extends StatelessWidget {
   const Injector({
     Key key,
     @required this.storage,
     @required this.animatorFactory,
+    @required this.timerFactory,
     @required this.child})
       : super(key: key);
 
@@ -21,13 +23,15 @@ class Injector extends StatelessWidget {
 
   final Storage storage;
   final AnimatorFactory animatorFactory;
+  final TimerFactory timerFactory;
   final Widget child;
 
   @override
   Widget build(BuildContext context) {
-    return new _InheritedInjector(
+    return _InheritedInjector(
       storage: storage,
       animatorFactory: animatorFactory,
+      timerFactory: timerFactory,
       child: child,
     );
   }
@@ -38,11 +42,13 @@ class _InheritedInjector extends InheritedWidget {
     Key key,
     @required this.storage,
     @required this.animatorFactory,
+    @required this.timerFactory,
     @required child})
       : super(key: key, child: child);
 
   final Storage storage;
   final AnimatorFactory animatorFactory;
+  final TimerFactory timerFactory;
 
   @override
   bool updateShouldNotify(_InheritedInjector oldWidget) {

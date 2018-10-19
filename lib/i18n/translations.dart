@@ -16,7 +16,7 @@ class Translations {
   }
 
   Locale locale;
-  static Map<dynamic, dynamic> _localizedValues = new Map<dynamic, dynamic>();
+  static Map<dynamic, dynamic> _localizedValues = Map<dynamic, dynamic>();
 
   static Translations of(BuildContext context){
     return Localizations.of<Translations>(context, Translations);
@@ -25,7 +25,7 @@ class Translations {
   String text(String key) => _localizedValues != null && _localizedValues[key] != null ? _localizedValues[key] : '';
 
   static Future<Translations> load(Locale locale) async {
-    Translations translations = new Translations(locale);
+    Translations translations = Translations(locale);
     String jsonContent = await rootBundle.loadString("locale/i18n_${locale.languageCode}.json");
     _localizedValues = json.decode(jsonContent);
     return translations;
@@ -33,5 +33,5 @@ class Translations {
 
   get currentLanguage => locale.languageCode;
 
-  static Iterable<Locale> supportedLocales() => TranslationsHelper.supportedLanguages.map<Locale>((lang) => new Locale(lang, ''));
+  static Iterable<Locale> supportedLocales() => TranslationsHelper.supportedLanguages.map<Locale>((lang) => Locale(lang, ''));
 }

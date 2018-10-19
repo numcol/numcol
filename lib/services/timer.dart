@@ -6,6 +6,17 @@ import 'package:flutter/material.dart';
 
 typedef void TimerEndCallback();
 
+class TimerFactory {
+  Timer create(
+      maxTimeInMilliseconds,
+      timePenaltyMultiplier,
+      timeAdditionByAnswerInMilliseconds,
+      timerEndCallback
+    ) {
+    return Timer(maxTimeInMilliseconds, timePenaltyMultiplier, timeAdditionByAnswerInMilliseconds, timerEndCallback);
+  }
+}
+
 class Timer {
   Timer(
     this._maxTimeInMilliseconds,

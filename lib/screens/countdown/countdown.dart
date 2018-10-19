@@ -39,10 +39,10 @@ class _CountdownScreenState extends State<CountdownScreen>
 
   @override
   Widget build(BuildContext context) {
-    return new Scaffold(
-      body: new Container(
-        child: new Center(
-          child: new CountdownWidget(
+    return Scaffold(
+      body: Container(
+        child: Center(
+          child: CountdownWidget(
             animation: _animator.animation,
           ),
         ),

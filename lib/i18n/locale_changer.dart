@@ -9,7 +9,7 @@ typedef void LocaleChangeCallback(Locale locale);
 class LocaleChanger {
   LocaleChangeCallback onLocaleChanged;
 
-  static final LocaleChanger _localeChanger = new LocaleChanger._internal();
+  static final LocaleChanger _localeChanger = LocaleChanger._internal();
 
   factory LocaleChanger() {
       return _localeChanger;
@@ -18,4 +18,4 @@ class LocaleChanger {
   LocaleChanger._internal();
 }
 
-LocaleChanger localeChanger = new LocaleChanger();
+LocaleChanger localeChanger = LocaleChanger();

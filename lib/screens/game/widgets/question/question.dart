@@ -4,9 +4,11 @@
 
 import 'package:flutter/material.dart';
 
+import '../../../../services/index.dart';
 import '../../../../domain/index.dart';
 import '../../../../view/index.dart';
 import '../../../../i18n/index.dart';
+import 'question_presenter.dart';
 
 typedef void DismissAnimationCallback();
 
@@ -41,43 +43,21 @@ class QuestionWidget extends StatefulWidget {
   _QuestionWidgetState createState() => _QuestionWidgetState();
 }
 
-class _QuestionWidgetState extends State<QuestionWidget> with TickerProviderStateMixin {
-  final Tween colorTween = ColorTween(begin: ScreenColors.black, end: ScreenColors.darkRed);
-  AnimationController _colorAnimationController;
-  AnimationController _numberAnimationController;
-  Animation _colorAnimation;
-  Animation _numberAnimation;
+class _QuestionWidgetState extends State<QuestionWidget> with TickerProviderStateMixin implements QuestionViewContract {
+  QuestionAnimator _colorAnimator;
+  QuestionAnimator _numberAnimator;
+  QuestionPresenter _presenter;
 
-  AnimationController _createAnimationController() {
-    return AnimationController(
+  bool get isNumberOk => widget.isNumberOk.value;
+  bool get isColorOk => widget.isColorOk.value;
+
+  QuestionAnimator _createAnimator(DismissAnimationCallback dismissAnimationCallbak) {
+    return Injector.of(context).animatorFactory.createQuestionAnimator(
       vsync: this,
-      duration: Duration(milliseconds: 400)
+      milliseconds: 400,
+      onDismissed: dismissAnimationCallbak,
+      listener: _setState,
     );
-  }
-
-  Animation _createAnimation(AnimationController controller, DismissAnimationCallback dismissAnimationCallbak) {
-    return colorTween.animate(controller)..addStatusListener((status) {
-      if (status == AnimationStatus.completed) {
-        controller.reverse();
-      } else if (status == AnimationStatus.dismissed) {
-        controller.stop();
-        dismissAnimationCallbak();
-      }
-    })..addListener(() {
-      setState((){});
-    });
-  }
-
-  void _blinkColorWhenError() {
-    if (!widget.isColorOk.value) {
-      _colorAnimationController.forward();
-    }
-  }
-
-  void _blinkNumberWhenError() {
-    if (!widget.isNumberOk.value) {
-      _numberAnimationController.forward();
-    }
   }
 
   void _setState() {
@@ -85,14 +65,13 @@ class _QuestionWidgetState extends State<QuestionWidget> with TickerProviderStat
   }
 
   @override
-  void initState() {
-    super.initState();
-    _colorAnimationController = _createAnimationController();
-    _numberAnimationController = _createAnimationController();
-    _colorAnimation = _createAnimation(_colorAnimationController, () => widget.isColorOk.value = true);
-    _numberAnimation = _createAnimation(_numberAnimationController, () => widget.isNumberOk.value = true);
-    widget.isColorOk.addListener(_blinkColorWhenError);
-    widget.isNumberOk.addListener(_blinkNumberWhenError);
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+    _colorAnimator = _createAnimator(() => widget.isColorOk.value = true);
+    _numberAnimator = _createAnimator(() => widget.isNumberOk.value = true);
+    _presenter = QuestionPresenter(this, _colorAnimator, _numberAnimator);
+    widget.isColorOk.addListener(_presenter.onIsColorOkValueChanged);
+    widget.isNumberOk.addListener(_presenter.onIsNumberOkValueChanged);
     widget.question.addListener(_setState);
   }
 
@@ -108,7 +87,7 @@ class _QuestionWidgetState extends State<QuestionWidget> with TickerProviderStat
             style: TextStyle(
               fontFamily: Fonts.poiretone,
               fontSize: 36.0,
-              color: _numberAnimation.value,
+              color: _numberAnimator.animation.value,
             ),
           ),
           Text(' '),
@@ -117,7 +96,7 @@ class _QuestionWidgetState extends State<QuestionWidget> with TickerProviderStat
             style: TextStyle(
               fontFamily: Fonts.poiretone,
               fontSize: 36.0,
-              color: _colorAnimation.value,
+              color: _colorAnimator.animation.value,
             ),
           ),
         ],
@@ -128,10 +107,10 @@ class _QuestionWidgetState extends State<QuestionWidget> with TickerProviderStat
   @override
   void dispose() {
     widget.question.removeListener(_setState);
-    widget.isColorOk.removeListener(_blinkColorWhenError);
-    widget.isNumberOk.removeListener(_blinkNumberWhenError);
-    _colorAnimationController.dispose();
-    _numberAnimationController.dispose();
+    widget.isColorOk.removeListener(_presenter.onIsColorOkValueChanged);
+    widget.isNumberOk.removeListener(_presenter.onIsNumberOkValueChanged);
+    _colorAnimator.dispose();
+    _numberAnimator.dispose();
     super.dispose();
   }
 }

@@ -5,3 +5,4 @@
 export 'animator.dart';
 export 'countdown_animator.dart';
 export 'game_timer_animator.dart';
+export 'question_animator.dart';

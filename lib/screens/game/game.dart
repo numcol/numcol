@@ -13,7 +13,7 @@ class GameScreen extends StatefulWidget {
 }
 
 class _GameScreenState extends State<GameScreen>
-    with NavigatorMixin
+    with NavigatorMixin, TickerProviderStateMixin
     implements GameScreenViewContract {
 
   final ValueNotifier<Answer> _reply = ValueNotifier<Answer>(null);
@@ -24,7 +24,8 @@ class _GameScreenState extends State<GameScreen>
   ValueNotifier<Answer> _question;
 
   GameScreenPresenter _presenter;
-  Timer _timer;
+  GameTimer _timer;
+  GameTimerAnimator _animator;
 
   void _onAnswerPressed() {
     if (_reply.value != null) {
@@ -50,12 +51,16 @@ class _GameScreenState extends State<GameScreen>
   void didChangeDependencies() {
     super.didChangeDependencies();
     final configuration = Configuration.of(context);
-    _timer = Injector.of(context).timerFactory.create(
+    _animator = Injector.of(context).animatorFactory.createGameAnimator(
+      vsync: this,
+      milliseconds: configuration.initialTimeInMilliseconds,
+      onCompleted: _gameover
+    );
+    _timer = GameTimer(
+      _animator,
       configuration.initialTimeInMilliseconds,
       configuration.timePenaltyMultiplier,
-      configuration.timeAdditionByAnswerInMilliseconds,
-      _gameover
-    );
+      configuration.timeAdditionByAnswerInMilliseconds);
     _reply.addListener(_onAnswerPressed);
     _presenter = GameScreenPresenter(this, _timer, Game());
     _presenter.onLoad();
@@ -68,7 +73,7 @@ class _GameScreenState extends State<GameScreen>
       Row(
         mainAxisAlignment: MainAxisAlignment.spaceAround,
         children: <Widget>[
-          RemainingWidget(timer: _timer),
+          RemainingWidget(animator: _animator),
           ScoreWidget(score: _score)
         ]
       ),
@@ -82,7 +87,7 @@ class _GameScreenState extends State<GameScreen>
           answers: _answers,
         ),
       ),
-      ProgressBarWidget(timer: _timer),
+      ProgressBarWidget(animator: _animator),
     ];
   }
 
@@ -108,7 +113,7 @@ class _GameScreenState extends State<GameScreen>
 
   @override
   void dispose() {
-    _timer.dispose();
+    _animator.dispose();
     _reply.dispose();
     _isColorOk.dispose();
     _isNumberOk.dispose();

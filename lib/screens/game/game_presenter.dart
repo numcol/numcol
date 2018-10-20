@@ -4,7 +4,6 @@
 
 import '../../domain/index.dart';
 import '../../routes.dart';
-import '../../services/index.dart';
 
 abstract class GameScreenViewContract {
   void redirectTo(String route);
@@ -15,7 +14,7 @@ class GameScreenPresenter {
 
   final Game _game;
   final GameScreenViewContract _view;
-  final Timer _timer;
+  final GameTimer _timer;
 
   List<Answer> get answers => _game.answers;
   Answer get question => _game.question;
@@ -23,6 +22,7 @@ class GameScreenPresenter {
 
   void onLoad() {
     _game.start();
+    _timer.start();
   }
 
   int onAnswerPressed(Answer answer) {

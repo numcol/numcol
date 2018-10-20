@@ -6,19 +6,19 @@ import 'package:flutter/material.dart';
 
 abstract class Animator {
   Animator({
-    @required TickerProviderStateMixin vsync,
-    @required int seconds,
+    @required this.vsync,
+    @required int milliseconds,
     this.onDismissed,
     this.onForward,
     this.onReverse,
     this.onCompleted,
+    this.listener,
   }) {
-    controller = AnimationController(
-      vsync: vsync,
-      duration: Duration(seconds: seconds),
-    );
+    controller = newController(milliseconds);
   }
 
+  final TickerProviderStateMixin vsync;
+  final Function listener;
   final Function onDismissed;
   final Function onForward;
   final Function onReverse;
@@ -29,8 +29,29 @@ abstract class Animator {
 
   Animation get animation;
 
+  void _listener() {
+    listener.call();
+  }
+
   @protected
-  void statusListener(AnimationStatus animationStatus) {
+  AnimationController newController(int milliseconds) {
+    var controller = AnimationController(
+      vsync: vsync,
+      duration: Duration(milliseconds: milliseconds),
+    );
+
+    if (onCompleted != null || onDismissed != null || onForward != null || onReverse != null) {
+      controller.addStatusListener(_statusListener);
+    }
+
+    if (listener != null) {
+      controller.addListener(_listener);
+    }
+
+    return controller;
+  }
+
+  void _statusListener(AnimationStatus animationStatus) {
     switch (animationStatus) {
       case AnimationStatus.dismissed:
         onDismissed?.call();
@@ -50,6 +71,10 @@ abstract class Animator {
 
   void forward({ double from }) {
     controller.forward(from: from);
+  }
+
+  void stop() {
+    controller.stop();
   }
 
   void dispose() {

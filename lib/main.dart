@@ -30,7 +30,6 @@ void main() {
       child: Injector(
         storage: Storage(),
         animatorFactory: AnimatorFactory(),
-        timerFactory: TimerFactory(),
         child: Numcol(),
       ),
     ),

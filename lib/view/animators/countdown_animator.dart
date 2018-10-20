@@ -10,25 +10,18 @@ class CountdownAnimator extends Animator {
   CountdownAnimator({
     @required TickerProviderStateMixin vsync,
     @required int seconds,
-    Function onDismissed,
-    Function onForward,
-    Function onReverse,
     @required Function onCompleted,
     @required int begin,
     @required int end,
   }) : super(
     vsync: vsync,
-    seconds: seconds,
-    onDismissed: onDismissed,
-    onForward: onForward,
-    onReverse: onReverse,
+    milliseconds: seconds * 1000,
     onCompleted: onCompleted,
   ) {
     _animation = StepTween(
         begin: begin,
         end: end,
-      ).animate(controller)
-      ..addStatusListener(statusListener);
+      ).animate(controller);
   }
 
   Animation _animation;

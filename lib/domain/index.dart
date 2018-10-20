@@ -5,3 +5,5 @@
 export 'answer.dart';
 export 'enums.dart';
 export 'game.dart';
+export 'game_timer.dart';
+export 'timer.dart';

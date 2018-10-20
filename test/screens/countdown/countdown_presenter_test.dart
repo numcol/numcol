@@ -31,19 +31,12 @@ void main() {
         verify(_mockAnimator.forward());
       });
     });
+
     group('On animation completed', () {
       test('it redirects to the game screen', () {
         _countdownScreenPresenter.onAnimationCompleted();
 
         verify(_mockCountdownScreenView.redirectTo(Routes.game));
-      });
-    });
-
-    group('On game end', () {
-      test('Destroys the countdown timer', () {
-        _countdownScreenPresenter.dispose();
-
-        verify(_mockAnimator.dispose());
       });
     });
   });

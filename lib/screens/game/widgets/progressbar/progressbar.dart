@@ -5,31 +5,20 @@
 import 'package:flutter/material.dart';
 
 import '../../../../view/index.dart';
-import '../../../../services/index.dart';
 
 class ProgressBarWidget extends StatefulWidget {
-  ProgressBarWidget({Key key, @required this.timer}) : super(key: key);
+  ProgressBarWidget({Key key, @required this.animator}) : super(key: key);
 
-  final Timer timer;
+  final GameTimerAnimator animator;
 
   @override
   _ProgressBarWidgetState createState() => _ProgressBarWidgetState();
 }
 
-class _ProgressBarWidgetState extends State<ProgressBarWidget> with TickerProviderStateMixin {
-  void _setState() {
-    setState(() => null);
-  }
-
-  @override
-  void initState() {
-    super.initState();
-    widget.timer.controller.addListener(_setState);
-  }
-
+class _ProgressBarWidgetState extends State<ProgressBarWidget> {
   @override
   Widget build(BuildContext context) {
-    var animation = Tween(begin: 1.0, end: 0.0).animate(widget.timer.controller.value)
+    var animation = Tween(begin: 1.0, end: 0.0).animate(widget.animator.animation)
       ..addListener(() {
         setState(() => null);
       });
@@ -37,7 +26,7 @@ class _ProgressBarWidgetState extends State<ProgressBarWidget> with TickerProvid
     var colorAnimation = ColorTween(
         begin: ScreenColors.green,
         end: ScreenColors.red,
-      ).animate(widget.timer.controller.value)
+      ).animate(widget.animator.animation)
       ..addListener(() {
         setState(() => null);
         });
@@ -48,11 +37,5 @@ class _ProgressBarWidgetState extends State<ProgressBarWidget> with TickerProvid
         backgroundColor: ScreenColors.lightGrey,
       ),
     );
-  }
-
-  @override
-  void dispose() {
-    widget.timer.controller.removeListener(_setState);
-    super.dispose();
   }
 }

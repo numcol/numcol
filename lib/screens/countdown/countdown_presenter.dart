@@ -18,6 +18,4 @@ class CountdownScreenPresenter {
   void onLoad() => _animator.forward();
 
   void onAnimationCompleted() => _view.redirectTo(Routes.game);
-
-  void dispose() => _animator.dispose();
 }

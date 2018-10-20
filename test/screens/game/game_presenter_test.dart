@@ -8,10 +8,9 @@ import 'package:mockito/mockito.dart';
 import '../../../lib/routes.dart';
 import '../../../lib/domain/index.dart';
 import '../../../lib/screens/game/game_presenter.dart';
-import '../../../lib/services/index.dart';
 
 class MockGameScreenView extends Mock implements GameScreenViewContract {}
-class MockTimer extends Mock implements Timer {}
+class MockTimer extends Mock implements GameTimer {}
 class MockGame extends Mock implements Game {}
 
 void main() {
@@ -29,9 +28,12 @@ void main() {
 
   group('Game Screen:', () {
     group('On load', () {
-      test('the game starts', () {
+      test('the game and the timer start', () {
         _gameScreenPresenter.onLoad();
-        verify(_mockGame.start());
+        verifyInOrder([
+          _mockGame.start(),
+          _mockTimer.start()
+        ]);
       });
     });
 
@@ -133,6 +135,35 @@ void main() {
       test('it redirects to game over screen', () {
         _gameScreenPresenter.onGameOver();
         verify(_mockGameScreenView.redirectTo(Routes.gameover));
+      });
+    });
+
+    group('On get answers', () {
+      test('it return game answers', () {
+        var answers = <Answer>[
+          Answer(Color.blue, Number.one),
+        ];
+        when(_mockGame.answers)
+          .thenReturn(answers);
+        expect(_gameScreenPresenter.answers, answers);
+      });
+    });
+
+    group('On get question', () {
+      test('it return game question', () {
+        var question = Answer(Color.blue, Number.one);
+        when(_mockGame.question)
+          .thenReturn(question);
+        expect(_gameScreenPresenter.question, question);
+      });
+    });
+
+    group('On get score', () {
+      test('it return game score', () {
+        var score = 123;
+        when(_mockGame.score)
+          .thenReturn(score);
+        expect(_gameScreenPresenter.score, score);
       });
     });
   });

@@ -20,7 +20,7 @@ class _CountdownScreenState extends State<CountdownScreen>
     implements CountdownScreenViewContract {
 
   CountdownScreenPresenter _presenter;
-  Animator _animator;
+  CountdownAnimator _animator;
 
   void _onAnimationComplete() {
     _presenter.onAnimationCompleted();
@@ -43,7 +43,7 @@ class _CountdownScreenState extends State<CountdownScreen>
 
   @override
   void dispose() {
-    _presenter.dispose();
+    _animator.dispose();
     super.dispose();
   }
 

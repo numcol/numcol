@@ -9,7 +9,7 @@ import 'package:test/test.dart';
 import '../../lib/domain/index.dart';
 
 void main() {
-  group('Game Engine:', () {
+  group('Game:', () {
     group('On game start', () {
       test('it has 36 possible answers', () {
         var game = new Game();

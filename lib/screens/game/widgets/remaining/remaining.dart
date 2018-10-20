@@ -5,30 +5,19 @@
 import 'package:flutter/material.dart';
 
 import 'remaining_counter.dart';
-import '../../../../services/index.dart';
+import '../../../../view/animators/game_timer_animator.dart';
 import '../../../../i18n/index.dart';
 
 class RemainingWidget extends StatefulWidget {
-  RemainingWidget({Key key, @required this.timer}) : super(key: key);
+  RemainingWidget({Key key, @required this.animator}) : super(key: key);
 
-  final Timer timer;
+  final GameTimerAnimator animator;
 
   @override
   _RemainingWidgetState createState() => _RemainingWidgetState();
 }
 
-class _RemainingWidgetState extends State<RemainingWidget> with TickerProviderStateMixin {
-  void _setState() {
-    setState(() => null);
-  }
-
-  @override
-  void initState() {
-    super.initState();
-    widget.timer.start(this);
-    widget.timer.controller.addListener(_setState);
-  }
-
+class _RemainingWidgetState extends State<RemainingWidget> {
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -36,18 +25,11 @@ class _RemainingWidgetState extends State<RemainingWidget> with TickerProviderSt
         Text(Translations.of(context).text('time')),
         RemainingCounter(
           animation: StepTween(
-            begin: widget.timer.maxTimeInMilliseconds.round(),
+            begin: widget.animator.maxTimeInMilliseconds.round(),
             end: 0,
-          ).animate(widget.timer.controller.value),
+          ).animate(widget.animator.animation),
         ),
       ]
     );
-  }
-
-  @override
-  void dispose() {
-    widget.timer.controller.value?.dispose();
-    widget.timer.controller.removeListener(_setState);
-    super.dispose();
   }
 }

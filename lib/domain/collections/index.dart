@@ -2,6 +2,7 @@
 // Use of this source code is governed by the version 3 of the
 // GNU General Public License that can be found in the LICENSE file.
 
-export 'delegate.dart';
-export 'locale_changer.dart';
-export 'translations.dart';
+export 'colors.dart';
+export 'locales.dart';
+export 'numbers.dart';
+export 'routes.dart';

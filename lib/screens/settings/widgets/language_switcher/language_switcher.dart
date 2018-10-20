@@ -4,6 +4,7 @@
 
 import 'package:flutter/material.dart' hide Color;
 
+import '../../../../domain/index.dart';
 import '../../../../i18n/index.dart';
 import '../../../../services/index.dart';
 import '../../../../widgets/index.dart';
@@ -22,7 +23,7 @@ class _LanguageSwitcherState extends State<LanguageSwitcher> implements Language
   @override
   void didChangeDependencies() {
     super.didChangeDependencies();
-    _presenter = LanguageSwitcherPresenter(this, Injector.of(context).storage);
+    _presenter = LanguageSwitcherPresenter(this, Injector.of(context).inject<StorageContract>());
     _presenter.loadChosenLanguage();
   }
 
@@ -33,7 +34,7 @@ class _LanguageSwitcherState extends State<LanguageSwitcher> implements Language
   }
 
   void onLanguageSaved(Locales chosenLocale) {
-    var languageCode = TranslationsHelper.getLanguageCode(chosenLocale);
+    var languageCode = LocaleHelper.getLanguageCode(chosenLocale);
     var newLocale = Locale(languageCode, '');
     localeChanger.onLocaleChanged(newLocale);
     setState(() {
@@ -60,13 +61,13 @@ class _LanguageSwitcherState extends State<LanguageSwitcher> implements Language
   }
 
   List<Widget> _buildLanguageTiles() {
-    var locales = TranslationsHelper.getLocales();
+    var locales = LocaleHelper.getLocales();
     if (_locale != null) {
       locales.remove(_locale);
     }
 
     return locales.map((locale) => ListTile(
-          title: Text(TranslationsHelper.getLanguageText(locale)),
+          title: Text(LocaleHelper.getLanguageText(locale)),
           onTap: () => _presenter.onLanguagePressed(locale),
         )).toList();
   }
@@ -77,7 +78,7 @@ class _LanguageSwitcherState extends State<LanguageSwitcher> implements Language
       width: 240.0,
       child: CustomExpansionTile(
         key: expansionTile,
-        title: Text(TranslationsHelper.getLanguageText(_locale) ?? Translations.of(context).text('languages')),
+        title: Text(LocaleHelper.getLanguageText(_locale) ?? Translations.of(context).text('languages')),
         children: _buildLanguageTiles(),
       ),
     );

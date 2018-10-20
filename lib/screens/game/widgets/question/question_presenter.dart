@@ -2,7 +2,7 @@
 // Use of this source code is governed by the version 3 of the
 // GNU General Public License that can be found in the LICENSE file.
 
-import '../../../../view/index.dart';
+import '../../../../domain/index.dart';
 
 abstract class QuestionViewContract {
   bool get isColorOk;
@@ -12,8 +12,8 @@ abstract class QuestionViewContract {
 class QuestionPresenter {
   QuestionPresenter(this._view, this._colorAnimator, this._numberAnimator);
 
-  final QuestionAnimator _colorAnimator;
-  final QuestionAnimator _numberAnimator;
+  final AnimatorContract _colorAnimator;
+  final AnimatorContract _numberAnimator;
   final QuestionViewContract _view;
 
   void onIsColorOkValueChanged() {

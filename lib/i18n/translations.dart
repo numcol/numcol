@@ -7,7 +7,7 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart' show  rootBundle;
 
-import 'translations_helper.dart';
+import '../domain/index.dart';
 
 class Translations {
   Translations(Locale locale) {
@@ -33,5 +33,5 @@ class Translations {
 
   get currentLanguage => locale.languageCode;
 
-  static Iterable<Locale> supportedLocales() => TranslationsHelper.supportedLanguages.map<Locale>((lang) => Locale(lang, ''));
+  static Iterable<Locale> supportedLocales() => LocaleHelper.supportedLanguages.map<Locale>((lang) => Locale(lang, ''));
 }

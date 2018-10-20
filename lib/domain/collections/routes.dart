@@ -2,6 +2,6 @@
 // Use of this source code is governed by the version 3 of the
 // GNU General Public License that can be found in the LICENSE file.
 
-export 'delegate.dart';
-export 'locale_changer.dart';
-export 'translations.dart';
+enum Routes {
+  home, game, countdown, gameover, settings
+}

@@ -28,8 +28,10 @@ void main() {
       timeAdditionByAnswerInMilliseconds: 1800,
       gameStartCountdownSeconds: 4,
       child: Injector(
-        storage: Storage(),
-        animatorFactory: AnimatorFactory(),
+        dependencies: [
+          Storage(),
+          AnimatorFactory(),
+        ],
         child: Numcol(),
       ),
     ),

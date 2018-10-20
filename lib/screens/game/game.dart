@@ -51,7 +51,7 @@ class _GameScreenState extends State<GameScreen>
   void didChangeDependencies() {
     super.didChangeDependencies();
     final configuration = Configuration.of(context);
-    _animator = Injector.of(context).animatorFactory.createGameAnimator(
+    _animator = Injector.of(context).inject<AnimatorFactory>().createGameAnimator(
       vsync: this,
       milliseconds: configuration.initialTimeInMilliseconds,
       onCompleted: _gameover

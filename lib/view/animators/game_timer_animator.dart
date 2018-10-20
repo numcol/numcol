@@ -4,10 +4,10 @@
 
 import 'package:flutter/material.dart';
 
-import '../../domain/timer.dart';
+import '../../domain/index.dart';
 import 'animator.dart';
 
-class GameTimerAnimator extends Animator implements Timer {
+class GameTimerAnimator extends Animator implements TimerContract {
   GameTimerAnimator({
     @required TickerProviderStateMixin vsync,
     @required int milliseconds,

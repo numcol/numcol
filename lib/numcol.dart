@@ -6,9 +6,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 
+import 'view/index.dart';
+import 'domain/index.dart';
 import 'i18n/index.dart';
 import 'services/index.dart';
-import 'routes.dart';
 import 'screens/index.dart';
 
 class Numcol extends StatefulWidget {
@@ -40,13 +41,26 @@ class _NumcolState extends State<Numcol> {
       DeviceOrientation.portraitUp,
       DeviceOrientation.portraitDown,
     ]);
-    Injector.of(context).storage.getLanguage()
+    Injector.of(context).inject<StorageContract>().getLanguage()
       .then((chosenLocale) {
         if (chosenLocale != null && chosenLocale != _chosenLocale) {
           onLocaleChange(new Locale(chosenLocale, ''));
         }
       });
   }
+/*
+  Route<dynamic> _onGenerateRoute(RouteSettings settings) {
+    var path = settings.name.split('/');
+    if (path[0] == "myRoute") {
+      final foo = path.length > 1 ? int.parse(path[1]) : null;
+      return new MaterialPageRoute(
+        builder: (context) => new MyPage(foo: foo),
+        settings: settings,
+      );
+    }
+
+    return null;
+  }*/
 
   @override
   Widget build(BuildContext context) {
@@ -54,11 +68,11 @@ class _NumcolState extends State<Numcol> {
       title: 'NumCol',
       initialRoute: '/',
       routes: {
-        Routes.home: (context) => HomeScreen(),
-        Routes.game: (context) => GameScreen(),
-        Routes.countdown: (context) => CountdownScreen(),
-        Routes.gameover: (context) => GameoverScreen(),
-        Routes.settings: (context) => SettingsScreen(),
+        routes[Routes.home]: (context) => HomeScreen(),
+        routes[Routes.game]: (context) => GameScreen(),
+        routes[Routes.countdown]: (context) => CountdownScreen(),
+        routes[Routes.gameover]: (context) => GameoverScreen(),
+        routes[Routes.settings]: (context) => SettingsScreen(),
       },
       localizationsDelegates: [
         _newLocaleDelegate,
@@ -67,6 +81,7 @@ class _NumcolState extends State<Numcol> {
         GlobalWidgetsLocalizations.delegate,
       ],
       supportedLocales: Translations.supportedLocales(),
+      /*onGenerateRoute: _onGenerateRoute,*/
     );
   }
 }

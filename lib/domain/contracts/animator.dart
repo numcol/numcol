@@ -2,9 +2,7 @@
 // Use of this source code is governed by the version 3 of the
 // GNU General Public License that can be found in the LICENSE file.
 
-abstract class Timer {
-  int get elapsedInMilliseconds;
-  int get maxTimeInMilliseconds;
-  void start(int maxTimeInMilliseconds);
+abstract class AnimatorContract {
+  void forward({ double from });
   void stop();
 }

@@ -5,7 +5,7 @@
 import 'package:test/test.dart';
 import 'package:mockito/mockito.dart';
 
-import '../../../lib/routes.dart';
+import '../../../lib/domain/index.dart';
 import '../../../lib/screens/home/home_presenter.dart';
 
 class MockHomeScreenView extends Mock implements HomeScreenViewContract {}

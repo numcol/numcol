@@ -52,7 +52,7 @@ class _QuestionWidgetState extends State<QuestionWidget> with TickerProviderStat
   bool get isColorOk => widget.isColorOk.value;
 
   QuestionAnimator _createAnimator(DismissAnimationCallback dismissAnimationCallbak) {
-    return Injector.of(context).animatorFactory.createQuestionAnimator(
+    return Injector.of(context).inject<AnimatorFactory>().createQuestionAnimator(
       vsync: this,
       milliseconds: 400,
       onDismissed: dismissAnimationCallbak,

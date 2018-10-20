@@ -2,7 +2,7 @@
 // Use of this source code is governed by the version 3 of the
 // GNU General Public License that can be found in the LICENSE file.
 
-import 'timer.dart';
+import '../contracts/timer.dart';
 
 class GameTimer {
   GameTimer(
@@ -12,11 +12,11 @@ class GameTimer {
     this._timeAdditionByAnswerInMilliseconds,
   );
 
-  final Timer _timer;
+  final TimerContract _timer;
   final double _timePenaltyMultiplier;
   final int _timeAdditionByAnswerInMilliseconds;
 
-  Timer get timer => _timer;
+  TimerContract get timer => _timer;
 
   int _initialMaxTimeInMilliseconds;
   int get maxTimeInMilliseconds => _timer.maxTimeInMilliseconds;

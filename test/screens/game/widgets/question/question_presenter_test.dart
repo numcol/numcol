@@ -6,10 +6,10 @@ import 'package:test/test.dart';
 import 'package:mockito/mockito.dart';
 
 import '../../../../../lib/screens/game/widgets/question/question_presenter.dart';
-import '../../../../../lib/view/index.dart';
+import '../../../../../lib/domain/index.dart';
 
 class MockQuestionView extends Mock implements QuestionViewContract {}
-class MockQuestionAnimator extends Mock implements QuestionAnimator {}
+class MockQuestionAnimator extends Mock implements AnimatorContract {}
 
 void main() {
   MockQuestionView _mockQuestionView;

@@ -2,6 +2,10 @@
 // Use of this source code is governed by the version 3 of the
 // GNU General Public License that can be found in the LICENSE file.
 
-export 'delegate.dart';
-export 'locale_changer.dart';
-export 'translations.dart';
+import '../collections/index.dart';
+
+class Answer {
+  final Color color;
+  final Number number;
+  const Answer(this.color, this.number);
+}

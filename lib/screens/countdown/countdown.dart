@@ -30,7 +30,7 @@ class _CountdownScreenState extends State<CountdownScreen>
   void didChangeDependencies() {
     super.didChangeDependencies();
     final configuration = Configuration.of(context);
-    _animator = Injector.of(context).animatorFactory.createCountdownAnimator(
+    _animator = Injector.of(context).inject<AnimatorFactory>().createCountdownAnimator(
       vsync: this,
       seconds: configuration.gameStartCountdownSeconds,
       begin: configuration.gameStartCountdownSeconds,

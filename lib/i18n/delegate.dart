@@ -5,7 +5,7 @@
 import 'package:flutter/material.dart';
 
 import 'translations.dart';
-import 'translations_helper.dart';
+import '../domain/index.dart';
 
 class TranslationsDelegate extends LocalizationsDelegate<Translations> {
   final Locale newLocale;
@@ -13,7 +13,7 @@ class TranslationsDelegate extends LocalizationsDelegate<Translations> {
   const TranslationsDelegate({this.newLocale});
 
   @override
-  bool isSupported(Locale locale) => TranslationsHelper.supportedLanguages.contains(locale.languageCode);
+  bool isSupported(Locale locale) => LocaleHelper.supportedLanguages.contains(locale.languageCode);
 
   @override
   Future<Translations> load(Locale locale) {

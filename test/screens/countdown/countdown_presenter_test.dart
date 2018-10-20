@@ -5,12 +5,11 @@
 import 'package:test/test.dart';
 import 'package:mockito/mockito.dart';
 
-import '../../../lib/routes.dart';
+import '../../../lib/domain/index.dart';
 import '../../../lib/screens/countdown/countdown_presenter.dart';
-import '../../../lib/view/index.dart';
 
 class MockCountdownScreenView extends Mock implements CountdownScreenViewContract {}
-class MockAnimator extends Mock implements Animator {}
+class MockAnimator extends Mock implements AnimatorContract {}
 
 void main() {
   MockCountdownScreenView _mockCountdownScreenView;

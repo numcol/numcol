@@ -5,7 +5,7 @@
 import 'package:test/test.dart';
 import 'package:mockito/mockito.dart';
 
-import '../../../lib/routes.dart';
+import '../../../lib/domain/index.dart';
 import '../../../lib/screens/gameover/gameover_presenter.dart';
 
 class MockGameoverScreenView extends Mock implements GameoverScreenViewContract {}

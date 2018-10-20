@@ -4,15 +4,28 @@
 
 import 'package:flutter/material.dart';
 
-abstract class NavigatorMixin<T extends StatefulWidget> extends State<T> {
+import '../../domain/index.dart';
+
+const routes = {
+  Routes.home: "/",
+  Routes.game: "/game",
+  Routes.countdown: "/countdown",
+  Routes.gameover: "/gameover",
+  Routes.settings: "/settings",
+};
+
+
+abstract class NavigatorMixin<T extends StatefulWidget> extends State<T>
+    implements NavigatorContract {
+
   factory NavigatorMixin._() => null;
 
-  void navigateTo(String route) {
-    Navigator.pushNamed(context, route);
+  void navigateTo(Routes route) {
+    Navigator.pushNamed(context, routes[route]);
   }
 
-  void redirectTo(String route) {
-    Navigator.pushReplacementNamed(context, route);
+  void redirectTo(Routes route) {
+    Navigator.pushReplacementNamed(context, routes[route]);
   }
 
   void navigateBack() {

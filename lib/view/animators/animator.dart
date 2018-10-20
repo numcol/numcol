@@ -4,7 +4,9 @@
 
 import 'package:flutter/material.dart';
 
-abstract class Animator {
+import '../../domain/index.dart';
+
+abstract class Animator implements AnimatorContract {
   Animator({
     @required this.vsync,
     @required int milliseconds,

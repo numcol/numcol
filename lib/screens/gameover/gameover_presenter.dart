@@ -2,12 +2,9 @@
 // Use of this source code is governed by the version 3 of the
 // GNU General Public License that can be found in the LICENSE file.
 
-import '../../routes.dart';
+import '../../domain/index.dart';
 
-abstract class GameoverScreenViewContract {
-  void redirectTo(String route);
-  void navigateBack();
-}
+abstract class GameoverScreenViewContract implements NavigatorContract {}
 
 class GameoverScreenPresenter {
   GameoverScreenPresenter(this._view);

@@ -2,10 +2,5 @@
 // Use of this source code is governed by the version 3 of the
 // GNU General Public License that can be found in the LICENSE file.
 
-enum Color {
-  blue, green, red, yellow
-}
-
-enum Number {
-  one, two, three, four, five, six, seven, eight, nine
-}
+export 'answer.dart';
+export 'game.dart';

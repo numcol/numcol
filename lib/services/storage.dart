@@ -4,9 +4,12 @@
 
 import 'package:shared_preferences/shared_preferences.dart';
 
-const String _keyLanguage = "language";
+import '../domain/index.dart';
 
-class Storage {
+const String _keyLanguage = "language";
+const String _keyTopScore = "top_score";
+
+class Storage implements StorageContract {
   Future<String> getLanguage() async {
     var prefs = await SharedPreferences.getInstance();
     return prefs.getString(_keyLanguage);
@@ -15,5 +18,15 @@ class Storage {
   Future<bool> setLanguage(String language) async {
     var prefs = await SharedPreferences.getInstance();
     return prefs.setString(_keyLanguage, language);
+  }
+
+  Future<int> getTopScore() async {
+    var prefs = await SharedPreferences.getInstance();
+    return prefs.getInt(_keyTopScore);
+  }
+
+  Future<bool> setTopScore(int topScore) async {
+    var prefs = await SharedPreferences.getInstance();
+    return prefs.setInt(_keyTopScore, topScore);
   }
 }

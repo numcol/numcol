@@ -5,12 +5,11 @@
 import 'package:test/test.dart';
 import 'package:mockito/mockito.dart';
 
-import '../../../../../lib/i18n/index.dart';
-import '../../../../../lib/services/index.dart';
+import '../../../../../lib/domain/index.dart';
 import '../../../../../lib/screens/settings/widgets/language_switcher/language_switcher_presenter.dart';
 
 class MockLanguageSwitcherView extends Mock implements LanguageSwitcherViewContract {}
-class MockStorage extends Mock implements Storage {}
+class MockStorage extends Mock implements StorageContract {}
 
 void main() {
   MockStorage _mockStorage;

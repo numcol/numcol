@@ -2,9 +2,10 @@
 // Use of this source code is governed by the version 3 of the
 // GNU General Public License that can be found in the LICENSE file.
 
-import 'answer.dart';
 import 'dart:math';
-import 'enums.dart';
+
+import 'answer.dart';
+import '../collections/index.dart';
 
 const colors = Color.values;
 const numbers = Number.values;

@@ -3,11 +3,8 @@
 // GNU General Public License that can be found in the LICENSE file.
 
 import '../../domain/index.dart';
-import '../../routes.dart';
 
-abstract class GameScreenViewContract {
-  void redirectTo(String route);
-}
+abstract class GameScreenViewContract implements NavigatorContract {}
 
 class GameScreenPresenter {
   GameScreenPresenter(this._view, this._timer, this._game);

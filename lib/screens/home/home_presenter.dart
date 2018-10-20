@@ -2,11 +2,9 @@
 // Use of this source code is governed by the version 3 of the
 // GNU General Public License that can be found in the LICENSE file.
 
-import '../../routes.dart';
+import '../../domain/index.dart';
 
-abstract class HomeScreenViewContract {
-  void navigateTo(String route);
-}
+abstract class HomeScreenViewContract implements NavigatorContract {}
 
 class HomeScreenPresenter {
   HomeScreenPresenter(this._view);

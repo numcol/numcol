@@ -2,7 +2,7 @@
 // Use of this source code is governed by the version 3 of the
 // GNU General Public License that can be found in the LICENSE file.
 
-import '../../../../services/index.dart';
+import '../../../../domain/index.dart';
 import '../../../../i18n/index.dart';
 
 abstract class LanguageSwitcherViewContract {
@@ -15,20 +15,20 @@ class LanguageSwitcherPresenter {
   LanguageSwitcherPresenter(this._view, this._storage);
 
   final LanguageSwitcherViewContract _view;
-  final Storage _storage;
+  final StorageContract _storage;
 
   void loadChosenLanguage() {
     _storage.getLanguage()
       .then((languageCode) {
         if (languageCode != null) {
-          var locale = TranslationsHelper.getLocaleByLanguageCode(languageCode);
+          var locale = LocaleHelper.getLocaleByLanguageCode(languageCode);
           this._view.onLoadChosenLanguageComplete(locale);
         }
       });
   }
 
   void onLanguagePressed(Locales locale) {
-    var languageCode = TranslationsHelper.getLanguageCode(locale);
+    var languageCode = LocaleHelper.getLanguageCode(locale);
 
     _storage.setLanguage(languageCode)
       .then((isSaved) {

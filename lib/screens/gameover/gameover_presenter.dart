@@ -4,12 +4,34 @@
 
 import '../../domain/index.dart';
 
-abstract class GameoverScreenViewContract implements NavigatorContract {}
+abstract class GameoverScreenViewContract implements NavigatorContract {
+  void setTopScore(int topScore, bool isNew);
+  void onTopscoreSavedError();
+}
 
 class GameoverScreenPresenter {
-  GameoverScreenPresenter(this._view);
+  GameoverScreenPresenter(this._view, this._storage);
 
   final GameoverScreenViewContract _view;
+  final StorageContract _storage;
+
+  int topScore;
+
+  void onLoad(int score) {
+    _storage.getTopScore()
+      .then((topScore) {
+        if (topScore == null || score > topScore) {
+          _storage.setTopScore(score).then((isSaved) {
+            if (!isSaved) {
+              _view.onTopscoreSavedError();
+            }
+          });
+          _view.setTopScore(score, true);
+        } else {
+          _view.setTopScore(topScore, false);
+        }
+      });
+  }
 
   void onTryAgainButtonPressed() {
     _view.redirectTo(Routes.countdown);

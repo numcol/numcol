@@ -12,6 +12,15 @@ import 'i18n/index.dart';
 import 'services/index.dart';
 import 'screens/index.dart';
 
+
+var numcolRoutes = {
+  routes[Routes.home]: (context) => HomeScreen(),
+  routes[Routes.game]: (context) => GameScreen(),
+  routes[Routes.countdown]: (context) => CountdownScreen(),
+  routes[Routes.gameover]: (context) => GameoverScreen(),
+  routes[Routes.settings]: (context) => SettingsScreen(),
+};
+
 class Numcol extends StatefulWidget {
   @override
   _NumcolState createState() => _NumcolState();
@@ -48,32 +57,33 @@ class _NumcolState extends State<Numcol> {
         }
       });
   }
-/*
+
   Route<dynamic> _onGenerateRoute(RouteSettings settings) {
     var path = settings.name.split('/');
-    if (path[0] == "myRoute") {
-      final foo = path.length > 1 ? int.parse(path[1]) : null;
+    if (path[0] == routes[Routes.gameover]) {
+      final score = path.length > 1 ? int.parse(path[1]) : null;
       return new MaterialPageRoute(
-        builder: (context) => new MyPage(foo: foo),
+        builder: (context) => GameoverScreen(score: score),
+        settings: settings,
+      );
+    } else if (numcolRoutes[path[0]] != null) {
+      return new MaterialPageRoute(
+        builder: numcolRoutes[path[0]],
         settings: settings,
       );
     }
 
-    return null;
-  }*/
+    return new MaterialPageRoute(
+      builder: numcolRoutes[routes[Routes.home]],
+      settings: settings,
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'NumCol',
       initialRoute: '/',
-      routes: {
-        routes[Routes.home]: (context) => HomeScreen(),
-        routes[Routes.game]: (context) => GameScreen(),
-        routes[Routes.countdown]: (context) => CountdownScreen(),
-        routes[Routes.gameover]: (context) => GameoverScreen(),
-        routes[Routes.settings]: (context) => SettingsScreen(),
-      },
       localizationsDelegates: [
         _newLocaleDelegate,
         const TranslationsDelegate(),
@@ -81,7 +91,7 @@ class _NumcolState extends State<Numcol> {
         GlobalWidgetsLocalizations.delegate,
       ],
       supportedLocales: Translations.supportedLocales(),
-      /*onGenerateRoute: _onGenerateRoute,*/
+      onGenerateRoute: _onGenerateRoute,
     );
   }
 }

@@ -119,7 +119,7 @@ void main() {
 
           test('it triggers gameover', () {
             _gameScreenPresenter.onAnswerPressed(wrongAnswer);
-            verify(_mockGameScreenView.redirectTo(Routes.gameover));
+            verify(_mockGameScreenView.redirectToWithParameter(Routes.gameover, any));
           });
 
           test('returns wrong response indicator', () {
@@ -133,7 +133,7 @@ void main() {
     group('On game over', () {
       test('it redirects to game over screen', () {
         _gameScreenPresenter.onGameOver();
-        verify(_mockGameScreenView.redirectTo(Routes.gameover));
+        verify(_mockGameScreenView.redirectToWithParameter(Routes.gameover, any));
       });
     });
 

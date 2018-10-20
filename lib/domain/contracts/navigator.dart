@@ -7,6 +7,7 @@ import '../collections/index.dart';
 abstract class NavigatorContract {
   void navigateTo(Routes route);
   void redirectTo(Routes route);
+  void redirectToWithParameter(Routes route, dynamic parameter);
   void navigateBack();
 }
 

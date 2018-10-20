@@ -39,6 +39,6 @@ class GameScreenPresenter {
   }
 
   void onGameOver() {
-    _view.redirectTo(Routes.gameover);
+    _view.redirectToWithParameter(Routes.gameover, score);
   }
 }

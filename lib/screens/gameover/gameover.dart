@@ -4,12 +4,17 @@
 
 import 'package:flutter/material.dart' hide Color;
 
+import '../../services/index.dart';
 import '../../domain/index.dart';
 import '../../view/index.dart';
 import '../../i18n/index.dart';
 import 'gameover_presenter.dart';
 
 class GameoverScreen extends StatefulWidget {
+  GameoverScreen({this.score});
+
+  final int score;
+
   @override
   _GameoverScreenState createState() => _GameoverScreenState();
 }
@@ -19,11 +24,13 @@ class _GameoverScreenState extends State<GameoverScreen>
     implements GameoverScreenViewContract {
 
   GameoverScreenPresenter _gameoverScreenPresenter;
+  int _topScore;
 
   @override
-  void initState() {
-    super.initState();
-    _gameoverScreenPresenter = GameoverScreenPresenter(this);
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+    _gameoverScreenPresenter = GameoverScreenPresenter(this, Injector.of(context).inject<StorageContract>());
+    _gameoverScreenPresenter.onLoad(widget.score);
   }
 
   Widget _title() {
@@ -44,6 +51,20 @@ class _GameoverScreenState extends State<GameoverScreen>
     );
   }
 
+  void setTopScore(int topScore, bool isNew) {
+    setState(() {
+      _topScore = topScore;
+    });
+  }
+
+  void onTopscoreSavedError() {
+    final snackBar = SnackBar(
+      content: Text(Translations.of(context).text('savedError')),
+    );
+
+    Scaffold.of(context).showSnackBar(snackBar);
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -55,6 +76,8 @@ class _GameoverScreenState extends State<GameoverScreen>
             crossAxisAlignment: CrossAxisAlignment.center,
             children: <Widget>[
               _title(),
+              Text('Top Score: ' + _topScore.toString()),
+              Text('Score: ' + widget.score.toString()),
               menuItem(Color.green, 'try_again', _gameoverScreenPresenter.onTryAgainButtonPressed),
               menuItem(Color.blue, 'back_to_menu', _gameoverScreenPresenter.onBackButtonPressed),
             ],

@@ -8,10 +8,10 @@ import '../../domain/index.dart';
 
 const routes = {
   Routes.home: "/",
-  Routes.game: "/game",
-  Routes.countdown: "/countdown",
-  Routes.gameover: "/gameover",
-  Routes.settings: "/settings",
+  Routes.game: "game",
+  Routes.countdown: "countdown",
+  Routes.gameover: "gameover",
+  Routes.settings: "settings",
 };
 
 
@@ -26,6 +26,11 @@ abstract class NavigatorMixin<T extends StatefulWidget> extends State<T>
 
   void redirectTo(Routes route) {
     Navigator.pushReplacementNamed(context, routes[route]);
+  }
+
+  void redirectToWithParameter(Routes route, dynamic parameter) {
+    var path = routes[route] + '/' + parameter.toString();
+    Navigator.pushReplacementNamed(context, path);
   }
 
   void navigateBack() {

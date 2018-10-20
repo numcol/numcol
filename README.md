@@ -4,6 +4,7 @@ The Brain Training Game About Matching Numbers And Colours.
 
 [![Build Status](https://api.cirrus-ci.com/github/numcol/numcol.svg)](https://cirrus-ci.com/github/numcol/numcol)
 [![AUR](https://img.shields.io/aur/license/yaourt.svg)](LICENSE)
+[![Coverage Status](https://coveralls.io/repos/github/numcol/numcol/badge.svg?branch=master)](https://coveralls.io/github/numcol/numcol?branch=master)
 
 This repo contains the source code of the latest versions of the [NumCol][0] Android Game.
 

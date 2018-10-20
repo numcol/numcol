@@ -40,16 +40,10 @@ class LocaleHelper {
     return _texts[locale];
   }
 
-  static List<String> getAllLanguageTexts() {
-    return _codes.values.toList();
-  }
-
   static Locales getLocaleByLanguageCode(String code) {
     return _codes.keys.firstWhere(
       (k) => _codes[k] == code,
       orElse: () => null,
     );
   }
-
-  static final List<String> supportedLanguages = getAllLanguageCodes();
 }

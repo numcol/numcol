@@ -6,7 +6,7 @@ import 'dart:math';
 
 import 'package:test/test.dart';
 
-import '../../lib/domain/index.dart';
+import '../../../lib/domain/index.dart';
 
 void main() {
   group('Game:', () {

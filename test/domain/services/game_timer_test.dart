@@ -5,7 +5,7 @@
 import 'package:test/test.dart';
 import 'package:mockito/mockito.dart';
 
-import '../../lib/domain/index.dart';
+import '../../../lib/domain/index.dart';
 
 class MockTimer extends Mock implements TimerContract {}
 

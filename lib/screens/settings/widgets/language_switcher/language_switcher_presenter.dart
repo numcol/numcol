@@ -3,7 +3,6 @@
 // GNU General Public License that can be found in the LICENSE file.
 
 import '../../../../domain/index.dart';
-import '../../../../i18n/index.dart';
 
 abstract class LanguageSwitcherViewContract {
   void onLoadChosenLanguageComplete(Locales chosenLocale);

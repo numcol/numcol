@@ -33,5 +33,5 @@ class Translations {
 
   get currentLanguage => locale.languageCode;
 
-  static Iterable<Locale> supportedLocales() => LocaleHelper.supportedLanguages.map<Locale>((lang) => Locale(lang, ''));
+  static Iterable<Locale> supportedLocales() => LocaleHelper.getAllLanguageCodes().map<Locale>((lang) => Locale(lang, ''));
 }

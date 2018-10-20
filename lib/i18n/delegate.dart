@@ -13,7 +13,7 @@ class TranslationsDelegate extends LocalizationsDelegate<Translations> {
   const TranslationsDelegate({this.newLocale});
 
   @override
-  bool isSupported(Locale locale) => LocaleHelper.supportedLanguages.contains(locale.languageCode);
+  bool isSupported(Locale locale) => LocaleHelper.getAllLanguageCodes().contains(locale.languageCode);
 
   @override
   Future<Translations> load(Locale locale) {

@@ -22,30 +22,18 @@ const gameNumbers = {
   Number.nine: '9',
 };
 
-class AnswerWidget extends StatefulWidget {
+class AnswerWidget extends AnimatedWidget {
   AnswerWidget({Key key, @required this.answer})
-    : super(key: key);
+    : super(key: key, listenable: answer);
 
   final ValueNotifier<Answer> answer;
 
   @override
-  _AnswerWidgetState createState() => _AnswerWidgetState();
-}
-
-class _AnswerWidgetState extends State<AnswerWidget> {
-
-  @override
-  void initState() {
-    super.initState();
-    widget.answer.addListener(() => setState(() => null));
-  }
-
-  @override
   Widget build(BuildContext context) {
     return NumcolButton(
-      color: widget.answer.value.color,
-      text: gameNumbers[widget.answer.value.number],
-      onPressed: () => ReplyInheritedWidget.of(context).reply.value = widget.answer.value,
+      color: answer.value.color,
+      text: gameNumbers[answer.value.number],
+      onPressed: () => ReplyInheritedWidget.of(context).reply.value = answer.value,
     );
   }
 }

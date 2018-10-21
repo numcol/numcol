@@ -4,32 +4,27 @@
 
 import 'package:flutter/material.dart';
 
-import 'remaining_counter.dart';
-import '../../../../view/animators/game_timer_animator.dart';
 import '../../../../i18n/index.dart';
+import '../../../../view/index.dart';
 
-class RemainingWidget extends StatefulWidget {
-  RemainingWidget({Key key, @required this.animator}) : super(key: key);
+class RemainingWidget extends AnimatedWidget {
+  RemainingWidget({ Key key, @required this.animation }) : super(key: key, listenable: animation);
 
-  final GameTimerAnimator animator;
+  final Animation<int> animation;
 
   @override
-  _RemainingWidgetState createState() => _RemainingWidgetState();
-}
-
-class _RemainingWidgetState extends State<RemainingWidget> {
-  @override
-  Widget build(BuildContext context) {
+  build(BuildContext context){
     return Column(
       children: <Widget>[
         Text(Translations.of(context).text('time')),
-        RemainingCounter(
-          animation: StepTween(
-            begin: widget.animator.maxTimeInMilliseconds.round(),
-            end: 0,
-          ).animate(widget.animator.animation),
+        Text(
+          (animation.value / 1000).toStringAsFixed(3).padLeft(6, '0'),
+          style: TextStyle(
+            fontSize: 18.0,
+            fontFamily: Fonts.robotoMono,
+          ),
         ),
-      ]
+      ],
     );
   }
 }

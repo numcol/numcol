@@ -38,13 +38,13 @@ class AnimatorFactory {
     @required TickerProviderStateMixin vsync,
     @required int milliseconds,
     @required Function onDismissed,
-    @required Function listener,
+    @required Function onCompleted,
   }) {
     return QuestionAnimator(
       vsync: vsync,
       milliseconds: milliseconds,
       onDismissed: onDismissed,
-      listener: listener,
+      onCompleted: onCompleted,
     );
   }
 }

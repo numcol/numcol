@@ -11,21 +11,19 @@ class QuestionAnimator extends Animator {
   QuestionAnimator({
     @required TickerProviderStateMixin vsync,
     @required int milliseconds,
+    @required Function onCompleted,
     @required Function onDismissed,
-    @required Function listener,
   }) : super(
     vsync: vsync,
     milliseconds: milliseconds,
-    listener: listener,
   ) {
     _animation = ColorTween(begin: ScreenColors.black, end: ScreenColors.darkRed)
                     .animate(controller);
 
     controller.addStatusListener((AnimationStatus status) {
       if (status == AnimationStatus.completed) {
-        controller.reverse();
+        onCompleted?.call();
       } else if (status == AnimationStatus.dismissed) {
-        controller.stop();
         onDismissed?.call();
       }
     });

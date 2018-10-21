@@ -7,10 +7,8 @@ import 'package:flutter/material.dart';
 import '../../../../services/index.dart';
 import '../../../../domain/index.dart';
 import '../../../../view/index.dart';
-import '../../../../i18n/index.dart';
 import 'question_presenter.dart';
-
-typedef void DismissAnimationCallback();
+import 'question_animated.dart';
 
 const gameColorWords = {
   Color.blue: 'blue',
@@ -51,12 +49,15 @@ class _QuestionWidgetState extends State<QuestionWidget> with TickerProviderStat
   bool get isNumberOk => widget.isNumberOk.value;
   bool get isColorOk => widget.isColorOk.value;
 
-  QuestionAnimator _createAnimator(DismissAnimationCallback dismissAnimationCallbak) {
+  set isNumberOk(bool isOk) => widget.isNumberOk.value = isOk;
+  set isColorOk(bool isOk) => widget.isColorOk.value = isOk;
+
+  QuestionAnimator _createAnimator(Function completeAnimationCallbak, Function dismissAnimationCallbak) {
     return Injector.of(context).inject<AnimatorFactory>().createQuestionAnimator(
       vsync: this,
       milliseconds: 400,
       onDismissed: dismissAnimationCallbak,
-      listener: _setState,
+      onCompleted: completeAnimationCallbak,
     );
   }
 
@@ -64,11 +65,27 @@ class _QuestionWidgetState extends State<QuestionWidget> with TickerProviderStat
     setState(() => null);
   }
 
+  void _onIsColorAnimationCompleted() {
+    _presenter.onIsColorAnimationCompleted();
+  }
+
+  void _onIsColorAnimationDismissed() {
+    _presenter.onIsColorAnimationDismissed();
+  }
+
+  void _onIsNumberAnimationCompleted() {
+    _presenter.onIsNumberAnimationCompleted();
+  }
+
+  void _onIsNumberAnimationDismissed() {
+    _presenter.onIsNumberAnimationDismissed();
+  }
+
   @override
   void didChangeDependencies() {
     super.didChangeDependencies();
-    _colorAnimator = _createAnimator(() => widget.isColorOk.value = true);
-    _numberAnimator = _createAnimator(() => widget.isNumberOk.value = true);
+    _colorAnimator = _createAnimator(_onIsColorAnimationCompleted, _onIsColorAnimationDismissed);
+    _numberAnimator = _createAnimator(_onIsNumberAnimationCompleted, _onIsNumberAnimationDismissed);
     _presenter = QuestionPresenter(this, _colorAnimator, _numberAnimator);
     widget.isColorOk.addListener(_presenter.onIsColorOkValueChanged);
     widget.isNumberOk.addListener(_presenter.onIsNumberOkValueChanged);
@@ -82,22 +99,14 @@ class _QuestionWidgetState extends State<QuestionWidget> with TickerProviderStat
       child: Row(
         mainAxisAlignment: MainAxisAlignment.center,
         children: <Widget>[
-          Text(
-            Translations.of(context).text(gameNumberWords[widget.question.value.number]).toUpperCase(),
-            style: TextStyle(
-              fontFamily: Fonts.poiretone,
-              fontSize: 36.0,
-              color: _numberAnimator.animation.value,
-            ),
+          QuestionAnimated(
+            animation: _numberAnimator.animation,
+            text: gameNumberWords[widget.question.value.number],
           ),
           Text(' '),
-          Text(
-            Translations.of(context).text(gameColorWords[widget.question.value.color]).toUpperCase(),
-            style: TextStyle(
-              fontFamily: Fonts.poiretone,
-              fontSize: 36.0,
-              color: _colorAnimator.animation.value,
-            ),
+          QuestionAnimated(
+            animation: _colorAnimator.animation,
+            text: gameColorWords[widget.question.value.color],
           ),
         ],
       ),

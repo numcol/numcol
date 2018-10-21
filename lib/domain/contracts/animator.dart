@@ -4,5 +4,6 @@
 
 abstract class AnimatorContract {
   void forward({ double from });
+  void reverse();
   void stop();
 }

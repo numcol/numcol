@@ -67,5 +67,47 @@ void main() {
         verifyNever(_mockNumberQuestionAnimator.forward());
       });
     });
+
+    group('On is color animation completed', () {
+      test('it reverses the animation', () {
+        _questionPresenter.onIsColorAnimationCompleted();
+
+        verify(_mockColorQuestionAnimator.reverse());
+      });
+    });
+
+    group('On is number animation completed', () {
+      test('it reverses the animation', () {
+        _questionPresenter.onIsNumberAnimationCompleted();
+
+        verify(_mockNumberQuestionAnimator.reverse());
+      });
+    });
+
+    group('On is color animation dismissed', () {
+      test('it stops the animation', () {
+        _questionPresenter.onIsColorAnimationDismissed();
+
+        verify(_mockColorQuestionAnimator.stop());
+      });
+      test('it sets "IsColorOk" to true', () {
+        _questionPresenter.onIsColorAnimationDismissed();
+
+        verify(_mockQuestionView.isColorOk = true);
+      });
+    });
+
+    group('On is number animation dismissed', () {
+      test('it stops the animation', () {
+        _questionPresenter.onIsNumberAnimationDismissed();
+
+        verify(_mockNumberQuestionAnimator.stop());
+      });
+      test('it sets "isNumberOk" to true', () {
+        _questionPresenter.onIsNumberAnimationDismissed();
+
+        verify(_mockQuestionView.isNumberOk = true);
+      });
+    });
   });
 }

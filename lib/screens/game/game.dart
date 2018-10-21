@@ -47,6 +47,13 @@ class _GameScreenState extends State<GameScreen>
     _presenter.onGameOver();
   }
 
+  Animation _remainingAnimation() {
+    return StepTween(
+      begin: _animator.maxTimeInMilliseconds.round(),
+      end: 0,
+    ).animate(_animator.animation);
+  }
+
   @override
   void didChangeDependencies() {
     super.didChangeDependencies();
@@ -73,7 +80,7 @@ class _GameScreenState extends State<GameScreen>
       Row(
         mainAxisAlignment: MainAxisAlignment.spaceAround,
         children: <Widget>[
-          RemainingWidget(animator: _animator),
+          RemainingWidget(animation: _remainingAnimation()),
           ScoreWidget(score: _score)
         ]
       ),

@@ -7,31 +7,18 @@ import 'package:flutter/material.dart';
 import '../../../../view/index.dart';
 import '../../../../i18n/index.dart';
 
-class ScoreWidget extends StatefulWidget {
-  ScoreWidget({Key key, @required this.score})
-    : super(key: key);
+class ScoreWidget extends AnimatedWidget {
+  ScoreWidget({ Key key, @required this.score }) : super(key: key, listenable: score);
 
-  final ValueNotifier<int> score;
-
-  @override
-  _ScoreWidgetState createState() => _ScoreWidgetState();
-}
-
-class _ScoreWidgetState extends State<ScoreWidget> {
+  final ValueNotifier score;
 
   @override
-  void initState() {
-    super.initState();
-    widget.score.addListener(() => setState(() => null));
-  }
-
-  @override
-  Widget build(BuildContext context) {
+  build(BuildContext context){
     return Column(
       children: <Widget>[
         Text(Translations.of(context).text('score')),
         Text(
-          widget.score.value.toString(),
+          score.value.toString(),
           style: TextStyle(
             fontSize: 18.0,
             fontFamily: Fonts.robotoMono,

@@ -14,13 +14,11 @@ abstract class Animator implements AnimatorContract {
     this.onForward,
     this.onReverse,
     this.onCompleted,
-    this.listener,
   }) {
     controller = newController(milliseconds);
   }
 
   final TickerProviderStateMixin vsync;
-  final Function listener;
   final Function onDismissed;
   final Function onForward;
   final Function onReverse;
@@ -31,10 +29,6 @@ abstract class Animator implements AnimatorContract {
 
   Animation get animation;
 
-  void _listener() {
-    listener.call();
-  }
-
   @protected
   AnimationController newController(int milliseconds) {
     var controller = AnimationController(
@@ -44,10 +38,6 @@ abstract class Animator implements AnimatorContract {
 
     if (onCompleted != null || onDismissed != null || onForward != null || onReverse != null) {
       controller.addStatusListener(_statusListener);
-    }
-
-    if (listener != null) {
-      controller.addListener(_listener);
     }
 
     return controller;
@@ -73,6 +63,10 @@ abstract class Animator implements AnimatorContract {
 
   void forward({ double from }) {
     controller.forward(from: from);
+  }
+
+  void reverse() {
+    controller.reverse();
   }
 
   void stop() {

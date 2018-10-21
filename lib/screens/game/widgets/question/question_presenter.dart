@@ -7,6 +7,8 @@ import '../../../../domain/index.dart';
 abstract class QuestionViewContract {
   bool get isColorOk;
   bool get isNumberOk;
+  set isColorOk(bool isOk);
+  set isNumberOk(bool isOk);
 }
 
 class QuestionPresenter {
@@ -21,9 +23,28 @@ class QuestionPresenter {
       _colorAnimator.forward();
     }
   }
+
   void onIsNumberOkValueChanged() {
     if (!_view.isNumberOk) {
       _numberAnimator.forward();
     }
+  }
+
+  void onIsColorAnimationCompleted() {
+    _colorAnimator.reverse();
+  }
+
+  void onIsNumberAnimationCompleted() {
+    _numberAnimator.reverse();
+  }
+
+  void onIsColorAnimationDismissed() {
+    _colorAnimator.stop();
+    _view.isColorOk = true;
+  }
+
+  void onIsNumberAnimationDismissed() {
+    _numberAnimator.stop();
+    _view.isNumberOk = true;
   }
 }

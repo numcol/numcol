@@ -2,7 +2,7 @@
 // Use of this source code is governed by the version 3 of the
 // GNU General Public License that can be found in the LICENSE file.
 
-import '../contracts/timer.dart';
+import '../contracts/index.dart';
 
 class GameTimer {
   GameTimer(

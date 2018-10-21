@@ -12,17 +12,21 @@ class MockGameScreenView extends Mock implements GameScreenViewContract {}
 class MockTimer extends Mock implements GameTimer {}
 class MockGame extends Mock implements Game {}
 
+class MockGameAudio extends Mock implements GameAudio {}
+
 void main() {
   MockGameScreenView _mockGameScreenView;
   MockTimer _mockTimer;
   MockGame _mockGame;
+  MockGameAudio _mockAudio;
   GameScreenPresenter _gameScreenPresenter;
 
   setUp(() async {
     _mockGameScreenView = MockGameScreenView();
     _mockTimer = MockTimer();
     _mockGame = MockGame();
-    _gameScreenPresenter = GameScreenPresenter(_mockGameScreenView, _mockTimer, _mockGame);
+    _mockAudio = MockGameAudio();
+    _gameScreenPresenter = GameScreenPresenter(_mockGameScreenView, _mockTimer, _mockGame, _mockAudio);
   });
 
   group('Game Screen:', () {
@@ -68,6 +72,11 @@ void main() {
           var correctAnswerId = _gameScreenPresenter.onAnswerPressed(rightAnswer);
           expect(correctAnswerId, rightAnswerIndex);
         });
+
+        test('it plays wrong sound', () {
+          _gameScreenPresenter.onAnswerPressed(rightAnswer);
+          verify(_mockAudio.playClickSound());
+        });
       });
 
       group('when it is a wrong answer', () {
@@ -109,6 +118,11 @@ void main() {
             var correctAnswerId = _gameScreenPresenter.onAnswerPressed(wrongAnswer);
             expect(correctAnswerId, -1);
           });
+
+          test('it plays wrong sound', () {
+            _gameScreenPresenter.onAnswerPressed(wrongAnswer);
+            verify(_mockAudio.playWrongSound());
+          });
         });
 
         group('if there is not remaining time', () {
@@ -131,6 +145,10 @@ void main() {
     });
 
     group('On game over', () {
+      test('it plays gameover sound', () {
+        _gameScreenPresenter.onGameOver();
+        verify(_mockAudio.playGameOverSound());
+      });
       test('it redirects to game over screen', () {
         _gameScreenPresenter.onGameOver();
         verify(_mockGameScreenView.redirectToWithParameter(Routes.gameover, any));

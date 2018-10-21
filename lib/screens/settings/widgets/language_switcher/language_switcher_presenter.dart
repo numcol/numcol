@@ -17,13 +17,11 @@ class LanguageSwitcherPresenter {
   final StorageContract _storage;
 
   void loadChosenLanguage() {
-    _storage.getLanguage()
-      .then((languageCode) {
-        if (languageCode != null) {
-          var locale = LocaleHelper.getLocaleByLanguageCode(languageCode);
-          this._view.onLoadChosenLanguageComplete(locale);
-        }
-      });
+    var languageCode = _storage.getLanguage();
+    if (languageCode != null) {
+      var locale = LocaleHelper.getLocaleByLanguageCode(languageCode);
+      this._view.onLoadChosenLanguageComplete(locale);
+    }
   }
 
   void onLanguagePressed(Locales locale) {

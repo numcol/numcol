@@ -12,6 +12,7 @@ dependencies:
   flutter_localizations:
     sdk: flutter
   shared_preferences: "0.4.3"
+  audioplayers: ^0.7.8
 
 dev_dependencies:
   flutter_test:
@@ -24,18 +25,23 @@ flutter:
   fonts:
     - family: Poiretone
       fonts:
-        - asset: fonts/poiretone.ttf
+        - asset: assets/fonts/poiretone.ttf
     - family: LemonMilk
       fonts:
-        - asset: fonts/LemonMilk.otf
+        - asset: assets/fonts/LemonMilk.otf
     - family: RobotoMono
       fonts:
-        - asset: fonts/RobotoMono-Regular.ttf
+        - asset: assets/fonts/RobotoMono-Regular.ttf
 
   assets:
-    - locale/i18n_en.json
-    - locale/i18n_fr.json
-    - locale/i18n_ca.json
-    - locale/i18n_es.json
-    - locale/i18n_gl.json
-    - locale/i18n_eu.json
+    - assets/locale/i18n_en.json
+    - assets/locale/i18n_fr.json
+    - assets/locale/i18n_ca.json
+    - assets/locale/i18n_es.json
+    - assets/locale/i18n_gl.json
+    - assets/locale/i18n_eu.json
+    - assets/audio/click.mp3
+    - assets/audio/gameover.mp3
+    - assets/audio/newround.mp3
+    - assets/audio/start.mp3
+    - assets/audio/wrong.mp3

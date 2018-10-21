@@ -6,3 +6,4 @@ export 'colors.dart';
 export 'locales.dart';
 export 'numbers.dart';
 export 'routes.dart';
+export 'sounds.dart';

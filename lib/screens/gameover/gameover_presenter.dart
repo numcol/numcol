@@ -18,19 +18,17 @@ class GameoverScreenPresenter {
   int topScore;
 
   void onLoad(int score) {
-    _storage.getTopScore()
-      .then((topScore) {
-        if (topScore == null || score > topScore) {
-          _storage.setTopScore(score).then((isSaved) {
-            if (!isSaved) {
-              _view.onTopscoreSavedError();
-            }
-          });
-          _view.setTopScore(score, true);
-        } else {
-          _view.setTopScore(topScore, false);
+    var topScore = _storage.getTopScore();
+    if (topScore == null || score > topScore) {
+      _storage.setTopScore(score).then((isSaved) {
+        if (!isSaved) {
+          _view.onTopscoreSavedError();
         }
       });
+      _view.setTopScore(score, true);
+    } else {
+      _view.setTopScore(topScore, false);
+    }
   }
 
   void onTryAgainButtonPressed() {

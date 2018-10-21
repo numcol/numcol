@@ -58,6 +58,7 @@ class _GameScreenState extends State<GameScreen>
   void didChangeDependencies() {
     super.didChangeDependencies();
     final configuration = Configuration.of(context);
+    var audio = Injector.of(context).inject<GameAudio>();
     _animator = Injector.of(context).inject<AnimatorFactory>().createGameAnimator(
       vsync: this,
       milliseconds: configuration.initialTimeInMilliseconds,
@@ -69,7 +70,7 @@ class _GameScreenState extends State<GameScreen>
       configuration.timePenaltyMultiplier,
       configuration.timeAdditionByAnswerInMilliseconds);
     _reply.addListener(_onAnswerPressed);
-    _presenter = GameScreenPresenter(this, _timer, Game());
+    _presenter = GameScreenPresenter(this, _timer, Game(), audio);
     _presenter.onLoad();
     _answers = _presenter.answers.map((answer) => ValueNotifier(answer)).toList();
     _question = ValueNotifier(_presenter.question);

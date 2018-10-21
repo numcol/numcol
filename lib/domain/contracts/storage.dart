@@ -3,8 +3,10 @@
 // GNU General Public License that can be found in the LICENSE file.
 
 abstract class StorageContract {
-  Future<String> getLanguage();
+  String getLanguage();
   Future<bool> setLanguage(String language);
-  Future<int> getTopScore();
+  int getTopScore();
   Future<bool> setTopScore(int topScore);
+  bool getIsAudioOn();
+  Future<bool> setIsAudioOn(bool isAudioOn);
 }

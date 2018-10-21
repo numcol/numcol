@@ -8,25 +8,34 @@ import '../domain/index.dart';
 
 const String _keyLanguage = "language";
 const String _keyTopScore = "top_score";
+const String _keyIsAudioOn = "audio_on";
 
 class Storage implements StorageContract {
-  Future<String> getLanguage() async {
-    var prefs = await SharedPreferences.getInstance();
-    return prefs.getString(_keyLanguage);
+  const Storage(this._preferences);
+
+  final SharedPreferences _preferences;
+
+  String getLanguage() {
+    return _preferences.getString(_keyLanguage);
   }
 
-  Future<bool> setLanguage(String language) async {
-    var prefs = await SharedPreferences.getInstance();
-    return prefs.setString(_keyLanguage, language);
+  Future<bool> setLanguage(String language) {
+    return _preferences.setString(_keyLanguage, language);
   }
 
-  Future<int> getTopScore() async {
-    var prefs = await SharedPreferences.getInstance();
-    return prefs.getInt(_keyTopScore);
+  int getTopScore() {
+    return _preferences.getInt(_keyTopScore) ?? 0;
   }
 
-  Future<bool> setTopScore(int topScore) async {
-    var prefs = await SharedPreferences.getInstance();
-    return prefs.setInt(_keyTopScore, topScore);
+  Future<bool> setTopScore(int topScore) {
+    return _preferences.setInt(_keyTopScore, topScore);
+  }
+
+  bool getIsAudioOn() {
+    return _preferences.getBool(_keyIsAudioOn) ?? true;
+  }
+
+  Future<bool> setIsAudioOn(bool isAudioOn) {
+    return _preferences.setBool(_keyIsAudioOn, isAudioOn);
   }
 }

@@ -14,7 +14,6 @@ const routes = {
   Routes.settings: "settings",
 };
 
-
 abstract class NavigatorMixin<T extends StatefulWidget> extends State<T>
     implements NavigatorContract {
 

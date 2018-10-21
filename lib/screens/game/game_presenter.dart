@@ -7,11 +7,12 @@ import '../../domain/index.dart';
 abstract class GameScreenViewContract implements NavigatorContract {}
 
 class GameScreenPresenter {
-  GameScreenPresenter(this._view, this._timer, this._game);
+  GameScreenPresenter(this._view, this._timer, this._game, this._audio);
 
   final Game _game;
   final GameScreenViewContract _view;
   final GameTimer _timer;
+  final GameAudio _audio;
 
   List<Answer> get answers => _game.answers;
   Answer get question => _game.question;
@@ -26,6 +27,7 @@ class GameScreenPresenter {
     if (_game.checkAnswer(answer)) {
       var answerIndex = _game.nextQuestion(answer, _timer.remainingInMilliseconds, _timer.maxTimeInMilliseconds);
       _timer.success();
+      _audio.playClickSound();
 
       return answerIndex;
     }
@@ -33,12 +35,15 @@ class GameScreenPresenter {
     var isGameOver = _timer.fail();
     if (isGameOver) {
       onGameOver();
+    } else {
+      _audio.playWrongSound();
     }
 
     return -1;
   }
 
   void onGameOver() {
+    _audio.playGameOverSound();
     _view.redirectToWithParameter(Routes.gameover, score);
   }
 }

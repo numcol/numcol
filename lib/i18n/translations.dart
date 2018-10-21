@@ -26,7 +26,7 @@ class Translations {
 
   static Future<Translations> load(Locale locale) async {
     Translations translations = Translations(locale);
-    String jsonContent = await rootBundle.loadString("locale/i18n_${locale.languageCode}.json");
+    String jsonContent = await rootBundle.loadString("assets/locale/i18n_${locale.languageCode}.json");
     _localizedValues = json.decode(jsonContent);
     return translations;
   }

@@ -15,12 +15,16 @@
 // along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
 import 'package:flutter/material.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 import 'configuration.dart';
 import 'numcol.dart';
 import 'services/index.dart';
+import 'domain/index.dart';
 
-void main() {
+void main() async {
+  var sharedPreferences = await SharedPreferences.getInstance();
+  var storage = Storage(sharedPreferences);
   runApp(
     Configuration(
       initialTimeInMilliseconds: 10000,
@@ -29,8 +33,9 @@ void main() {
       gameStartCountdownSeconds: 4,
       child: Injector(
         dependencies: [
-          Storage(),
+          storage,
           AnimatorFactory(),
+          GameAudio(storage, AudioPlayer())
         ],
         child: Numcol(),
       ),

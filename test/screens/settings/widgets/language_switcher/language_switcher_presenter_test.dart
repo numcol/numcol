@@ -25,30 +25,23 @@ void main() {
   group('Language Switcher:', () {
     group('On load', () {
       test('it gets user preferred language and if it is empty it does not refresh UI', () {
-        String value;
-        final future = new Future.value(value);
         when(_mockStorage.getLanguage())
-          .thenAnswer((_) => future);
+          .thenReturn(null);
 
         _languageSwitcherPresenter.loadChosenLanguage();
 
-        future.then((_) {
-          verify(_mockStorage.getLanguage());
-          verifyNever(_mockLanguageSwitcherView.onLoadChosenLanguageComplete(any));
-        });
+        verify(_mockStorage.getLanguage());
+        verifyNever(_mockLanguageSwitcherView.onLoadChosenLanguageComplete(any));
       });
 
       test('it gets user preferred language and it calls complete action to refresh screen with the loaded locale', () {
-        final future = new Future.value('eu');
         when(_mockStorage.getLanguage())
-          .thenAnswer((_) => future);
+          .thenReturn('eu');
 
         _languageSwitcherPresenter.loadChosenLanguage();
 
-        future.then((_) {
-          verify(_mockStorage.getLanguage());
-          verify(_mockLanguageSwitcherView.onLoadChosenLanguageComplete(Locales.euskara));
-        });
+        verify(_mockStorage.getLanguage());
+        verify(_mockLanguageSwitcherView.onLoadChosenLanguageComplete(Locales.euskara));
       });
     });
 

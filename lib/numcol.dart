@@ -50,12 +50,10 @@ class _NumcolState extends State<Numcol> {
       DeviceOrientation.portraitUp,
       DeviceOrientation.portraitDown,
     ]);
-    Injector.of(context).inject<StorageContract>().getLanguage()
-      .then((chosenLocale) {
-        if (chosenLocale != null && chosenLocale != _chosenLocale) {
-          onLocaleChange(new Locale(chosenLocale, ''));
-        }
-      });
+    var chosenLocale = Injector.of(context).inject<StorageContract>().getLanguage();
+    if (chosenLocale != null && chosenLocale != _chosenLocale) {
+      onLocaleChange(new Locale(chosenLocale, ''));
+    }
   }
 
   Route<dynamic> _onGenerateRoute(RouteSettings settings) {

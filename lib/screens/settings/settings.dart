@@ -58,6 +58,7 @@ class _SettingsScreenState extends State<SettingsScreen>
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: <Widget>[
                   _buildTitle(context),
+                  AudioSwitcher(),
                   LanguageSwitcher(),
                   menuItem(Color.blue, 'back_to_menu', _settingsScreenPresenter.onBackButtonPressed),
                 ],

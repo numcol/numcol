@@ -42,6 +42,5 @@ flutter:
     - assets/locale/i18n_eu.json
     - assets/audio/click.mp3
     - assets/audio/gameover.mp3
-    - assets/audio/newround.mp3
     - assets/audio/start.mp3
     - assets/audio/wrong.mp3

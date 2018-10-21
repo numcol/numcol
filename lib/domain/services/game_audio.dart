@@ -31,12 +31,6 @@ class GameAudio {
     }
   }
 
-  void playNewRoundSound() {
-    if (_isAudioOn()) {
-      _player.play(Sounds.newround);
-    }
-  }
-
   void playStartSound() {
     if (_isAudioOn()) {
       _player.play(Sounds.start);

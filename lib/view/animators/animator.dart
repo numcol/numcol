@@ -14,6 +14,7 @@ abstract class Animator implements AnimatorContract {
     this.onForward,
     this.onReverse,
     this.onCompleted,
+    this.listener,
   }) {
     controller = newController(milliseconds);
   }
@@ -23,6 +24,7 @@ abstract class Animator implements AnimatorContract {
   final Function onForward;
   final Function onReverse;
   final Function onCompleted;
+  final Function listener;
 
   @protected
   AnimationController controller;
@@ -38,6 +40,10 @@ abstract class Animator implements AnimatorContract {
 
     if (onCompleted != null || onDismissed != null || onForward != null || onReverse != null) {
       controller.addStatusListener(_statusListener);
+    }
+
+    if (listener != null) {
+      controller.addListener(_listener);
     }
 
     return controller;
@@ -59,6 +65,10 @@ abstract class Animator implements AnimatorContract {
         break;
       default:
     }
+  }
+
+  void _listener() {
+    listener?.call();
   }
 
   void forward({ double from }) {

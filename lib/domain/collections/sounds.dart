@@ -3,5 +3,5 @@
 // GNU General Public License that can be found in the LICENSE file.
 
 enum Sounds {
-  click, gameover, newround, start, wrong
+  click, gameover, start, wrong
 }

@@ -9,7 +9,6 @@ import '../domain/index.dart';
 const sounds = {
   Sounds.click: "click.mp3",
   Sounds.gameover: "gameover.mp3",
-  Sounds.newround: "newround.mp3",
   Sounds.start: "start.mp3",
   Sounds.wrong: "wrong.mp3",
 };

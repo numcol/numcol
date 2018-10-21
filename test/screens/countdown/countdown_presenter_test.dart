@@ -9,17 +9,20 @@ import '../../../lib/domain/index.dart';
 import '../../../lib/screens/countdown/countdown_presenter.dart';
 
 class MockCountdownScreenView extends Mock implements CountdownScreenViewContract {}
+class MockGameAudio extends Mock implements GameAudio {}
 class MockAnimator extends Mock implements AnimatorContract {}
 
 void main() {
   MockCountdownScreenView _mockCountdownScreenView;
   MockAnimator _mockAnimator;
+  MockGameAudio _mockAudio;
   CountdownScreenPresenter _countdownScreenPresenter;
 
   setUp(() async {
     _mockCountdownScreenView = MockCountdownScreenView();
     _mockAnimator = MockAnimator();
-    _countdownScreenPresenter = CountdownScreenPresenter(_mockCountdownScreenView, _mockAnimator);
+    _mockAudio = MockGameAudio();
+    _countdownScreenPresenter = CountdownScreenPresenter(_mockCountdownScreenView, _mockAnimator, _mockAudio);
   });
 
   group('Countdown Screen:', () {
@@ -36,6 +39,11 @@ void main() {
         _countdownScreenPresenter.onAnimationCompleted();
 
         verify(_mockCountdownScreenView.redirectTo(Routes.game));
+      });
+
+      test('it plays the game start sound', () {
+        _countdownScreenPresenter.onAnimationCompleted();
+        verify(_mockAudio.playStartSound());
       });
     });
   });

@@ -46,13 +46,6 @@ void main() {
         });
       });
 
-      group('on play newround sound', () {
-        test('it plays the newround sound', () {
-          _gameAudio.playNewRoundSound();
-          verify(_mockAudioPlayer.play(Sounds.newround));
-        });
-      });
-
       group('on play start sound', () {
         test('it plays the start sound', () {
           _gameAudio.playStartSound();
@@ -86,13 +79,6 @@ void main() {
         test('it does not play the gameover sound', () {
           _gameAudio.playGameOverSound();
           verifyNever(_mockAudioPlayer.play(Sounds.gameover));
-        });
-      });
-
-      group('on play newround sound', () {
-        test('it does not play the newround sound', () {
-          _gameAudio.playNewRoundSound();
-          verifyNever(_mockAudioPlayer.play(Sounds.newround));
         });
       });
 

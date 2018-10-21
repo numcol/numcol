@@ -7,12 +7,16 @@ import '../../domain/index.dart';
 abstract class CountdownScreenViewContract implements NavigatorContract {}
 
 class CountdownScreenPresenter {
-  CountdownScreenPresenter(this._view, this._animator);
+  CountdownScreenPresenter(this._view, this._animator, this._audio);
 
   final AnimatorContract _animator;
+  final GameAudio _audio;
   final CountdownScreenViewContract _view;
 
   void onLoad() => _animator.forward();
 
-  void onAnimationCompleted() => _view.redirectTo(Routes.game);
+  void onAnimationCompleted() {
+    _audio.playStartSound();
+    _view.redirectTo(Routes.game);
+  }
 }

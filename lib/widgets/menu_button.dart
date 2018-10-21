@@ -4,6 +4,7 @@
 
 import 'package:flutter/material.dart' hide Color;
 
+import '../services/index.dart';
 import '../domain/index.dart';
 import 'numcol_button.dart';
 
@@ -21,6 +22,7 @@ class MenuButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    var audio = Injector.of(context).inject<GameAudio>();
     return Container(
       padding: const EdgeInsets.only(
         top: 15.0,
@@ -30,7 +32,10 @@ class MenuButton extends StatelessWidget {
       child: NumcolButton(
         color: color,
         text: text,
-        onPressed: onPressed,
+        onPressed: () {
+          audio.playClickSound();
+          onPressed?.call();
+        }
       ),
     );
   }

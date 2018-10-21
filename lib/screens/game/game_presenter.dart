@@ -21,6 +21,7 @@ class GameScreenPresenter {
   void onLoad() {
     _game.start();
     _timer.start();
+
   }
 
   int onAnswerPressed(Answer answer) {

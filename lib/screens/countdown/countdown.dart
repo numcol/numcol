@@ -4,6 +4,7 @@
 
 import 'package:flutter/material.dart';
 
+import '../../domain/index.dart';
 import '../../configuration.dart';
 import '../../view/index.dart';
 import '../../services/index.dart';
@@ -30,14 +31,15 @@ class _CountdownScreenState extends State<CountdownScreen>
   void didChangeDependencies() {
     super.didChangeDependencies();
     final configuration = Configuration.of(context);
+    final audio = Injector.of(context).inject<GameAudio>();
     _animator = Injector.of(context).inject<AnimatorFactory>().createCountdownAnimator(
       vsync: this,
       seconds: configuration.gameStartCountdownSeconds,
       begin: configuration.gameStartCountdownSeconds,
       end: 0,
-      onCompleted: _onAnimationComplete
+      onCompleted: _onAnimationComplete,
     );
-    _presenter = CountdownScreenPresenter(this, _animator);
+    _presenter = CountdownScreenPresenter(this, _animator, audio);
     _presenter.onLoad();
   }
 

@@ -10,10 +10,12 @@ import '../../../lib/screens/gameover/gameover_presenter.dart';
 
 class MockGameoverScreenView extends Mock implements GameoverScreenViewContract {}
 class MockStorage extends Mock implements StorageContract {}
+class MockSharer extends Mock implements SharerContract {}
 
 void main() {
   MockGameoverScreenView _mockGameoverScreenView;
   MockStorage _mockStorage;
+  MockSharer _mockSharer;
   GameoverScreenPresenter _gameoverScreenPresenter;
 
   group('Gameover Screen:', () {
@@ -21,7 +23,8 @@ void main() {
     setUp(() async {
       _mockGameoverScreenView = MockGameoverScreenView();
       _mockStorage = MockStorage();
-      _gameoverScreenPresenter = GameoverScreenPresenter(_mockGameoverScreenView, _mockStorage);
+      _mockSharer = MockSharer();
+      _gameoverScreenPresenter = GameoverScreenPresenter(_mockGameoverScreenView, _mockStorage, _mockSharer);
     });
 
     group('On load', () {
@@ -111,6 +114,13 @@ void main() {
       test('it navigates back', () {
         _gameoverScreenPresenter.onBackButtonPressed();
         verify(_mockGameoverScreenView.navigateBack());
+      });
+    });
+
+    group('On "share" button pressed', () {
+      test('it launches the native sharer with a text that includes score', () {
+        _gameoverScreenPresenter.onShareButtonPressed('text', 123);
+        verify(_mockSharer.shareScore('text', 123));
       });
     });
   });

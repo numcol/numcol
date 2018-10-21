@@ -10,6 +10,9 @@
     "score": "Puntuazioa",
     "time": "Denbora",
     "gameover": "Game Over",
+    "share": "Partekatu!",
+    "share_text": "{{score}} puntu lortu ditut NumCol-en http://goo.gl/fMkZrJ #numcol",
+    "sound": "Soinua",
 
     "one": "Bat",
     "two": "Bi",
@@ -28,7 +31,7 @@
 
     "new": "Berria",
     "back_to_menu": "Itzuli",
-    "share": "Partekatu!",
+
     "starts_in": "",
     "kids_level": "Haur maila",
     "normal_level": "Erdi maila",
@@ -44,7 +47,6 @@
     "share_infinite": "{{score}} puntu lortu ditut NumCol-en http://goo.gl/fMkZrJ #numcol",
     "question": "<span id=\"question_number\">{{number}}</span> <span id=\"question_colour\">{{colour}}</span>",
     "classic_mode": "Betiko Modua",
-    "sound": "Soinua",
     "signin": "Saioa hasi",
     "logout": "Saioa amaitu",
     "account": "Saioa",

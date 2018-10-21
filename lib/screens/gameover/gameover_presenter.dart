@@ -10,10 +10,11 @@ abstract class GameoverScreenViewContract implements NavigatorContract {
 }
 
 class GameoverScreenPresenter {
-  GameoverScreenPresenter(this._view, this._storage);
+  GameoverScreenPresenter(this._view, this._storage, this._sharer);
 
   final GameoverScreenViewContract _view;
   final StorageContract _storage;
+  final SharerContract _sharer;
 
   int topScore;
 
@@ -29,6 +30,10 @@ class GameoverScreenPresenter {
     } else {
       _view.setTopScore(topScore, false);
     }
+  }
+
+  void onShareButtonPressed(String text, int score) {
+    _sharer.shareScore(text, score);
   }
 
   void onTryAgainButtonPressed() {

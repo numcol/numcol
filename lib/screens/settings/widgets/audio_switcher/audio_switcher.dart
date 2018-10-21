@@ -59,10 +59,23 @@ class _AudioSwitcherState extends State<AudioSwitcher> implements AudioSwitcherV
   @override
   Widget build(BuildContext context) {
     return Container(
-      width: 240.0,
-      child: Switch(
-        value: _isAudioOn,
-        onChanged: _presenter.onTogglePressed
+      width: 210.0,
+      child: Row(
+        children: <Widget>[
+          Text(
+            Translations.of(context).text('sound'),
+            style: TextStyle(
+              fontSize: 16.0,
+            ),
+          ),
+          Container(
+            width: 160.0,
+            child: Switch(
+              value: _isAudioOn,
+              onChanged: _presenter.onTogglePressed
+            ),
+          ),
+        ],
       ),
     );
   }

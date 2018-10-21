@@ -29,7 +29,10 @@ class _GameoverScreenState extends State<GameoverScreen>
   @override
   void didChangeDependencies() {
     super.didChangeDependencies();
-    _gameoverScreenPresenter = GameoverScreenPresenter(this, Injector.of(context).inject<StorageContract>());
+    _gameoverScreenPresenter = GameoverScreenPresenter(
+      this,
+      Injector.of(context).inject<Storage>(),
+      Injector.of(context).inject<Sharer>());
     _gameoverScreenPresenter.onLoad(widget.score);
   }
 
@@ -78,6 +81,10 @@ class _GameoverScreenState extends State<GameoverScreen>
               _title(),
               Text('Top Score: ' + _topScore.toString()),
               Text('Score: ' + widget.score.toString()),
+              menuItem(Color.red, 'share', () => _gameoverScreenPresenter.onShareButtonPressed(
+                Translations.of(context).text('share_text'),
+                widget.score,
+              )),
               menuItem(Color.green, 'try_again', _gameoverScreenPresenter.onTryAgainButtonPressed),
               menuItem(Color.blue, 'back_to_menu', _gameoverScreenPresenter.onBackButtonPressed),
             ],

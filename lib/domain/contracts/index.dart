@@ -5,5 +5,6 @@
 export 'animator.dart';
 export 'audio_player.dart';
 export 'navigator.dart';
+export 'sharer.dart';
 export 'storage.dart';
 export 'timer.dart';

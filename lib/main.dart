@@ -35,7 +35,8 @@ void main() async {
         dependencies: [
           storage,
           AnimatorFactory(),
-          GameAudio(storage, AudioPlayer())
+          GameAudio(storage, AudioPlayer()),
+          Sharer(),
         ],
         child: Numcol(),
       ),

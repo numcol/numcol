@@ -1,0 +1,8 @@
+v1.2.0
+- Sound Effects added
+- Removed penalty when user tap in blank spaces 
+- Added anonymous app analytics with Google Analytics.
+
+v1.1.0
+- Fixed showing ads during play
+- Minor changes on design

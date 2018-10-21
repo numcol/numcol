@@ -1,4 +1,4 @@
-package com.example.numcol;
+package com.numcol.free;
 
 import android.os.Bundle;
 import io.flutter.app.FlutterActivity;

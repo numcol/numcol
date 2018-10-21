@@ -1,0 +1,17 @@
+Game available in English, French, Spanish and Basque.
+
+The free version is full featured but contains ads.
+
+NumCol is a very simple app for casual gaming. The game will test your response time matching numbers of different colours.
+
+You will see two words: a number and a color. You need to tap the button that matches both. Each round has 36 button, each button has a number and a color. It's a really addicting game.
+
+It has 4 difficulty levels:
+- Kid Mode: You start with 30s
+- Normal:  You start with 10s
+- Difficult:  You start with 5s
+- Ninja:  You start with 3s
+
+Each round you will have less time.
+
+You can try another languages to make it more difficult.

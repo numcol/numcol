@@ -38,6 +38,26 @@ Or use VSCode/Itenllij to debug.
 flutter test .
 ```
 
+### Release
+
+```sh
+# Ensure key info is stored in android/key.properties
+flutter build apk --release
+# Install on device
+flutter install
+```
+
+### Deploy
+
+Pre-requisites:
+
+- [Fastlane][2]
+
+```sh
+# Ensure google play api service credentials are stored in fastlane-playstore.json
+fastlane beta
+```
+
 ## License
 
 NumCol - The Brain Training Game About Matching Numbers And Colours.  
@@ -82,3 +102,4 @@ License: [Apache License](https://github.com/google/fonts/blob/master/apache/rob
 
 [0]: https://play.google.com/store/apps/details?id=com.numcol.free
 [1]: https://flutter.io/
+[2]: https://docs.fastlane.tools/

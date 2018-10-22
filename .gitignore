@@ -80,3 +80,6 @@ fastlane-playstore.json
 **/fastlane/Preview.html
 **/fastlane/screenshots
 **/fastlane/test_output
+
+# Firebase
+**/google-services.json

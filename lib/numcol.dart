@@ -2,6 +2,8 @@
 // Use of this source code is governed by the version 3 of the
 // GNU General Public License that can be found in the LICENSE file.
 
+import 'package:firebase_analytics/firebase_analytics.dart';
+import 'package:firebase_analytics/observer.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
@@ -11,7 +13,6 @@ import 'domain/index.dart';
 import 'i18n/index.dart';
 import 'services/index.dart';
 import 'screens/index.dart';
-
 
 var numcolRoutes = {
   routes[Routes.home]: (context) => HomeScreen(),
@@ -26,6 +27,7 @@ class Numcol extends StatefulWidget {
   _NumcolState createState() => _NumcolState();
 }
 class _NumcolState extends State<Numcol> {
+  FirebaseAnalytics _analytics;
   TranslationsDelegate _newLocaleDelegate;
   String _chosenLocale;
 
@@ -50,6 +52,7 @@ class _NumcolState extends State<Numcol> {
       DeviceOrientation.portraitUp,
       DeviceOrientation.portraitDown,
     ]);
+    _analytics = Injector.of(context).inject<FirebaseAnalytics>();
     var chosenLocale = Injector.of(context).inject<StorageContract>().getLanguage();
     if (chosenLocale != null && chosenLocale != _chosenLocale) {
       onLocaleChange(new Locale(chosenLocale, ''));
@@ -90,6 +93,9 @@ class _NumcolState extends State<Numcol> {
       ],
       supportedLocales: Translations.supportedLocales(),
       onGenerateRoute: _onGenerateRoute,
+      navigatorObservers: [
+        new FirebaseAnalyticsObserver(analytics: _analytics),
+      ],
     );
   }
 }

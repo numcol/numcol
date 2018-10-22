@@ -14,6 +14,7 @@
 // You should have received a copy of the GNU General Public License
 // along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
+import 'package:firebase_analytics/firebase_analytics.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -37,6 +38,7 @@ void main() async {
           AnimatorFactory(),
           GameAudio(storage, AudioPlayer()),
           Sharer(),
+          FirebaseAnalytics(),
         ],
         child: Numcol(),
       ),

@@ -16,17 +16,16 @@
 default_platform(:android)
 
 platform :android do
-  desc "Submit a new Beta Build to Crashlytics Beta"
-  lane :beta do
+  desc "Submit a new Alpha Build"
+  lane :alpha do
     upload_to_play_store(
-      track: 'beta',
+      track: 'alpha',
       apk: '../build/app/outputs/apk/release/app-release.apk',
     )
   end
 
   desc "Deploy a new version to the Google Play"
   lane :deploy do
-    gradle(task: "clean assembleRelease")
     upload_to_play_store
   end
 end

@@ -1,7 +1,7 @@
 name: numcol
 description: A new Flutter project.
 
-version: 2.1.0+18102001
+version: 2.1.0+18102201
 
 environment:
   sdk: ">=2.0.0-dev.68.0 <3.0.0"

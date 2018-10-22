@@ -36,19 +36,41 @@ class _GameoverScreenState extends State<GameoverScreen>
     _gameoverScreenPresenter.onLoad(widget.score);
   }
 
-  Widget _title() {
-    return Center(
-      child: Container(
-        padding: const EdgeInsets.only(
-          bottom: 60.0
+  Widget _numberTitle(String text) {
+    return Container(
+      child: Text(
+        text,
+        style: TextStyle(
+          fontFamily: Fonts.poiretone,
+          fontWeight: FontWeight.bold,
+          color: ScreenColors.darkBlack
         ),
-        child: Text(
-          Translations.of(context).text('gameover').toUpperCase(),
-          style: TextStyle(
-            fontSize: 42.0,
-            color: ScreenColors.black,
-            fontFamily: Fonts.poiretone,
-          ),
+      ),
+      margin: EdgeInsets.only(
+        bottom: 5.0,
+      ),
+      padding: const EdgeInsets.only(
+        top: 3.0,
+        bottom: 3.0,
+        left: 10.0,
+        right: 10.0,
+      ),
+      decoration: BoxDecoration(
+        color: ScreenColors.lightGrey,
+        borderRadius: BorderRadius.all(Radius.circular(3.0)),
+      ),
+    );
+  }
+
+  Widget _number(String text , double fontSize) {
+    return Container(
+      padding: const EdgeInsets.only(
+        bottom: 20.0
+      ),
+      child: Text(
+        text,
+        style: TextStyle(
+          fontSize: fontSize,
         ),
       ),
     );
@@ -78,9 +100,11 @@ class _GameoverScreenState extends State<GameoverScreen>
             mainAxisAlignment: MainAxisAlignment.center,
             crossAxisAlignment: CrossAxisAlignment.center,
             children: <Widget>[
-              _title(),
-              Text('Top Score: ' + _topScore.toString()),
-              Text('Score: ' + widget.score.toString()),
+              PageTitle(tag: 'gameover'),
+              _numberTitle(Translations.of(context).text('score')),
+              _number(widget.score.toString(), 54.0),
+              _numberTitle(Translations.of(context).text('high_score')),
+              _number(_topScore.toString(), 32.0),
               menuItem(Color.red, 'share', () => _gameoverScreenPresenter.onShareButtonPressed(
                 Translations.of(context).text('share_text'),
                 widget.score,

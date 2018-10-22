@@ -4,8 +4,8 @@
 
 import 'package:flutter/material.dart' hide Color;
 
-import '../services/index.dart';
-import '../domain/index.dart';
+import '../../services/index.dart';
+import '../../domain/index.dart';
 import 'numcol_button.dart';
 
 class MenuButton extends StatelessWidget {

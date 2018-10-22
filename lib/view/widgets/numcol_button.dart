@@ -4,8 +4,8 @@
 
 import 'package:flutter/material.dart';
 
-import '../view/index.dart';
-import '../domain/index.dart' as Engine;
+import '../styles.dart';
+import '../../domain/index.dart' as Engine;
 
 typedef NumcolButtonPressed();
 

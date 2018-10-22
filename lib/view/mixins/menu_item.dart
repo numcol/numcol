@@ -6,7 +6,7 @@ import 'package:flutter/material.dart' hide Color;
 
 import '../../domain/index.dart';
 import '../../i18n/index.dart';
-import '../../widgets/index.dart';
+import '../widgets/index.dart';
 
 abstract class MenuItemMixin<T extends StatefulWidget> extends State<T> {
   factory MenuItemMixin._() => null;

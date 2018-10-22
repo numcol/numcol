@@ -5,10 +5,8 @@
 import 'package:flutter/material.dart';
 
 import '../../../../domain/index.dart' hide Color;
-import '../../../../widgets/numcol_button.dart';
+import '../../../../view/index.dart';
 import '../reply/reply.dart';
-
-typedef void AnswerCallback(Answer val);
 
 const gameNumbers = {
   Number.one: '1',

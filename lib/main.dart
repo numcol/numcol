@@ -24,8 +24,14 @@ import 'services/index.dart';
 import 'domain/index.dart';
 
 void main() async {
-  var sharedPreferences = await SharedPreferences.getInstance();
-  var storage = Storage(sharedPreferences);
+  final sharedPreferences = await SharedPreferences.getInstance();
+  final storage = Storage(sharedPreferences);
+  final animatorFactory = AnimatorFactory();
+  final audioPlayer = AudioPlayer();
+  final sharer = Sharer();
+  final analytics = FirebaseAnalytics();
+  final gameAudio = GameAudio(storage, audioPlayer);
+
   runApp(
     Configuration(
       initialTimeInMilliseconds: 10000,
@@ -35,10 +41,10 @@ void main() async {
       child: Injector(
         dependencies: [
           storage,
-          AnimatorFactory(),
-          GameAudio(storage, AudioPlayer()),
-          Sharer(),
-          FirebaseAnalytics(),
+          animatorFactory,
+          gameAudio,
+          sharer,
+          analytics,
         ],
         child: Numcol(),
       ),

@@ -5,7 +5,6 @@
 import 'package:flutter/material.dart' hide Color;
 
 import '../../domain/index.dart';
-import '../../i18n/index.dart';
 import '../../view/index.dart';
 import 'widgets/index.dart';
 import 'settings_presenter.dart';
@@ -27,24 +26,6 @@ class _SettingsScreenState extends State<SettingsScreen>
     _settingsScreenPresenter = SettingsScreenPresenter(this);
   }
 
-  Widget _buildTitle(BuildContext context) {
-    return Center(
-      child: Container(
-        padding: const EdgeInsets.only(
-          bottom: 60.0
-        ),
-        child: Text(
-          Translations.of(context).text('settings').toUpperCase(),
-          style: TextStyle(
-            fontSize: 42.0,
-            color: ScreenColors.black,
-            fontFamily: Fonts.poiretone,
-          ),
-        ),
-      ),
-    );
-  }
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -57,7 +38,7 @@ class _SettingsScreenState extends State<SettingsScreen>
                 mainAxisAlignment: MainAxisAlignment.center,
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: <Widget>[
-                  _buildTitle(context),
+                  PageTitle(tag: 'settings'),
                   AudioSwitcher(),
                   LanguageSwitcher(),
                   menuItem(Color.blue, 'back_to_menu', _settingsScreenPresenter.onBackButtonPressed),

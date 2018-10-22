@@ -4,4 +4,5 @@
 
 export 'animators/index.dart';
 export 'mixins/index.dart';
+export 'widgets/index.dart';
 export 'styles.dart';

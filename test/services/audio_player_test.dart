@@ -2,29 +2,29 @@
 // Use of this source code is governed by the version 3 of the
 // GNU General Public License that can be found in the LICENSE file.
 
+import 'package:audioplayers/audio_cache.dart';
 import 'package:test/test.dart';
 import 'package:mockito/mockito.dart';
 
-import '../../../lib/domain/index.dart';
+import '../../lib/services/audio_player.dart';
+import '../../lib/services/storage.dart';
 
-class MockStorage extends Mock implements StorageContract {}
-class MockAudioPlayer extends Mock implements AudioPlayerContract {}
+class MockStorage extends Mock implements Storage {}
+class MockPlayer extends Mock implements AudioCache {}
 
 void main() {
 
   MockStorage _mockStorage;
-  MockAudioPlayer _mockAudioPlayer;
-  GameAudio _gameAudio;
+  MockPlayer _mockPlayer;
+  AudioPlayer _gameAudio;
 
   setUp(() async {
     _mockStorage = MockStorage();
-    _mockAudioPlayer = MockAudioPlayer();
-    _gameAudio = GameAudio(
-      _mockStorage,
-      _mockAudioPlayer);
+    _mockPlayer = MockPlayer();
+    _gameAudio = AudioPlayer(_mockStorage, _mockPlayer);
   });
 
-  group('Game Audio:', () {
+  group('Audio Player:', () {
     group('When audio is on', () {
 
       setUp(() async {
@@ -35,28 +35,28 @@ void main() {
       group('on play click sound', () {
         test('it plays the click sound', () {
           _gameAudio.playClickSound();
-          verify(_mockAudioPlayer.play(Sounds.click));
+          verify(_mockPlayer.play('click.mp3'));
         });
       });
 
       group('on play gameover sound', () {
         test('it plays the gameover sound', () {
           _gameAudio.playGameOverSound();
-          verify(_mockAudioPlayer.play(Sounds.gameover));
+          verify(_mockPlayer.play('gameover.mp3'));
         });
       });
 
       group('on play start sound', () {
         test('it plays the start sound', () {
           _gameAudio.playStartSound();
-          verify(_mockAudioPlayer.play(Sounds.start));
+          verify(_mockPlayer.play('start.mp3'));
         });
       });
 
       group('on play wrong sound', () {
         test('it plays the wrong sound', () {
           _gameAudio.playWrongSound();
-          verify(_mockAudioPlayer.play(Sounds.wrong));
+          verify(_mockPlayer.play('wrong.mp3'));
         });
       });
     });
@@ -71,28 +71,28 @@ void main() {
       group('on play click sound', () {
         test('it does not play the click sound', () {
           _gameAudio.playClickSound();
-          verifyNever(_mockAudioPlayer.play(Sounds.click));
+          verifyNever(_mockPlayer.play('click.mp3'));
         });
       });
 
       group('on play gameover sound', () {
         test('it does not play the gameover sound', () {
           _gameAudio.playGameOverSound();
-          verifyNever(_mockAudioPlayer.play(Sounds.gameover));
+          verifyNever(_mockPlayer.play('gameover.mp3'));
         });
       });
 
       group('on play start sound', () {
         test('it does not play the start sound', () {
           _gameAudio.playStartSound();
-          verifyNever(_mockAudioPlayer.play(Sounds.start));
+          verifyNever(_mockPlayer.play('start.mp3'));
         });
       });
 
       group('on play wrong sound', () {
         test('it does not play the wrong sound', () {
           _gameAudio.playWrongSound();
-          verifyNever(_mockAudioPlayer.play(Sounds.wrong));
+          verifyNever(_mockPlayer.play('wrong.mp3'));
         });
       });
     });

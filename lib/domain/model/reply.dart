@@ -2,11 +2,11 @@
 // Use of this source code is governed by the version 3 of the
 // GNU General Public License that can be found in the LICENSE file.
 
-import '../collections/index.dart';
+import 'answer.dart';
 
-abstract class AudioPlayerContract {
-  void play(Sounds sound);
+class Reply {
+  const Reply(this.isOk, this.answer);
+
+  final bool isOk;
+  final Answer answer;
 }
-
-
-

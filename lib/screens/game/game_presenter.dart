@@ -3,48 +3,40 @@
 // GNU General Public License that can be found in the LICENSE file.
 
 import '../../domain/index.dart';
+import '../../services/index.dart';
 
-abstract class GameScreenViewContract implements NavigatorContract {}
+abstract class GameScreenViewContract implements NavigatorContract {
+  void updateView(Reply reply);
+}
 
 class GameScreenPresenter {
-  GameScreenPresenter(this._view, this._timer, this._game, this._audio);
+  GameScreenPresenter(this._view, this._game, this._audio);
 
   final Game _game;
   final GameScreenViewContract _view;
-  final GameTimer _timer;
-  final GameAudio _audio;
+  final AudioPlayer _audio;
 
   List<Answer> get answers => _game.answers;
-  Answer get question => _game.question;
+  Question get question => _game.question;
   int get score => _game.score;
 
-  void onLoad() {
-    _game.start();
-    _timer.start();
-
+  void onLoad(GameTimer timer) {
+    _game.start(timer);
+    _game.gameoverStream.listen((_) => _onGameOver());
+    _game.replyStream.listen(_onReply);
   }
 
-  int onAnswerPressed(Answer answer) {
-    if (_game.checkAnswer(answer)) {
-      var answerIndex = _game.nextQuestion(answer, _timer.remainingInMilliseconds, _timer.maxTimeInMilliseconds);
-      _timer.success();
+  void _onReply(Reply reply) {
+    _view.updateView(reply);
+    if (reply.isOk) {
       _audio.playClickSound();
-
-      return answerIndex;
-    }
-
-    var isGameOver = _timer.fail();
-    if (isGameOver) {
-      onGameOver();
     } else {
       _audio.playWrongSound();
     }
-
-    return -1;
   }
 
-  void onGameOver() {
+  void _onGameOver() {
     _audio.playGameOverSound();
-    _view.redirectToWithParameter(Routes.gameover, score);
+    _view.redirectToWithParameter(Routes.gameover, _game.score);
   }
 }

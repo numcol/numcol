@@ -25,26 +25,20 @@ class AnimatorFactory {
   GameTimerAnimator createGameAnimator({
     @required TickerProviderStateMixin vsync,
     @required int milliseconds,
-    @required Function onCompleted,
   }) {
     return GameTimerAnimator(
       vsync: vsync,
       milliseconds: milliseconds,
-      onCompleted: onCompleted,
     );
   }
 
   QuestionAnimator createQuestionAnimator({
     @required TickerProviderStateMixin vsync,
     @required int milliseconds,
-    @required Function onDismissed,
-    @required Function onCompleted,
   }) {
     return QuestionAnimator(
       vsync: vsync,
       milliseconds: milliseconds,
-      onDismissed: onDismissed,
-      onCompleted: onCompleted,
     );
   }
 }

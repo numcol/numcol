@@ -3,6 +3,7 @@
 // GNU General Public License that can be found in the LICENSE file.
 
 import '../../domain/index.dart';
+import '../../services/index.dart';
 
 abstract class CountdownScreenViewContract implements NavigatorContract {}
 
@@ -10,7 +11,7 @@ class CountdownScreenPresenter {
   CountdownScreenPresenter(this._view, this._animator, this._audio);
 
   final AnimatorContract _animator;
-  final GameAudio _audio;
+  final AudioPlayer _audio;
   final CountdownScreenViewContract _view;
 
   void onLoad() => _animator.forward();

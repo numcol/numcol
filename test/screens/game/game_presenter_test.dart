@@ -2,163 +2,90 @@
 // Use of this source code is governed by the version 3 of the
 // GNU General Public License that can be found in the LICENSE file.
 
+import 'dart:async';
+
 import 'package:test/test.dart';
 import 'package:mockito/mockito.dart';
 
 import '../../../lib/domain/index.dart';
+import '../../../lib/services/index.dart';
 import '../../../lib/screens/game/game_presenter.dart';
 
 class MockGameScreenView extends Mock implements GameScreenViewContract {}
 class MockTimer extends Mock implements GameTimer {}
 class MockGame extends Mock implements Game {}
 
-class MockGameAudio extends Mock implements GameAudio {}
+class MockAudioPlayer extends Mock implements AudioPlayer {}
 
 void main() {
   MockGameScreenView _mockGameScreenView;
   MockTimer _mockTimer;
   MockGame _mockGame;
-  MockGameAudio _mockAudio;
+  MockAudioPlayer _mockAudio;
   GameScreenPresenter _gameScreenPresenter;
+  StreamController<Reply> _replyStreamer;
+  StreamController _gameoverStreamer;
 
   setUp(() async {
+    _replyStreamer = StreamController.broadcast();
+    _gameoverStreamer = StreamController.broadcast();
     _mockGameScreenView = MockGameScreenView();
     _mockTimer = MockTimer();
     _mockGame = MockGame();
-    _mockAudio = MockGameAudio();
-    _gameScreenPresenter = GameScreenPresenter(_mockGameScreenView, _mockTimer, _mockGame, _mockAudio);
+    _mockAudio = MockAudioPlayer();
+    _gameScreenPresenter = GameScreenPresenter(_mockGameScreenView, _mockGame, _mockAudio);
+    when(_mockGame.replyStream)
+        .thenAnswer((_) => _replyStreamer.stream);
+    when(_mockGame.gameoverStream)
+        .thenAnswer((_) => _gameoverStreamer.stream);
   });
 
   group('Game Screen:', () {
     group('On load', () {
-      test('the game and the timer start', () {
-        _gameScreenPresenter.onLoad();
-        verifyInOrder([
-          _mockGame.start(),
-          _mockTimer.start()
-        ]);
+      test('the game starts with the new timer', () {
+        _gameScreenPresenter.onLoad(_mockTimer);
+        verify(_mockGame.start(_mockTimer));
       });
-    });
 
-    group('On answer pressed', () {
-      group('when it is the correct answer', () {
-        const rightAnswer = Answer(Color.red, Number.five);
-        const rightAnswerIndex = 1;
-        const remainingInMilliseconds = 2;
-        const maxTimeInMilliseconds = 4;
+      group('a listener is added to gameover event and when it triggers', () {
+        test('it plays gameover sound', () {
+          _gameoverStreamer.add(null);
+          _gameoverStreamer.done.then((_) {
+            verify(_mockAudio.playGameOverSound());
+          });
+        });
+        test('it redirects to game over screen', () {
+          _gameoverStreamer.add(null);
+          _gameoverStreamer.done.then((_) {
+            verify(_mockGameScreenView.redirectToWithParameter(Routes.gameover, any));
+          });
+        });
+      });
 
-        setUp(() async {
-          when(_mockTimer.remainingInMilliseconds)
-            .thenReturn(remainingInMilliseconds);
-          when(_mockTimer.maxTimeInMilliseconds)
-            .thenReturn(maxTimeInMilliseconds);
-          when(_mockGame.checkAnswer(rightAnswer))
+      group('a listener is added to the reply event and when it triggers', () {
+        test('it plays click sound if the reply is ok', () {
+          when(_mockGame.reply(any))
             .thenReturn(true);
-          when(_mockGame.nextQuestion(rightAnswer, remainingInMilliseconds, maxTimeInMilliseconds))
-            .thenReturn(rightAnswerIndex);
+          _replyStreamer.add(null);
+          _replyStreamer.done.then((_) {
+            verify(_mockAudio.playClickSound());
+          });
         });
-
-        test('adds extra time', () {
-          _gameScreenPresenter.onAnswerPressed(rightAnswer);
-          verify(_mockTimer.success());
-        });
-
-        test('renews the question', () {
-          _gameScreenPresenter.onAnswerPressed(rightAnswer);
-          verify(_mockGame.nextQuestion(rightAnswer, remainingInMilliseconds, maxTimeInMilliseconds));
-        });
-
-        test('returns the answer id to be able to remove it from the view', () {
-          var correctAnswerId = _gameScreenPresenter.onAnswerPressed(rightAnswer);
-          expect(correctAnswerId, rightAnswerIndex);
-        });
-
-        test('it plays wrong sound', () {
-          _gameScreenPresenter.onAnswerPressed(rightAnswer);
-          verify(_mockAudio.playClickSound());
-        });
-      });
-
-      group('when it is a wrong answer', () {
-        const wrongAnswer = Answer(Color.red, Number.five);
-        const wrongAnswerIndex = -1;
-        const remainingInMilliseconds = 2;
-        const maxTimeInMilliseconds = 4;
-
-        setUp(() async {
-          when(_mockTimer.remainingInMilliseconds)
-            .thenReturn(remainingInMilliseconds);
-          when(_mockTimer.maxTimeInMilliseconds)
-            .thenReturn(maxTimeInMilliseconds);
-          when(_mockGame.checkAnswer(wrongAnswer))
+        test('it plays wrong sound if the reply is wrong', () {
+          when(_mockGame.reply(any))
             .thenReturn(false);
-          when(_mockGame.nextQuestion(wrongAnswer, remainingInMilliseconds, maxTimeInMilliseconds))
-            .thenReturn(wrongAnswerIndex);
-        });
-
-        test('triggers a penalty that reduce the remaining time', () {
-          when(_mockTimer.fail())
-              .thenReturn(false);
-          _gameScreenPresenter.onAnswerPressed(wrongAnswer);
-          verify(_mockTimer.fail());
-        });
-
-        group('if there is still remaining time', () {
-          setUp(() async {
-            when(_mockTimer.fail())
-              .thenReturn(false);
-          });
-
-          test('it does not trigger gameover', () {
-            _gameScreenPresenter.onAnswerPressed(wrongAnswer);
-            verifyNever(_mockGameScreenView.redirectTo(Routes.gameover));
-          });
-
-          test('returns wrong response indicator', () {
-            var correctAnswerId = _gameScreenPresenter.onAnswerPressed(wrongAnswer);
-            expect(correctAnswerId, -1);
-          });
-
-          test('it plays wrong sound', () {
-            _gameScreenPresenter.onAnswerPressed(wrongAnswer);
+          _replyStreamer.add(null);
+          _replyStreamer.done.then((_) {
             verify(_mockAudio.playWrongSound());
           });
         });
-
-        group('if there is not remaining time', () {
-          setUp(() async {
-            when(_mockTimer.fail())
-              .thenReturn(true);
-          });
-
-          test('it triggers gameover', () {
-            _gameScreenPresenter.onAnswerPressed(wrongAnswer);
-            verify(_mockGameScreenView.redirectToWithParameter(Routes.gameover, any));
-          });
-
-          test('returns wrong response indicator', () {
-            var correctAnswerId = _gameScreenPresenter.onAnswerPressed(wrongAnswer);
-            expect(correctAnswerId, -1);
-          });
-        });
-      });
-    });
-
-    group('On game over', () {
-      test('it plays gameover sound', () {
-        _gameScreenPresenter.onGameOver();
-        verify(_mockAudio.playGameOverSound());
-      });
-      test('it redirects to game over screen', () {
-        _gameScreenPresenter.onGameOver();
-        verify(_mockGameScreenView.redirectToWithParameter(Routes.gameover, any));
       });
     });
 
     group('On get answers', () {
       test('it return game answers', () {
         var answers = <Answer>[
-          Answer(Color.blue, Number.one),
+          Answer(1, Color.blue, Number.one),
         ];
         when(_mockGame.answers)
           .thenReturn(answers);
@@ -168,7 +95,7 @@ void main() {
 
     group('On get question', () {
       test('it return game question', () {
-        var question = Answer(Color.blue, Number.one);
+        var question = Question(Answer(1, Color.blue, Number.one));
         when(_mockGame.question)
           .thenReturn(question);
         expect(_gameScreenPresenter.question, question);

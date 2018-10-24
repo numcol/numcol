@@ -3,4 +3,6 @@
 // GNU General Public License that can be found in the LICENSE file.
 
 export 'answer.dart';
-export 'game.dart';
+export 'numcol.dart';
+export 'question.dart';
+export 'reply.dart';

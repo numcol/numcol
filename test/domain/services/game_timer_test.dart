@@ -27,11 +27,6 @@ void main() {
   });
 
   group('Game Timer:', () {
-    group('On get timer', () {
-      test('it returns internal timer', () {
-        expect(_gameTimer.timer, _mockInternalTimer);
-      });
-    });
 
     group('On get max time', () {
       test('it returns the initial time when the timer started after last answer', () {

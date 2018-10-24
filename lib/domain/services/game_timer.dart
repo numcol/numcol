@@ -16,7 +16,7 @@ class GameTimer {
   final double _timePenaltyMultiplier;
   final int _timeAdditionByAnswerInMilliseconds;
 
-  TimerContract get timer => _timer;
+  Stream get gameoverStream => _timer.gameoverStream;
 
   int _initialMaxTimeInMilliseconds;
   int get maxTimeInMilliseconds => _timer.maxTimeInMilliseconds;

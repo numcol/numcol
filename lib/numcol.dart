@@ -22,11 +22,11 @@ var numcolRoutes = {
   routes[Routes.settings]: (context) => SettingsScreen(),
 };
 
-class Numcol extends StatefulWidget {
+class NumcolApp extends StatefulWidget {
   @override
-  _NumcolState createState() => _NumcolState();
+  _NumcolAppState createState() => _NumcolAppState();
 }
-class _NumcolState extends State<Numcol> {
+class _NumcolAppState extends State<NumcolApp> {
   FirebaseAnalytics _analytics;
   TranslationsDelegate _newLocaleDelegate;
   String _chosenLocale;

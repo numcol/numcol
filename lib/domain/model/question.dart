@@ -2,8 +2,9 @@
 // Use of this source code is governed by the version 3 of the
 // GNU General Public License that can be found in the LICENSE file.
 
-export 'animator.dart';
-export 'navigator.dart';
-export 'sharer.dart';
-export 'storage.dart';
-export 'timer.dart';
+import 'numcol.dart';
+import 'answer.dart';
+
+class Question extends Numcol {
+  Question(Answer answer) : super(answer.color, answer.number);
+}

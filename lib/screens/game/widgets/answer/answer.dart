@@ -5,8 +5,9 @@
 import 'package:flutter/material.dart';
 
 import '../../../../domain/index.dart' hide Color;
+import '../../../../services/index.dart';
 import '../../../../view/index.dart';
-import '../reply/reply.dart';
+import 'answer_presenter.dart';
 
 const gameNumbers = {
   Number.one: '1',
@@ -20,18 +21,21 @@ const gameNumbers = {
   Number.nine: '9',
 };
 
-class AnswerWidget extends AnimatedWidget {
+class AnswerWidget extends AnimatedWidget implements AnswerViewContract {
   AnswerWidget({Key key, @required this.answer})
     : super(key: key, listenable: answer);
 
   final ValueNotifier<Answer> answer;
+  Answer get reply => answer.value;
 
   @override
   Widget build(BuildContext context) {
+    var game = Injector.of(context).inject<Game>();
+    var presenter = AnswerPresenter(this, game);
     return NumcolButton(
       color: answer.value.color,
       text: gameNumbers[answer.value.number],
-      onPressed: () => ReplyInheritedWidget.of(context).reply.value = answer.value,
+      onPressed: presenter.onPressed,
     );
   }
 }

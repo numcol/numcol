@@ -11,8 +11,6 @@ class QuestionAnimator extends Animator {
   QuestionAnimator({
     @required TickerProviderStateMixin vsync,
     @required int milliseconds,
-    @required Function onCompleted,
-    @required Function onDismissed,
   }) : super(
     vsync: vsync,
     milliseconds: milliseconds,
@@ -22,9 +20,7 @@ class QuestionAnimator extends Animator {
 
     controller.addStatusListener((AnimationStatus status) {
       if (status == AnimationStatus.completed) {
-        onCompleted?.call();
-      } else if (status == AnimationStatus.dismissed) {
-        onDismissed?.call();
+        controller.reverse();
       }
     });
   }

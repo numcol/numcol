@@ -14,6 +14,7 @@
 // You should have received a copy of the GNU General Public License
 // along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
+import 'package:audioplayers/audio_cache.dart';
 import 'package:firebase_analytics/firebase_analytics.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -25,12 +26,13 @@ import 'domain/index.dart';
 
 void main() async {
   final sharedPreferences = await SharedPreferences.getInstance();
+  final audioCache = AudioCache(prefix: 'audio/');
   final storage = Storage(sharedPreferences);
   final animatorFactory = AnimatorFactory();
-  final audioPlayer = AudioPlayer();
   final sharer = Sharer();
   final analytics = FirebaseAnalytics();
-  final gameAudio = GameAudio(storage, audioPlayer);
+  final audio = AudioPlayer(storage, audioCache);
+  final game = Game();
 
   runApp(
     Configuration(
@@ -42,11 +44,12 @@ void main() async {
         dependencies: [
           storage,
           animatorFactory,
-          gameAudio,
+          audio,
           sharer,
           analytics,
+          game,
         ],
-        child: Numcol(),
+        child: NumcolApp(),
       ),
     ),
   );

@@ -6,9 +6,9 @@ import 'package:shared_preferences/shared_preferences.dart';
 
 import '../domain/index.dart';
 
-const String _keyLanguage = "language";
-const String _keyTopScore = "top_score";
-const String _keyIsAudioOn = "audio_on";
+const String _keyLanguage = 'language';
+const String _keyTopScore = 'top_score';
+const String _keyIsAudioOn = 'audio_on';
 
 class Storage implements StorageContract {
   const Storage(this._preferences);

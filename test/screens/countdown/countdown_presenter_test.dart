@@ -6,22 +6,23 @@ import 'package:test/test.dart';
 import 'package:mockito/mockito.dart';
 
 import '../../../lib/domain/index.dart';
+import '../../../lib/services/index.dart';
 import '../../../lib/screens/countdown/countdown_presenter.dart';
 
 class MockCountdownScreenView extends Mock implements CountdownScreenViewContract {}
-class MockGameAudio extends Mock implements GameAudio {}
+class MockAudioPlayer extends Mock implements AudioPlayer {}
 class MockAnimator extends Mock implements AnimatorContract {}
 
 void main() {
   MockCountdownScreenView _mockCountdownScreenView;
   MockAnimator _mockAnimator;
-  MockGameAudio _mockAudio;
+  MockAudioPlayer _mockAudio;
   CountdownScreenPresenter _countdownScreenPresenter;
 
   setUp(() async {
     _mockCountdownScreenView = MockCountdownScreenView();
     _mockAnimator = MockAnimator();
-    _mockAudio = MockGameAudio();
+    _mockAudio = MockAudioPlayer();
     _countdownScreenPresenter = CountdownScreenPresenter(_mockCountdownScreenView, _mockAnimator, _mockAudio);
   });
 

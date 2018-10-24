@@ -16,64 +16,41 @@ class _GameScreenState extends State<GameScreen>
     with NavigatorMixin, TickerProviderStateMixin
     implements GameScreenViewContract {
 
-  final ValueNotifier<Answer> _reply = ValueNotifier<Answer>(null);
-  final ValueNotifier<bool> _isColorOk = ValueNotifier(true);
-  final ValueNotifier<bool> _isNumberOk = ValueNotifier(true);
-  final ValueNotifier<int> _score = ValueNotifier(0);
+  ValueNotifier<int> _score;
   List<ValueNotifier<Answer>> _answers;
-  ValueNotifier<Answer> _question;
+  ValueNotifier<Question> _question;
 
   GameScreenPresenter _presenter;
-  GameTimer _timer;
   GameTimerAnimator _animator;
-
-  void _onAnswerPressed() {
-    if (_reply.value != null) {
-      var answer = _reply.value;
-      var correctAnswerIndex = _presenter.onAnswerPressed(answer);
-      if (correctAnswerIndex >= 0) {
-        _answers[correctAnswerIndex].value = _presenter.answers[correctAnswerIndex];
-        _question.value = _presenter.question;
-        _score.value = _presenter.score;
-      } else {
-        _isColorOk.value = answer.color == _presenter.question.color;
-        _isNumberOk.value = answer.number == _presenter.question.number;
-      }
-      _reply.value = null;
-    }
-  }
-
-  void _gameover() {
-    _presenter.onGameOver();
-  }
-
-  Animation _remainingAnimation() {
-    return StepTween(
-      begin: _animator.maxTimeInMilliseconds.round(),
-      end: 0,
-    ).animate(_animator.animation);
-  }
 
   @override
   void didChangeDependencies() {
     super.didChangeDependencies();
     final configuration = Configuration.of(context);
-    var audio = Injector.of(context).inject<GameAudio>();
+    var audio = Injector.of(context).inject<AudioPlayer>();
+    var game = Injector.of(context).inject<Game>();
     _animator = Injector.of(context).inject<AnimatorFactory>().createGameAnimator(
       vsync: this,
       milliseconds: configuration.initialTimeInMilliseconds,
-      onCompleted: _gameover
     );
-    _timer = GameTimer(
+    var timer = GameTimer(
       _animator,
       configuration.initialTimeInMilliseconds,
       configuration.timePenaltyMultiplier,
       configuration.timeAdditionByAnswerInMilliseconds);
-    _reply.addListener(_onAnswerPressed);
-    _presenter = GameScreenPresenter(this, _timer, Game(), audio);
-    _presenter.onLoad();
+    _presenter = GameScreenPresenter(this, game, audio);
+    _presenter.onLoad(timer);
     _answers = _presenter.answers.map((answer) => ValueNotifier(answer)).toList();
     _question = ValueNotifier(_presenter.question);
+    _score = ValueNotifier(_presenter.score);
+  }
+
+  void updateView(Reply reply) {
+    if (reply.isOk) {
+      _answers[reply.answer.id].value = _presenter.answers[reply.answer.id];
+      _question.value = _presenter.question;
+      _score.value = _presenter.score;
+    }
   }
 
   List<Widget> _buildChildren() {
@@ -87,8 +64,6 @@ class _GameScreenState extends State<GameScreen>
       ),
       QuestionWidget(
         question: _question,
-        isColorOk: _isColorOk,
-        isNumberOk: _isNumberOk
       ),
       Expanded(
         child: AnswersWidget(
@@ -99,32 +74,33 @@ class _GameScreenState extends State<GameScreen>
     ];
   }
 
+  Animation _remainingAnimation() {
+    return StepTween(
+      begin: _animator.maxTimeInMilliseconds.round(),
+      end: 0,
+    ).animate(_animator.animation);
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: ReplyInheritedWidget(
-        reply: _reply,
-        child: SafeArea(
-          child: Container(
-            padding: const EdgeInsets.all(15.0),
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              mainAxisSize: MainAxisSize.max,
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: _buildChildren(),
-            )
+      body: SafeArea(
+        child: Container(
+          padding: const EdgeInsets.all(15.0),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            mainAxisSize: MainAxisSize.max,
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: _buildChildren(),
           ),
         ),
-      )
+      ),
     );
   }
 
   @override
   void dispose() {
     _animator.dispose();
-    _reply.dispose();
-    _isColorOk.dispose();
-    _isNumberOk.dispose();
     _question.dispose();
     _answers.forEach((answer) => answer.dispose());
     super.dispose();

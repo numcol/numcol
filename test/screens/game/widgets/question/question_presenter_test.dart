@@ -18,95 +18,62 @@ void main() {
   QuestionPresenter _questionPresenter;
 
   group('Question Widget:', () {
-    setUp(() async {
+    setUp(() {
       _mockQuestionView = MockQuestionView();
       _mockNumberQuestionAnimator = MockQuestionAnimator();
       _mockColorQuestionAnimator = MockQuestionAnimator();
       _questionPresenter = QuestionPresenter(
-        _mockQuestionView,
-        _mockColorQuestionAnimator,
-        _mockNumberQuestionAnimator);
+        _mockQuestionView);
+      when(_mockQuestionView.numberAnimator)
+        .thenReturn(_mockNumberQuestionAnimator);
+      when(_mockQuestionView.colorAnimator)
+        .thenReturn(_mockColorQuestionAnimator);
     });
 
-    group('On "IsColorOk" value changed', () {
-      test('if it is not ok it highlights the color of the question', () {
-        when(_mockQuestionView.isColorOk)
-          .thenReturn(false);
+    group('On reply', () {
+      Reply reply;
+      Question question;
 
-        _questionPresenter.onIsColorOkValueChanged();
+      group('when the reply is correct', () {
+        setUp(() {
+          reply = Reply(true, Answer(2, Color.red, Number.three));
+          question = Question(Answer(2, Color.red, Number.three));
+          when(_mockQuestionView.question)
+            .thenReturn(question);
+        });
 
-        verify(_mockColorQuestionAnimator.forward());
+        test('it does not start any animation', () {
+          _questionPresenter.onReply(reply);
+
+          verifyNever(_mockNumberQuestionAnimator.forward());
+          verifyNever(_mockColorQuestionAnimator.forward());
+        });
       });
 
-      test('if it is ok it does not highlight the color of the question', () {
-        when(_mockQuestionView.isColorOk)
-          .thenReturn(true);
+      group('when the reply is not correct', () {
+        setUp(() {
+          question = Question(Answer(2, Color.red, Number.three));
+          when(_mockQuestionView.question)
+            .thenReturn(question);
+        });
 
-        _questionPresenter.onIsColorOkValueChanged();
+        test('if the color is not ok it starts the animation of the color of the question', () {
+          reply = Reply(false, Answer(2, Color.blue, Number.three));
 
-        verifyNever(_mockColorQuestionAnimator.forward());
-      });
-    });
+          _questionPresenter.onReply(reply);
 
-    group('On "IsNumberOk" value changed', () {
-      test('if it is not ok it highlights the number of the question', () {
-        when(_mockQuestionView.isNumberOk)
-          .thenReturn(false);
+          verify(_mockColorQuestionAnimator.forward());
+          verifyNever(_mockNumberQuestionAnimator.forward());
+        });
 
-        _questionPresenter.onIsNumberOkValueChanged();
+        test('if the number is not ok it starts the animation of the number of the question', () {
+          reply = Reply(false, Answer(2, Color.red, Number.eight));
 
-        verify(_mockNumberQuestionAnimator.forward());
-      });
+          _questionPresenter.onReply(reply);
 
-      test('if it is ok it does not highlight the number of the question', () {
-        when(_mockQuestionView.isNumberOk)
-          .thenReturn(true);
-
-        _questionPresenter.onIsNumberOkValueChanged();
-
-        verifyNever(_mockNumberQuestionAnimator.forward());
-      });
-    });
-
-    group('On is color animation completed', () {
-      test('it reverses the animation', () {
-        _questionPresenter.onIsColorAnimationCompleted();
-
-        verify(_mockColorQuestionAnimator.reverse());
-      });
-    });
-
-    group('On is number animation completed', () {
-      test('it reverses the animation', () {
-        _questionPresenter.onIsNumberAnimationCompleted();
-
-        verify(_mockNumberQuestionAnimator.reverse());
-      });
-    });
-
-    group('On is color animation dismissed', () {
-      test('it stops the animation', () {
-        _questionPresenter.onIsColorAnimationDismissed();
-
-        verify(_mockColorQuestionAnimator.stop());
-      });
-      test('it sets "IsColorOk" to true', () {
-        _questionPresenter.onIsColorAnimationDismissed();
-
-        verify(_mockQuestionView.isColorOk = true);
-      });
-    });
-
-    group('On is number animation dismissed', () {
-      test('it stops the animation', () {
-        _questionPresenter.onIsNumberAnimationDismissed();
-
-        verify(_mockNumberQuestionAnimator.stop());
-      });
-      test('it sets "isNumberOk" to true', () {
-        _questionPresenter.onIsNumberAnimationDismissed();
-
-        verify(_mockQuestionView.isNumberOk = true);
+          verify(_mockNumberQuestionAnimator.forward());
+          verifyNever(_mockColorQuestionAnimator.forward());
+        });
       });
     });
   });

@@ -5,46 +5,24 @@
 import '../../../../domain/index.dart';
 
 abstract class QuestionViewContract {
-  bool get isColorOk;
-  bool get isNumberOk;
-  set isColorOk(bool isOk);
-  set isNumberOk(bool isOk);
+  AnimatorContract get colorAnimator;
+  AnimatorContract get numberAnimator;
+  Question get question;
 }
 
 class QuestionPresenter {
-  QuestionPresenter(this._view, this._colorAnimator, this._numberAnimator);
+  QuestionPresenter(this._view);
 
-  final AnimatorContract _colorAnimator;
-  final AnimatorContract _numberAnimator;
   final QuestionViewContract _view;
 
-  void onIsColorOkValueChanged() {
-    if (!_view.isColorOk) {
-      _colorAnimator.forward();
+  void onReply(Reply reply) {
+    if (!reply.isOk) {
+      if (reply.answer.color != _view.question.color) {
+        _view.colorAnimator.forward();
+      }
+      if (reply.answer.number != _view.question.number) {
+        _view.numberAnimator.forward();
+      }
     }
-  }
-
-  void onIsNumberOkValueChanged() {
-    if (!_view.isNumberOk) {
-      _numberAnimator.forward();
-    }
-  }
-
-  void onIsColorAnimationCompleted() {
-    _colorAnimator.reverse();
-  }
-
-  void onIsNumberAnimationCompleted() {
-    _numberAnimator.reverse();
-  }
-
-  void onIsColorAnimationDismissed() {
-    _colorAnimator.stop();
-    _view.isColorOk = true;
-  }
-
-  void onIsNumberAnimationDismissed() {
-    _numberAnimator.stop();
-    _view.isNumberOk = true;
   }
 }

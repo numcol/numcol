@@ -30,12 +30,10 @@ const gameNumberWords = {
 };
 
 class QuestionWidget extends StatefulWidget {
-  QuestionWidget({Key key, @required this.question, @required this.isColorOk, @required this.isNumberOk})
+  QuestionWidget({Key key, @required this.question})
     : super(key: key);
 
-  final ValueNotifier<Answer> question;
-  final ValueNotifier<bool> isColorOk;
-  final ValueNotifier<bool> isNumberOk;
+  final ValueNotifier<Question> question;
 
   @override
   _QuestionWidgetState createState() => _QuestionWidgetState();
@@ -45,51 +43,37 @@ class _QuestionWidgetState extends State<QuestionWidget> with TickerProviderStat
   QuestionAnimator _colorAnimator;
   QuestionAnimator _numberAnimator;
   QuestionPresenter _presenter;
+  Question _question;
 
-  bool get isNumberOk => widget.isNumberOk.value;
-  bool get isColorOk => widget.isColorOk.value;
-
-  set isNumberOk(bool isOk) => widget.isNumberOk.value = isOk;
-  set isColorOk(bool isOk) => widget.isColorOk.value = isOk;
-
-  QuestionAnimator _createAnimator(Function completeAnimationCallbak, Function dismissAnimationCallbak) {
+  QuestionAnimator _createAnimator() {
     return Injector.of(context).inject<AnimatorFactory>().createQuestionAnimator(
       vsync: this,
       milliseconds: 400,
-      onDismissed: dismissAnimationCallbak,
-      onCompleted: completeAnimationCallbak,
     );
   }
 
-  void _setState() {
-    setState(() => null);
+  QuestionAnimator get colorAnimator => _colorAnimator;
+  QuestionAnimator get numberAnimator => _numberAnimator;
+  Question get question => _question;
+
+  void _setQuestion() {
+    setState(() => _question = widget.question.value);
   }
 
-  void _onIsColorAnimationCompleted() {
-    _presenter.onIsColorAnimationCompleted();
-  }
-
-  void _onIsColorAnimationDismissed() {
-    _presenter.onIsColorAnimationDismissed();
-  }
-
-  void _onIsNumberAnimationCompleted() {
-    _presenter.onIsNumberAnimationCompleted();
-  }
-
-  void _onIsNumberAnimationDismissed() {
-    _presenter.onIsNumberAnimationDismissed();
+  void _onReply(Reply reply) {
+    _presenter.onReply(reply);
   }
 
   @override
   void didChangeDependencies() {
     super.didChangeDependencies();
-    _colorAnimator = _createAnimator(_onIsColorAnimationCompleted, _onIsColorAnimationDismissed);
-    _numberAnimator = _createAnimator(_onIsNumberAnimationCompleted, _onIsNumberAnimationDismissed);
-    _presenter = QuestionPresenter(this, _colorAnimator, _numberAnimator);
-    widget.isColorOk.addListener(_presenter.onIsColorOkValueChanged);
-    widget.isNumberOk.addListener(_presenter.onIsNumberOkValueChanged);
-    widget.question.addListener(_setState);
+    _colorAnimator = _createAnimator();
+    _numberAnimator = _createAnimator();
+    _question = widget.question.value;
+    _presenter = QuestionPresenter(this);
+    widget.question.addListener(_setQuestion);
+    var game = Injector.of(context).inject<Game>();
+    game.replyStream.listen(_onReply);
   }
 
   @override
@@ -115,9 +99,7 @@ class _QuestionWidgetState extends State<QuestionWidget> with TickerProviderStat
 
   @override
   void dispose() {
-    widget.question.removeListener(_setState);
-    widget.isColorOk.removeListener(_presenter.onIsColorOkValueChanged);
-    widget.isNumberOk.removeListener(_presenter.onIsNumberOkValueChanged);
+    widget.question.removeListener(_setQuestion);
     _colorAnimator.dispose();
     _numberAnimator.dispose();
     super.dispose();

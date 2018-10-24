@@ -5,6 +5,7 @@
 abstract class TimerContract {
   int get elapsedInMilliseconds;
   int get maxTimeInMilliseconds;
+  Stream get gameoverStream;
   void start(int maxTimeInMilliseconds);
   void stop();
 }

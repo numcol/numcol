@@ -3,9 +3,10 @@
 // GNU General Public License that can be found in the LICENSE file.
 
 import '../collections/index.dart';
+import 'numcol.dart';
 
-class Answer {
-  final Color color;
-  final Number number;
-  const Answer(this.color, this.number);
+class Answer extends Numcol {
+  const Answer(this.id, Color color, Number number) : super(color, number);
+
+  final int id;
 }

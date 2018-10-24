@@ -22,7 +22,7 @@ class MenuButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    var audio = Injector.of(context).inject<GameAudio>();
+    var audio = Injector.of(context).inject<AudioPlayer>();
     return Container(
       padding: const EdgeInsets.only(
         top: 15.0,

@@ -2,6 +2,8 @@
 // Use of this source code is governed by the version 3 of the
 // GNU General Public License that can be found in the LICENSE file.
 
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 
 import '../../domain/index.dart';
@@ -11,14 +13,15 @@ class GameTimerAnimator extends Animator implements TimerContract {
   GameTimerAnimator({
     @required TickerProviderStateMixin vsync,
     @required int milliseconds,
-    @required Function onCompleted
   }) : super(
     vsync: vsync,
     milliseconds: milliseconds,
-    onCompleted: onCompleted,
   ) {
     _maxTimeInMillisecondxs = milliseconds;
+    controller.addStatusListener(_statusListener);
   }
+
+  final StreamController<Null> _gameOverStreamer = StreamController.broadcast();
 
   Animation<double> get animation => controller;
   int _maxTimeInMillisecondxs;
@@ -28,6 +31,9 @@ class GameTimerAnimator extends Animator implements TimerContract {
 
   @override
   int get maxTimeInMilliseconds => _maxTimeInMillisecondxs;
+
+  @override
+  Stream get gameoverStream => _gameOverStreamer.stream;
 
   @override
   void start(int durationsTimeInMilliseconds) {
@@ -42,5 +48,11 @@ class GameTimerAnimator extends Animator implements TimerContract {
       startingPoint = startingMilliseconds / controller.duration.inMilliseconds;
     }
     controller.forward(from: startingPoint);
+  }
+
+  void _statusListener(AnimationStatus status) {
+    if (status == AnimationStatus.completed) {
+      _gameOverStreamer.add(null);
+    }
   }
 }

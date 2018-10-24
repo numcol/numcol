@@ -5,8 +5,11 @@
 
 import 'package:audioplayers/audio_cache.dart';
 
-import '../view/index.dart';
 import 'storage.dart';
+
+enum Sounds {
+  click, gameover, start, wrong
+}
 
 const sounds = {
   Sounds.click: 'click.mp3',

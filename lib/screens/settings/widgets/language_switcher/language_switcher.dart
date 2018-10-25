@@ -5,8 +5,8 @@
 import 'package:flutter/material.dart' hide Color;
 
 import '../../../../domain/index.dart';
-import '../../../../i18n/index.dart';
 import '../../../../middleware/index.dart';
+import '../../../../i18n/index.dart';
 import '../../../../view/index.dart';
 import 'language_switcher_presenter.dart';
 
@@ -23,7 +23,7 @@ class _LanguageSwitcherState extends State<LanguageSwitcher> implements Language
   @override
   void didChangeDependencies() {
     super.didChangeDependencies();
-    _presenter = LanguageSwitcherPresenter(this, Injector.of(context).inject<StorageContract>());
+    _presenter = LanguageSwitcherPresenter(this, Injector.of(context).inject<Storage>());
     _presenter.loadChosenLanguage();
   }
 

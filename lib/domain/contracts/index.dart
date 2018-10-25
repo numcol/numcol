@@ -3,6 +3,7 @@
 // GNU General Public License that can be found in the LICENSE file.
 
 export 'animator.dart';
+export 'audio_player.dart';
 export 'navigator.dart';
 export 'sharer.dart';
 export 'storage.dart';

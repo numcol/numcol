@@ -12,6 +12,7 @@ import 'view/index.dart';
 import 'domain/index.dart';
 import 'i18n/index.dart';
 import 'screens/index.dart';
+import 'middleware/index.dart';
 
 var numcolRoutes = {
   routes[Routes.home]: (context) => HomeScreen(),

@@ -6,6 +6,7 @@ import 'package:flutter/material.dart' hide Color;
 
 import '../../domain/index.dart';
 import '../../view/index.dart';
+import '../../middleware/index.dart';
 import 'widgets/index.dart';
 import 'settings_presenter.dart';
 

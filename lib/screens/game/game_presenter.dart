@@ -3,7 +3,6 @@
 // GNU General Public License that can be found in the LICENSE file.
 
 import '../../domain/index.dart';
-import '../../middleware/index.dart';
 
 abstract class GameScreenViewContract implements NavigatorContract {
   void updateView(Reply reply);
@@ -14,7 +13,7 @@ class GameScreenPresenter {
 
   final Game _game;
   final GameScreenViewContract _view;
-  final AudioPlayer _audio;
+  final AudioPlayerContract _audio;
 
   List<Answer> get answers => _game.answers;
   Question get question => _game.question;

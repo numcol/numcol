@@ -4,6 +4,7 @@
 
 import 'package:flutter/material.dart';
 
+import '../../../../middleware/index.dart';
 import '../../../../view/index.dart';
 
 class ProgressBarWidget extends StatefulWidget {

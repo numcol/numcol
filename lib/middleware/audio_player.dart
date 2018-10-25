@@ -5,6 +5,7 @@
 
 import 'package:audioplayers/audio_cache.dart';
 
+import '../domain/contracts/index.dart';
 import 'storage.dart';
 
 enum Sounds {
@@ -18,7 +19,7 @@ const sounds = {
   Sounds.wrong: 'wrong.mp3',
 };
 
-class AudioPlayer {
+class AudioPlayer implements AudioPlayerContract {
   AudioPlayer(this._storage, this._player) {
     _player.loadAll(sounds.values.toList());
   }

@@ -6,6 +6,7 @@ import 'package:flutter/material.dart' hide Color;
 
 import '../../domain/index.dart';
 import '../../view/index.dart';
+import '../../middleware/index.dart';
 import 'home_presenter.dart';
 
 class HomeScreen extends StatefulWidget {

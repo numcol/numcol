@@ -4,7 +4,7 @@
 
 import 'package:flutter/material.dart' hide Color;
 
-import '../../services/index.dart';
+import '../../middleware/index.dart';
 import '../../domain/index.dart';
 import '../../view/index.dart';
 import '../../i18n/index.dart';

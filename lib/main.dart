@@ -21,8 +21,9 @@ import 'package:shared_preferences/shared_preferences.dart';
 
 import 'configuration.dart';
 import 'numcol.dart';
-import 'services/index.dart';
+import 'middleware/index.dart';
 import 'domain/index.dart';
+import 'view/index.dart';
 
 void main() async {
   final sharedPreferences = await SharedPreferences.getInstance();

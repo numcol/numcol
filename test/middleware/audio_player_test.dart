@@ -6,8 +6,8 @@ import 'package:audioplayers/audio_cache.dart';
 import 'package:test/test.dart';
 import 'package:mockito/mockito.dart';
 
-import '../../lib/services/audio_player.dart';
-import '../../lib/services/storage.dart';
+import '../../lib/middleware/audio_player.dart';
+import '../../lib/middleware/storage.dart';
 
 class MockStorage extends Mock implements Storage {}
 class MockPlayer extends Mock implements AudioCache {}

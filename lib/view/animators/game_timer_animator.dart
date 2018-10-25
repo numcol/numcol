@@ -7,7 +7,7 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 
 import '../../domain/index.dart';
-import 'animator.dart';
+import '../../middleware/index.dart';
 
 class GameTimerAnimator extends Animator implements TimerContract {
   GameTimerAnimator({

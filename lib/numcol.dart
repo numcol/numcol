@@ -11,7 +11,6 @@ import 'package:flutter_localizations/flutter_localizations.dart';
 import 'view/index.dart';
 import 'domain/index.dart';
 import 'i18n/index.dart';
-import 'services/index.dart';
 import 'screens/index.dart';
 
 var numcolRoutes = {

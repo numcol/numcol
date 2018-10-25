@@ -4,7 +4,7 @@
 
 import 'package:flutter/material.dart';
 
-import 'animator.dart';
+import '../../middleware/index.dart';
 
 class CountdownAnimator extends Animator {
   CountdownAnimator({

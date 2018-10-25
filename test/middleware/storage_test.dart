@@ -6,7 +6,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'package:test/test.dart';
 import 'package:mockito/mockito.dart';
 
-import '../../lib/services/storage.dart';
+import '../../lib/middleware/storage.dart';
 
 class MockSharedPreferences extends Mock implements SharedPreferences {}
 

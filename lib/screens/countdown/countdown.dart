@@ -6,7 +6,7 @@ import 'package:flutter/material.dart';
 
 import '../../configuration.dart';
 import '../../view/index.dart';
-import '../../services/index.dart';
+import '../../middleware/index.dart';
 import 'widgets/index.dart';
 import 'countdown_presenter.dart';
 

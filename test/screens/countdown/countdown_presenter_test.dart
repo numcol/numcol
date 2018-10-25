@@ -6,7 +6,7 @@ import 'package:test/test.dart';
 import 'package:mockito/mockito.dart';
 
 import '../../../lib/domain/index.dart';
-import '../../../lib/services/index.dart';
+import '../../../lib/middleware/index.dart';
 import '../../../lib/screens/countdown/countdown_presenter.dart';
 
 class MockCountdownScreenView extends Mock implements CountdownScreenViewContract {}

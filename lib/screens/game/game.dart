@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 import '../../configuration.dart';
-import '../../services/index.dart';
+import '../../middleware/index.dart';
 import '../../domain/index.dart';
 import '../../view/index.dart';
 import 'widgets/index.dart';

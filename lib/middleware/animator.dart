@@ -4,7 +4,7 @@
 
 import 'package:flutter/material.dart';
 
-import '../../domain/index.dart';
+import '../domain/index.dart';
 
 abstract class Animator implements AnimatorContract {
   Animator({

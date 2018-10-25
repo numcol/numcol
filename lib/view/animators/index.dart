@@ -2,7 +2,6 @@
 // Use of this source code is governed by the version 3 of the
 // GNU General Public License that can be found in the LICENSE file.
 
-export 'animator.dart';
 export 'countdown_animator.dart';
 export 'game_timer_animator.dart';
 export 'question_animator.dart';

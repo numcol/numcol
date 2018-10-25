@@ -6,7 +6,7 @@ import 'package:flutter/material.dart' hide Color;
 
 import '../../../../domain/index.dart';
 import '../../../../i18n/index.dart';
-import '../../../../services/index.dart';
+import '../../../../middleware/index.dart';
 import '../../../../view/index.dart';
 import 'audio_switcher_presenter.dart';
 

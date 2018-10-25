@@ -4,6 +4,6 @@
 
 export 'animator_factory.dart';
 export 'audio_player.dart';
-export 'injector.dart';
 export 'sharer.dart';
 export 'storage.dart';
+export 'animator.dart';

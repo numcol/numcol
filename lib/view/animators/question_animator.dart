@@ -5,7 +5,7 @@
 import 'package:flutter/material.dart';
 
 import '../styles.dart';
-import 'animator.dart';
+import '../../middleware/index.dart';
 
 class QuestionAnimator extends Animator {
   QuestionAnimator({

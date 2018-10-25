@@ -6,6 +6,8 @@ import '../../../../domain/index.dart';
 
 abstract class AnswerViewContract {
   Answer get reply;
+  void renew();
+  void shake();
 }
 
 class AnswerPresenter {
@@ -15,6 +17,11 @@ class AnswerPresenter {
   final Game _game;
 
   void onPressed() {
-    _game.reply(_view.reply);
+    var isOk = _game.reply(_view.reply);
+    if (isOk) {
+      _view.renew();
+    } else {
+      _view.shake();
+    }
   }
 }

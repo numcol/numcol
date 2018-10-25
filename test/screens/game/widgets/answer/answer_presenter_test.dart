@@ -30,10 +30,38 @@ void main() {
         var answer = Answer(2, Color.red, Number.three);
         when(_mockAnswerView.reply)
           .thenReturn(answer);
+        when(_mockGame.reply(answer))
+          .thenReturn(true);
 
         _answerPresenter.onPressed();
 
         verify(_mockGame.reply(answer));
+      });
+
+      test('it shakes if the answer is wrong', () {
+        var answer = Answer(2, Color.red, Number.three);
+        when(_mockAnswerView.reply)
+          .thenReturn(answer);
+        when(_mockGame.reply(answer))
+          .thenReturn(false);
+
+        _answerPresenter.onPressed();
+
+        verify(_mockAnswerView.shake());
+        verifyNever(_mockAnswerView.renew());
+      });
+
+      test('it renews the answer', () {
+        var answer = Answer(2, Color.red, Number.three);
+        when(_mockAnswerView.reply)
+          .thenReturn(answer);
+        when(_mockGame.reply(answer))
+          .thenReturn(true);
+
+        _answerPresenter.onPressed();
+
+        verify(_mockAnswerView.renew());
+        verifyNever(_mockAnswerView.shake());
       });
     });
   });

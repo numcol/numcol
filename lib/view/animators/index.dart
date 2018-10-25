@@ -4,3 +4,5 @@
 
 export 'countdown_animator.dart';
 export 'question_animator.dart';
+export 'shake_animator.dart';
+export 'flipping_animator.dart';

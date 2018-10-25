@@ -79,6 +79,10 @@ abstract class Animator implements AnimatorContract {
     controller.reverse();
   }
 
+  void reset() {
+    controller.reset();
+  }
+
   void stop() {
     controller.stop();
   }

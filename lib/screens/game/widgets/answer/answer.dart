@@ -5,7 +5,6 @@
 import 'package:flutter/material.dart';
 
 import '../../../../domain/index.dart' hide Color;
-import '../../../../middleware/index.dart';
 import '../../../../view/index.dart';
 import 'answer_presenter.dart';
 
@@ -21,21 +20,74 @@ const gameNumbers = {
   Number.nine: '9',
 };
 
-class AnswerWidget extends AnimatedWidget implements AnswerViewContract {
+class AnswerWidget extends StatefulWidget {
   AnswerWidget({Key key, @required this.answer})
-    : super(key: key, listenable: answer);
+      : super(key: key);
 
   final ValueNotifier<Answer> answer;
-  Answer get reply => answer.value;
+
+  @override
+  _AnswerWidgetState createState() => _AnswerWidgetState();
+}
+
+class _AnswerWidgetState extends State<AnswerWidget>
+  with TickerProviderStateMixin implements AnswerViewContract {
+
+  AnswerPresenter _presenter;
+  Answer get reply => widget.answer.value;
+  ShakeAnimator _shakeAnimator;
+  FlippingAnimator _flippingAnimator;
+  Answer _currentAnswer;
+
+  @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+    _shakeAnimator = ShakeAnimator(vsync: this, listener: _setState);
+    _flippingAnimator = FlippingAnimator(vsync: this, onFlip: _onFlip);
+    var game = Injector.of(context).inject<Game>();
+    _presenter = AnswerPresenter(this, game);
+    widget.answer.addListener(_setState);
+    _currentAnswer = widget.answer.value;
+  }
+
+  @override
+  void renew() {
+    _flippingAnimator.forward();
+  }
+
+  @override
+  void shake() {
+    _shakeAnimator.reset();
+    _shakeAnimator.forward();
+  }
+
+  void _onFlip() {
+    setState(() => _currentAnswer = widget.answer.value);
+  }
+
+  void _setState() {
+    setState(() => null);
+  }
 
   @override
   Widget build(BuildContext context) {
-    var game = Injector.of(context).inject<Game>();
-    var presenter = AnswerPresenter(this, game);
-    return NumcolButton(
-      color: answer.value.color,
-      text: gameNumbers[answer.value.number],
-      onPressed: presenter.onPressed,
+    return AnimatedBuilder(
+      animation: _flippingAnimator.animation,
+      child: Transform(
+        transform: _shakeAnimator.translation,
+        child: NumcolButton(
+          color: _currentAnswer.color,
+          text: gameNumbers[_currentAnswer.number],
+          onPressed: _presenter.onPressed,
+        ),
+      ),
+      builder: _flippingAnimator.builder,
     );
+  }
+
+  @override
+  void dispose() {
+    _shakeAnimator.dispose();
+    super.dispose();
   }
 }

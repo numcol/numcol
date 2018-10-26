@@ -19,8 +19,8 @@ class GameScreenPresenter {
   Question get question => _game.question;
   int get score => _game.score;
 
-  void onLoad(GameTimer timer) {
-    _game.start(timer);
+  void onLoad(GameTimer timer, bool isZenMode) {
+    _game.start(timer, isZenMode);
     _game.gameoverStream.listen((_) => _onGameOver());
     _game.replyStream.listen(_onReply);
   }

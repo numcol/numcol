@@ -8,6 +8,10 @@ import 'widgets/index.dart';
 import 'game_presenter.dart';
 
 class GameScreen extends StatefulWidget {
+  GameScreen({this.isZenMode});
+
+  final bool isZenMode;
+
   @override
   _GameScreenState createState() => _GameScreenState();
 }
@@ -36,10 +40,11 @@ class _GameScreenState extends State<GameScreen>
     var timer = GameTimer(
       _animator,
       configuration.initialTimeInMilliseconds,
+      configuration.timeReducerMultiplier,
       configuration.timePenaltyMultiplier,
       configuration.timeAdditionByAnswerInMilliseconds);
     _presenter = GameScreenPresenter(this, game, audio);
-    _presenter.onLoad(timer);
+    _presenter.onLoad(timer, widget.isZenMode);
     _answers = _presenter.answers.map((answer) => ValueNotifier(answer)).toList();
     _question = ValueNotifier(_presenter.question);
     _score = ValueNotifier(_presenter.score);

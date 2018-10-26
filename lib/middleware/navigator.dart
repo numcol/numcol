@@ -23,6 +23,11 @@ abstract class NavigatorMixin<T extends StatefulWidget> extends State<T>
     Navigator.pushNamed(context, routes[route]);
   }
 
+  void navigateToWithParameter(Routes route, dynamic parameter) {
+    var path = routes[route] + '/' + parameter.toString();
+    Navigator.pushNamed(context, path);
+  }
+
   void redirectTo(Routes route) {
     Navigator.pushReplacementNamed(context, routes[route]);
   }

@@ -1,6 +1,6 @@
 {
     "play": "► Jolastu",
-    "zen_mode": "\"Zen\" modua",
+    "kids_level": "Haur maila",
     "settings": "Ezarpenak",
     "languages": "Languaiak",
     "saved": "Gordeta!",
@@ -34,7 +34,7 @@
     "back_to_menu": "Itzuli",
 
     "starts_in": "",
-    "kids_level": "Haur maila",
+
     "normal_level": "Erdi maila",
     "difficult_level": "Zaila",
     "ninja_level": "Ninja",

@@ -13,7 +13,9 @@ const colors = Color.values;
 const numbers = Number.values;
 
 class Game {
-  Game();
+  Game(this._zenModePoints);
+
+  final int _zenModePoints;
 
   StreamController<Null> _gameOverStreamer;
   StreamController<Reply> _replyStreamer;
@@ -21,6 +23,8 @@ class Game {
   Question _question;
   int _score;
   GameTimer _timer;
+  bool _isZenMode;
+  int _successCount;
 
   Stream get gameoverStream => _gameOverStreamer.stream;
   Stream<Reply> get replyStream => _replyStreamer.stream;
@@ -28,7 +32,8 @@ class Game {
   Question get question => _question;
   int get score => _score;
 
-  void start(GameTimer timer) {
+  void start(GameTimer timer, bool isZenMode) {
+    _isZenMode = isZenMode;
     _gameOverStreamer?.close();
     _replyStreamer?.close();
     _gameOverStreamer = StreamController.broadcast();
@@ -36,19 +41,19 @@ class Game {
     _answers = _RandomGenerator.generateAnswers();
     _question = _RandomGenerator.generateQuestion(_answers);
     _score = 0;
-    _timer = timer;
-    _timer.gameoverStream.listen((_) => _gameover());
-    _timer.start();
+    _successCount = 0;
+    if (!_isZenMode) {
+      _timer = timer;
+      _timer.gameoverStream.listen((_) => _gameover());
+      _timer.start();
+    }
   }
 
   bool reply(Answer answer) {
     var isAnswerOk = _question.color == answer.color && _question.number == answer.number;
     if (isAnswerOk) {
-      var remainingInMilliseconds = _timer.remainingInMilliseconds;
-      var maxTimeInMilliseconds = _timer.maxTimeInMilliseconds;
-      _timer.success();
-      _nextQuestion(answer, remainingInMilliseconds, maxTimeInMilliseconds);
-    } else {
+      _onAnswerOk(answer);
+    } else if (!_isZenMode) {
       var isGameOver = _timer.fail();
       if (isGameOver) {
         _gameOverStreamer.add(null);
@@ -61,15 +66,39 @@ class Game {
     return isAnswerOk;
   }
 
-  void _nextQuestion(Answer answer, int remainingTime, int timeLimit) {
+  void _onAnswerOk(Answer answer) {
+    int remainingInMilliseconds;
+    int maxTimeInMilliseconds;
+
+    if (!_isZenMode) {
+      remainingInMilliseconds = _timer.remainingInMilliseconds;
+      maxTimeInMilliseconds = _timer.maxTimeInMilliseconds;
+      _timer.success(_successCount);
+    }
+
+    _nextQuestion(answer);
+
+    if (_isZenMode) {
+      _addZenModePoints();
+    } else {
+      _addPointsBasedOnTime(remainingInMilliseconds, maxTimeInMilliseconds);
+    }
+
+    _successCount++;
+  }
+
+  void _nextQuestion(Answer answer) {
     var index = _answers.indexOf(answer);
     _answers[index] = _RandomGenerator.generateAnswer(index);
     _question = _RandomGenerator.generateQuestion(_answers);
-    _addPoints(remainingTime, timeLimit);
   }
 
-  void _addPoints(int remainingTime, int timeLimit) {
+  void _addPointsBasedOnTime(int remainingTime, int timeLimit) {
     _score += (remainingTime * 100 / timeLimit).floor();
+  }
+
+  void _addZenModePoints() {
+    _score += _zenModePoints;
   }
 
   void _gameover() {

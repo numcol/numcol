@@ -18,11 +18,13 @@ void main() {
   MockTimer _mockTimer;
   StreamController _gameoverStreamer;
 
+  const int zenModePoints = 10;
+
   group('Game:', () {
 
     setUp(() async {
       _mockTimer = MockTimer();
-      _game = Game();
+      _game = Game(zenModePoints);
       _gameoverStreamer = StreamController.broadcast();
       when(_mockTimer.gameoverStream)
         .thenAnswer((_) => _gameoverStreamer.stream);
@@ -30,24 +32,24 @@ void main() {
 
     group('On game start', () {
       test('it has 36 possible answers', () {
-        _game.start(_mockTimer);
+        _game.start(_mockTimer, true);
         expect(_game.answers.length, 36);
       });
 
       test('it has an answerable question', () {
-        _game.start(_mockTimer);
+        _game.start(_mockTimer, false);
         expect(_game.answers.any((a) => a.color == _game.question.color && a.number == _game.question.number), true);
       });
 
       test('it starts with 0 score', () {
-        _game.start(_mockTimer);
+        _game.start(_mockTimer, false);
         expect(_game.score, 0);
       });
 
       test('it ensures the timer will trigger gameover on timer end', () {
         var completer = Completer<bool>();
 
-        _game.start(_mockTimer);
+        _game.start(_mockTimer, false);
         _game.gameoverStream.listen((_) => completer.complete(true));
         _gameoverStreamer.add(null);
 
@@ -55,7 +57,7 @@ void main() {
       });
 
       test('it starts the timer', () {
-        _game.start(_mockTimer);
+        _game.start(_mockTimer, false);
         verify(_mockTimer.start());
       });
     });
@@ -65,7 +67,7 @@ void main() {
         Answer correctAnswer;
 
         setUp(() async {
-          _game.start(_mockTimer);
+          _game.start(_mockTimer, false);
           correctAnswer = _game.answers.firstWhere(
             (answer) => answer.number == _game.question.number && answer.color == _game.question.color
           );
@@ -81,7 +83,7 @@ void main() {
 
         test('it adds extra time to the timer', () {
           _game.reply(correctAnswer);
-          verify(_mockTimer.success());
+          verify(_mockTimer.success(0));
         });
 
         test('it renews the question', () {
@@ -122,7 +124,7 @@ void main() {
         Answer wrongAnswer;
 
         setUp(() {
-          _game.start(_mockTimer);
+          _game.start(_mockTimer, false);
           wrongAnswer = _game.answers.firstWhere(
             (answer) => answer.number != _game.question.number || answer.color != _game.question.color
           );

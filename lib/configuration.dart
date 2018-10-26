@@ -9,9 +9,11 @@ class Configuration extends StatelessWidget {
     Key key,
     @required this.child,
     @required this.initialTimeInMilliseconds,
+    @required this.timeReducerMultiplier,
     @required this.timePenaltyMultiplier,
     @required this.timeAdditionByAnswerInMilliseconds,
-    @required this.gameStartCountdownSeconds})
+    @required this.gameStartCountdownSeconds,
+    @required this.zenModePoints,})
       : super(key: key);
 
   static _InheritedConfiguration of(BuildContext context) {
@@ -20,18 +22,22 @@ class Configuration extends StatelessWidget {
 
   final Widget child;
   final int initialTimeInMilliseconds;
+  final double timeReducerMultiplier;
   final double timePenaltyMultiplier;
   final int timeAdditionByAnswerInMilliseconds;
   final int gameStartCountdownSeconds;
+  final int zenModePoints;
 
   @override
   Widget build(BuildContext context) {
     return _InheritedConfiguration(
       child: child,
       initialTimeInMilliseconds: initialTimeInMilliseconds,
+      timeReducerMultiplier: timeReducerMultiplier,
       timePenaltyMultiplier: timePenaltyMultiplier,
       timeAdditionByAnswerInMilliseconds: timeAdditionByAnswerInMilliseconds,
       gameStartCountdownSeconds: gameStartCountdownSeconds,
+      zenModePoints: zenModePoints,
     );
   }
 }
@@ -41,15 +47,19 @@ class _InheritedConfiguration extends InheritedWidget {
     Key key,
     @required child,
     @required this.initialTimeInMilliseconds,
+    @required this.timeReducerMultiplier,
     @required this.timePenaltyMultiplier,
     @required this.timeAdditionByAnswerInMilliseconds,
-    @required this.gameStartCountdownSeconds})
+    @required this.gameStartCountdownSeconds,
+    @required this.zenModePoints,})
       : super(key: key, child: child);
 
   final int initialTimeInMilliseconds;
+  final double timeReducerMultiplier;
   final double timePenaltyMultiplier;
   final int timeAdditionByAnswerInMilliseconds;
   final int gameStartCountdownSeconds;
+  final int zenModePoints;
 
   @override
   bool updateShouldNotify(_InheritedConfiguration oldWidget) {

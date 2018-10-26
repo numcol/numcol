@@ -57,7 +57,7 @@ class _HomeScreenState extends State<HomeScreen>
                 child: _title(),
               ),
               menuItem(Color.green, 'play', _homeScreenPresenter.onPlayButtonPressed),
-              menuItem(Color.yellow, 'zen_mode', _homeScreenPresenter.onZenModeButtonPressed),
+              menuItem(Color.yellow, 'kids_level', _homeScreenPresenter.onZenModeButtonPressed),
               menuItem(Color.blue, 'rate', _homeScreenPresenter.onRateButtonPressed),
               menuItem(Color.red, 'settings', _homeScreenPresenter.onSettingsButtonPressed),
             ],

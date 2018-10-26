@@ -26,6 +26,7 @@ import 'domain/index.dart';
 import 'view/index.dart';
 
 void main() async {
+  const zenModePoints = 10;
   final sharedPreferences = await SharedPreferences.getInstance();
   final audioCache = AudioCache(prefix: 'audio/');
   final storage = Storage(sharedPreferences);
@@ -33,14 +34,16 @@ void main() async {
   final sharer = Sharer();
   final analytics = FirebaseAnalytics();
   final audio = AudioPlayer(storage, audioCache);
-  final game = Game();
+  final game = Game(zenModePoints);
 
   runApp(
     Configuration(
       initialTimeInMilliseconds: 10000,
+      timeReducerMultiplier: 0.99,
       timePenaltyMultiplier: 0.66,
       timeAdditionByAnswerInMilliseconds: 1800,
       gameStartCountdownSeconds: 4,
+      zenModePoints: zenModePoints,
       child: Injector(
         dependencies: [
           storage,

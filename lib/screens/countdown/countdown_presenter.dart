@@ -17,6 +17,6 @@ class CountdownScreenPresenter {
 
   void onAnimationCompleted() {
     _audio.playStartSound();
-    _view.redirectTo(Routes.game);
+    _view.redirectToWithParameter(Routes.game, false);
   }
 }

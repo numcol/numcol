@@ -42,9 +42,10 @@ void main() {
 
   group('Game Screen:', () {
     group('On load', () {
-      test('the game starts with the new timer', () {
-        _gameScreenPresenter.onLoad(_mockTimer);
-        verify(_mockGame.start(_mockTimer));
+      test('the game starts with the new timer and proper mode', () {
+        var isZenMode = true;
+        _gameScreenPresenter.onLoad(_mockTimer, isZenMode);
+        verify(_mockGame.start(_mockTimer, isZenMode));
       });
 
       group('a listener is added to gameover event and when it triggers', () {

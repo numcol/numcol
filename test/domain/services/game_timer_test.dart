@@ -2,6 +2,8 @@
 // Use of this source code is governed by the version 3 of the
 // GNU General Public License that can be found in the LICENSE file.
 
+import 'dart:math';
+
 import 'package:test/test.dart';
 import 'package:mockito/mockito.dart';
 
@@ -11,6 +13,7 @@ class MockTimer extends Mock implements TimerContract {}
 
 void main() {
   const initialTimeInMilliseconds = 10000;
+  const timePenaltyReducer = 0.99;
   const timePenaltyMultiplier = 0.66;
   const timeAdditionByAnswerInMilliseconds = 1800;
 
@@ -22,6 +25,7 @@ void main() {
     _gameTimer = GameTimer(
       _mockInternalTimer,
       initialTimeInMilliseconds,
+      timePenaltyReducer,
       timePenaltyMultiplier,
       timeAdditionByAnswerInMilliseconds);
   });
@@ -45,14 +49,16 @@ void main() {
 
     group('On success', () {
       test('it adds extra time (as configured)', () {
+        var successCount = 15;
+
         when(_mockInternalTimer.maxTimeInMilliseconds)
           .thenReturn(10000);
         when(_mockInternalTimer.elapsedInMilliseconds)
           .thenReturn(2000);
 
-        _gameTimer.success();
+        _gameTimer.success(successCount);
 
-        verify(_mockInternalTimer.start(10000 - 2000 + timeAdditionByAnswerInMilliseconds));
+        verify(_mockInternalTimer.start(10000 - 2000 + (timeAdditionByAnswerInMilliseconds * pow(timePenaltyReducer, successCount)).ceil()));
       });
     });
 

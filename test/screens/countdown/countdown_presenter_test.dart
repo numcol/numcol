@@ -36,10 +36,10 @@ void main() {
     });
 
     group('On animation completed', () {
-      test('it redirects to the game screen', () {
+      test('it redirects to the game screen in normal mode', () {
         _countdownScreenPresenter.onAnimationCompleted();
 
-        verify(_mockCountdownScreenView.redirectTo(Routes.game));
+        verify(_mockCountdownScreenView.redirectToWithParameter(Routes.game, false));
       });
 
       test('it plays the game start sound', () {

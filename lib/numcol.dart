@@ -67,6 +67,12 @@ class _NumcolAppState extends State<NumcolApp> {
         builder: (context) => GameoverScreen(score: score),
         settings: settings,
       );
+    } else if (path[0] == routes[Routes.game]) {
+      final isZenMode = path[1] != null && path[1] == 'true';
+      return new MaterialPageRoute(
+        builder: (context) => GameScreen(isZenMode: isZenMode),
+        settings: settings,
+      );
     } else if (numcolRoutes[path[0]] != null) {
       return new MaterialPageRoute(
         builder: numcolRoutes[path[0]],

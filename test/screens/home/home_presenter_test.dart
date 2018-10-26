@@ -30,10 +30,10 @@ void main() {
       });
     });
 
-    group('On "Zen Mode" button pressed', () {
+    group('On "Kids Mode" button pressed', () {
       test('it navigates to countdown page', () {
-        _homeScreenPresenter.onZenModeButtonPressed();
-        verify(_mockHomeScreenView.navigateTo(Routes.countdown));
+        _homeScreenPresenter.onKidsModeButtonPressed();
+        verify(_mockHomeScreenView.navigateToWithParameter(Routes.game, true));
       });
     });
 

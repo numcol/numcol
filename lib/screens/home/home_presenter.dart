@@ -16,8 +16,8 @@ class HomeScreenPresenter {
     _view.navigateTo(Routes.countdown);
   }
 
-  void onZenModeButtonPressed() {
-    _view.navigateTo(Routes.countdown);
+  void onKidsModeButtonPressed() {
+    _view.navigateToWithParameter(Routes.game, true);
   }
 
   void onRateButtonPressed() {

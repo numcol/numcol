@@ -15,7 +15,9 @@ dependencies:
   audioplayers: ^0.7.8
   share: "0.5.3"
   firebase_analytics: ^1.0.4
+  firebase_remote_config: ^0.0.6+1
   launch_review: ^1.0.1
+  flutter_crashlytics: "0.1.1"
 
 dev_dependencies:
   flutter_test:

@@ -3,6 +3,7 @@
 // GNU General Public License that can be found in the LICENSE file.
 
 import 'package:share/share.dart';
+import 'package:launch_review/launch_review.dart';
 
 import '../domain/index.dart';
 
@@ -10,5 +11,9 @@ class Sharer implements SharerContract {
   void shareScore(String text, int score) {
     const placeholder = '{{score}}';
     Share.share(text.replaceAll(placeholder, score.toString()));
+  }
+
+  void rateApp() {
+    LaunchReview.launch();
   }
 }

@@ -7,9 +7,10 @@ import '../../domain/index.dart';
 abstract class HomeScreenViewContract implements NavigatorContract {}
 
 class HomeScreenPresenter {
-  HomeScreenPresenter(this._view);
+  HomeScreenPresenter(this._view, this._sharer);
 
   final HomeScreenViewContract _view;
+  final SharerContract _sharer;
 
   void onPlayButtonPressed() {
     _view.navigateTo(Routes.countdown);
@@ -19,8 +20,8 @@ class HomeScreenPresenter {
     _view.navigateTo(Routes.countdown);
   }
 
-  void onTopScoreButtonPressed() {
-    _view.navigateTo(Routes.countdown);
+  void onRateButtonPressed() {
+    _sharer.rateApp();
   }
 
   void onSettingsButtonPressed() {

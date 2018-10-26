@@ -2,7 +2,6 @@
     "play": "► Jolastu",
     "zen_mode": "\"Zen\" modua",
     "settings": "Ezarpenak",
-    "top_score": "Puntuazioak",
     "languages": "Languaiak",
     "saved": "Gordeta!",
     "savedError": "Errorea gordetzen!",
@@ -14,6 +13,7 @@
     "share": "Partekatu!",
     "share_text": "{{score}} puntu lortu ditut NumCol-en http://goo.gl/fMkZrJ #numcol",
     "sound": "Soinua",
+    "rate": "Baloratu",
 
     "one": "Bat",
     "two": "Bi",
@@ -29,7 +29,7 @@
     "blue": "Urdina",
     "yellow": "Horia",
 
-
+    "top_score": "Puntuazioak",
     "new": "Berria",
     "back_to_menu": "Itzuli",
 

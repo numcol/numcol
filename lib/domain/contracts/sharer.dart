@@ -4,4 +4,5 @@
 
 abstract class SharerContract {
   void shareScore(String text, int score);
+  void rateApp();
 }

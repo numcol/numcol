@@ -21,9 +21,10 @@ class _HomeScreenState extends State<HomeScreen>
   HomeScreenPresenter _homeScreenPresenter;
 
   @override
-  initState() {
-    super.initState();
-    _homeScreenPresenter = HomeScreenPresenter(this);
+  didChangeDependencies() {
+    super.didChangeDependencies();
+    var sharer = Injector.of(context).inject<Sharer>();
+    _homeScreenPresenter = HomeScreenPresenter(this, sharer);
   }
 
   Widget _title() {
@@ -57,7 +58,7 @@ class _HomeScreenState extends State<HomeScreen>
               ),
               menuItem(Color.green, 'play', _homeScreenPresenter.onPlayButtonPressed),
               menuItem(Color.yellow, 'zen_mode', _homeScreenPresenter.onZenModeButtonPressed),
-              menuItem(Color.blue, 'top_score', _homeScreenPresenter.onTopScoreButtonPressed),
+              menuItem(Color.blue, 'rate', _homeScreenPresenter.onRateButtonPressed),
               menuItem(Color.red, 'settings', _homeScreenPresenter.onSettingsButtonPressed),
             ],
           ),

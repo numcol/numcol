@@ -9,14 +9,17 @@ import '../../../lib/domain/index.dart';
 import '../../../lib/screens/home/home_presenter.dart';
 
 class MockHomeScreenView extends Mock implements HomeScreenViewContract {}
+class MockSharer extends Mock implements SharerContract {}
 
 void main() {
   MockHomeScreenView _mockHomeScreenView;
   HomeScreenPresenter _homeScreenPresenter;
+  MockSharer _mockSharer;
 
   setUp(() async {
     _mockHomeScreenView = MockHomeScreenView();
-    _homeScreenPresenter = HomeScreenPresenter(_mockHomeScreenView);
+    _mockSharer = MockSharer();
+    _homeScreenPresenter = HomeScreenPresenter(_mockHomeScreenView, _mockSharer);
   });
 
   group('Home Screen:', () {
@@ -34,10 +37,10 @@ void main() {
       });
     });
 
-    group('On "Top Score" button pressed', () {
+    group('On "Rate App" button pressed', () {
       test('it navigates to countdown page', () {
-        _homeScreenPresenter.onTopScoreButtonPressed();
-        verify(_mockHomeScreenView.navigateTo(Routes.countdown));
+        _homeScreenPresenter.onRateButtonPressed();
+        verify(_mockSharer.rateApp());
       });
     });
 

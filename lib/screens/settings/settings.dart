@@ -18,7 +18,6 @@ class SettingsScreen extends StatefulWidget {
 class _SettingsScreenState extends State<SettingsScreen>
     with NavigatorMixin, MenuItemMixin
     implements SettingsScreenViewContract {
-
   SettingsScreenPresenter _settingsScreenPresenter;
 
   @override
@@ -42,7 +41,8 @@ class _SettingsScreenState extends State<SettingsScreen>
                   PageTitle(tag: 'settings'),
                   AudioSwitcher(),
                   LanguageSwitcher(),
-                  menuItem(Color.blue, 'back_to_menu', _settingsScreenPresenter.onBackButtonPressed),
+                  menuItem(Color.blue, 'back_to_menu',
+                      _settingsScreenPresenter.onBackButtonPressed),
                 ],
               ),
             ),

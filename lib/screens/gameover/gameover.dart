@@ -22,7 +22,6 @@ class GameoverScreen extends StatefulWidget {
 class _GameoverScreenState extends State<GameoverScreen>
     with NavigatorMixin, MenuItemMixin
     implements GameoverScreenViewContract {
-
   GameoverScreenPresenter _gameoverScreenPresenter;
   int _topScore;
 
@@ -30,9 +29,9 @@ class _GameoverScreenState extends State<GameoverScreen>
   void didChangeDependencies() {
     super.didChangeDependencies();
     _gameoverScreenPresenter = GameoverScreenPresenter(
-      this,
-      Injector.of(context).inject<Storage>(),
-      Injector.of(context).inject<Sharer>());
+        this,
+        Injector.of(context).inject<Storage>(),
+        Injector.of(context).inject<Sharer>());
     _gameoverScreenPresenter.onLoad(widget.score);
   }
 
@@ -41,10 +40,9 @@ class _GameoverScreenState extends State<GameoverScreen>
       child: Text(
         text,
         style: TextStyle(
-          fontFamily: Fonts.poiretone,
-          fontWeight: FontWeight.bold,
-          color: ScreenColors.darkBlack
-        ),
+            fontFamily: Fonts.poiretone,
+            fontWeight: FontWeight.bold,
+            color: ScreenColors.darkBlack),
       ),
       margin: EdgeInsets.only(
         bottom: 5.0,
@@ -62,11 +60,9 @@ class _GameoverScreenState extends State<GameoverScreen>
     );
   }
 
-  Widget _number(String text , double fontSize) {
+  Widget _number(String text, double fontSize) {
     return Container(
-      padding: const EdgeInsets.only(
-        bottom: 20.0
-      ),
+      padding: const EdgeInsets.only(bottom: 20.0),
       child: Text(
         text,
         style: TextStyle(
@@ -105,12 +101,17 @@ class _GameoverScreenState extends State<GameoverScreen>
               _number(widget.score.toString(), 54.0),
               _numberTitle(Translations.of(context).text('high_score')),
               _number(_topScore.toString(), 32.0),
-              menuItem(Color.red, 'share', () => _gameoverScreenPresenter.onShareButtonPressed(
-                Translations.of(context).text('share_text'),
-                widget.score,
-              )),
-              menuItem(Color.green, 'try_again', _gameoverScreenPresenter.onTryAgainButtonPressed),
-              menuItem(Color.blue, 'back_to_menu', _gameoverScreenPresenter.onBackButtonPressed),
+              menuItem(
+                  Color.red,
+                  'share',
+                  () => _gameoverScreenPresenter.onShareButtonPressed(
+                        Translations.of(context).text('share_text'),
+                        widget.score,
+                      )),
+              menuItem(Color.green, 'try_again',
+                  _gameoverScreenPresenter.onTryAgainButtonPressed),
+              menuItem(Color.blue, 'back_to_menu',
+                  _gameoverScreenPresenter.onBackButtonPressed),
             ],
           ),
         ),

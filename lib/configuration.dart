@@ -13,8 +13,8 @@ class Configuration extends StatelessWidget {
     @required this.timePenaltyMultiplier,
     @required this.timeAdditionByAnswerInMilliseconds,
     @required this.gameStartCountdownSeconds,
-    @required this.zenModePoints,})
-      : super(key: key);
+    @required this.zenModePoints,
+  }) : super(key: key);
 
   static _InheritedConfiguration of(BuildContext context) {
     return context.inheritFromWidgetOfExactType(_InheritedConfiguration);
@@ -51,8 +51,8 @@ class _InheritedConfiguration extends InheritedWidget {
     @required this.timePenaltyMultiplier,
     @required this.timeAdditionByAnswerInMilliseconds,
     @required this.gameStartCountdownSeconds,
-    @required this.zenModePoints,})
-      : super(key: key, child: child);
+    @required this.zenModePoints,
+  }) : super(key: key, child: child);
 
   final int initialTimeInMilliseconds;
   final double timeReducerMultiplier;

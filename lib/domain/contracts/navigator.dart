@@ -11,6 +11,3 @@ abstract class NavigatorContract {
   void redirectToWithParameter(Routes route, dynamic parameter);
   void navigateBack();
 }
-
-
-

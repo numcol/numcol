@@ -8,8 +8,7 @@ import '../../i18n/index.dart';
 import '../styles.dart';
 
 class PageTitle extends StatelessWidget {
-  PageTitle({Key key, @required this.tag})
-      : super(key: key);
+  PageTitle({Key key, @required this.tag}) : super(key: key);
 
   final String tag;
 
@@ -17,9 +16,7 @@ class PageTitle extends StatelessWidget {
   Widget build(BuildContext context) {
     return Center(
       child: Container(
-        padding: const EdgeInsets.only(
-          bottom: 30.0
-        ),
+        padding: const EdgeInsets.only(bottom: 30.0),
         child: Text(
           Translations.of(context).text(tag).toUpperCase(),
           style: TextStyle(

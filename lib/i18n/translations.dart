@@ -5,7 +5,7 @@
 import 'dart:async';
 import 'dart:convert';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart' show  rootBundle;
+import 'package:flutter/services.dart' show rootBundle;
 
 import '../domain/index.dart';
 
@@ -18,20 +18,26 @@ class Translations {
   Locale locale;
   static Map<dynamic, dynamic> _localizedValues = Map<dynamic, dynamic>();
 
-  static Translations of(BuildContext context){
+  static Translations of(BuildContext context) {
     return Localizations.of<Translations>(context, Translations);
   }
 
-  String text(String key) => _localizedValues != null && _localizedValues[key] != null ? _localizedValues[key] : '';
+  String text(String key) =>
+      _localizedValues != null && _localizedValues[key] != null
+          ? _localizedValues[key]
+          : '';
 
   static Future<Translations> load(Locale locale) async {
     Translations translations = Translations(locale);
-    String jsonContent = await rootBundle.loadString("assets/locale/i18n_${locale.languageCode}.json");
+    String jsonContent = await rootBundle
+        .loadString("assets/locale/i18n_${locale.languageCode}.json");
     _localizedValues = json.decode(jsonContent);
     return translations;
   }
 
   get currentLanguage => locale.languageCode;
 
-  static Iterable<Locale> supportedLocales() => LocaleHelper.getAllLanguageCodes().map<Locale>((lang) => Locale(lang, ''));
+  static Iterable<Locale> supportedLocales() =>
+      LocaleHelper.getAllLanguageCodes()
+          .map<Locale>((lang) => Locale(lang, ''));
 }

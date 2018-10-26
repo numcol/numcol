@@ -8,13 +8,14 @@ import '../../../../i18n/index.dart';
 import '../../../../view/index.dart';
 
 class QuestionAnimated extends AnimatedWidget {
-  QuestionAnimated({ Key key, @required this.animation, @required this.text }) : super(key: key, listenable: animation);
+  QuestionAnimated({Key key, @required this.animation, @required this.text})
+      : super(key: key, listenable: animation);
 
   final Animation animation;
   final String text;
 
   @override
-  build(BuildContext context){
+  build(BuildContext context) {
     return Text(
       Translations.of(context).text(text).toUpperCase(),
       style: TextStyle(

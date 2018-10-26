@@ -18,7 +18,6 @@ class CountdownScreen extends StatefulWidget {
 class _CountdownScreenState extends State<CountdownScreen>
     with TickerProviderStateMixin, NavigatorMixin
     implements CountdownScreenViewContract {
-
   CountdownScreenPresenter _presenter;
   CountdownAnimator _animator;
 
@@ -31,13 +30,14 @@ class _CountdownScreenState extends State<CountdownScreen>
     super.didChangeDependencies();
     final configuration = Configuration.of(context);
     final audio = Injector.of(context).inject<AudioPlayer>();
-    _animator = Injector.of(context).inject<AnimatorFactory>().createCountdownAnimator(
-      vsync: this,
-      seconds: configuration.gameStartCountdownSeconds,
-      begin: configuration.gameStartCountdownSeconds,
-      end: 0,
-      onCompleted: _onAnimationComplete,
-    );
+    _animator =
+        Injector.of(context).inject<AnimatorFactory>().createCountdownAnimator(
+              vsync: this,
+              seconds: configuration.gameStartCountdownSeconds,
+              begin: configuration.gameStartCountdownSeconds,
+              end: 0,
+              onCompleted: _onAnimationComplete,
+            );
     _presenter = CountdownScreenPresenter(this, _animator, audio);
     _presenter.onLoad();
   }

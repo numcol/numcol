@@ -15,7 +15,8 @@ class AudioSwitcher extends StatefulWidget {
   _AudioSwitcherState createState() => _AudioSwitcherState();
 }
 
-class _AudioSwitcherState extends State<AudioSwitcher> implements AudioSwitcherViewContract {
+class _AudioSwitcherState extends State<AudioSwitcher>
+    implements AudioSwitcherViewContract {
   final GlobalKey<CustomExpansionTileState> expansionTile = GlobalKey();
   bool _isAudioOn = true;
   AudioSwitcherPresenter _presenter;
@@ -23,7 +24,8 @@ class _AudioSwitcherState extends State<AudioSwitcher> implements AudioSwitcherV
   @override
   void didChangeDependencies() {
     super.didChangeDependencies();
-    _presenter = AudioSwitcherPresenter(this, Injector.of(context).inject<StorageContract>());
+    _presenter = AudioSwitcherPresenter(
+        this, Injector.of(context).inject<StorageContract>());
     _presenter.loadIsAudioOn();
   }
 
@@ -71,9 +73,7 @@ class _AudioSwitcherState extends State<AudioSwitcher> implements AudioSwitcherV
           Container(
             width: 160.0,
             child: Switch(
-              value: _isAudioOn,
-              onChanged: _presenter.onTogglePressed
-            ),
+                value: _isAudioOn, onChanged: _presenter.onTogglePressed),
           ),
         ],
       ),

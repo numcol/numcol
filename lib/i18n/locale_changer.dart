@@ -12,7 +12,7 @@ class LocaleChanger {
   static final LocaleChanger _localeChanger = LocaleChanger._internal();
 
   factory LocaleChanger() {
-      return _localeChanger;
+    return _localeChanger;
   }
 
   LocaleChanger._internal();

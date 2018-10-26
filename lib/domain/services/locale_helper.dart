@@ -5,7 +5,6 @@
 import '../collections/index.dart';
 
 class LocaleHelper {
-
   static final _codes = {
     Locales.english: 'en',
     Locales.castellano: 'es',

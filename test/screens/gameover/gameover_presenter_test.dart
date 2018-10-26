@@ -8,8 +8,11 @@ import 'package:mockito/mockito.dart';
 import '../../../lib/domain/index.dart';
 import '../../../lib/screens/gameover/gameover_presenter.dart';
 
-class MockGameoverScreenView extends Mock implements GameoverScreenViewContract {}
+class MockGameoverScreenView extends Mock
+    implements GameoverScreenViewContract {}
+
 class MockStorage extends Mock implements StorageContract {}
+
 class MockSharer extends Mock implements SharerContract {}
 
 void main() {
@@ -19,12 +22,12 @@ void main() {
   GameoverScreenPresenter _gameoverScreenPresenter;
 
   group('Gameover Screen:', () {
-
     setUp(() async {
       _mockGameoverScreenView = MockGameoverScreenView();
       _mockStorage = MockStorage();
       _mockSharer = MockSharer();
-      _gameoverScreenPresenter = GameoverScreenPresenter(_mockGameoverScreenView, _mockStorage, _mockSharer);
+      _gameoverScreenPresenter = GameoverScreenPresenter(
+          _mockGameoverScreenView, _mockStorage, _mockSharer);
     });
 
     group('On load', () {
@@ -33,8 +36,7 @@ void main() {
         const currentScore = 500;
 
         setUp(() async {
-          when(_mockStorage.getTopScore())
-            .thenReturn(previousTopScore);
+          when(_mockStorage.getTopScore()).thenReturn(previousTopScore);
         });
 
         test('it shows previous top score', () {
@@ -56,10 +58,8 @@ void main() {
         final isSavedFuture = new Future.value(true);
 
         setUp(() async {
-          when(_mockStorage.getTopScore())
-            .thenReturn(previousTopScore);
-          when(_mockStorage.setTopScore(any))
-            .thenAnswer((_) => isSavedFuture);
+          when(_mockStorage.getTopScore()).thenReturn(previousTopScore);
+          when(_mockStorage.setTopScore(any)).thenAnswer((_) => isSavedFuture);
         });
 
         test('it shows current score as top score', () {
@@ -81,10 +81,8 @@ void main() {
         final isSavedFuture = new Future.value(false);
 
         setUp(() async {
-          when(_mockStorage.getTopScore())
-            .thenReturn(previousTopScore);
-          when(_mockStorage.setTopScore(any))
-            .thenAnswer((_) => isSavedFuture);
+          when(_mockStorage.getTopScore()).thenReturn(previousTopScore);
+          when(_mockStorage.setTopScore(any)).thenAnswer((_) => isSavedFuture);
         });
 
         test('it shows current score as top score', () {

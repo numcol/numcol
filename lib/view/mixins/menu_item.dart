@@ -11,7 +11,8 @@ import '../widgets/index.dart';
 abstract class MenuItemMixin<T extends StatefulWidget> extends State<T> {
   factory MenuItemMixin._() => null;
 
-  Widget menuItem(Color color, String languageTag, NumcolButtonPressed command) {
+  Widget menuItem(
+      Color color, String languageTag, NumcolButtonPressed command) {
     return MenuButton(
       color: color,
       text: Translations.of(context).text(languageTag),

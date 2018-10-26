@@ -7,22 +7,20 @@ import 'package:flutter/material.dart';
 import '../../../../view/index.dart';
 
 class CountdownWidget extends AnimatedWidget {
-  CountdownWidget({ Key key, @required this.animation }) : super(key: key, listenable: animation);
+  CountdownWidget({Key key, @required this.animation})
+      : super(key: key, listenable: animation);
 
   final Animation<int> animation;
 
   @override
-  build(BuildContext context){
+  build(BuildContext context) {
     return Container(
       height: 260.0,
       width: 260.0,
       child: Center(
         child: Text(
           animation.value == 0 ? 'Go!' : animation.value.toString(),
-          style: TextStyle(
-            fontSize: 92.0,
-            fontFamily: Fonts.poiretone
-          ),
+          style: TextStyle(fontSize: 92.0, fontFamily: Fonts.poiretone),
         ),
       ),
       decoration: BoxDecoration(
@@ -32,4 +30,3 @@ class CountdownWidget extends AnimatedWidget {
     );
   }
 }
-

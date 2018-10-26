@@ -30,8 +30,7 @@ const gameNumberWords = {
 };
 
 class QuestionWidget extends StatefulWidget {
-  QuestionWidget({Key key, @required this.question})
-    : super(key: key);
+  QuestionWidget({Key key, @required this.question}) : super(key: key);
 
   final ValueNotifier<Question> question;
 
@@ -39,17 +38,21 @@ class QuestionWidget extends StatefulWidget {
   _QuestionWidgetState createState() => _QuestionWidgetState();
 }
 
-class _QuestionWidgetState extends State<QuestionWidget> with TickerProviderStateMixin implements QuestionViewContract {
+class _QuestionWidgetState extends State<QuestionWidget>
+    with TickerProviderStateMixin
+    implements QuestionViewContract {
   QuestionAnimator _colorAnimator;
   QuestionAnimator _numberAnimator;
   QuestionPresenter _presenter;
   Question _question;
 
   QuestionAnimator _createAnimator() {
-    return Injector.of(context).inject<AnimatorFactory>().createQuestionAnimator(
-      vsync: this,
-      milliseconds: 400,
-    );
+    return Injector.of(context)
+        .inject<AnimatorFactory>()
+        .createQuestionAnimator(
+          vsync: this,
+          milliseconds: 400,
+        );
   }
 
   QuestionAnimator get colorAnimator => _colorAnimator;

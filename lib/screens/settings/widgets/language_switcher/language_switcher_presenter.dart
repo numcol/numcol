@@ -27,13 +27,12 @@ class LanguageSwitcherPresenter {
   void onLanguagePressed(Locales locale) {
     var languageCode = LocaleHelper.getLanguageCode(locale);
 
-    _storage.setLanguage(languageCode)
-      .then((isSaved) {
-        if (isSaved) {
-          this._view.onLanguageSaved(locale);
-        } else {
-          this._view.onLanguageSavedError();
-        }
-      });
+    _storage.setLanguage(languageCode).then((isSaved) {
+      if (isSaved) {
+        this._view.onLanguageSaved(locale);
+      } else {
+        this._view.onLanguageSavedError();
+      }
+    });
   }
 }

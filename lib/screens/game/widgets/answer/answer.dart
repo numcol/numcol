@@ -21,8 +21,7 @@ const gameNumbers = {
 };
 
 class AnswerWidget extends StatefulWidget {
-  AnswerWidget({Key key, @required this.answer})
-      : super(key: key);
+  AnswerWidget({Key key, @required this.answer}) : super(key: key);
 
   final ValueNotifier<Answer> answer;
 
@@ -31,8 +30,8 @@ class AnswerWidget extends StatefulWidget {
 }
 
 class _AnswerWidgetState extends State<AnswerWidget>
-  with TickerProviderStateMixin implements AnswerViewContract {
-
+    with TickerProviderStateMixin
+    implements AnswerViewContract {
   AnswerPresenter _presenter;
   Answer get reply => widget.answer.value;
   ShakeAnimator _shakeAnimator;

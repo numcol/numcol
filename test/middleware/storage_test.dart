@@ -11,7 +11,6 @@ import '../../lib/middleware/storage.dart';
 class MockSharedPreferences extends Mock implements SharedPreferences {}
 
 void main() {
-
   Storage _storage;
   MockSharedPreferences _mockPreferences;
 
@@ -23,8 +22,7 @@ void main() {
   group('Storage:', () {
     group('On get language', () {
       test('retrieves the language from the storage', () {
-        when(_mockPreferences.getString('language'))
-          .thenReturn('eu');
+        when(_mockPreferences.getString('language')).thenReturn('eu');
 
         expect(_storage.getLanguage(), 'eu');
       });
@@ -39,15 +37,13 @@ void main() {
 
     group('On get top score', () {
       test('retrieves the top score from the storage', () {
-        when(_mockPreferences.getInt('top_score'))
-          .thenReturn(23);
+        when(_mockPreferences.getInt('top_score')).thenReturn(23);
 
         expect(_storage.getTopScore(), 23);
       });
 
       test('retrieves zero if there is nothing in the storage', () {
-        when(_mockPreferences.getInt('top_score'))
-          .thenReturn(null);
+        when(_mockPreferences.getInt('top_score')).thenReturn(null);
 
         expect(_storage.getTopScore(), 0);
       });
@@ -62,15 +58,13 @@ void main() {
 
     group('On get is audio on', () {
       test('retrieves is audio on from the storage', () {
-        when(_mockPreferences.getBool('audio_on'))
-          .thenReturn(false);
+        when(_mockPreferences.getBool('audio_on')).thenReturn(false);
 
         expect(_storage.getIsAudioOn(), false);
       });
 
       test('retrieves true if there is nothing in the storage', () {
-        when(_mockPreferences.getBool('audio_on'))
-          .thenReturn(null);
+        when(_mockPreferences.getBool('audio_on')).thenReturn(null);
 
         expect(_storage.getIsAudioOn(), true);
       });

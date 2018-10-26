@@ -38,7 +38,10 @@ abstract class Animator implements AnimatorContract {
       duration: Duration(milliseconds: milliseconds),
     );
 
-    if (onCompleted != null || onDismissed != null || onForward != null || onReverse != null) {
+    if (onCompleted != null ||
+        onDismissed != null ||
+        onForward != null ||
+        onReverse != null) {
       controller.addStatusListener(_statusListener);
     }
 
@@ -71,7 +74,7 @@ abstract class Animator implements AnimatorContract {
     listener?.call();
   }
 
-  void forward({ double from }) {
+  void forward({double from}) {
     controller.forward(from: from);
   }
 

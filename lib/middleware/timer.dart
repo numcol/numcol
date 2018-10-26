@@ -14,9 +14,9 @@ class GameTimerAnimator extends Animator implements TimerContract {
     @required TickerProviderStateMixin vsync,
     @required int milliseconds,
   }) : super(
-    vsync: vsync,
-    milliseconds: milliseconds,
-  ) {
+          vsync: vsync,
+          milliseconds: milliseconds,
+        ) {
     _maxTimeInMillisecondxs = milliseconds;
     controller.addStatusListener(_statusListener);
   }
@@ -27,7 +27,8 @@ class GameTimerAnimator extends Animator implements TimerContract {
   int _maxTimeInMillisecondxs;
 
   @override
-  int get elapsedInMilliseconds => controller.lastElapsedDuration.inMilliseconds;
+  int get elapsedInMilliseconds =>
+      controller.lastElapsedDuration.inMilliseconds;
 
   @override
   int get maxTimeInMilliseconds => _maxTimeInMillisecondxs;
@@ -44,7 +45,8 @@ class GameTimerAnimator extends Animator implements TimerContract {
       startingPoint = 0.0;
     } else {
       _maxTimeInMillisecondxs = durationsTimeInMilliseconds;
-      var startingMilliseconds = controller.duration.inMilliseconds - durationsTimeInMilliseconds;
+      var startingMilliseconds =
+          controller.duration.inMilliseconds - durationsTimeInMilliseconds;
       startingPoint = startingMilliseconds / controller.duration.inMilliseconds;
     }
     controller.forward(from: startingPoint);

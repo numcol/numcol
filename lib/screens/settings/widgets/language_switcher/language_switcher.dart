@@ -15,7 +15,8 @@ class LanguageSwitcher extends StatefulWidget {
   _LanguageSwitcherState createState() => _LanguageSwitcherState();
 }
 
-class _LanguageSwitcherState extends State<LanguageSwitcher> implements LanguageSwitcherViewContract {
+class _LanguageSwitcherState extends State<LanguageSwitcher>
+    implements LanguageSwitcherViewContract {
   final GlobalKey<CustomExpansionTileState> expansionTile = GlobalKey();
   Locales _locale;
   LanguageSwitcherPresenter _presenter;
@@ -23,7 +24,8 @@ class _LanguageSwitcherState extends State<LanguageSwitcher> implements Language
   @override
   void didChangeDependencies() {
     super.didChangeDependencies();
-    _presenter = LanguageSwitcherPresenter(this, Injector.of(context).inject<Storage>());
+    _presenter =
+        LanguageSwitcherPresenter(this, Injector.of(context).inject<Storage>());
     _presenter.loadChosenLanguage();
   }
 
@@ -66,10 +68,12 @@ class _LanguageSwitcherState extends State<LanguageSwitcher> implements Language
       locales.remove(_locale);
     }
 
-    return locales.map((locale) => ListTile(
-          title: Text(LocaleHelper.getLanguageText(locale)),
-          onTap: () => _presenter.onLanguagePressed(locale),
-        )).toList();
+    return locales
+        .map((locale) => ListTile(
+              title: Text(LocaleHelper.getLanguageText(locale)),
+              onTap: () => _presenter.onLanguagePressed(locale),
+            ))
+        .toList();
   }
 
   @override
@@ -78,7 +82,8 @@ class _LanguageSwitcherState extends State<LanguageSwitcher> implements Language
       width: 240.0,
       child: CustomExpansionTile(
         key: expansionTile,
-        title: Text(LocaleHelper.getLanguageText(_locale) ?? Translations.of(context).text('languages')),
+        title: Text(LocaleHelper.getLanguageText(_locale) ??
+            Translations.of(context).text('languages')),
         children: _buildLanguageTiles(),
       ),
     );

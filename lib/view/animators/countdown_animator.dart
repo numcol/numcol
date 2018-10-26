@@ -14,14 +14,14 @@ class CountdownAnimator extends Animator {
     @required int begin,
     @required int end,
   }) : super(
-    vsync: vsync,
-    milliseconds: seconds * 1000,
-    onCompleted: onCompleted,
-  ) {
+          vsync: vsync,
+          milliseconds: seconds * 1000,
+          onCompleted: onCompleted,
+        ) {
     _animation = StepTween(
-        begin: begin,
-        end: end,
-      ).animate(controller);
+      begin: begin,
+      end: end,
+    ).animate(controller);
   }
 
   Animation _animation;

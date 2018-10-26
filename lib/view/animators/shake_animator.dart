@@ -12,11 +12,7 @@ class ShakeAnimator extends Animator {
   ShakeAnimator({
     @required TickerProviderStateMixin vsync,
     @required Function listener,
-  }) : super(
-    vsync: vsync,
-    milliseconds: 200,
-    listener: listener
-  ) {
+  }) : super(vsync: vsync, milliseconds: 200, listener: listener) {
     controller.addStatusListener((AnimationStatus status) {
       if (status == AnimationStatus.completed) {
         controller.reverse();

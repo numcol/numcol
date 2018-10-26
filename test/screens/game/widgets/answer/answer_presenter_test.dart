@@ -9,6 +9,7 @@ import '../../../../../lib/screens/game/widgets/answer/answer_presenter.dart';
 import '../../../../../lib/domain/index.dart';
 
 class MockAnswerView extends Mock implements AnswerViewContract {}
+
 class MockGame extends Mock implements Game {}
 
 void main() {
@@ -20,18 +21,14 @@ void main() {
     setUp(() async {
       _mockAnswerView = MockAnswerView();
       _mockGame = MockGame();
-      _answerPresenter = AnswerPresenter(
-        _mockAnswerView,
-        _mockGame);
+      _answerPresenter = AnswerPresenter(_mockAnswerView, _mockGame);
     });
 
     group('On pressed', () {
       test('it replies to the game question with pressed answer', () {
         var answer = Answer(2, Color.red, Number.three);
-        when(_mockAnswerView.reply)
-          .thenReturn(answer);
-        when(_mockGame.reply(answer))
-          .thenReturn(true);
+        when(_mockAnswerView.reply).thenReturn(answer);
+        when(_mockGame.reply(answer)).thenReturn(true);
 
         _answerPresenter.onPressed();
 
@@ -40,10 +37,8 @@ void main() {
 
       test('it shakes if the answer is wrong', () {
         var answer = Answer(2, Color.red, Number.three);
-        when(_mockAnswerView.reply)
-          .thenReturn(answer);
-        when(_mockGame.reply(answer))
-          .thenReturn(false);
+        when(_mockAnswerView.reply).thenReturn(answer);
+        when(_mockGame.reply(answer)).thenReturn(false);
 
         _answerPresenter.onPressed();
 
@@ -53,10 +48,8 @@ void main() {
 
       test('it renews the answer', () {
         var answer = Answer(2, Color.red, Number.three);
-        when(_mockAnswerView.reply)
-          .thenReturn(answer);
-        when(_mockGame.reply(answer))
-          .thenReturn(true);
+        when(_mockAnswerView.reply).thenReturn(answer);
+        when(_mockGame.reply(answer)).thenReturn(true);
 
         _answerPresenter.onPressed();
 

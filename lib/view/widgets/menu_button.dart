@@ -31,13 +31,12 @@ class MenuButton extends StatelessWidget {
       height: 60.0,
       width: 240.0,
       child: NumcolButton(
-        color: color,
-        text: text,
-        onPressed: () {
-          audio.playClickSound();
-          onPressed?.call();
-        }
-      ),
+          color: color,
+          text: text,
+          onPressed: () {
+            audio.playClickSound();
+            onPressed?.call();
+          }),
     );
   }
 }

@@ -9,8 +9,11 @@ import '../../../lib/domain/index.dart';
 import '../../../lib/middleware/index.dart';
 import '../../../lib/screens/countdown/countdown_presenter.dart';
 
-class MockCountdownScreenView extends Mock implements CountdownScreenViewContract {}
+class MockCountdownScreenView extends Mock
+    implements CountdownScreenViewContract {}
+
 class MockAudioPlayer extends Mock implements AudioPlayer {}
+
 class MockAnimator extends Mock implements AnimatorContract {}
 
 void main() {
@@ -23,7 +26,8 @@ void main() {
     _mockCountdownScreenView = MockCountdownScreenView();
     _mockAnimator = MockAnimator();
     _mockAudio = MockAudioPlayer();
-    _countdownScreenPresenter = CountdownScreenPresenter(_mockCountdownScreenView, _mockAnimator, _mockAudio);
+    _countdownScreenPresenter = CountdownScreenPresenter(
+        _mockCountdownScreenView, _mockAnimator, _mockAudio);
   });
 
   group('Countdown Screen:', () {
@@ -39,7 +43,8 @@ void main() {
       test('it redirects to the game screen in normal mode', () {
         _countdownScreenPresenter.onAnimationCompleted();
 
-        verify(_mockCountdownScreenView.redirectToWithParameter(Routes.game, false));
+        verify(_mockCountdownScreenView.redirectToWithParameter(
+            Routes.game, false));
       });
 
       test('it plays the game start sound', () {

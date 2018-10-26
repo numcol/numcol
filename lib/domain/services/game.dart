@@ -50,7 +50,8 @@ class Game {
   }
 
   bool reply(Answer answer) {
-    var isAnswerOk = _question.color == answer.color && _question.number == answer.number;
+    var isAnswerOk =
+        _question.color == answer.color && _question.number == answer.number;
     if (isAnswerOk) {
       _onAnswerOk(answer);
     } else if (!_isZenMode) {

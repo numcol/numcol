@@ -15,9 +15,7 @@ class AnswersWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     List<Widget> answerWidgets = answers.map((answer) {
-      return AnswerWidget(
-        answer: answer
-      );
+      return AnswerWidget(answer: answer);
     }).toList();
 
     return GridView.count(

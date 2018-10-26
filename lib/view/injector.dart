@@ -5,10 +5,7 @@
 import 'package:flutter/material.dart';
 
 class Injector extends StatelessWidget {
-  const Injector({
-    Key key,
-    @required this.dependencies,
-    @required this.child})
+  const Injector({Key key, @required this.dependencies, @required this.child})
       : super(key: key);
 
   static _InheritedInjector of(BuildContext context) {
@@ -28,10 +25,7 @@ class Injector extends StatelessWidget {
 }
 
 class _InheritedInjector extends InheritedWidget {
-  _InheritedInjector({
-    Key key,
-    @required this.dependencies,
-    @required child})
+  _InheritedInjector({Key key, @required this.dependencies, @required child})
       : super(key: key, child: child);
 
   final List<dynamic> dependencies;

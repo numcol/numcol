@@ -10,7 +10,11 @@ import '../../domain/index.dart' as Engine;
 typedef NumcolButtonPressed();
 
 class NumcolButton extends StatelessWidget {
-  NumcolButton({Key key, @required this.color, @required this.text, @required this.onPressed})
+  NumcolButton(
+      {Key key,
+      @required this.color,
+      @required this.text,
+      @required this.onPressed})
       : super(key: key);
 
   final NumcolButtonPressed onPressed;
@@ -20,10 +24,7 @@ class NumcolButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     var style = TextStyle(
-      color: Colors.white,
-      fontSize: 18.0,
-      fontFamily: Fonts.lemonMilk
-    );
+        color: Colors.white, fontSize: 18.0, fontFamily: Fonts.lemonMilk);
     var buttonColor = colors[color];
     var buttonDarkColor = darkColors[color];
     var borderColor = BorderSide(
@@ -41,24 +42,22 @@ class NumcolButton extends StatelessWidget {
       },
       child: Container(
         child: Center(
-
-            child: Stack(
-              children: [
-                Positioned(
-                  top: 2.0,
-                  left: 2.0,
-                  child: Text(
-                    text,
-                    style: style.copyWith(color: Colors.black.withOpacity(0.4)),
-                  ),
+          child: Stack(
+            children: [
+              Positioned(
+                top: 2.0,
+                left: 2.0,
+                child: Text(
+                  text,
+                  style: style.copyWith(color: Colors.black.withOpacity(0.4)),
                 ),
-                Container(
-                  padding: const EdgeInsets.all(1.0),
-                  child: Text(text, style: style),
-                ),
-              ],
-            ),
-
+              ),
+              Container(
+                padding: const EdgeInsets.all(1.0),
+                child: Text(text, style: style),
+              ),
+            ],
+          ),
         ),
         decoration: BoxDecoration(
           color: buttonColor,

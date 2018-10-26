@@ -11,9 +11,9 @@ class FlippingAnimator extends Animator {
     @required TickerProviderStateMixin vsync,
     @required Function onFlip,
   }) : super(
-    vsync: vsync,
-    milliseconds: 150,
-  ) {
+          vsync: vsync,
+          milliseconds: 150,
+        ) {
     _animation = Tween(
       begin: 1.0,
       end: 0.0,

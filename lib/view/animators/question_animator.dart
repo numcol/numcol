@@ -12,11 +12,12 @@ class QuestionAnimator extends Animator {
     @required TickerProviderStateMixin vsync,
     @required int milliseconds,
   }) : super(
-    vsync: vsync,
-    milliseconds: milliseconds,
-  ) {
-    _animation = ColorTween(begin: ScreenColors.black, end: ScreenColors.darkRed)
-                    .animate(controller);
+          vsync: vsync,
+          milliseconds: milliseconds,
+        ) {
+    _animation =
+        ColorTween(begin: ScreenColors.black, end: ScreenColors.darkRed)
+            .animate(controller);
 
     controller.addStatusListener((AnimationStatus status) {
       if (status == AnimationStatus.completed) {

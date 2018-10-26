@@ -12,7 +12,9 @@ import '../../../lib/middleware/index.dart';
 import '../../../lib/screens/game/game_presenter.dart';
 
 class MockGameScreenView extends Mock implements GameScreenViewContract {}
+
 class MockTimer extends Mock implements GameTimer {}
+
 class MockGame extends Mock implements Game {}
 
 class MockAudioPlayer extends Mock implements AudioPlayer {}
@@ -33,11 +35,10 @@ void main() {
     _mockTimer = MockTimer();
     _mockGame = MockGame();
     _mockAudio = MockAudioPlayer();
-    _gameScreenPresenter = GameScreenPresenter(_mockGameScreenView, _mockGame, _mockAudio);
-    when(_mockGame.replyStream)
-        .thenAnswer((_) => _replyStreamer.stream);
-    when(_mockGame.gameoverStream)
-        .thenAnswer((_) => _gameoverStreamer.stream);
+    _gameScreenPresenter =
+        GameScreenPresenter(_mockGameScreenView, _mockGame, _mockAudio);
+    when(_mockGame.replyStream).thenAnswer((_) => _replyStreamer.stream);
+    when(_mockGame.gameoverStream).thenAnswer((_) => _gameoverStreamer.stream);
   });
 
   group('Game Screen:', () {
@@ -58,23 +59,22 @@ void main() {
         test('it redirects to game over screen', () {
           _gameoverStreamer.add(null);
           _gameoverStreamer.done.then((_) {
-            verify(_mockGameScreenView.redirectToWithParameter(Routes.gameover, any));
+            verify(_mockGameScreenView.redirectToWithParameter(
+                Routes.gameover, any));
           });
         });
       });
 
       group('a listener is added to the reply event and when it triggers', () {
         test('it plays click sound if the reply is ok', () {
-          when(_mockGame.reply(any))
-            .thenReturn(true);
+          when(_mockGame.reply(any)).thenReturn(true);
           _replyStreamer.add(null);
           _replyStreamer.done.then((_) {
             verify(_mockAudio.playClickSound());
           });
         });
         test('it plays wrong sound if the reply is wrong', () {
-          when(_mockGame.reply(any))
-            .thenReturn(false);
+          when(_mockGame.reply(any)).thenReturn(false);
           _replyStreamer.add(null);
           _replyStreamer.done.then((_) {
             verify(_mockAudio.playWrongSound());
@@ -88,8 +88,7 @@ void main() {
         var answers = <Answer>[
           Answer(1, Color.blue, Number.one),
         ];
-        when(_mockGame.answers)
-          .thenReturn(answers);
+        when(_mockGame.answers).thenReturn(answers);
         expect(_gameScreenPresenter.answers, answers);
       });
     });
@@ -97,8 +96,7 @@ void main() {
     group('On get question', () {
       test('it return game question', () {
         var question = Question(Answer(1, Color.blue, Number.one));
-        when(_mockGame.question)
-          .thenReturn(question);
+        when(_mockGame.question).thenReturn(question);
         expect(_gameScreenPresenter.question, question);
       });
     });
@@ -106,8 +104,7 @@ void main() {
     group('On get score', () {
       test('it return game score', () {
         var score = 123;
-        when(_mockGame.score)
-          .thenReturn(score);
+        when(_mockGame.score).thenReturn(score);
         expect(_gameScreenPresenter.score, score);
       });
     });

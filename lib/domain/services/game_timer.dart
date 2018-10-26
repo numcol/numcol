@@ -23,14 +23,17 @@ class GameTimer {
 
   Stream get gameoverStream => _timer.gameoverStream;
   int get maxTimeInMilliseconds => _timer.maxTimeInMilliseconds;
-  int get remainingInMilliseconds => _timer.maxTimeInMilliseconds - _timer.elapsedInMilliseconds;
+  int get remainingInMilliseconds =>
+      _timer.maxTimeInMilliseconds - _timer.elapsedInMilliseconds;
 
   void start() {
     _timer.start(_initialMaxTimeInMilliseconds);
   }
 
   void success(int successCount) {
-    var multiplier = (_timeAdditionByAnswerInMilliseconds * pow(_timeReducerMultiplier, successCount)).ceil();
+    var multiplier = (_timeAdditionByAnswerInMilliseconds *
+            pow(_timeReducerMultiplier, successCount))
+        .ceil();
     var newTime = remainingInMilliseconds + multiplier;
     _timer.start(newTime);
   }

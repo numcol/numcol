@@ -19,7 +19,6 @@ class GameScreen extends StatefulWidget {
 class _GameScreenState extends State<GameScreen>
     with NavigatorMixin, TickerProviderStateMixin
     implements GameScreenViewContract {
-
   ValueNotifier<int> _score;
   List<ValueNotifier<Answer>> _answers;
   ValueNotifier<Question> _question;
@@ -33,19 +32,21 @@ class _GameScreenState extends State<GameScreen>
     final configuration = Configuration.of(context);
     var audio = Injector.of(context).inject<AudioPlayer>();
     var game = Injector.of(context).inject<Game>();
-    _animator = Injector.of(context).inject<AnimatorFactory>().createGameAnimator(
-      vsync: this,
-      milliseconds: configuration.initialTimeInMilliseconds,
-    );
+    _animator =
+        Injector.of(context).inject<AnimatorFactory>().createGameAnimator(
+              vsync: this,
+              milliseconds: configuration.initialTimeInMilliseconds,
+            );
     var timer = GameTimer(
-      _animator,
-      configuration.initialTimeInMilliseconds,
-      configuration.timeReducerMultiplier,
-      configuration.timePenaltyMultiplier,
-      configuration.timeAdditionByAnswerInMilliseconds);
+        _animator,
+        configuration.initialTimeInMilliseconds,
+        configuration.timeReducerMultiplier,
+        configuration.timePenaltyMultiplier,
+        configuration.timeAdditionByAnswerInMilliseconds);
     _presenter = GameScreenPresenter(this, game, audio);
     _presenter.onLoad(timer, widget.isZenMode);
-    _answers = _presenter.answers.map((answer) => ValueNotifier(answer)).toList();
+    _answers =
+        _presenter.answers.map((answer) => ValueNotifier(answer)).toList();
     _question = ValueNotifier(_presenter.question);
     _score = ValueNotifier(_presenter.score);
   }
@@ -60,13 +61,10 @@ class _GameScreenState extends State<GameScreen>
 
   List<Widget> _buildChildren() {
     return <Widget>[
-      Row(
-        mainAxisAlignment: MainAxisAlignment.spaceAround,
-        children: <Widget>[
-          RemainingWidget(animation: _remainingAnimation()),
-          ScoreWidget(score: _score)
-        ]
-      ),
+      Row(mainAxisAlignment: MainAxisAlignment.spaceAround, children: <Widget>[
+        RemainingWidget(animation: _remainingAnimation()),
+        ScoreWidget(score: _score)
+      ]),
       QuestionWidget(
         question: _question,
       ),

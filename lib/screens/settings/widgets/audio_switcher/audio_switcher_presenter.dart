@@ -22,13 +22,12 @@ class AudioSwitcherPresenter {
   }
 
   void onTogglePressed(bool isAudioOn) {
-    _storage.setIsAudioOn(isAudioOn)
-      .then((isSaved) {
-        if (isSaved) {
-          this._view.onIsAudioOnSaved(isAudioOn);
-        } else {
-          this._view.onIsAudioOnSavedError();
-        }
-      });
+    _storage.setIsAudioOn(isAudioOn).then((isSaved) {
+      if (isSaved) {
+        this._view.onIsAudioOnSaved(isAudioOn);
+      } else {
+        this._view.onIsAudioOnSavedError();
+      }
+    });
   }
 }

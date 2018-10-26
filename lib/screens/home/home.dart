@@ -17,7 +17,6 @@ class HomeScreen extends StatefulWidget {
 class _HomeScreenState extends State<HomeScreen>
     with NavigatorMixin, MenuItemMixin
     implements HomeScreenViewContract {
-
   HomeScreenPresenter _homeScreenPresenter;
 
   @override
@@ -29,9 +28,7 @@ class _HomeScreenState extends State<HomeScreen>
 
   Widget _title() {
     return Container(
-      padding: const EdgeInsets.only(
-        bottom: 60.0
-      ),
+      padding: const EdgeInsets.only(bottom: 60.0),
       child: Text(
         'NumCol',
         style: TextStyle(
@@ -56,10 +53,14 @@ class _HomeScreenState extends State<HomeScreen>
               Center(
                 child: _title(),
               ),
-              menuItem(Color.green, 'play', _homeScreenPresenter.onPlayButtonPressed),
-              menuItem(Color.yellow, 'kids_level', _homeScreenPresenter.onZenModeButtonPressed),
-              menuItem(Color.blue, 'rate', _homeScreenPresenter.onRateButtonPressed),
-              menuItem(Color.red, 'settings', _homeScreenPresenter.onSettingsButtonPressed),
+              menuItem(Color.green, 'play',
+                  _homeScreenPresenter.onPlayButtonPressed),
+              menuItem(Color.yellow, 'kids_level',
+                  _homeScreenPresenter.onKidsModeButtonPressed),
+              menuItem(
+                  Color.blue, 'rate', _homeScreenPresenter.onRateButtonPressed),
+              menuItem(Color.red, 'settings',
+                  _homeScreenPresenter.onSettingsButtonPressed),
             ],
           ),
         ),

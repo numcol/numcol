@@ -3,7 +3,6 @@
 // GNU General Public License that can be found in the LICENSE file.
 
 import 'dart:async';
-import 'dart:math';
 
 import 'package:mockito/mockito.dart';
 import 'package:test/test.dart';
@@ -13,7 +12,6 @@ import '../../../lib/domain/index.dart';
 class MockTimer extends Mock implements GameTimer {}
 
 void main() {
-
   Game _game;
   MockTimer _mockTimer;
   StreamController _gameoverStreamer;
@@ -21,13 +19,12 @@ void main() {
   const int zenModePoints = 10;
 
   group('Game:', () {
-
     setUp(() async {
       _mockTimer = MockTimer();
       _game = Game(zenModePoints);
       _gameoverStreamer = StreamController.broadcast();
       when(_mockTimer.gameoverStream)
-        .thenAnswer((_) => _gameoverStreamer.stream);
+          .thenAnswer((_) => _gameoverStreamer.stream);
     });
 
     group('On game start', () {
@@ -38,7 +35,11 @@ void main() {
 
       test('it has an answerable question', () {
         _game.start(_mockTimer, false);
-        expect(_game.answers.any((a) => a.color == _game.question.color && a.number == _game.question.number), true);
+        expect(
+            _game.answers.any((a) =>
+                a.color == _game.question.color &&
+                a.number == _game.question.number),
+            true);
       });
 
       test('it starts with 0 score', () {
@@ -68,13 +69,11 @@ void main() {
 
         setUp(() async {
           _game.start(_mockTimer, false);
-          correctAnswer = _game.answers.firstWhere(
-            (answer) => answer.number == _game.question.number && answer.color == _game.question.color
-          );
-          when(_mockTimer.maxTimeInMilliseconds)
-            .thenReturn(1000);
-          when(_mockTimer.remainingInMilliseconds)
-            .thenReturn(500);
+          correctAnswer = _game.answers.firstWhere((answer) =>
+              answer.number == _game.question.number &&
+              answer.color == _game.question.color);
+          when(_mockTimer.maxTimeInMilliseconds).thenReturn(1000);
+          when(_mockTimer.remainingInMilliseconds).thenReturn(500);
         });
 
         test('it returns true', () {
@@ -97,13 +96,16 @@ void main() {
           expect(_game.answers[correctAnswer.id] != correctAnswer, true);
         });
 
-        test('it adds score based on the remaining time from the last answer', () {
+        test('it adds score based on the remaining time from the last answer',
+            () {
           var oldScore = _game.score;
           _game.reply(correctAnswer);
           expect(_game.score == oldScore + (500 * 100 / 1000).floor(), true);
         });
 
-        test('it emits reply events with the info for the animations and other UI', () {
+        test(
+            'it emits reply events with the info for the animations and other UI',
+            () {
           var completer = new Completer<bool>();
           Reply futureReply;
           _game.replyStream.listen((reply) {
@@ -125,19 +127,17 @@ void main() {
 
         setUp(() {
           _game.start(_mockTimer, false);
-          wrongAnswer = _game.answers.firstWhere(
-            (answer) => answer.number != _game.question.number || answer.color != _game.question.color
-          );
-          when(_mockTimer.maxTimeInMilliseconds)
-            .thenReturn(1000);
-          when(_mockTimer.remainingInMilliseconds)
-            .thenReturn(500);
+          wrongAnswer = _game.answers.firstWhere((answer) =>
+              answer.number != _game.question.number ||
+              answer.color != _game.question.color);
+          when(_mockTimer.maxTimeInMilliseconds).thenReturn(1000);
+          when(_mockTimer.remainingInMilliseconds).thenReturn(500);
         });
 
-        group('and if the timer removes so many time that goes bellow zero', () {
+        group('and if the timer removes so many time that goes bellow zero',
+            () {
           setUp(() {
-            when(_mockTimer.fail())
-              .thenReturn(true);
+            when(_mockTimer.fail()).thenReturn(true);
           });
 
           test('it returns false', () {
@@ -161,8 +161,7 @@ void main() {
 
         group('and if the timer still has time', () {
           setUp(() {
-            when(_mockTimer.fail())
-              .thenReturn(false);
+            when(_mockTimer.fail()).thenReturn(false);
           });
 
           test('it returns false', () {
@@ -174,7 +173,9 @@ void main() {
             verify(_mockTimer.fail());
           });
 
-          test('it emits reply events with the info for the animations and other UI', () {
+          test(
+              'it emits reply events with the info for the animations and other UI',
+              () {
             var completer = new Completer<bool>();
             Reply futureReply;
             _game.replyStream.listen((reply) {

@@ -8,12 +8,13 @@ import '../../../../view/index.dart';
 import '../../../../i18n/index.dart';
 
 class ScoreWidget extends AnimatedWidget {
-  ScoreWidget({ Key key, @required this.score }) : super(key: key, listenable: score);
+  ScoreWidget({Key key, @required this.score})
+      : super(key: key, listenable: score);
 
   final ValueNotifier score;
 
   @override
-  build(BuildContext context){
+  build(BuildContext context) {
     return Column(
       children: <Widget>[
         Text(Translations.of(context).text('score')),

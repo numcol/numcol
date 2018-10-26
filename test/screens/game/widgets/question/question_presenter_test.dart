@@ -9,6 +9,7 @@ import '../../../../../lib/screens/game/widgets/question/question_presenter.dart
 import '../../../../../lib/domain/index.dart';
 
 class MockQuestionView extends Mock implements QuestionViewContract {}
+
 class MockQuestionAnimator extends Mock implements AnimatorContract {}
 
 void main() {
@@ -22,12 +23,11 @@ void main() {
       _mockQuestionView = MockQuestionView();
       _mockNumberQuestionAnimator = MockQuestionAnimator();
       _mockColorQuestionAnimator = MockQuestionAnimator();
-      _questionPresenter = QuestionPresenter(
-        _mockQuestionView);
+      _questionPresenter = QuestionPresenter(_mockQuestionView);
       when(_mockQuestionView.numberAnimator)
-        .thenReturn(_mockNumberQuestionAnimator);
+          .thenReturn(_mockNumberQuestionAnimator);
       when(_mockQuestionView.colorAnimator)
-        .thenReturn(_mockColorQuestionAnimator);
+          .thenReturn(_mockColorQuestionAnimator);
     });
 
     group('On reply', () {
@@ -38,8 +38,7 @@ void main() {
         setUp(() {
           reply = Reply(true, Answer(2, Color.red, Number.three));
           question = Question(Answer(2, Color.red, Number.three));
-          when(_mockQuestionView.question)
-            .thenReturn(question);
+          when(_mockQuestionView.question).thenReturn(question);
         });
 
         test('it does not start any animation', () {
@@ -53,11 +52,12 @@ void main() {
       group('when the reply is not correct', () {
         setUp(() {
           question = Question(Answer(2, Color.red, Number.three));
-          when(_mockQuestionView.question)
-            .thenReturn(question);
+          when(_mockQuestionView.question).thenReturn(question);
         });
 
-        test('if the color is not ok it starts the animation of the color of the question', () {
+        test(
+            'if the color is not ok it starts the animation of the color of the question',
+            () {
           reply = Reply(false, Answer(2, Color.blue, Number.three));
 
           _questionPresenter.onReply(reply);
@@ -66,7 +66,9 @@ void main() {
           verifyNever(_mockNumberQuestionAnimator.forward());
         });
 
-        test('if the number is not ok it starts the animation of the number of the question', () {
+        test(
+            'if the number is not ok it starts the animation of the number of the question',
+            () {
           reply = Reply(false, Answer(2, Color.red, Number.eight));
 
           _questionPresenter.onReply(reply);

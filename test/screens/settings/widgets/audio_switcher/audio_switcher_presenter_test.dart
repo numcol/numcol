@@ -9,6 +9,7 @@ import '../../../../../lib/domain/index.dart';
 import '../../../../../lib/screens/settings/widgets/audio_switcher/audio_switcher_presenter.dart';
 
 class MockAudioSwitcherView extends Mock implements AudioSwitcherViewContract {}
+
 class MockStorage extends Mock implements StorageContract {}
 
 void main() {
@@ -19,14 +20,16 @@ void main() {
   setUp(() async {
     _mockAudioSwitcherView = MockAudioSwitcherView();
     _mockStorage = MockStorage();
-    _audioSwitcherPresenter = AudioSwitcherPresenter(_mockAudioSwitcherView, _mockStorage);
+    _audioSwitcherPresenter =
+        AudioSwitcherPresenter(_mockAudioSwitcherView, _mockStorage);
   });
 
   group('Audio Switcher:', () {
     group('On load', () {
-      test('it gets user preferred audio setting and it calls complete action to refresh screen', () {
-        when(_mockStorage.getIsAudioOn())
-          .thenReturn(true);
+      test(
+          'it gets user preferred audio setting and it calls complete action to refresh screen',
+          () {
+        when(_mockStorage.getIsAudioOn()).thenReturn(true);
 
         _audioSwitcherPresenter.loadIsAudioOn();
 
@@ -36,10 +39,10 @@ void main() {
     });
 
     group('On audio setting selected', () {
-      test('saves the changes and it notifies the UI about the saved changes', () {
+      test('saves the changes and it notifies the UI about the saved changes',
+          () {
         final future = new Future.value(true);
-        when(_mockStorage.setIsAudioOn(true))
-          .thenAnswer((_) => future);
+        when(_mockStorage.setIsAudioOn(true)).thenAnswer((_) => future);
 
         _audioSwitcherPresenter.onTogglePressed(true);
 
@@ -51,8 +54,7 @@ void main() {
 
       test('it notifies the UI about the errors saving changes', () {
         final future = new Future.value(false);
-        when(_mockStorage.setIsAudioOn(true))
-          .thenAnswer((_) => future);
+        when(_mockStorage.setIsAudioOn(true)).thenAnswer((_) => future);
 
         _audioSwitcherPresenter.onTogglePressed(true);
 

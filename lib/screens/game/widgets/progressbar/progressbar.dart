@@ -19,18 +19,19 @@ class ProgressBarWidget extends StatefulWidget {
 class _ProgressBarWidgetState extends State<ProgressBarWidget> {
   @override
   Widget build(BuildContext context) {
-    var animation = Tween(begin: 1.0, end: 0.0).animate(widget.animator.animation)
+    var animation =
+        Tween(begin: 1.0, end: 0.0).animate(widget.animator.animation)
+          ..addListener(() {
+            setState(() => null);
+          });
+
+    var colorAnimation = ColorTween(
+      begin: ScreenColors.green,
+      end: ScreenColors.red,
+    ).animate(widget.animator.animation)
       ..addListener(() {
         setState(() => null);
       });
-
-    var colorAnimation = ColorTween(
-        begin: ScreenColors.green,
-        end: ScreenColors.red,
-      ).animate(widget.animator.animation)
-      ..addListener(() {
-        setState(() => null);
-        });
     return Container(
       child: LinearProgressIndicator(
         value: animation.value,

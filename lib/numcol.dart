@@ -26,6 +26,7 @@ class NumcolApp extends StatefulWidget {
   @override
   _NumcolAppState createState() => _NumcolAppState();
 }
+
 class _NumcolAppState extends State<NumcolApp> {
   FirebaseAnalytics _analytics;
   TranslationsDelegate _newLocaleDelegate;
@@ -53,7 +54,8 @@ class _NumcolAppState extends State<NumcolApp> {
       DeviceOrientation.portraitDown,
     ]);
     _analytics = Injector.of(context).inject<FirebaseAnalytics>();
-    var chosenLocale = Injector.of(context).inject<StorageContract>().getLanguage();
+    var chosenLocale =
+        Injector.of(context).inject<StorageContract>().getLanguage();
     if (chosenLocale != null && chosenLocale != _chosenLocale) {
       onLocaleChange(new Locale(chosenLocale, ''));
     }

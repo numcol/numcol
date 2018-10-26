@@ -16,7 +16,6 @@ const routes = {
 
 abstract class NavigatorMixin<T extends StatefulWidget> extends State<T>
     implements NavigatorContract {
-
   factory NavigatorMixin._() => null;
 
   void navigateTo(Routes route) {

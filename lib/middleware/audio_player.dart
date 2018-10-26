@@ -1,4 +1,3 @@
-
 // Copyright (C) 2018 Alberto Varela Sánchez <alberto@berriart.com>
 // Use of this source code is governed by the version 3 of the
 // GNU General Public License that can be found in the LICENSE file.
@@ -8,9 +7,7 @@ import 'package:audioplayers/audio_cache.dart';
 import '../domain/contracts/index.dart';
 import 'storage.dart';
 
-enum Sounds {
-  click, gameover, start, wrong
-}
+enum Sounds { click, gameover, start, wrong }
 
 const sounds = {
   Sounds.click: 'click.mp3',

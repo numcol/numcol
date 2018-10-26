@@ -10,10 +10,10 @@ import '../../lib/middleware/audio_player.dart';
 import '../../lib/middleware/storage.dart';
 
 class MockStorage extends Mock implements Storage {}
+
 class MockPlayer extends Mock implements AudioCache {}
 
 void main() {
-
   MockStorage _mockStorage;
   MockPlayer _mockPlayer;
   AudioPlayer _gameAudio;
@@ -26,10 +26,8 @@ void main() {
 
   group('Audio Player:', () {
     group('When audio is on', () {
-
       setUp(() async {
-        when(_mockStorage.getIsAudioOn())
-          .thenReturn(true);
+        when(_mockStorage.getIsAudioOn()).thenReturn(true);
       });
 
       group('on play click sound', () {
@@ -62,10 +60,8 @@ void main() {
     });
 
     group('When audio is off', () {
-
       setUp(() async {
-        when(_mockStorage.getIsAudioOn())
-          .thenReturn(false);
+        when(_mockStorage.getIsAudioOn()).thenReturn(false);
       });
 
       group('on play click sound', () {

@@ -3,6 +3,6 @@
 // GNU General Public License that can be found in the LICENSE file.
 
 abstract class AnimatorContract {
-  void forward({ double from });
+  void forward({double from});
   void stop();
 }

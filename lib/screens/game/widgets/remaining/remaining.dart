@@ -8,12 +8,13 @@ import '../../../../i18n/index.dart';
 import '../../../../view/index.dart';
 
 class RemainingWidget extends AnimatedWidget {
-  RemainingWidget({ Key key, @required this.animation }) : super(key: key, listenable: animation);
+  RemainingWidget({Key key, @required this.animation})
+      : super(key: key, listenable: animation);
 
   final Animation<int> animation;
 
   @override
-  build(BuildContext context){
+  build(BuildContext context) {
     return Column(
       children: <Widget>[
         Text(Translations.of(context).text('time')),

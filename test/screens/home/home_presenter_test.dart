@@ -9,6 +9,7 @@ import '../../../lib/domain/index.dart';
 import '../../../lib/screens/home/home_presenter.dart';
 
 class MockHomeScreenView extends Mock implements HomeScreenViewContract {}
+
 class MockSharer extends Mock implements SharerContract {}
 
 void main() {
@@ -19,7 +20,8 @@ void main() {
   setUp(() async {
     _mockHomeScreenView = MockHomeScreenView();
     _mockSharer = MockSharer();
-    _homeScreenPresenter = HomeScreenPresenter(_mockHomeScreenView, _mockSharer);
+    _homeScreenPresenter =
+        HomeScreenPresenter(_mockHomeScreenView, _mockSharer);
   });
 
   group('Home Screen:', () {

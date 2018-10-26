@@ -7,7 +7,8 @@ import 'package:mockito/mockito.dart';
 
 import '../../../lib/screens/settings/settings_presenter.dart';
 
-class MockSettingsScreenView extends Mock implements SettingsScreenViewContract {}
+class MockSettingsScreenView extends Mock
+    implements SettingsScreenViewContract {}
 
 void main() {
   MockSettingsScreenView _mockSettingsScreenView;

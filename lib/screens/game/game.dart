@@ -59,12 +59,23 @@ class _GameScreenState extends State<GameScreen>
     }
   }
 
+  List<Widget> _buildHeader() {
+    var widgets = <Widget>[
+      ScoreWidget(score: _score),
+    ];
+
+    if (!widget.isZenMode) {
+      widgets.insert(0, RemainingWidget(animation: _remainingAnimation()));
+    }
+
+    return widgets;
+  }
+
   List<Widget> _buildChildren() {
     return <Widget>[
-      Row(mainAxisAlignment: MainAxisAlignment.spaceAround, children: <Widget>[
-        RemainingWidget(animation: _remainingAnimation()),
-        ScoreWidget(score: _score)
-      ]),
+      Row(
+          mainAxisAlignment: MainAxisAlignment.spaceAround,
+          children: _buildHeader()),
       QuestionWidget(
         question: _question,
       ),

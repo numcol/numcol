@@ -6,7 +6,7 @@
     "saved": "Gordeta!",
     "savedError": "Errorea gordetzen!",
     "try_again": "Saiatu berriro",
-    "score": "Zure puntuazioa",
+    "score": "Puntuazioa",
     "high_score": "★ Zure puntuaziorik onena ★",
     "time": "Denbora",
     "gameover": "Game Over",
@@ -14,6 +14,7 @@
     "share_text": "{{score}} puntu lortu ditut NumCol-en http://goo.gl/fMkZrJ #numcol",
     "sound": "Soinua",
     "rate": "Baloratu",
+    "back_to_menu": "Itzuli",
 
     "one": "Bat",
     "two": "Bi",
@@ -27,33 +28,5 @@
     "red": "Gorria",
     "green": "Berdea",
     "blue": "Urdina",
-    "yellow": "Horia",
-
-    "top_score": "Puntuazioak",
-    "new": "Berria",
-    "back_to_menu": "Itzuli",
-
-    "starts_in": "",
-
-    "normal_level": "Erdi maila",
-    "difficult_level": "Zaila",
-    "ninja_level": "Ninja",
-    "infinite_level": "Hamaigabe",
-    "infinite_mode": "Hamaigabe Modua",
-    "round": "Txanda",
-    "share_kids": "{{score}} puntu lortu ditut NumCol-en http://goo.gl/fMkZrJ #numcol",
-    "share_normal": "{{score}} puntu lortu ditut NumCol-en http://goo.gl/fMkZrJ #numcol",
-    "share_difficult": "{{score}} puntu lortu ditut NumCol-en http://goo.gl/fMkZrJ #numcol",
-    "share_ninja": "{{score}} puntu lortu ditut NumCol-en http://goo.gl/fMkZrJ #numcol",
-    "share_infinite": "{{score}} puntu lortu ditut NumCol-en http://goo.gl/fMkZrJ #numcol",
-    "question": "<span id=\"question_number\">{{number}}</span> <span id=\"question_colour\">{{colour}}</span>",
-    "classic_mode": "Betiko Modua",
-    "signin": "Saioa hasi",
-    "logout": "Saioa amaitu",
-    "account": "Saioa",
-    "share_scores": "Share zure puntuazioa",
-    "leaderboard": "Zure puntuazioa",
-    "achievements": "Lorpenak",
-    "next": "Hurrengoa",
-    "prev": "Aurrekoa"
+    "yellow": "Horia"
 }

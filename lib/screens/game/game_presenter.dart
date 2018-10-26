@@ -6,6 +6,7 @@ import '../../domain/index.dart';
 
 abstract class GameScreenViewContract implements NavigatorContract {
   void updateView(Reply reply);
+  void onGameOver(int score);
 }
 
 class GameScreenPresenter {
@@ -35,6 +36,7 @@ class GameScreenPresenter {
   }
 
   void _onGameOver() {
+    _view.onGameOver(_game.score);
     _audio.playGameOverSound();
     _view.redirectToWithParameter(Routes.gameover, _game.score);
   }

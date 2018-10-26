@@ -20,7 +20,7 @@ class PageTitle extends StatelessWidget {
         child: Text(
           Translations.of(context).text(tag).toUpperCase(),
           style: TextStyle(
-            fontSize: 48.0,
+            fontSize: 42.0,
             color: ScreenColors.black,
             fontFamily: Fonts.poiretone,
           ),

@@ -2,6 +2,7 @@
 // Use of this source code is governed by the version 3 of the
 // GNU General Public License that can be found in the LICENSE file.
 
+import 'package:firebase_analytics/firebase_analytics.dart';
 import 'package:flutter/material.dart';
 
 import '../../../../domain/index.dart' hide Color;
@@ -32,6 +33,7 @@ class AnswerWidget extends StatefulWidget {
 class _AnswerWidgetState extends State<AnswerWidget>
     with TickerProviderStateMixin
     implements AnswerViewContract {
+  FirebaseAnalytics _analytics;
   AnswerPresenter _presenter;
   Answer get reply => widget.answer.value;
   ShakeAnimator _shakeAnimator;
@@ -47,17 +49,20 @@ class _AnswerWidgetState extends State<AnswerWidget>
     _presenter = AnswerPresenter(this, game);
     widget.answer.addListener(_setState);
     _currentAnswer = widget.answer.value;
+    _analytics = Injector.of(context).inject<FirebaseAnalytics>();
   }
 
   @override
   void renew() {
     _flippingAnimator.forward();
+    _analytics.logEvent(name: 'answer', parameters: {'isOk': true});
   }
 
   @override
   void shake() {
     _shakeAnimator.reset();
     _shakeAnimator.forward();
+    _analytics.logEvent(name: 'answer', parameters: {'isOk': false});
   }
 
   void _onFlip() {

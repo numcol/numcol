@@ -1,3 +1,4 @@
+import 'package:firebase_analytics/firebase_analytics.dart';
 import 'package:flutter/material.dart';
 
 import '../../configuration.dart';
@@ -25,6 +26,7 @@ class _GameScreenState extends State<GameScreen>
 
   GameScreenPresenter _presenter;
   GameTimerAnimator _animator;
+  FirebaseAnalytics _analytics;
 
   @override
   void didChangeDependencies() {
@@ -32,6 +34,7 @@ class _GameScreenState extends State<GameScreen>
     final configuration = Configuration.of(context);
     var audio = Injector.of(context).inject<AudioPlayer>();
     var game = Injector.of(context).inject<Game>();
+    _analytics = Injector.of(context).inject<FirebaseAnalytics>();
     _animator =
         Injector.of(context).inject<AnimatorFactory>().createGameAnimator(
               vsync: this,
@@ -93,6 +96,11 @@ class _GameScreenState extends State<GameScreen>
       begin: _animator.maxTimeInMilliseconds.round(),
       end: 0,
     ).animate(_animator.animation);
+  }
+
+  @override
+  void onGameOver(int score) {
+    _analytics.logPostScore(score: score, level: widget.isZenMode ? 0 : 1);
   }
 
   @override

@@ -2,6 +2,7 @@
 // Use of this source code is governed by the version 3 of the
 // GNU General Public License that can be found in the LICENSE file.
 
+import 'package:firebase_analytics/firebase_analytics.dart';
 import 'package:flutter/material.dart' hide Color;
 
 import '../../middleware/index.dart';
@@ -23,6 +24,7 @@ class _GameoverScreenState extends State<GameoverScreen>
     with NavigatorMixin, MenuItemMixin
     implements GameoverScreenViewContract {
   GameoverScreenPresenter _gameoverScreenPresenter;
+  FirebaseAnalytics _analytics;
   int _topScore;
 
   @override
@@ -33,6 +35,7 @@ class _GameoverScreenState extends State<GameoverScreen>
         Injector.of(context).inject<Storage>(),
         Injector.of(context).inject<Sharer>());
     _gameoverScreenPresenter.onLoad(widget.score);
+    _analytics = Injector.of(context).inject<FirebaseAnalytics>();
   }
 
   Widget _numberTitle(String text) {
@@ -101,13 +104,16 @@ class _GameoverScreenState extends State<GameoverScreen>
               _number(widget.score.toString(), 54.0),
               _numberTitle(Translations.of(context).text('high_score')),
               _number(_topScore.toString(), 32.0),
-              menuItem(
-                  Color.red,
-                  'share',
-                  () => _gameoverScreenPresenter.onShareButtonPressed(
-                        Translations.of(context).text('share_text'),
-                        widget.score,
-                      )),
+              menuItem(Color.red, 'share', () {
+                _analytics.logShare(
+                  contentType: 'score',
+                  itemId: widget.score.toString(),
+                );
+                _gameoverScreenPresenter.onShareButtonPressed(
+                  Translations.of(context).text('share_text'),
+                  widget.score,
+                );
+              }),
               menuItem(Color.green, 'try_again',
                   _gameoverScreenPresenter.onTryAgainButtonPressed),
               menuItem(Color.blue, 'back_to_menu',

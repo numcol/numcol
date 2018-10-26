@@ -42,6 +42,10 @@ class _NumcolAppState extends State<NumcolApp> {
   onLocaleChange(Locale locale) {
     setState(() {
       _newLocaleDelegate = TranslationsDelegate(newLocale: locale);
+      _analytics.setUserProperty(
+        name: 'language',
+        value: locale.languageCode,
+      );
     });
   }
 
@@ -59,33 +63,6 @@ class _NumcolAppState extends State<NumcolApp> {
     if (chosenLocale != null && chosenLocale != _chosenLocale) {
       onLocaleChange(new Locale(chosenLocale, ''));
     }
-  }
-
-  Route<dynamic> _onGenerateRoute(RouteSettings settings) {
-    var path = settings.name.split('/');
-    if (path[0] == routes[Routes.gameover]) {
-      final score = path.length > 1 ? int.parse(path[1]) : null;
-      return new MaterialPageRoute(
-        builder: (context) => GameoverScreen(score: score),
-        settings: settings,
-      );
-    } else if (path[0] == routes[Routes.game]) {
-      final isZenMode = path[1] != null && path[1] == 'true';
-      return new MaterialPageRoute(
-        builder: (context) => GameScreen(isZenMode: isZenMode),
-        settings: settings,
-      );
-    } else if (numcolRoutes[path[0]] != null) {
-      return new MaterialPageRoute(
-        builder: numcolRoutes[path[0]],
-        settings: settings,
-      );
-    }
-
-    return new MaterialPageRoute(
-      builder: numcolRoutes[routes[Routes.home]],
-      settings: settings,
-    );
   }
 
   @override
@@ -106,4 +83,31 @@ class _NumcolAppState extends State<NumcolApp> {
       ],
     );
   }
+}
+
+Route<dynamic> _onGenerateRoute(RouteSettings settings) {
+  var path = settings.name.split('/');
+  if (path[0] == routes[Routes.gameover]) {
+    final score = path.length > 1 ? int.parse(path[1]) : null;
+    return new MaterialPageRoute(
+      builder: (context) => GameoverScreen(score: score),
+      settings: settings,
+    );
+  } else if (path[0] == routes[Routes.game]) {
+    final isZenMode = path[1] != null && path[1] == 'true';
+    return new MaterialPageRoute(
+      builder: (context) => GameScreen(isZenMode: isZenMode),
+      settings: settings,
+    );
+  } else if (numcolRoutes[path[0]] != null) {
+    return new MaterialPageRoute(
+      builder: numcolRoutes[path[0]],
+      settings: settings,
+    );
+  }
+
+  return new MaterialPageRoute(
+    builder: numcolRoutes[routes[Routes.home]],
+    settings: settings,
+  );
 }

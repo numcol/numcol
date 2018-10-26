@@ -2,6 +2,7 @@
 // Use of this source code is governed by the version 3 of the
 // GNU General Public License that can be found in the LICENSE file.
 
+import 'package:firebase_analytics/firebase_analytics.dart';
 import 'package:flutter/material.dart' hide Color;
 
 import '../../../../domain/index.dart';
@@ -20,10 +21,12 @@ class _AudioSwitcherState extends State<AudioSwitcher>
   final GlobalKey<CustomExpansionTileState> expansionTile = GlobalKey();
   bool _isAudioOn = true;
   AudioSwitcherPresenter _presenter;
+  FirebaseAnalytics _analytics;
 
   @override
   void didChangeDependencies() {
     super.didChangeDependencies();
+    _analytics = Injector.of(context).inject<FirebaseAnalytics>();
     _presenter = AudioSwitcherPresenter(
         this, Injector.of(context).inject<StorageContract>());
     _presenter.loadIsAudioOn();
@@ -36,6 +39,10 @@ class _AudioSwitcherState extends State<AudioSwitcher>
   }
 
   void onIsAudioOnSaved(bool isAudioOn) {
+    _analytics.setUserProperty(
+      name: 'audio',
+      value: isAudioOn ? 'on' : 'off',
+    );
     setState(() {
       _isAudioOn = isAudioOn;
     });

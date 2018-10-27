@@ -51,7 +51,7 @@ class _CountdownScreenState extends State<CountdownScreen>
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Container(
+      body: Page(
         child: Center(
           child: CountdownWidget(
             animation: _animator.animation,

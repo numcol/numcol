@@ -7,7 +7,6 @@ import 'package:flutter/material.dart' hide Color;
 
 import '../../../../domain/index.dart';
 import '../../../../i18n/index.dart';
-import '../../../../middleware/index.dart';
 import '../../../../view/index.dart';
 import 'audio_switcher_presenter.dart';
 
@@ -67,14 +66,17 @@ class _AudioSwitcherState extends State<AudioSwitcher>
 
   @override
   Widget build(BuildContext context) {
+    var isLarge = MediaQuery.of(context).size.width > 540;
     return Container(
-      width: 210.0,
+      width: isLarge ? 340.0 : 210.0,
+      padding: EdgeInsets.only(bottom: 15.0),
       child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: <Widget>[
           Text(
             Translations.of(context).text('sound'),
             style: TextStyle(
-              fontSize: 16.0,
+              fontSize: isLarge ? 24.0 : 16.0,
             ),
           ),
           Container(

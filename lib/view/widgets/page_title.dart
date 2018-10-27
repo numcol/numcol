@@ -14,13 +14,16 @@ class PageTitle extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    var isLarge = MediaQuery.of(context).size.width > 540;
     return Center(
       child: Container(
-        padding: const EdgeInsets.only(bottom: 30.0),
+        padding: isLarge
+            ? const EdgeInsets.only(bottom: 50.0)
+            : const EdgeInsets.only(bottom: 30.0),
         child: Text(
           Translations.of(context).text(tag).toUpperCase(),
           style: TextStyle(
-            fontSize: 42.0,
+            fontSize: isLarge ? 60.0 : 42.0,
             color: ScreenColors.black,
             fontFamily: Fonts.poiretone,
           ),

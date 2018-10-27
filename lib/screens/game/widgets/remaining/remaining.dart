@@ -15,17 +15,9 @@ class RemainingWidget extends AnimatedWidget {
 
   @override
   build(BuildContext context) {
-    return Column(
-      children: <Widget>[
-        Text(Translations.of(context).text('time')),
-        Text(
-          (animation.value / 1000).toStringAsFixed(3).padLeft(6, '0'),
-          style: TextStyle(
-            fontSize: 18.0,
-            fontFamily: Fonts.robotoMono,
-          ),
-        ),
-      ],
+    return GameIndicator(
+      title: 'time',
+      value: (animation.value / 1000).toStringAsFixed(3).padLeft(6, '0'),
     );
   }
 }

@@ -31,20 +31,17 @@ class _SettingsScreenState extends State<SettingsScreen>
     return Scaffold(
       body: Builder(
         builder: (BuildContext context) {
-          return SafeArea(
-            child: Container(
-              padding: const EdgeInsets.all(15.0),
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: <Widget>[
-                  PageTitle(tag: 'settings'),
-                  AudioSwitcher(),
-                  LanguageSwitcher(),
-                  menuItem(Color.blue, 'back_to_menu',
-                      _settingsScreenPresenter.onBackButtonPressed),
-                ],
-              ),
+          return Page(
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: <Widget>[
+                PageTitle(tag: 'settings'),
+                AudioSwitcher(),
+                LanguageSwitcher(),
+                menuItem(Color.blue, 'back_to_menu',
+                    _settingsScreenPresenter.onBackButtonPressed),
+              ],
             ),
           );
         },

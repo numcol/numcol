@@ -30,12 +30,13 @@ class _HomeScreenState extends State<HomeScreen>
   }
 
   Widget _title() {
+    var isLarge = MediaQuery.of(context).size.width > 540;
     return Container(
       padding: const EdgeInsets.only(bottom: 60.0),
       child: Text(
         'NumCol',
         style: TextStyle(
-          fontSize: 72.0,
+          fontSize: isLarge ? 108.0 : 72.0,
           color: ScreenColors.black,
           fontFamily: Fonts.poiretone,
         ),
@@ -46,31 +47,28 @@ class _HomeScreenState extends State<HomeScreen>
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: SafeArea(
-        child: Container(
-          padding: const EdgeInsets.all(15.0),
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: <Widget>[
-              Center(
-                child: _title(),
-              ),
-              menuItem(
-                  Color.green,
-                  'play',
-                  () => Ads.showOrContinue(
-                      _homeScreenPresenter.onPlayButtonPressed)),
-              menuItem(Color.yellow, 'kids_level',
-                  _homeScreenPresenter.onKidsModeButtonPressed),
-              menuItem(Color.blue, 'rate', () {
-                _analytics.logEvent(name: 'rate');
-                _homeScreenPresenter.onRateButtonPressed();
-              }),
-              menuItem(Color.red, 'settings',
-                  _homeScreenPresenter.onSettingsButtonPressed),
-            ],
-          ),
+      body: Page(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: <Widget>[
+            Center(
+              child: _title(),
+            ),
+            menuItem(
+                Color.green,
+                'play',
+                () => Ads.showOrContinue(
+                    _homeScreenPresenter.onPlayButtonPressed)),
+            menuItem(Color.yellow, 'kids_level',
+                _homeScreenPresenter.onKidsModeButtonPressed),
+            menuItem(Color.blue, 'rate', () {
+              _analytics.logEvent(name: 'rate');
+              _homeScreenPresenter.onRateButtonPressed();
+            }),
+            menuItem(Color.red, 'settings',
+                _homeScreenPresenter.onSettingsButtonPressed),
+          ],
         ),
       ),
     );

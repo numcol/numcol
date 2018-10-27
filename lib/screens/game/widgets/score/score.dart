@@ -5,7 +5,6 @@
 import 'package:flutter/material.dart';
 
 import '../../../../view/index.dart';
-import '../../../../i18n/index.dart';
 
 class ScoreWidget extends AnimatedWidget {
   ScoreWidget({Key key, @required this.score})
@@ -15,17 +14,9 @@ class ScoreWidget extends AnimatedWidget {
 
   @override
   build(BuildContext context) {
-    return Column(
-      children: <Widget>[
-        Text(Translations.of(context).text('score')),
-        Text(
-          score.value.toString(),
-          style: TextStyle(
-            fontSize: 18.0,
-            fontFamily: Fonts.robotoMono,
-          ),
-        ),
-      ],
+    return GameIndicator(
+      title: 'score',
+      value: score.value.toString(),
     );
   }
 }

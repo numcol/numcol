@@ -18,10 +18,12 @@ class AnswersWidget extends StatelessWidget {
       return AnswerWidget(answer: answer);
     }).toList();
 
+    final spacing = MediaQuery.of(context).size.width > 540 ? 20.0 : 10.0;
+
     return GridView.count(
       primary: false,
-      mainAxisSpacing: 10.0,
-      crossAxisSpacing: 10.0,
+      mainAxisSpacing: spacing,
+      crossAxisSpacing: spacing,
       crossAxisCount: 6,
       children: answerWidgets,
     );

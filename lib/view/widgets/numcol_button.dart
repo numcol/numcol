@@ -23,8 +23,9 @@ class NumcolButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    var fontSize = MediaQuery.of(context).size.width > 540 ? 28.0 : 18.0;
     var style = TextStyle(
-        color: Colors.white, fontSize: 18.0, fontFamily: Fonts.lemonMilk);
+        color: Colors.white, fontSize: fontSize, fontFamily: Fonts.lemonMilk);
     var buttonColor = colors[color];
     var buttonDarkColor = darkColors[color];
     var borderColor = BorderSide(

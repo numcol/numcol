@@ -26,9 +26,11 @@ class _GameoverScreenState extends State<GameoverScreen>
   GameoverScreenPresenter _gameoverScreenPresenter;
   FirebaseAnalytics _analytics;
   int _topScore;
+  bool _isLarge;
 
   @override
   void didChangeDependencies() {
+    _isLarge = MediaQuery.of(context).size.width > 540;
     super.didChangeDependencies();
     final injector = Injector.of(context);
     _gameoverScreenPresenter = GameoverScreenPresenter(
@@ -43,6 +45,7 @@ class _GameoverScreenState extends State<GameoverScreen>
         text,
         style: TextStyle(
             fontFamily: Fonts.poiretone,
+            fontSize: _isLarge ? 24.0 : 14.0,
             fontWeight: FontWeight.bold,
             color: ScreenColors.darkBlack),
       ),
@@ -91,37 +94,34 @@ class _GameoverScreenState extends State<GameoverScreen>
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: SafeArea(
-        child: Container(
-          padding: const EdgeInsets.all(15.0),
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: <Widget>[
-              PageTitle(tag: 'gameover'),
-              _numberTitle(Translations.of(context).text('score')),
-              _number(widget.score.toString(), 54.0),
-              _numberTitle(Translations.of(context).text('high_score')),
-              _number(_topScore.toString(), 32.0),
-              menuItem(Color.red, 'share', () {
-                _analytics.logShare(
-                  contentType: 'score',
-                  itemId: widget.score.toString(),
-                );
-                _gameoverScreenPresenter.onShareButtonPressed(
-                  Translations.of(context).text('share_text'),
-                  widget.score,
-                );
-              }),
-              menuItem(
-                  Color.green,
-                  'try_again',
-                  () => Ads.showOrContinue(
-                      _gameoverScreenPresenter.onTryAgainButtonPressed)),
-              menuItem(Color.blue, 'back_to_menu',
-                  _gameoverScreenPresenter.onBackButtonPressed),
-            ],
-          ),
+      body: Page(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: <Widget>[
+            PageTitle(tag: 'gameover'),
+            _numberTitle(Translations.of(context).text('score')),
+            _number(widget.score.toString(), _isLarge ? 80.0 : 54.0),
+            _numberTitle(Translations.of(context).text('high_score')),
+            _number(_topScore.toString(), _isLarge ? 54.0 : 32.0),
+            menuItem(Color.red, 'share', () {
+              _analytics.logShare(
+                contentType: 'score',
+                itemId: widget.score.toString(),
+              );
+              _gameoverScreenPresenter.onShareButtonPressed(
+                Translations.of(context).text('share_text'),
+                widget.score,
+              );
+            }),
+            menuItem(
+                Color.green,
+                'try_again',
+                () => Ads.showOrContinue(
+                    _gameoverScreenPresenter.onTryAgainButtonPressed)),
+            menuItem(Color.blue, 'back_to_menu',
+                _gameoverScreenPresenter.onBackButtonPressed),
+          ],
         ),
       ),
     );

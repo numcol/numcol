@@ -16,11 +16,13 @@ class QuestionAnimated extends AnimatedWidget {
 
   @override
   build(BuildContext context) {
+    var isLarge = MediaQuery.of(context).size.width > 540;
+
     return Text(
       Translations.of(context).text(text).toUpperCase(),
       style: TextStyle(
         fontFamily: Fonts.poiretone,
-        fontSize: 36.0,
+        fontSize: isLarge ? 54.0 : 36.0,
         color: animation.value,
       ),
     );

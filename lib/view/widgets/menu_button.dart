@@ -24,12 +24,13 @@ class MenuButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     var audio = Injector.of(context).inject<AudioPlayer>();
+    var isLarge = MediaQuery.of(context).size.width > 540;
     return Container(
       padding: const EdgeInsets.only(
         top: 15.0,
       ),
-      height: 60.0,
-      width: 240.0,
+      height: isLarge ? 80.0 : 60.0,
+      width: isLarge ? 360.0 : 240.0,
       child: NumcolButton(
           color: color,
           text: text,

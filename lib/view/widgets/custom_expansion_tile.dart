@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import '../styles.dart';
+
 // From: https://stackoverflow.com/questions/48930372/flutter-collapsing-expansiontile-after-choosing-an-item
 
 const Duration _kExpand = const Duration(milliseconds: 400);
@@ -100,9 +102,8 @@ class CustomExpansionTileState extends State<CustomExpansionTile>
   }
 
   Widget _buildChildren(BuildContext context, Widget child) {
-    final Color borderSideColor =
-        _borderColor.evaluate(_easeOutAnimation) ?? Colors.transparent;
-    final Color titleColor = _headerColor.evaluate(_easeInAnimation);
+    final Color borderSideColor = ScreenColors.lightGrey;
+    var isLarge = MediaQuery.of(context).size.width > 540;
 
     return Container(
       decoration: BoxDecoration(
@@ -121,10 +122,10 @@ class CustomExpansionTileState extends State<CustomExpansionTile>
               onTap: toggle,
               leading: widget.leading,
               title: DefaultTextStyle(
-                style: Theme.of(context)
-                    .textTheme
-                    .subhead
-                    .copyWith(color: titleColor),
+                style: TextStyle(
+                  fontSize: isLarge ? 24.0 : 16.0,
+                  color: ScreenColors.black,
+                ),
                 child: widget.title,
               ),
               trailing: widget.trailing ??

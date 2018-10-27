@@ -4,6 +4,7 @@
 
 import 'package:flutter/material.dart';
 
+import '../../../../view/index.dart';
 import '../../../../domain/index.dart';
 import '../answer/answer.dart';
 
@@ -18,7 +19,7 @@ class AnswersWidget extends StatelessWidget {
       return AnswerWidget(answer: answer);
     }).toList();
 
-    final spacing = MediaQuery.of(context).size.width > 540 ? 20.0 : 10.0;
+    final spacing = Responsive.getValue(context, 10.0, 20.0, 20.0);
 
     return GridView.count(
       primary: false,

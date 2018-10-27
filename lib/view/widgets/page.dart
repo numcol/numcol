@@ -4,6 +4,8 @@
 
 import 'package:flutter/material.dart';
 
+import '../responsive.dart';
+
 class Page extends StatelessWidget {
   const Page({Key key, @required this.child}) : super(key: key);
 
@@ -13,9 +15,7 @@ class Page extends StatelessWidget {
   Widget build(BuildContext context) {
     return SafeArea(
       child: Container(
-        padding: MediaQuery.of(context).size.width > 540
-            ? const EdgeInsets.all(50.0)
-            : const EdgeInsets.all(15.0),
+        padding: EdgeInsets.all(Responsive.getValue(context, 15.0, 50.0, 50.0)),
         child: child,
       ),
     );

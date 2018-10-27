@@ -7,6 +7,7 @@ import 'package:flutter/material.dart' hide Color;
 import '../../middleware/index.dart';
 import '../../domain/index.dart';
 import '../injector.dart';
+import '../responsive.dart';
 import 'numcol_button.dart';
 
 class MenuButton extends StatelessWidget {
@@ -24,13 +25,12 @@ class MenuButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     var audio = Injector.of(context).inject<AudioPlayer>();
-    var isLarge = MediaQuery.of(context).size.width > 540;
     return Container(
-      padding: const EdgeInsets.only(
-        top: 15.0,
+      padding: EdgeInsets.only(
+        top: Responsive.getValue(context, 15.0, 20.0, 25.0),
       ),
-      height: isLarge ? 80.0 : 60.0,
-      width: isLarge ? 360.0 : 240.0,
+      height: Responsive.getValue(context, 60.0, 80.0, 110.0),
+      width: Responsive.getValue(context, 240.0, 360.0, 480.0),
       child: NumcolButton(
           color: color,
           text: text,

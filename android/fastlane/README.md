@@ -21,6 +21,11 @@ or alternatively using `brew cask install fastlane`
 fastlane android alpha
 ```
 Submit a new Alpha Build
+### android beta
+```
+fastlane android beta
+```
+Submit a new Alpha Build
 ### android deploy
 ```
 fastlane android deploy

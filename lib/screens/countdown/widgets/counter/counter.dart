@@ -15,17 +15,24 @@ class CountdownWidget extends AnimatedWidget {
   @override
   build(BuildContext context) {
     return Container(
-      height: 260.0,
-      width: 260.0,
+      height: Responsive.getValue(context, 260.0, 320.0, 420.0),
+      width: Responsive.getValue(context, 260.0, 320.0, 420.0),
       child: Center(
         child: Text(
           animation.value == 0 ? 'Go!' : animation.value.toString(),
-          style: TextStyle(fontSize: 92.0, fontFamily: Fonts.poiretone),
+          style: TextStyle(
+            fontSize: Responsive.getValue(context, 92.0, 116.0, 132.0),
+            fontFamily: Fonts.poiretone,
+          ),
         ),
       ),
       decoration: BoxDecoration(
         color: ScreenColors.lightGrey,
-        borderRadius: BorderRadius.all(Radius.circular(130.0)),
+        borderRadius: BorderRadius.all(
+          Radius.circular(
+            Responsive.getValue(context, 130.0, 160.0, 210.0),
+          ),
+        ),
       ),
     );
   }

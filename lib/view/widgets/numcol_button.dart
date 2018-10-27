@@ -4,8 +4,9 @@
 
 import 'package:flutter/material.dart';
 
-import '../styles.dart';
 import '../../domain/index.dart' as Engine;
+import '../styles.dart';
+import '../responsive.dart';
 
 typedef NumcolButtonPressed();
 
@@ -23,7 +24,7 @@ class NumcolButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    var fontSize = MediaQuery.of(context).size.width > 540 ? 28.0 : 18.0;
+    var fontSize = Responsive.getValue(context, 18.0, 28.0, 36.0);
     var style = TextStyle(
         color: Colors.white, fontSize: fontSize, fontFamily: Fonts.lemonMilk);
     var buttonColor = colors[color];

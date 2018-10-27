@@ -81,7 +81,10 @@ class _QuestionWidgetState extends State<QuestionWidget>
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: const EdgeInsets.only(top: 50.0, bottom: 25.0),
+      padding: EdgeInsets.only(
+        top: Responsive.getValue(context, 50.0, 80.0, 80.0),
+        bottom: Responsive.getValue(context, 25.0, 70.0, 70.0),
+      ),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.center,
         children: <Widget>[

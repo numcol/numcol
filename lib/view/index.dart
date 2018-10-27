@@ -6,6 +6,7 @@ export 'animators/index.dart';
 export 'mixins/index.dart';
 export 'widgets/index.dart';
 export 'ads.dart';
+export 'responsive.dart';
 export 'styles.dart';
 export 'injector.dart';
 export 'animator_factory.dart';

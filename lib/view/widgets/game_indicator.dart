@@ -6,6 +6,7 @@ import 'package:flutter/material.dart';
 
 import '../../i18n/index.dart';
 import '../styles.dart';
+import '../responsive.dart';
 
 class GameIndicator extends StatelessWidget {
   const GameIndicator({Key key, @required this.title, @required this.value})
@@ -16,20 +17,18 @@ class GameIndicator extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    var isLarge = MediaQuery.of(context).size.width > 540;
-
     return Column(
       children: <Widget>[
         Text(
           Translations.of(context).text(title),
           style: TextStyle(
-            fontSize: isLarge ? 18.0 : 14.0,
+            fontSize: Responsive.getValue(context, 14.0, 18.0, 24.0),
           ),
         ),
         Text(
           value,
           style: TextStyle(
-            fontSize: isLarge ? 24.0 : 18.0,
+            fontSize: Responsive.getValue(context, 18.0, 24.0, 32.0),
             fontFamily: Fonts.robotoMono,
           ),
         ),

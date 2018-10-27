@@ -66,17 +66,18 @@ class _AudioSwitcherState extends State<AudioSwitcher>
 
   @override
   Widget build(BuildContext context) {
-    var isLarge = MediaQuery.of(context).size.width > 540;
     return Container(
-      width: isLarge ? 340.0 : 210.0,
-      padding: EdgeInsets.only(bottom: 15.0),
+      width: Responsive.getValue(context, 210.0, 340.0, 450.0),
+      padding: EdgeInsets.only(
+        bottom: Responsive.getValue(context, 15.0, 20.0, 35.0),
+      ),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: <Widget>[
           Text(
             Translations.of(context).text('sound'),
             style: TextStyle(
-              fontSize: isLarge ? 24.0 : 16.0,
+              fontSize: Responsive.getValue(context, 16.0, 24.0, 32.0),
             ),
           ),
           Container(

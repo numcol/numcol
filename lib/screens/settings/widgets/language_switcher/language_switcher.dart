@@ -78,10 +78,11 @@ class _LanguageSwitcherState extends State<LanguageSwitcher>
 
   @override
   Widget build(BuildContext context) {
-    var isLarge = MediaQuery.of(context).size.width > 540;
     return Container(
-      width: isLarge ? 370.0 : 240.0,
-      padding: EdgeInsets.only(bottom: 15.0),
+      width: Responsive.getValue(context, 240.0, 370.0, 480.0),
+      padding: EdgeInsets.only(
+        bottom: Responsive.getValue(context, 15.0, 20.0, 35.0),
+      ),
       child: CustomExpansionTile(
         key: expansionTile,
         title: Text(LocaleHelper.getLanguageText(_locale) ??

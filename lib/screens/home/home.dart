@@ -30,13 +30,12 @@ class _HomeScreenState extends State<HomeScreen>
   }
 
   Widget _title() {
-    var isLarge = MediaQuery.of(context).size.width > 540;
     return Container(
       padding: const EdgeInsets.only(bottom: 60.0),
       child: Text(
         'NumCol',
         style: TextStyle(
-          fontSize: isLarge ? 108.0 : 72.0,
+          fontSize: Responsive.getValue(context, 72.0, 108.0, 142.0),
           color: ScreenColors.black,
           fontFamily: Fonts.poiretone,
         ),

@@ -6,6 +6,7 @@ import 'package:flutter/material.dart';
 
 import '../../i18n/index.dart';
 import '../styles.dart';
+import '../responsive.dart';
 
 class PageTitle extends StatelessWidget {
   PageTitle({Key key, @required this.tag}) : super(key: key);
@@ -14,16 +15,15 @@ class PageTitle extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    var isLarge = MediaQuery.of(context).size.width > 540;
     return Center(
       child: Container(
-        padding: isLarge
-            ? const EdgeInsets.only(bottom: 50.0)
-            : const EdgeInsets.only(bottom: 30.0),
+        padding: EdgeInsets.only(
+          bottom: Responsive.getValue(context, 30.0, 50.0, 70.0),
+        ),
         child: Text(
           Translations.of(context).text(tag).toUpperCase(),
           style: TextStyle(
-            fontSize: isLarge ? 60.0 : 42.0,
+            fontSize: Responsive.getValue(context, 42.0, 60.0, 80.0),
             color: ScreenColors.black,
             fontFamily: Fonts.poiretone,
           ),

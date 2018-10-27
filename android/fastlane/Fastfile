@@ -24,8 +24,19 @@ platform :android do
     )
   end
 
+  desc "Submit a new Alpha Build"
+  lane :beta do
+    upload_to_play_store(
+      track: 'alpha',
+      track_promote_to: 'beta'
+    )
+  end
+
   desc "Deploy a new version to the Google Play"
   lane :deploy do
-    upload_to_play_store
+    upload_to_play_store(
+      track: 'beta',
+      track_promote_to: 'production'
+    )
   end
 end

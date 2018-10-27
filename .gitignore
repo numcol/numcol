@@ -83,3 +83,6 @@ fastlane-playstore.json
 
 # Firebase
 **/google-services.json
+
+# AdMob
+assets/admob.id

@@ -30,12 +30,11 @@ class _GameoverScreenState extends State<GameoverScreen>
   @override
   void didChangeDependencies() {
     super.didChangeDependencies();
+    final injector = Injector.of(context);
     _gameoverScreenPresenter = GameoverScreenPresenter(
-        this,
-        Injector.of(context).inject<Storage>(),
-        Injector.of(context).inject<Sharer>());
+        this, injector.inject<Storage>(), injector.inject<Sharer>());
     _gameoverScreenPresenter.onLoad(widget.score);
-    _analytics = Injector.of(context).inject<FirebaseAnalytics>();
+    _analytics = injector.inject<FirebaseAnalytics>();
   }
 
   Widget _numberTitle(String text) {
@@ -114,8 +113,11 @@ class _GameoverScreenState extends State<GameoverScreen>
                   widget.score,
                 );
               }),
-              menuItem(Color.green, 'try_again',
-                  _gameoverScreenPresenter.onTryAgainButtonPressed),
+              menuItem(
+                  Color.green,
+                  'try_again',
+                  () => Ads.showOrContinue(
+                      _gameoverScreenPresenter.onTryAgainButtonPressed)),
               menuItem(Color.blue, 'back_to_menu',
                   _gameoverScreenPresenter.onBackButtonPressed),
             ],
@@ -123,5 +125,10 @@ class _GameoverScreenState extends State<GameoverScreen>
         ),
       ),
     );
+  }
+
+  @override
+  void dispose() {
+    super.dispose();
   }
 }

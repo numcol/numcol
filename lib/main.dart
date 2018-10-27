@@ -31,7 +31,6 @@ import 'view/index.dart';
 
 void main() async {
   final sharedPreferences = await SharedPreferences.getInstance();
-
   var isDebugMode = false;
   assert(() {
     isDebugMode = true;

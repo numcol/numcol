@@ -56,8 +56,11 @@ class _HomeScreenState extends State<HomeScreen>
               Center(
                 child: _title(),
               ),
-              menuItem(Color.green, 'play',
-                  _homeScreenPresenter.onPlayButtonPressed),
+              menuItem(
+                  Color.green,
+                  'play',
+                  () => Ads.showOrContinue(
+                      _homeScreenPresenter.onPlayButtonPressed)),
               menuItem(Color.yellow, 'kids_level',
                   _homeScreenPresenter.onKidsModeButtonPressed),
               menuItem(Color.blue, 'rate', () {

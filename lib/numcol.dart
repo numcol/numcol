@@ -35,6 +35,7 @@ class _NumcolAppState extends State<NumcolApp> {
   @override
   void initState() {
     super.initState();
+    Ads.init();
     _newLocaleDelegate = TranslationsDelegate(newLocale: null);
     localeChanger.onLocaleChanged = onLocaleChange;
   }
@@ -82,6 +83,12 @@ class _NumcolAppState extends State<NumcolApp> {
         new FirebaseAnalyticsObserver(analytics: _analytics),
       ],
     );
+  }
+
+  @override
+  void dispose() {
+    Ads.dispose();
+    super.dispose();
   }
 }
 

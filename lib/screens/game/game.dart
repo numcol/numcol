@@ -31,6 +31,7 @@ class _GameScreenState extends State<GameScreen>
   @override
   void didChangeDependencies() {
     super.didChangeDependencies();
+    Ads.createInterstitialAd();
     final configuration = Configuration.of(context);
     var audio = Injector.of(context).inject<AudioPlayer>();
     var game = Injector.of(context).inject<Game>();

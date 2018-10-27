@@ -1,7 +1,7 @@
 name: numcol
 description: The Brain Training Game About Matching Numbers And Colours.
 
-version: 2.1.0+18102601
+version: 2.1.0+18102602
 
 environment:
   sdk: ">=2.0.0-dev.68.0 <3.0.0"
@@ -16,6 +16,7 @@ dependencies:
   share: "0.5.3"
   firebase_analytics: ^1.0.4
   firebase_remote_config: ^0.0.6+1
+  firebase_admob: ^0.6.1+1
   launch_review: ^1.0.1
   flutter_crashlytics: "0.1.1"
 

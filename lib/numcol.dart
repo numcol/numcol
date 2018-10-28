@@ -69,6 +69,7 @@ class _NumcolAppState extends State<NumcolApp> {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      debugShowCheckedModeBanner: false,
       title: 'NumCol',
       initialRoute: '/',
       localizationsDelegates: [

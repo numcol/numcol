@@ -1,0 +1,15 @@
+Numcol és un joc d'agilitat mental molt simple en el qual hauràs de lluitar contra el rellotge per encertar el major nombre possible de combinacions de nombres i colors possible.
+
+La mecànica és molt senzilla, veuràs dues paraules: un número i un color. Has tocar el botó que correspongui a tots dos. Si encertes la teva puntuació augmentarà en base al ràpid que hagis estat i el compte enrere de la partida s'incrementarà perquè tinguis temps per seguir encertant combinacions. En el cas que fallis, no et restarà puntuació però sí que disminuirà el temps restant de partida.
+
+NumCol disposa d'una manera que hem anomenat 'Infantil' on s'ha suprimit el límit de temps perquè els més petits que encara tinguin dificultats per llegir puguin jugar tranquil·lament i fomentar així el seu aprenentatge.
+
+El joc està disponible en anglès, francès, espanyol, euskara, català i galego. Pel que si vols augmentar el seu nivell de dificultat no tens més que canviar l'idioma i provar amb una altra llengua en la qual no et sentis tan còmode.
+
+Amb NumCol tota la família podrà entrenar la seva ment mentre es diverteix, incloent als nens i als nostres majors.
+
+CONTACTE I SUGGERIMENTS
+
+Aquest joc està desenvolupat per una sola persona en el seu temps lliure i no hi ha una empresa al darrere, de manera que la capacitat d'introduir millores i corregir errors és força limitada. Tot i així, si tens algun suggeriment, si vols avisar d'alguna fallada o si t'interessa ajudar afegint traduccions no dubtis en enviar un correu a:
+
+numcol@berriart.com

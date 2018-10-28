@@ -1,3 +1,30 @@
+Numcol is a simple mental agility game in which you will have to fight against the clock to get as many combinations of numbers and colors as possible.
+
+The mechanics are very simple, you will see two words: a number and a color. You must touch the button that corresponds to both. If your answer is right your score will increase based on how fast you have been and the countdown of the game will be increased so that you have time to continue guessing right combinations. In the event that you fail, your score will not be reduced but the remaining time.
+
+NumCol has a 'Kids Mode'' where the time limit has been removed so that the children who still have difficulties to read can play and enjoy the game also.
+
+The game is available in English, French, Spanish, Basque, Catalan and Galician. So, if you want to increase your level of difficulty you just have to change the language and try another one in which you do not feel so comfortable.
+
+With NumCol the whole family can train their mind while having fun, including children and elders.
+
+CONTACT AND SUGGESTIONS
+
+This game is developed by a single person and is not supported by any company, so the ability to introduce improvements and fix errors is limited. Even so, if you have any suggestions, if you want to report a bug or if you are interested in helping adding translations do not hesitate to send an email to:
+
+numcol@berriart.com
+
+
+
+
+
+
+
+
+
+
+
+
 Game available in English, French, Spanish and Basque.
 
 The free version is full featured but contains ads.

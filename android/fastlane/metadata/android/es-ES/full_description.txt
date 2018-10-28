@@ -1,17 +1,15 @@
-Juego disponible en Inglés, francés, español y euskara. 
+Numcol es un juego de agilidad mental muy simple en el que tendrás que luchar contra el reloj para acertar el mayor número posible de combinaciones de números y colores posible.
 
-La versión gratuita tiene todas las funcionalidades pero de vez en cuando muestra publicidad.
+La mecánica es muy sencilla, verás dos palabras: un número y un color. Debes tocar el botón que corresponda a ambos. Si aciertas, tu puntuación aumentará en base a lo rápido que hayas sido y la cuenta atrás de la partida se incrementará para que tengas tiempo para seguir acertando combinaciones. En el caso de que falles, no se te restará puntuación pero sí que disminuirá el tiempo restante de partida.
 
-Es un juego simple en el que tendrás que luchar contra el reloj para completar un tablero de números de colores. Podrás demostrar tu rapidez mental y luchar contra tus amigos.
+NumCol dispone de un modo que hemos llamado 'Infantil' donde se ha suprimido el límite de tiempo para que los más peques que aún tengan dificultades para leer puedan jugar tranquilamente y fomentar así su aprendizaje.
 
-Verás dos palabras: un número y un color. Debes tocar el botón que corresponda a ambos. Cada ronda tiene 36 botones, cada botón tiene un número y un color. 
+El juego está disponible en inglés, francés, español, euskara, catalán y gallego. Por lo que si quieres aumentar su nivel de dificultad no tienes más que cambiar el idioma y probar con otra lengua en la que no te sientas tan cómodo.
 
-Tiene cuatro niveles de dificultad y pueden jugar tanto niños que acaben de aprender a leer como adultos con ganas de probar su rapidez: 
-- Modo Niños: Empiezas con 30 segundos 
-- Normal: Empiezas con 10s 
-- Difícil: Empiezas con 5s 
-- Ninja: Empiezas con 3s 
+Con NumCol toda la familia podrá entrenar su mente mientras se divierte, incluyendo a los niños y a nuestros mayores.
 
-En cada ronda tendrás un poco menos de tiempo, cuanto menos tardes en reaccionar más puntos. 
+CONTACTO Y SUGERENCIAS
 
-Prueba con otros idiomas si quieres para que sea más difícil.
+Este juego está desarrollado por una sola persona en su tiempo libre y no hay una empresa detrás, por lo que la capacidad de introducir mejoras y corregir errores es bastante limitada. Aún así, si tienes alguna sugerencia, si quieres avisar de algún fallo o si te interesa ayudar añadiendo traducciones no dudes en enviar un correo a:
+
+numcol@berriart.com

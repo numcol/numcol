@@ -81,7 +81,7 @@ class _AudioSwitcherState extends State<AudioSwitcher>
             ),
           ),
           Container(
-            width: 160.0,
+            width: 150.0,
             child: Switch(
                 value: _isAudioOn, onChanged: _presenter.onTogglePressed),
           ),

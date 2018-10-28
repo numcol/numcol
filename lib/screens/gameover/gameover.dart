@@ -26,6 +26,7 @@ class _GameoverScreenState extends State<GameoverScreen>
   GameoverScreenPresenter _gameoverScreenPresenter;
   FirebaseAnalytics _analytics;
   int _topScore;
+  bool _isNewTopScore = false;
 
   @override
   void didChangeDependencies() {
@@ -75,9 +76,61 @@ class _GameoverScreenState extends State<GameoverScreen>
     );
   }
 
+  List<Widget> _buildChildren() {
+    var widgets = <Widget>[
+      PageTitle(tag: 'gameover'),
+    ];
+
+    if (!_isNewTopScore) {
+      widgets.add(_numberTitle(Translations.of(context).text('score')));
+      widgets.add(_number(
+        widget.score.toString(),
+        Responsive.getValue(context, 54.0, 80.0, 108.0),
+      ));
+    }
+
+    widgets.add(_numberTitle(Translations.of(context).text('high_score')));
+    widgets.add(_number(
+      _topScore.toString(),
+      !_isNewTopScore
+          ? Responsive.getValue(context, 32.0, 54.0, 72.0)
+          : Responsive.getValue(context, 54.0, 80.0, 108.0),
+    ));
+
+    if (_isNewTopScore) {
+      widgets.add(Congrats());
+    }
+
+    widgets.add(menuItem(Color.red, 'share', () {
+      _analytics.logShare(
+        contentType: 'score',
+        itemId: widget.score.toString(),
+      );
+      _gameoverScreenPresenter.onShareButtonPressed(
+        Translations.of(context).text('share_text'),
+        widget.score,
+      );
+    }));
+    widgets.add(menuItem(
+      Color.green,
+      'try_again',
+      () => Ads.showOrContinue(
+            _gameoverScreenPresenter.onTryAgainButtonPressed,
+          ),
+    ));
+    widgets.add(menuItem(
+      Color.blue,
+      'back_to_menu',
+      _gameoverScreenPresenter.onBackButtonPressed,
+    ));
+
+    return widgets;
+  }
+
   void setTopScore(int topScore, bool isNew) {
     setState(() {
       _topScore = topScore;
+      _isNewTopScore = isNew;
     });
   }
 
@@ -96,36 +149,7 @@ class _GameoverScreenState extends State<GameoverScreen>
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           crossAxisAlignment: CrossAxisAlignment.center,
-          children: <Widget>[
-            PageTitle(tag: 'gameover'),
-            _numberTitle(Translations.of(context).text('score')),
-            _number(
-              widget.score.toString(),
-              Responsive.getValue(context, 54.0, 80.0, 108.0),
-            ),
-            _numberTitle(Translations.of(context).text('high_score')),
-            _number(
-              _topScore.toString(),
-              Responsive.getValue(context, 32.0, 54.0, 72.0),
-            ),
-            menuItem(Color.red, 'share', () {
-              _analytics.logShare(
-                contentType: 'score',
-                itemId: widget.score.toString(),
-              );
-              _gameoverScreenPresenter.onShareButtonPressed(
-                Translations.of(context).text('share_text'),
-                widget.score,
-              );
-            }),
-            menuItem(
-                Color.green,
-                'try_again',
-                () => Ads.showOrContinue(
-                    _gameoverScreenPresenter.onTryAgainButtonPressed)),
-            menuItem(Color.blue, 'back_to_menu',
-                _gameoverScreenPresenter.onBackButtonPressed),
-          ],
+          children: _buildChildren(),
         ),
       ),
     );

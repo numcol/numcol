@@ -94,7 +94,7 @@ Future<RemoteConfig> setupRemoteConfig(bool isDebugMode) async {
   remoteConfig.setConfigSettings(RemoteConfigSettings(debugMode: isDebugMode));
   remoteConfig.setDefaults(<String, dynamic>{
     'initialTimeInMilliseconds': 10000,
-    'timeReducerMultiplier': 0.99,
+    'timeReducerMultiplier': 0.985,
     'timePenaltyMultiplier': 0.66,
     'timeAdditionByAnswerInMilliseconds': 1800,
     'gameStartCountdownSeconds': 4,

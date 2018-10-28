@@ -8,3 +8,4 @@ export 'numcol_button.dart';
 export 'page_title.dart';
 export 'page.dart';
 export 'game_indicator.dart';
+export 'congrats.dart';

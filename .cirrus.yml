@@ -1,7 +1,0 @@
-container:
-  image: artberri/flutter:0.9.6
-
-test_task:
-  pub_cache:
-    folder: ~/.pub-cache
-  test_script: flutter test .

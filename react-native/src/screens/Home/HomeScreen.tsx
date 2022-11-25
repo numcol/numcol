@@ -1,7 +1,10 @@
 import { Button, colors, fonts } from "@numcol/ds"
+import { useTranslation } from "@numcol/i18n"
 import { StyleSheet, Text, View } from "react-native"
+import { Routes, ScreenProps } from "../routes"
 
-export const HomeScreen = () => {
+export const HomeScreen = ({ navigation }: ScreenProps<"Home">) => {
+	const { t } = useTranslation()
 	return (
 		<View style={styles.container}>
 			<View style={styles.titleContainer}>
@@ -12,24 +15,24 @@ export const HomeScreen = () => {
 			</View>
 			<View style={styles.buttonsContainer}>
 				<Button onPress={() => undefined} color={Button.Color.Red} fixedHeight>
-					Jugar
+					{t("play")}
 				</Button>
 				<Button
 					onPress={() => undefined}
 					color={Button.Color.Green}
 					fixedHeight
 				>
-					Modo infantil
+					{t("kids_level")}
 				</Button>
 				<Button onPress={() => undefined} color={Button.Color.Blue} fixedHeight>
-					Puntuar app
+					{t("rate")}
 				</Button>
 				<Button
-					onPress={() => undefined}
+					onPress={() => navigation.navigate(Routes.Settings)}
 					color={Button.Color.Yellow}
 					fixedHeight
 				>
-					Ajustes
+					{t("settings")}
 				</Button>
 			</View>
 		</View>

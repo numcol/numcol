@@ -10,6 +10,7 @@ module.exports = function (api) {
 						// This needs to be mirrored in tsconfig.json
 						"@numcol/ds": "./src/ds",
 						"@numcol/screens": "./src/screens",
+						"@numcol/i18n": "./src/i18n",
 					},
 					extensions: [".js", ".ios.js", ".android.js"],
 				},

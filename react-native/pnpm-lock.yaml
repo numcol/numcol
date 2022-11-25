@@ -19,8 +19,10 @@ specifiers:
   expo-modules-autolinking: ^1.0.0
   expo-splash-screen: ~0.17.5
   expo-status-bar: ~1.4.2
+  i18next: ^22.0.6
   prettier: 2.7.1
   react: 18.1.0
+  react-i18next: ^12.0.0
   react-native: 0.70.5
   react-native-safe-area-context: 4.4.1
   react-native-screens: ~3.18.0
@@ -36,7 +38,9 @@ dependencies:
   expo-modules-autolinking: 1.0.0
   expo-splash-screen: 0.17.5_ttpbecuw2g3p276ehchke7rusu
   expo-status-bar: 1.4.2
+  i18next: 22.0.6
   react: 18.1.0
+  react-i18next: 12.0.0_idebtfutoeavdd62rgs47uwije
   react-native: 0.70.5_54md7p3jw3ru3lahxqgw5vptci
   react-native-safe-area-context: 4.4.1_tj3nonr5gneraukzjkxpsiy7yu
   react-native-screens: 3.18.2_tj3nonr5gneraukzjkxpsiy7yu
@@ -4419,6 +4423,12 @@ packages:
       lru-cache: 6.0.0
     dev: false
 
+  /html-parse-stringify/3.0.1:
+    resolution: {integrity: sha512-KknJ50kTInJ7qIScF3jeaFRpMpE8/lfiTdzf/twXyPBLAGrLRTmkz3AdTnKeh40X8k9L2fdYwEp/42WGXIRGcg==}
+    dependencies:
+      void-elements: 3.1.0
+    dev: false
+
   /http-errors/1.7.2:
     resolution: {integrity: sha512-uUQBt3H/cSIVfch6i1EuPNy/YsRSOUBXTVfZ+yR7Zjez3qjBz6i9+i4zjNaoqcoFVI4lQJ5plg63TvGfRSDCRg==}
     engines: {node: '>= 0.6'}
@@ -4449,6 +4459,12 @@ packages:
       debug: 4.3.4
     transitivePeerDependencies:
       - supports-color
+    dev: false
+
+  /i18next/22.0.6:
+    resolution: {integrity: sha512-RlreNGoPIdDP4QG+qSA9PxZKGwlzmcozbI9ObI6+OyUa/Rp0EjZZA9ubyBjw887zVNZsC+7FI3sXX8oiTzAfig==}
+    dependencies:
+      '@babel/runtime': 7.20.1
     dev: false
 
   /iconv-lite/0.4.24:
@@ -6342,6 +6358,26 @@ packages:
       react: 18.1.0
     dev: false
 
+  /react-i18next/12.0.0_idebtfutoeavdd62rgs47uwije:
+    resolution: {integrity: sha512-/O7N6aIEAl1FaWZBNvhdIo9itvF/MO/nRKr9pYqRc9LhuC1u21SlfwpiYQqvaeNSEW3g3qUXLREOWMt+gxrWbg==}
+    peerDependencies:
+      i18next: '>= 19.0.0'
+      react: '>= 16.8.0'
+      react-dom: '*'
+      react-native: '*'
+    peerDependenciesMeta:
+      react-dom:
+        optional: true
+      react-native:
+        optional: true
+    dependencies:
+      '@babel/runtime': 7.20.1
+      html-parse-stringify: 3.0.1
+      i18next: 22.0.6
+      react: 18.1.0
+      react-native: 0.70.5_54md7p3jw3ru3lahxqgw5vptci
+    dev: false
+
   /react-is/16.13.1:
     resolution: {integrity: sha512-24e6ynE2H+OKt4kqsOvNd8kBpV65zoxbA4BVsEOB3ARVWQki/DHzaUoC5KuON/BiccDaCCTZBuOcfZs70kR8bQ==}
 
@@ -7629,6 +7665,11 @@ packages:
 
   /vlq/1.0.1:
     resolution: {integrity: sha512-gQpnTgkubC6hQgdIcRdYGDSDc+SaujOdyesZQMv6JlfQee/9Mp0Qhnys6WxDWvQnL5WZdT7o2Ul187aSt0Rq+w==}
+    dev: false
+
+  /void-elements/3.1.0:
+    resolution: {integrity: sha512-Dhxzh5HZuiHQhbvTW9AMetFfBHDMYpo23Uo9btPXgdYP+3T5S+p+jgNy7spra+veYhBP2dCSgxR/i2Y02h5/6w==}
+    engines: {node: '>=0.10.0'}
     dev: false
 
   /walker/1.0.8:

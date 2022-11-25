@@ -13,7 +13,7 @@
 		"paths": {
 			// This needs to be mirrored in babel.config.js
 			"@numcol/ds": ["./src/ds"],
-			"@numcol/ds/*": ["./src/ds/*"]
+			"@numcol/screens": ["./src/screens"]
 		}
 	},
 	"extends": "expo/tsconfig.base"

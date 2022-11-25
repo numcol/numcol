@@ -9,6 +9,7 @@ module.exports = function (api) {
 					alias: {
 						// This needs to be mirrored in tsconfig.json
 						"@numcol/ds": "./src/ds",
+						"@numcol/screens": "./src/screens",
 					},
 					extensions: [".js", ".ios.js", ".android.js"],
 				},

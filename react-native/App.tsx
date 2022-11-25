@@ -1,11 +1,13 @@
-import { Button, colors } from "@numcol/ds"
+import { HomeScreen, Routes } from "@numcol/screens"
+import { NavigationContainer } from "@react-navigation/native"
+import { createNativeStackNavigator } from "@react-navigation/native-stack"
 import { useFonts } from "expo-font"
 import * as SplashScreen from "expo-splash-screen"
 import { StatusBar } from "expo-status-bar"
 import { useCallback } from "react"
-import { StyleSheet, Text, View } from "react-native"
 
 SplashScreen.preventAutoHideAsync()
+const Stack = createNativeStackNavigator()
 
 export default function App() {
 	const [fontsLoaded] = useFonts({
@@ -25,46 +27,15 @@ export default function App() {
 	}
 
 	return (
-		<View style={styles.container} onLayout={onLayoutRootView}>
-			<View style={styles.container2}>
-				<Button onPress={() => undefined} color={Button.Color.Red}>
-					Hola
-				</Button>
-				<Button onPress={() => undefined} color={Button.Color.Green}>
-					Hola
-				</Button>
-				<Button onPress={() => undefined} color={Button.Color.Blue}>
-					Hola
-				</Button>
-				<Button onPress={() => undefined} color={Button.Color.Yellow}>
-					Hola
-				</Button>
-			</View>
-			<View style={styles.container2}>
-				<Text>Adios</Text>
-			</View>
-			<StatusBar style="light" />
-		</View>
+		<NavigationContainer onReady={onLayoutRootView}>
+			<StatusBar style="dark" />
+			<Stack.Navigator
+				screenOptions={{
+					headerShown: false,
+				}}
+			>
+				<Stack.Screen name={Routes.Home} component={HomeScreen} />
+			</Stack.Navigator>
+		</NavigationContainer>
 	)
 }
-
-const styles = StyleSheet.create({
-	container: {
-		flex: 1,
-		backgroundColor: colors.main.white,
-		alignItems: "center",
-		justifyContent: "center",
-	},
-	container2: {
-		alignItems: "center",
-		justifyContent: "center",
-		width: "100%",
-		height: 70,
-		paddingLeft: 40,
-		paddingRight: 40,
-	},
-	text: {
-		fontFamily: "PoiretOne-Regular",
-		fontSize: 40,
-	},
-})

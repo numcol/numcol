@@ -12,13 +12,22 @@ interface ButtonProps {
 	onPress: () => void
 	children?: React.ReactNode
 	color: ButtonColor
+	fixedHeight?: boolean
 }
 
-export const Button = ({ onPress, children, color }: ButtonProps) => {
+export const Button = ({
+	onPress,
+	children,
+	color,
+	fixedHeight,
+}: ButtonProps) => {
 	const buttonColor = buttonColors[color]
 
 	return (
-		<Pressable onPress={onPress} style={styles.container}>
+		<Pressable
+			onPress={onPress}
+			style={[styles.container, fixedHeight && styles.fixedHeight]}
+		>
 			{({ pressed }) => (
 				<>
 					<View
@@ -33,7 +42,7 @@ export const Button = ({ onPress, children, color }: ButtonProps) => {
 						style={[
 							styles.button,
 							buttonColor.buttonBackgroundColor,
-							pressed ? styles.pressed : undefined,
+							pressed && styles.pressed,
 						]}
 					>
 						<View
@@ -105,6 +114,9 @@ const styles = StyleSheet.create({
 	titleShadow: {
 		...titleStyles,
 		color: colors.shadow.red,
+	},
+	fixedHeight: {
+		height: 70,
 	},
 	pressed: { top: "6%" },
 	redButtonBackground: { backgroundColor: colors.main.red },

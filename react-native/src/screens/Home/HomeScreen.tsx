@@ -1,25 +1,36 @@
-import { Button, colors } from "@numcol/ds"
+import { Button, colors, fonts } from "@numcol/ds"
 import { StyleSheet, Text, View } from "react-native"
 
 export const HomeScreen = () => {
 	return (
 		<View style={styles.container}>
-			<View style={styles.container2}>
-				<Button onPress={() => undefined} color={Button.Color.Red}>
-					Hola
-				</Button>
-				<Button onPress={() => undefined} color={Button.Color.Green}>
-					Hola
-				</Button>
-				<Button onPress={() => undefined} color={Button.Color.Blue}>
-					Hola
-				</Button>
-				<Button onPress={() => undefined} color={Button.Color.Yellow}>
-					Hola
-				</Button>
+			<View style={styles.titleContainer}>
+				<Text style={styles.title}>NumCol</Text>
+				<Text style={styles.subtitle}>
+					The brain game about numbers & colors
+				</Text>
 			</View>
-			<View style={styles.container2}>
-				<Text>Adios</Text>
+			<View style={styles.buttonsContainer}>
+				<Button onPress={() => undefined} color={Button.Color.Red} fixedHeight>
+					Jugar
+				</Button>
+				<Button
+					onPress={() => undefined}
+					color={Button.Color.Green}
+					fixedHeight
+				>
+					Modo infantil
+				</Button>
+				<Button onPress={() => undefined} color={Button.Color.Blue} fixedHeight>
+					Puntuar app
+				</Button>
+				<Button
+					onPress={() => undefined}
+					color={Button.Color.Yellow}
+					fixedHeight
+				>
+					Ajustes
+				</Button>
 			</View>
 		</View>
 	)
@@ -30,18 +41,30 @@ const styles = StyleSheet.create({
 		flex: 1,
 		backgroundColor: colors.main.white,
 		alignItems: "center",
-		justifyContent: "center",
+		justifyContent: "space-between",
+		padding: 40,
 	},
-	container2: {
+	titleContainer: {
+		flex: 1,
 		alignItems: "center",
 		justifyContent: "center",
 		width: "100%",
-		height: 70,
-		paddingLeft: 40,
-		paddingRight: 40,
 	},
-	text: {
-		fontFamily: "PoiretOne-Regular",
-		fontSize: 40,
+	buttonsContainer: {
+		alignItems: "center",
+		justifyContent: "space-between",
+		width: "100%",
+		height: 320,
+		marginBottom: 40,
+	},
+	title: {
+		fontFamily: fonts.poiretOne,
+		fontSize: 74,
+		color: colors.main.black,
+	},
+	subtitle: {
+		fontFamily: fonts.fredoka,
+		fontSize: 14,
+		color: colors.main.grey,
 	},
 })

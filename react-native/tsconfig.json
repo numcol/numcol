@@ -9,7 +9,12 @@
 		"noPropertyAccessFromIndexSignature": true,
 		"noUncheckedIndexedAccess": true,
 		"noUnusedLocals": true,
-		"noUnusedParameters": true
+		"noUnusedParameters": true,
+		"paths": {
+			// This needs to be mirrored in babel.config.js
+			"@numcol/ds": ["./src/ds"],
+			"@numcol/ds/*": ["./src/ds/*"]
+		}
 	},
 	"extends": "expo/tsconfig.base"
 }

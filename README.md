@@ -70,15 +70,27 @@ the Free Software Foundation, either version 3 of the License, or
 
 This program is distributed in the hope that it will be useful,
 but WITHOUT ANY WARRANTY; without even the implied warranty of
-MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
 GNU General Public License for more details.
 
 You should have received a copy of the GNU General Public License
-along with this program.  If not, see <https://www.gnu.org/licenses/>.
+along with this program. If not, see <https://www.gnu.org/licenses/>.
 
 ## Fonts Licensing
 
-Fonts are not authored by Alberto Varela and they are authored and licensed as described bellow:
+Fonts are not authored by Alberto Varela and they are authored and licensed as described below:
+
+### Fredoka
+
+Copyright 2016 The Fredoka Project Authors (<https://github.com/hafontia/Fredoka-One>)
+
+License: [SIL OPEN FONT LICENSE Version 1.1 - 26 February 2007](https://scripts.sil.org/cms/scripts/page.php?site_id=nrsi&id=OFL)
+
+### Poired One
+
+Copyright (c) 2011, Denis Masharov (denis.masharov@gmail.com)
+
+License: [SIL OPEN FONT LICENSE Version 1.1 - 26 February 2007](https://scripts.sil.org/cms/scripts/page.php?site_id=nrsi&id=OFL)
 
 ### Raleway
 

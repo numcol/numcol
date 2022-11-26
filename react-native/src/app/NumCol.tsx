@@ -3,6 +3,7 @@ import { SettingsProvider } from "./providers/SettingsProvider"
 
 interface NumColProps {
 	onReady?: () => void
+	jj: boolean
 }
 
 export const NumCol = ({ onReady }: NumColProps) => {

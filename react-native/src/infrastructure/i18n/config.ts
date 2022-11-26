@@ -1,7 +1,7 @@
+import { Language } from "@numcol/domain"
 import i18n from "i18next"
 import { initReactI18next } from "react-i18next"
 import { NativeModules, Platform } from "react-native"
-import { Languages } from "./languages"
 
 import ca from "./translations/ca.json"
 import en from "./translations/en.json"
@@ -10,7 +10,7 @@ import eu from "./translations/eu.json"
 import fr from "./translations/fr.json"
 import gl from "./translations/gl.json"
 
-const detectLanguage = (): Languages => {
+export const detectLanguage = (): Language => {
 	const deviceLanguage =
 		Platform.OS === "ios"
 			? NativeModules["SettingsManager"].settings.AppleLocale ||
@@ -18,44 +18,44 @@ const detectLanguage = (): Languages => {
 			: NativeModules["I18nManager"].localeIdentifier
 
 	if (typeof deviceLanguage !== "string") {
-		return Languages.En
+		return Language.En
 	}
 
 	const sanitizedLanguage = deviceLanguage
 		.trim()
 		.substring(0, 2)
-		.toLowerCase() as Languages
-	if (Object.values(Languages).includes(sanitizedLanguage)) {
+		.toLowerCase() as Language
+	if (Object.values(Language).includes(sanitizedLanguage)) {
 		return sanitizedLanguage
 	}
 
-	return Languages.En
+	return Language.En
 }
 
 export const initI18n = () =>
 	i18n.use(initReactI18next).init({
 		resources: {
-			[Languages.Ca]: {
+			[Language.Ca]: {
 				translation: ca,
 			},
-			[Languages.En]: {
+			[Language.En]: {
 				translation: en,
 			},
-			[Languages.Es]: {
+			[Language.Es]: {
 				translation: es,
 			},
-			[Languages.Eu]: {
+			[Language.Eu]: {
 				translation: eu,
 			},
-			[Languages.Fr]: {
+			[Language.Fr]: {
 				translation: fr,
 			},
-			[Languages.Gl]: {
+			[Language.Gl]: {
 				translation: gl,
 			},
 		},
 		lng: detectLanguage(),
-		fallbackLng: Languages.En,
+		fallbackLng: Language.En,
 		interpolation: {
 			escapeValue: false,
 		},

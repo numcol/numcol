@@ -14,12 +14,27 @@ module.exports = {
 		node: true,
 	},
 	rules: {
-		"@typescript-eslint/no-unused-vars": [
-			"error",
-			{
-				argsIgnorePattern: "^_",
-				destructuredArrayIgnorePattern: "^_",
-			},
-		],
+		"no-console": ["error"],
 	},
+	overrides: [
+		{
+			files: ["*.ts", "*.tsx"], // Your TypeScript files extension
+			parserOptions: {
+				project: ["./tsconfig.json"],
+			},
+			rules: {
+				"@typescript-eslint/no-floating-promises": [
+					"error",
+					{ ignoreVoid: true },
+				],
+				"@typescript-eslint/no-unused-vars": [
+					"error",
+					{
+						argsIgnorePattern: "^_",
+						destructuredArrayIgnorePattern: "^_",
+					},
+				],
+			},
+		},
+	],
 }

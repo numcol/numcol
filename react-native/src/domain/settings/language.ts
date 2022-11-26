@@ -1,4 +1,4 @@
-export enum Languages {
+export enum Language {
 	Ca = "ca",
 	En = "en",
 	Es = "es",

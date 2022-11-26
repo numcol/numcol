@@ -1,7 +1,7 @@
 import { Button, colors, fonts } from "@numcol/ds"
-import { useTranslation } from "@numcol/i18n"
+import { useTranslation } from "@numcol/infra"
 import { StyleSheet, Text, View } from "react-native"
-import { Routes, ScreenProps } from "../routes"
+import { Routes, ScreenProps } from "../../routes"
 
 export const HomeScreen = ({ navigation }: ScreenProps<"Home">) => {
 	const { t } = useTranslation()

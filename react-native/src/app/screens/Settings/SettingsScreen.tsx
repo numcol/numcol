@@ -1,32 +1,32 @@
+import { Language } from "@numcol/domain"
 import { Button, Dropdown, DropdownItem } from "@numcol/ds"
-import { useTranslation } from "@numcol/i18n"
+import { useTranslation } from "@numcol/infra"
 import { useState } from "react"
 import { StyleSheet, Text, View } from "react-native"
-import { Languages } from "../../i18n/languages"
-import { Routes, ScreenProps } from "../routes"
+import { useSettings } from "../../providers/SettingsProvider"
+import { Routes, ScreenProps } from "../../routes"
 
-const availableLanguages: Record<
-	Languages,
-	{ label: string; value: Languages }
-> = {
-	[Languages.En]: { label: "English", value: Languages.En },
-	[Languages.Es]: { label: "Español", value: Languages.Es },
-	[Languages.Fr]: { label: "Français", value: Languages.Fr },
-	[Languages.Eu]: { label: "Euskara", value: Languages.Eu },
-	[Languages.Gl]: { label: "Galego", value: Languages.Gl },
-	[Languages.Ca]: { label: "Català", value: Languages.Ca },
-}
+const availableLanguages: Record<Language, { label: string; value: Language }> =
+	{
+		[Language.En]: { label: "English", value: Language.En },
+		[Language.Es]: { label: "Español", value: Language.Es },
+		[Language.Fr]: { label: "Français", value: Language.Fr },
+		[Language.Eu]: { label: "Euskara", value: Language.Eu },
+		[Language.Gl]: { label: "Galego", value: Language.Gl },
+		[Language.Ca]: { label: "Català", value: Language.Ca },
+	}
 
 const dropdownData = Object.values(availableLanguages)
 
 export const SettingsScreen = ({ navigation }: ScreenProps<"Settings">) => {
-	const { t, currentLanguage, changeLanguage } = useTranslation()
+	const { t } = useTranslation()
+	const { language, setLanguage } = useSettings()
 	const [selected, setSelected] = useState<DropdownItem>(
-		availableLanguages[currentLanguage],
+		availableLanguages[language],
 	)
 
 	const handleLanguageChange = (item: DropdownItem) => {
-		changeLanguage(item.value as Languages)
+		setLanguage(item.value as Language)
 		setSelected(item)
 	}
 

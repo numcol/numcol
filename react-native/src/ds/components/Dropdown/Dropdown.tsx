@@ -7,6 +7,8 @@ import {
 	TouchableOpacity,
 	View,
 } from "react-native"
+import { colors, fonts } from "../../constants"
+import { Button } from "../Button/Button"
 
 export interface DropdownItem {
 	label: string
@@ -79,30 +81,37 @@ export const Dropdown = ({ label, data, onSelect }: DropdownProps) => {
 	}
 
 	return (
-		<TouchableOpacity
+		<Button
 			ref={DropdownButton}
-			style={styles.button}
 			onPress={toggleDropdown}
+			color={Button.Color.Green}
+			fixedHeight
 		>
 			{renderDropdown()}
-			<Text style={styles.buttonText}>
-				{(!!selected && selected.label) || label}
-			</Text>
-		</TouchableOpacity>
+			{(!!selected && selected.label) || label}
+		</Button>
 	)
 }
 
 const styles = StyleSheet.create({
 	button: {
-		flexDirection: "row",
+		height: 70,
+		width: "100%",
+	},
+	buttonContainer: {
+		flex: 1,
 		alignItems: "center",
-		backgroundColor: "#efefef",
-		height: 50,
-		zIndex: 1,
+		justifyContent: "center",
+		backgroundColor: colors.main.lightGrey,
+		borderRadius: 15,
+		width: "100%",
 	},
 	buttonText: {
-		flex: 1,
 		textAlign: "center",
+		color: colors.main.white,
+		fontFamily: fonts.fredokaBold,
+		fontSize: 32,
+		textTransform: "uppercase" as const,
 	},
 	icon: {
 		marginRight: 10,

@@ -1,8 +1,15 @@
 import { Language } from "@numcol/domain"
-import { Button, Dropdown, DropdownItem } from "@numcol/ds"
+import {
+	Button,
+	colors,
+	Dropdown,
+	DropdownItem,
+	Label,
+	PageTitle,
+} from "@numcol/ds"
 import { useTranslation } from "@numcol/infra"
 import { useState } from "react"
-import { StyleSheet, Text, View } from "react-native"
+import { StyleSheet, View } from "react-native"
 import { useSettings } from "../../providers/SettingsProvider"
 import { Routes, ScreenProps } from "../../routes"
 
@@ -33,20 +40,35 @@ export const SettingsScreen = ({ navigation }: ScreenProps<"Settings">) => {
 	return (
 		<View style={styles.container}>
 			<View style={styles.titleContainer}>
-				<Text>NumCol</Text>
-				<Text>The brain game about numbers & colors</Text>
-				<Dropdown
-					label={selected.label}
-					data={dropdownData}
-					onSelect={handleLanguageChange}
-				/>
-				<Button
-					onPress={() => navigation.navigate(Routes.Home)}
-					color={Button.Color.Blue}
-					fixedHeight
-				>
-					{t("back_to_menu")}
-				</Button>
+				<PageTitle>{t("settings")}</PageTitle>
+			</View>
+
+			<View style={styles.buttonContainer}>
+				<View style={styles.fieldContainer}>
+					<Label>{t("sound")}</Label>
+					<Dropdown
+						label={selected.label}
+						data={dropdownData}
+						onSelect={handleLanguageChange}
+					/>
+				</View>
+				<View style={styles.fieldContainer}>
+					<Label>{t("language")}</Label>
+					<Dropdown
+						label={selected.label}
+						data={dropdownData}
+						onSelect={handleLanguageChange}
+					/>
+				</View>
+				<View style={styles.backContainer}>
+					<Button
+						onPress={() => navigation.navigate(Routes.Home)}
+						color={Button.Color.Yellow}
+						fixedHeight
+					>
+						{t("back_to_menu")}
+					</Button>
+				</View>
 			</View>
 		</View>
 	)
@@ -56,13 +78,35 @@ const styles = StyleSheet.create({
 	container: {
 		flex: 1,
 		alignItems: "center",
-		justifyContent: "center",
+		justifyContent: "space-between",
+		width: "100%",
 		padding: 40,
+		backgroundColor: colors.main.white,
 	},
 	titleContainer: {
 		flex: 1,
+		width: "100%",
 		alignItems: "center",
 		justifyContent: "center",
+	},
+	backContainer: {
 		width: "100%",
+		alignItems: "center",
+		justifyContent: "center",
+		marginTop: 40,
+	},
+	fieldContainer: {
+		width: "100%",
+		alignItems: "center",
+		justifyContent: "center",
+		paddingBottom: 5,
+	},
+	buttonContainer: {
+		height: 320,
+		alignItems: "center",
+		justifyContent: "flex-end",
+		width: "100%",
+		marginBottom: 40,
+		padding: 0,
 	},
 })

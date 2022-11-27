@@ -1,3 +1,4 @@
+import { forwardRef, ForwardRefExoticComponent, RefAttributes } from "react"
 import { Pressable, StyleSheet, Text, View } from "react-native"
 import { colors, fonts } from "../../constants"
 
@@ -15,57 +16,62 @@ interface ButtonProps {
 	fixedHeight?: boolean
 }
 
-export const Button = ({
-	onPress,
-	children,
-	color,
-	fixedHeight,
-}: ButtonProps) => {
-	const buttonColor = buttonColors[color]
+interface Button
+	extends ForwardRefExoticComponent<ButtonProps & RefAttributes<View>> {
+	Color: typeof ButtonColor
+}
 
-	return (
-		<Pressable
-			onPress={onPress}
-			style={[styles.container, fixedHeight && styles.fixedHeight]}
-		>
-			{({ pressed }) => (
-				<>
-					<View
-						style={[
-							styles.buttonShadow,
-							buttonColor.buttonShadowBackgroundColor,
-						]}
-						accessibilityElementsHidden
-						importantForAccessibility="no-hide-descendants"
-					></View>
-					<View
-						style={[
-							styles.button,
-							buttonColor.buttonBackgroundColor,
-							pressed && styles.pressed,
-						]}
-					>
+export const Button = forwardRef<View, ButtonProps>(
+	({ onPress, children, color, fixedHeight }, ref) => {
+		const buttonColor = buttonColors[color]
+
+		return (
+			<Pressable
+				ref={ref}
+				onPress={onPress}
+				style={[styles.container, fixedHeight && styles.fixedHeight]}
+			>
+				{({ pressed }) => (
+					<>
 						<View
-							style={styles.titleShadowContainer}
+							style={[
+								styles.buttonShadow,
+								buttonColor.buttonShadowBackgroundColor,
+							]}
 							accessibilityElementsHidden
 							importantForAccessibility="no-hide-descendants"
+						></View>
+						<View
+							style={[
+								styles.button,
+								buttonColor.buttonBackgroundColor,
+								pressed && styles.pressed,
+							]}
 						>
-							<Text
-								style={[
-									styles.titleShadow,
-									buttonColor.textShadowBackgroundColor,
-								]}
+							<View
+								style={styles.titleShadowContainer}
+								accessibilityElementsHidden
+								importantForAccessibility="no-hide-descendants"
 							>
-								{children}
-							</Text>
+								<Text
+									style={[
+										styles.titleShadow,
+										buttonColor.textShadowBackgroundColor,
+									]}
+								>
+									{children}
+								</Text>
+							</View>
+							<Text style={styles.title}>{children}</Text>
 						</View>
-						<Text style={styles.title}>{children}</Text>
-					</View>
-				</>
-			)}
-		</Pressable>
-	)
-}
+					</>
+				)}
+			</Pressable>
+		)
+	},
+) as Button
+
+Button.displayName = "Button"
 
 Button.Color = ButtonColor
 

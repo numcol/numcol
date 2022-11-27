@@ -15,7 +15,7 @@ export const HomeScreen = ({ navigation }: ScreenProps<"Home">) => {
 			</View>
 			<View style={styles.buttonsContainer}>
 				<Button onPress={() => undefined} color={Button.Color.Red} fixedHeight>
-					{t("play")}
+					► {t("play")}
 				</Button>
 				<Button
 					onPress={() => undefined}
@@ -25,14 +25,14 @@ export const HomeScreen = ({ navigation }: ScreenProps<"Home">) => {
 					{t("kids_level")}
 				</Button>
 				<Button onPress={() => undefined} color={Button.Color.Blue} fixedHeight>
-					{t("rate")}
+					SPanish
 				</Button>
 				<Button
 					onPress={() => navigation.navigate(Routes.Settings)}
 					color={Button.Color.Yellow}
 					fixedHeight
 				>
-					{t("settings")}
+					♫ Audio ON
 				</Button>
 			</View>
 		</View>

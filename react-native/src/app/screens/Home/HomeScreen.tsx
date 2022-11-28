@@ -1,10 +1,7 @@
-import { faChildReaching } from "@fortawesome/free-solid-svg-icons/faChildReaching"
-import { faLanguage } from "@fortawesome/free-solid-svg-icons/faLanguage"
-import { faPlay } from "@fortawesome/free-solid-svg-icons/faPlay"
-import { faVolumeMute } from "@fortawesome/free-solid-svg-icons/faVolumeMute"
 import { Button, colors, fonts } from "@numcol/ds"
 import { useTranslation } from "@numcol/infra"
 import { StyleSheet, Text, View } from "react-native"
+import { SafeAreaView } from "react-native-safe-area-context"
 import { useSettings } from "../../providers/SettingsProvider"
 import { Routes, ScreenProps } from "../../routes"
 
@@ -13,7 +10,7 @@ export const HomeScreen = ({ navigation }: ScreenProps<"Home">) => {
 	const { language } = useSettings()
 
 	return (
-		<View style={styles.container}>
+		<SafeAreaView style={styles.container}>
 			<View style={styles.titleContainer}>
 				<Text style={styles.title}>NumCol</Text>
 				<Text style={styles.subtitle}>
@@ -24,7 +21,7 @@ export const HomeScreen = ({ navigation }: ScreenProps<"Home">) => {
 				<Button
 					onPress={() => undefined}
 					color={Button.Color.Red}
-					icon={faPlay}
+					icon="play"
 					fixedHeight
 				>
 					{t("play")}
@@ -33,7 +30,7 @@ export const HomeScreen = ({ navigation }: ScreenProps<"Home">) => {
 					onPress={() => undefined}
 					color={Button.Color.Green}
 					fixedHeight
-					icon={faChildReaching}
+					icon="child"
 				>
 					{t("kids_level")}
 				</Button>
@@ -41,7 +38,7 @@ export const HomeScreen = ({ navigation }: ScreenProps<"Home">) => {
 					onPress={() => undefined}
 					color={Button.Color.Blue}
 					fixedHeight
-					icon={faVolumeMute}
+					icon="volume-mute"
 				>
 					{t("sound")}
 				</Button>
@@ -49,12 +46,12 @@ export const HomeScreen = ({ navigation }: ScreenProps<"Home">) => {
 					onPress={() => navigation.navigate(Routes.Languages)}
 					color={Button.Color.Yellow}
 					fixedHeight
-					icon={faLanguage}
+					icon="language"
 				>
 					{t(`language_${language}`)}
 				</Button>
 			</View>
-		</View>
+		</SafeAreaView>
 	)
 }
 

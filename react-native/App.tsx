@@ -4,7 +4,10 @@ import { NavigationContainer } from "@react-navigation/native"
 import { useFonts } from "expo-font"
 import * as SplashScreen from "expo-splash-screen"
 import { StatusBar } from "expo-status-bar"
+
+import "intl-pluralrules"
 import { useCallback, useEffect, useState } from "react"
+import { SafeAreaProvider } from "react-native-safe-area-context"
 
 void initI18n()
 void SplashScreen.preventAutoHideAsync()
@@ -38,9 +41,11 @@ export default function App() {
 	}
 
 	return (
-		<NavigationContainer onReady={onNavigationContainerReady}>
-			<StatusBar style="dark" />
-			<NumCol onReady={onAppReady} />
-		</NavigationContainer>
+		<SafeAreaProvider>
+			<NavigationContainer onReady={onNavigationContainerReady}>
+				<StatusBar style="dark" />
+				<NumCol onReady={onAppReady} />
+			</NavigationContainer>
+		</SafeAreaProvider>
 	)
 }

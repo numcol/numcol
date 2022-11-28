@@ -1,6 +1,4 @@
-import { IconDefinition } from "@fortawesome/fontawesome-common-types"
-import { FontAwesomeIcon } from "@fortawesome/react-native-fontawesome"
-
+import FontAwesome from "@expo/vector-icons/FontAwesome5"
 import { forwardRef, ForwardRefExoticComponent, RefAttributes } from "react"
 import { Pressable, StyleSheet, Text, View } from "react-native"
 import { colors, fonts } from "../../constants"
@@ -17,7 +15,7 @@ interface ButtonProps {
 	children: string
 	color: ButtonColor
 	fixedHeight?: boolean
-	icon?: IconDefinition
+	icon?: string
 }
 
 interface Button
@@ -33,7 +31,9 @@ export const Button = forwardRef<View, ButtonProps>(
 			<Pressable
 				ref={ref}
 				onPress={onPress}
+				unstable_pressDelay={0}
 				style={[styles.container, fixedHeight && styles.fixedHeight]}
+				android_disableSound={true}
 			>
 				{({ pressed }) => (
 					<>
@@ -73,8 +73,8 @@ export const Button = forwardRef<View, ButtonProps>(
 								</Text>
 								{icon && (
 									<View style={styles.icon}>
-										<FontAwesomeIcon
-											icon={icon}
+										<FontAwesome
+											name={icon}
 											color={buttonColor.textShadowBackgroundColor.color}
 											size={24}
 										/>
@@ -84,8 +84,8 @@ export const Button = forwardRef<View, ButtonProps>(
 							<Text style={styles.title}>{children}</Text>
 							{icon && (
 								<View style={styles.icon}>
-									<FontAwesomeIcon
-										icon={icon}
+									<FontAwesome
+										name={icon}
 										color={colors.main.white}
 										size={24}
 									/>
@@ -132,7 +132,7 @@ const styles = StyleSheet.create({
 		textAlign: "center" as const,
 		color: colors.main.white,
 		fontFamily: fonts.fredokaBold,
-		fontSize: 32,
+		fontSize: 28,
 		textTransform: "uppercase",
 	},
 	titleShadowContainer: {
@@ -156,6 +156,7 @@ const styles = StyleSheet.create({
 		justifyContent: "center",
 		alignItems: "center",
 		height: "100%",
+		width: 32,
 	},
 	buttonWithIcon: {
 		justifyContent: "space-between",

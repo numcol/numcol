@@ -1,8 +1,7 @@
-import { FontAwesomeIcon } from "@fortawesome/react-native-fontawesome"
-import { StyleSheet, TouchableOpacity, View } from "react-native"
-
-import { faClose } from "@fortawesome/free-solid-svg-icons/faClose"
+import FontAwesome from "@expo/vector-icons/FontAwesome5"
 import { ReactNode } from "react"
+import { StyleSheet, TouchableOpacity, View } from "react-native"
+import { SafeAreaView } from "react-native-safe-area-context"
 import { colors } from "../../constants"
 
 interface ModalProps {
@@ -13,18 +12,18 @@ interface ModalProps {
 
 export const Modal = ({ close, closeText, children }: ModalProps) => {
 	return (
-		<View style={styles.modal}>
+		<SafeAreaView style={styles.modal}>
 			<View style={styles.closeButton}>
 				<TouchableOpacity
 					accessible={true}
 					accessibilityLabel={closeText}
 					onPress={close}
 				>
-					<FontAwesomeIcon icon={faClose} color={colors.main.black} size={32} />
+					<FontAwesome name="times-circle" color={colors.main.grey} size={32} />
 				</TouchableOpacity>
 			</View>
 			<View style={styles.container}>{children}</View>
-		</View>
+		</SafeAreaView>
 	)
 }
 
@@ -45,7 +44,7 @@ const styles = StyleSheet.create({
 		padding: 40,
 	},
 	closeButton: {
-		padding: 10,
+		padding: 20,
 		width: "100%",
 		flexDirection: "row",
 		justifyContent: "flex-end",

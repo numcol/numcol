@@ -1,5 +1,3 @@
-import { faCircle } from "@fortawesome/free-solid-svg-icons/faCircle"
-import { faCircleCheck } from "@fortawesome/free-solid-svg-icons/faCircleCheck"
 import { Language } from "@numcol/domain"
 import { Button, Modal, PageTitle } from "@numcol/ds"
 import { useTranslation } from "@numcol/infra"
@@ -39,7 +37,7 @@ export const LanguagesModal = ({ navigation }: ScreenProps<"Languages">) => {
 								onPress={() => selectLanguage(lng)}
 								color={Button.Color.Blue}
 								fixedHeight
-								icon={language === lng ? faCircleCheck : faCircle}
+								icon={language === lng ? "check-circle" : "circle"}
 							>
 								{t(`language_${lng}`)}
 							</Button>

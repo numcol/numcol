@@ -12,17 +12,29 @@ import {
 const settingsKey = "@numcol_settings"
 const defaultSettings: Settings = {
 	language: detectLanguage(),
+	audio: true,
 }
 
-const SettingsContext = createContext<{
+interface SettingsContextProps {
 	loaded: boolean
 	language: Language
+	audio: boolean
 	setLanguage: (language: Language) => void
-}>({
+	setAudio: (audio: boolean) => void
+}
+
+const SettingsContext = createContext<SettingsContextProps>({
 	loaded: false,
+	audio: true,
 	language: detectLanguage(),
 	setLanguage: () => undefined,
+	setAudio: () => undefined,
 })
+
+interface SettingsState {
+	loaded: boolean
+	settings: Settings
+}
 
 interface SettingsProviderProps {
 	children: ReactNode
@@ -30,10 +42,7 @@ interface SettingsProviderProps {
 
 export const SettingsProvider = ({ children }: SettingsProviderProps) => {
 	const { getItem, setItem } = useStorage()
-	const [state, setState] = useState<{
-		loaded: boolean
-		settings: Settings
-	}>({
+	const [state, setState] = useState<SettingsState>({
 		loaded: false,
 		settings: defaultSettings,
 	})
@@ -50,6 +59,7 @@ export const SettingsProvider = ({ children }: SettingsProviderProps) => {
 				setState((prev) => ({
 					settings: {
 						language: savedSettings.language ?? prev.settings.language,
+						audio: savedSettings.audio ?? prev.settings.audio,
 					},
 					loaded: true,
 				}))
@@ -62,7 +72,18 @@ export const SettingsProvider = ({ children }: SettingsProviderProps) => {
 	const setLanguage = useCallback(
 		(language: Language) => {
 			setState((prev) => {
-				const newSettings = { ...prev.settings, language }
+				const newSettings: Settings = { ...prev.settings, language }
+				void setItem(settingsKey, JSON.stringify(newSettings))
+				return { settings: newSettings, loaded: prev.loaded }
+			})
+		},
+		[setItem],
+	)
+
+	const setAudio = useCallback(
+		(audio: boolean) => {
+			setState((prev) => {
+				const newSettings: Settings = { ...prev.settings, audio }
 				void setItem(settingsKey, JSON.stringify(newSettings))
 				return { settings: newSettings, loaded: prev.loaded }
 			})
@@ -75,7 +96,9 @@ export const SettingsProvider = ({ children }: SettingsProviderProps) => {
 			value={{
 				loaded: state.loaded,
 				language: state.settings.language,
+				audio: state.settings.audio,
 				setLanguage,
+				setAudio,
 			}}
 		>
 			{children}
@@ -83,10 +106,6 @@ export const SettingsProvider = ({ children }: SettingsProviderProps) => {
 	)
 }
 
-export const useSettings = (): {
-	loaded: boolean
-	language: Language
-	setLanguage: (language: Language) => void
-} => {
+export const useSettings = (): SettingsContextProps => {
 	return useContext(SettingsContext)
 }

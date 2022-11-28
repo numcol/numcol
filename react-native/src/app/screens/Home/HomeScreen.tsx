@@ -7,7 +7,7 @@ import { Routes, ScreenProps } from "../../routes"
 
 export const HomeScreen = ({ navigation }: ScreenProps<"Home">) => {
 	const { t } = useTranslation()
-	const { language } = useSettings()
+	const { language, audio, setAudio } = useSettings()
 
 	return (
 		<SafeAreaView style={styles.container}>
@@ -35,10 +35,10 @@ export const HomeScreen = ({ navigation }: ScreenProps<"Home">) => {
 					{t("kids_level")}
 				</Button>
 				<Button
-					onPress={() => undefined}
+					onPress={() => setAudio(!audio)}
 					color={Button.Color.Blue}
 					fixedHeight
-					icon="volume-mute"
+					icon={audio ? "volume-up" : "volume-mute"}
 				>
 					{t("sound")}
 				</Button>

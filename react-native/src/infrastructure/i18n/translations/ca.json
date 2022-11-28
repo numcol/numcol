@@ -29,5 +29,12 @@
 	"red": "Vermell",
 	"green": "Verd",
 	"blue": "Blau",
-	"yellow": "Groc"
+	"yellow": "Groc",
+
+	"language_en": "English",
+	"language_es": "Español",
+	"language_fr": "Français",
+	"language_eu": "Euskara",
+	"language_gl": "Galego",
+	"language_ca": "Català"
 }

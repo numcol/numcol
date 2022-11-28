@@ -1,3 +1,6 @@
+import { IconDefinition } from "@fortawesome/fontawesome-common-types"
+import { FontAwesomeIcon } from "@fortawesome/react-native-fontawesome"
+
 import { forwardRef, ForwardRefExoticComponent, RefAttributes } from "react"
 import { Pressable, StyleSheet, Text, View } from "react-native"
 import { colors, fonts } from "../../constants"
@@ -11,9 +14,10 @@ enum ButtonColor {
 
 interface ButtonProps {
 	onPress: () => void
-	children?: React.ReactNode
+	children: string
 	color: ButtonColor
 	fixedHeight?: boolean
+	icon?: IconDefinition
 }
 
 interface Button
@@ -22,7 +26,7 @@ interface Button
 }
 
 export const Button = forwardRef<View, ButtonProps>(
-	({ onPress, children, color, fixedHeight }, ref) => {
+	({ onPress, children, color, fixedHeight, icon }, ref) => {
 		const buttonColor = buttonColors[color]
 
 		return (
@@ -35,6 +39,7 @@ export const Button = forwardRef<View, ButtonProps>(
 					<>
 						<View
 							style={[
+								styles.button,
 								styles.buttonShadow,
 								buttonColor.buttonShadowBackgroundColor,
 							]}
@@ -46,23 +51,46 @@ export const Button = forwardRef<View, ButtonProps>(
 								styles.button,
 								buttonColor.buttonBackgroundColor,
 								pressed && styles.pressed,
+								!!icon && styles.buttonWithIcon,
 							]}
 						>
 							<View
-								style={styles.titleShadowContainer}
+								style={[
+									styles.titleShadowContainer,
+									!!icon && styles.buttonWithIcon,
+								]}
 								accessibilityElementsHidden
 								importantForAccessibility="no-hide-descendants"
 							>
 								<Text
 									style={[
+										styles.title,
 										styles.titleShadow,
 										buttonColor.textShadowBackgroundColor,
 									]}
 								>
 									{children}
 								</Text>
+								{icon && (
+									<View style={styles.icon}>
+										<FontAwesomeIcon
+											icon={icon}
+											color={buttonColor.textShadowBackgroundColor.color}
+											size={24}
+										/>
+									</View>
+								)}
 							</View>
 							<Text style={styles.title}>{children}</Text>
+							{icon && (
+								<View style={styles.icon}>
+									<FontAwesomeIcon
+										icon={icon}
+										color={colors.main.white}
+										size={24}
+									/>
+								</View>
+							)}
 						</View>
 					</>
 				)}
@@ -75,23 +103,6 @@ Button.displayName = "Button"
 
 Button.Color = ButtonColor
 
-const titleStyles = {
-	textAlign: "center" as const,
-	color: colors.main.white,
-	fontFamily: fonts.fredokaBold,
-	fontSize: 32,
-	width: "100%",
-	textTransform: "uppercase" as const,
-}
-
-const buttonStyles = {
-	width: "100%",
-	height: "83%",
-	justifyContent: "center" as const,
-	borderRadius: 15,
-	backgroundColor: colors.main.red,
-}
-
 const styles = StyleSheet.create({
 	container: {
 		marginHorizontal: 16,
@@ -100,31 +111,55 @@ const styles = StyleSheet.create({
 		borderRadius: 15,
 		alignItems: "center",
 	},
-	button: buttonStyles,
+	button: {
+		width: "100%",
+		height: "83%",
+		justifyContent: "center",
+		alignItems: "center",
+		borderRadius: 15,
+		backgroundColor: colors.main.red,
+		flexDirection: "row",
+		paddingLeft: 20,
+		paddingRight: 20,
+	},
 	buttonShadow: {
-		...buttonStyles,
 		top: "17%",
 		left: 0,
 		position: "absolute",
 		backgroundColor: colors.shadow.red,
 	},
-	title: titleStyles,
+	title: {
+		textAlign: "center" as const,
+		color: colors.main.white,
+		fontFamily: fonts.fredokaBold,
+		fontSize: 32,
+		textTransform: "uppercase",
+	},
 	titleShadowContainer: {
 		position: "absolute",
 		top: 4,
-		left: 0,
+		left: 20,
 		justifyContent: "center",
+		alignItems: "center",
 		width: "100%",
 		height: "100%",
+		flexDirection: "row",
 	},
 	titleShadow: {
-		...titleStyles,
 		color: colors.shadow.red,
 	},
 	fixedHeight: {
 		height: 70,
 	},
-	pressed: { top: "6%" },
+	pressed: { top: "2%" },
+	icon: {
+		justifyContent: "center",
+		alignItems: "center",
+		height: "100%",
+	},
+	buttonWithIcon: {
+		justifyContent: "space-between",
+	},
 	redButtonBackground: { backgroundColor: colors.main.red },
 	redButtonShadowBackground: { backgroundColor: colors.shadow.red },
 	redButtonTextShadowBackground: { color: colors.shadow.red },

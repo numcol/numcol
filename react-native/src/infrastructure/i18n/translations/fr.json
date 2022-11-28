@@ -29,5 +29,12 @@
 	"red": "Rouge",
 	"green": "Vert",
 	"blue": "Bleu",
-	"yellow": "Jaune"
+	"yellow": "Jaune",
+
+	"language_en": "English",
+	"language_es": "Español",
+	"language_fr": "Français",
+	"language_eu": "Euskara",
+	"language_gl": "Galego",
+	"language_ca": "Català"
 }

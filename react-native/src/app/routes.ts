@@ -2,12 +2,12 @@ import type { NativeStackScreenProps } from "@react-navigation/native-stack"
 
 export const enum Routes {
 	Home = "Home",
-	Settings = "Settings",
+	Languages = "Languages",
 }
 
 export type RootStackParamList = {
 	Home: undefined
-	Settings: undefined
+	Languages: undefined
 }
 
 export type ScreenProps<T extends keyof RootStackParamList> =

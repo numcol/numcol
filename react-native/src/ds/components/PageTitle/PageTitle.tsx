@@ -13,7 +13,7 @@ export const PageTitle = ({ children }: LabelProps) => {
 const styles = StyleSheet.create({
 	text: {
 		fontFamily: fonts.poiretOne,
-		fontSize: 48,
+		fontSize: 36,
 		color: colors.main.black,
 		textTransform: "uppercase",
 	},

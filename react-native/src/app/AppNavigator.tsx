@@ -4,9 +4,10 @@ import { useTranslation } from "../infrastructure/i18n"
 import { useSettings } from "./providers/SettingsProvider"
 import { RootStackParamList, Routes } from "./routes"
 import { HomeScreen } from "./screens/Home/HomeScreen"
-import { SettingsScreen } from "./screens/Settings/SettingsScreen"
+import { LanguagesModal } from "./screens/Languages/LanguagesModal"
 
-const { Navigator, Screen } = createNativeStackNavigator<RootStackParamList>()
+const { Navigator, Screen, Group } =
+	createNativeStackNavigator<RootStackParamList>()
 
 interface AppNavigatorProps {
 	onReady?: () => void
@@ -33,8 +34,12 @@ export const AppNavigator = ({ onReady }: AppNavigatorProps) => {
 				headerShown: false,
 			}}
 		>
-			<Screen name={Routes.Home} component={HomeScreen} />
-			<Screen name={Routes.Settings} component={SettingsScreen} />
+			<Group>
+				<Screen name={Routes.Home} component={HomeScreen} />
+			</Group>
+			<Group screenOptions={{ presentation: "modal" }}>
+				<Screen name={Routes.Languages} component={LanguagesModal} />
+			</Group>
 		</Navigator>
 	)
 }

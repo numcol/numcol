@@ -1,10 +1,17 @@
+import { faChildReaching } from "@fortawesome/free-solid-svg-icons/faChildReaching"
+import { faLanguage } from "@fortawesome/free-solid-svg-icons/faLanguage"
+import { faPlay } from "@fortawesome/free-solid-svg-icons/faPlay"
+import { faVolumeMute } from "@fortawesome/free-solid-svg-icons/faVolumeMute"
 import { Button, colors, fonts } from "@numcol/ds"
 import { useTranslation } from "@numcol/infra"
 import { StyleSheet, Text, View } from "react-native"
+import { useSettings } from "../../providers/SettingsProvider"
 import { Routes, ScreenProps } from "../../routes"
 
 export const HomeScreen = ({ navigation }: ScreenProps<"Home">) => {
 	const { t } = useTranslation()
+	const { language } = useSettings()
+
 	return (
 		<View style={styles.container}>
 			<View style={styles.titleContainer}>
@@ -14,25 +21,37 @@ export const HomeScreen = ({ navigation }: ScreenProps<"Home">) => {
 				</Text>
 			</View>
 			<View style={styles.buttonsContainer}>
-				<Button onPress={() => undefined} color={Button.Color.Red} fixedHeight>
-					► {t("play")}
+				<Button
+					onPress={() => undefined}
+					color={Button.Color.Red}
+					icon={faPlay}
+					fixedHeight
+				>
+					{t("play")}
 				</Button>
 				<Button
 					onPress={() => undefined}
 					color={Button.Color.Green}
 					fixedHeight
+					icon={faChildReaching}
 				>
 					{t("kids_level")}
 				</Button>
-				<Button onPress={() => undefined} color={Button.Color.Blue} fixedHeight>
-					SPanish
+				<Button
+					onPress={() => undefined}
+					color={Button.Color.Blue}
+					fixedHeight
+					icon={faVolumeMute}
+				>
+					{t("sound")}
 				</Button>
 				<Button
-					onPress={() => navigation.navigate(Routes.Settings)}
+					onPress={() => navigation.navigate(Routes.Languages)}
 					color={Button.Color.Yellow}
 					fixedHeight
+					icon={faLanguage}
 				>
-					♫ Audio ON
+					{t(`language_${language}`)}
 				</Button>
 			</View>
 		</View>

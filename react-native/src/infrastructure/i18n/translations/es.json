@@ -29,5 +29,12 @@
 	"red": "Rojo",
 	"green": "Verde",
 	"blue": "Azul",
-	"yellow": "Amarillo"
+	"yellow": "Amarillo",
+
+	"language_en": "English",
+	"language_es": "Español",
+	"language_fr": "Français",
+	"language_eu": "Euskara",
+	"language_gl": "Galego",
+	"language_ca": "Català"
 }

@@ -5,7 +5,7 @@ import { SafeAreaView } from "react-native-safe-area-context"
 import { useSettings } from "../../providers/SettingsProvider"
 import { Routes, ScreenProps } from "../../routes"
 
-export const HomeScreen = ({ navigation }: ScreenProps<"Home">) => {
+export const HomeScreen = ({ navigation }: ScreenProps<Routes.Home>) => {
 	const { t } = useTranslation()
 	const { language, audio, setAudio } = useSettings()
 
@@ -27,7 +27,7 @@ export const HomeScreen = ({ navigation }: ScreenProps<"Home">) => {
 					{t("play")}
 				</Button>
 				<Button
-					onPress={() => undefined}
+					onPress={() => navigation.navigate(Routes.CountDown)}
 					color={Button.Color.Green}
 					fixedHeight
 					icon="child"

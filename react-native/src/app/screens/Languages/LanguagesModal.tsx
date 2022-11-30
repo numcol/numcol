@@ -3,7 +3,7 @@ import { Button, Modal, PageTitle } from "@numcol/ds"
 import { useTranslation } from "@numcol/infra"
 import { StyleSheet, View } from "react-native"
 import { useSettings } from "../../providers/SettingsProvider"
-import { ScreenProps } from "../../routes"
+import { Routes, ScreenProps } from "../../routes"
 
 const availableLanguages = [
 	Language.En,
@@ -14,7 +14,9 @@ const availableLanguages = [
 	Language.Gl,
 ]
 
-export const LanguagesModal = ({ navigation }: ScreenProps<"Languages">) => {
+export const LanguagesModal = ({
+	navigation,
+}: ScreenProps<Routes.Languages>) => {
 	const { t } = useTranslation()
 	const { language, setLanguage } = useSettings()
 

@@ -3,6 +3,7 @@ import { useEffect } from "react"
 import { useTranslation } from "../infrastructure/i18n"
 import { useSettings } from "./providers/SettingsProvider"
 import { RootStackParamList, Routes } from "./routes"
+import { CountDownScreen } from "./screens/CountDown/CountDownScreen"
 import { HomeScreen } from "./screens/Home/HomeScreen"
 import { LanguagesModal } from "./screens/Languages/LanguagesModal"
 
@@ -36,6 +37,7 @@ export const AppNavigator = ({ onReady }: AppNavigatorProps) => {
 		>
 			<Group>
 				<Screen name={Routes.Home} component={HomeScreen} />
+				<Screen name={Routes.CountDown} component={CountDownScreen} />
 			</Group>
 			<Group screenOptions={{ presentation: "modal" }}>
 				<Screen name={Routes.Languages} component={LanguagesModal} />

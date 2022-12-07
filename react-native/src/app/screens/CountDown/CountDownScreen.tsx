@@ -74,7 +74,7 @@ export const CountDownScreen = ({
 					}
 					fromUpToMiddle.stop()
 					fromMiddleToDown.stop()
-					navigation.goBack()
+					navigation.navigate(Routes.Game)
 					return
 				}
 				isGoingOut.current = !isGoingOut.current

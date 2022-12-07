@@ -4,12 +4,14 @@ export const enum Routes {
 	Home = "Home",
 	Languages = "Languages",
 	CountDown = "CountDown",
+	Game = "Game",
 }
 
 export type RootStackParamList = {
 	Home: undefined
 	Languages: undefined
 	CountDown: undefined
+	Game: undefined
 }
 
 export type ScreenProps<T extends keyof RootStackParamList> =

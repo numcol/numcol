@@ -1,6 +1,6 @@
 import { Answer } from "./answer"
 import { Numcol } from "./numcol"
-import { randomAnswers, randomQuestion } from "./randomGenerator"
+import { randomQuestion } from "./randomGenerator"
 
 const scoreIncreaseByCorrectAnswer = 10
 
@@ -43,4 +43,14 @@ export class Game {
 
 		return newQuestion
 	}
+}
+
+const randomAnswers = (): Answer[] => {
+	const answers: Answer[] = []
+
+	for (let i = 1; i <= 36; i++) {
+		answers.push(Answer.randomAnswer(i))
+	}
+
+	return answers
 }

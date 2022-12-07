@@ -3,7 +3,7 @@ import { forwardRef, ForwardRefExoticComponent, RefAttributes } from "react"
 import { Pressable, StyleSheet, Text, View } from "react-native"
 import { colors, fonts } from "../../constants"
 
-enum ButtonColor {
+export enum ButtonColor {
 	Red = "Red",
 	Blue = "Blue",
 	Green = "Green",
@@ -105,7 +105,6 @@ Button.Color = ButtonColor
 
 const styles = StyleSheet.create({
 	container: {
-		marginHorizontal: 16,
 		width: "100%",
 		height: "100%",
 		borderRadius: 15,
@@ -151,7 +150,7 @@ const styles = StyleSheet.create({
 	fixedHeight: {
 		height: 70,
 	},
-	pressed: { top: "2%" },
+	pressed: { top: 4 },
 	icon: {
 		justifyContent: "center",
 		alignItems: "center",

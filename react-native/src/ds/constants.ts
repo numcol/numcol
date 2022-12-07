@@ -5,9 +5,10 @@ export const colors = {
 		blue: "#4285F4",
 		green: "#0F9D58",
 		yellow: "#F4B400",
-		black: "#000000",
+		black: "#505050",
 		grey: "#808080",
 		lightGrey: "#C0C0C0",
+		extraLightGrey: "#E0E0E0",
 	},
 	shadow: {
 		red: "#C23023",
@@ -18,7 +19,6 @@ export const colors = {
 }
 
 export const fonts = {
-	poiretOne: "PoiretOne-Regular",
 	fredoka: "Fredoka-Regular",
 	fredokaBold: "Fredoka-SemiBold",
 }

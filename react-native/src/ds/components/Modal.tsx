@@ -2,7 +2,7 @@ import FontAwesome from "@expo/vector-icons/FontAwesome5"
 import { ReactNode } from "react"
 import { StyleSheet, TouchableOpacity, View } from "react-native"
 import { SafeAreaView } from "react-native-safe-area-context"
-import { colors } from "../../constants"
+import { colors } from "../constants"
 
 interface ModalProps {
 	close: () => void

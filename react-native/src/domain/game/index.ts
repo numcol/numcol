@@ -1,0 +1,5 @@
+export * from "./answer"
+export * from "./color"
+export * from "./game"
+export * from "./number"
+export * from "./numcol"

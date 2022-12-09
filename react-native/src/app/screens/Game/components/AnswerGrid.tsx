@@ -1,5 +1,5 @@
+import { Answer } from "@numcol/domain"
 import { StyleSheet, View } from "react-native"
-import { Answer } from "../../../../domain/game/answer"
 import { AnswerButton } from "./AnswerButton"
 
 interface AnswerGridProps {

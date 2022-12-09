@@ -1,9 +1,9 @@
 import { colors, fonts } from "@numcol/ds"
+import { useLogger } from "@numcol/infra"
 import { StackActions } from "@react-navigation/native"
 import { useCallback, useEffect, useMemo, useRef, useState } from "react"
 import { Animated, Dimensions, StyleSheet, Text } from "react-native"
 import { SafeAreaView } from "react-native-safe-area-context"
-import { useLogger } from "../../../infrastructure/logger"
 import { Routes, ScreenProps } from "../../routes"
 
 const duration = 500

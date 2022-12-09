@@ -1,12 +1,10 @@
+import { Answer, Game } from "@numcol/domain"
+import { ShakeView, ShakeViewRef } from "@numcol/ds"
+import { randomBoolean, useLogger } from "@numcol/infra"
 import { useCallback, useEffect, useRef, useState } from "react"
-import { Answer } from "../../../../domain/game/answer"
-import { Game } from "../../../../domain/game/game"
-import { randomBoolean } from "../../../../domain/game/randomGenerator"
-import { useLogger } from "../../../../infrastructure/logger"
-import { AnswerGrid } from "../components/AnswerGrid"
-import { Question } from "../components/Question"
-import { ScoreBoard } from "../components/ScoreBoard"
-import { ShakeView, ShakeViewRef } from "./ShakeView"
+import { AnswerGrid } from "./AnswerGrid"
+import { Question } from "./Question"
+import { ScoreBoard } from "./ScoreBoard"
 
 export const GameBoard = () => {
 	const [game, setGame] = useState(Game.create())

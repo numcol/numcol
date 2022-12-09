@@ -1,8 +1,7 @@
 import { Button, colors, fonts } from "@numcol/ds"
-import { useTranslation } from "@numcol/infra"
+import { useLogger, useTranslation } from "@numcol/infra"
 import { Dimensions, StyleSheet, Text, View } from "react-native"
 import { SafeAreaView } from "react-native-safe-area-context"
-import { useLogger } from "../../../infrastructure/logger"
 import { useSettings } from "../../providers/SettingsProvider"
 import { Routes, ScreenProps } from "../../routes"
 

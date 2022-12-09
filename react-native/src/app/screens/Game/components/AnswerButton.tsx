@@ -1,9 +1,7 @@
+import { Answer, NumcolColor, NumcolNumber } from "@numcol/domain"
 import { Button, ButtonColor } from "@numcol/ds"
 import { memo, useCallback } from "react"
 import { Dimensions, StyleSheet, View } from "react-native"
-import { Answer } from "../../../../domain/game/answer"
-import { NumcolColor } from "../../../../domain/game/color"
-import { NumcolNumber } from "../../../../domain/game/number"
 
 const size = (Dimensions.get("window").width - 20 - 25) / 6
 

@@ -1,10 +1,8 @@
-import { colors, fonts } from "@numcol/ds"
+import { NumcolColor, NumcolNumber } from "@numcol/domain"
+import { colors, FlipView, FlipViewRef, fonts } from "@numcol/ds"
+import { useTranslation } from "@numcol/infra"
 import { memo, useEffect, useRef } from "react"
 import { StyleSheet, Text, View } from "react-native"
-import { NumcolColor } from "../../../../domain/game/color"
-import { NumcolNumber } from "../../../../domain/game/number"
-import { useTranslation } from "../../../../infrastructure/i18n"
-import { FlipView, FlipViewRef } from "./FlipView"
 
 interface QuestionProps {
 	color: NumcolColor

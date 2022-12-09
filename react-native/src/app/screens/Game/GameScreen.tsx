@@ -1,6 +1,6 @@
+import { useLogger } from "@numcol/infra"
 import { StyleSheet } from "react-native"
 import { SafeAreaView } from "react-native-safe-area-context"
-import { useLogger } from "../../../infrastructure/logger"
 import { Routes, ScreenProps } from "../../routes"
 import { GameBoard } from "./components/GameBoard"
 

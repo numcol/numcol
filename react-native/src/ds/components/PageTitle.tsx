@@ -1,6 +1,6 @@
 import { ReactNode } from "react"
 import { StyleSheet, Text } from "react-native"
-import { colors } from "../../constants"
+import { colors, fonts } from "../constants"
 
 interface LabelProps {
 	children?: ReactNode
@@ -12,6 +12,7 @@ export const PageTitle = ({ children }: LabelProps) => {
 
 const styles = StyleSheet.create({
 	text: {
+		fontFamily: fonts.fredokaBold,
 		fontSize: 36,
 		color: colors.main.black,
 		textTransform: "uppercase",

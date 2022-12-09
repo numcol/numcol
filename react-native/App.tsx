@@ -1,26 +1,36 @@
 import { NumCol } from "@numcol/app"
 import { initI18n } from "@numcol/infra"
-import { NavigationContainer } from "@react-navigation/native"
+import { DefaultTheme, NavigationContainer } from "@react-navigation/native"
 import { Asset } from "expo-asset"
 import { useFonts } from "expo-font"
 import * as SplashScreen from "expo-splash-screen"
 import { StatusBar } from "expo-status-bar"
 import "intl-pluralrules"
 import { useCallback, useEffect, useState } from "react"
+import "react-native-gesture-handler"
 import { SafeAreaProvider } from "react-native-safe-area-context"
+
+const navTheme = {
+	...DefaultTheme,
+	colors: {
+		...DefaultTheme.colors,
+		background: "transparent",
+	},
+}
 
 void initI18n()
 void SplashScreen.preventAutoHideAsync()
 
-const images = [
-	require("./assets/seamless-memphis-geometric-lines-pattern.png"),
-]
+const images = {
+	background: require("./assets/seamless-memphis-geometric-lines-pattern.png"),
+}
 const fonts = {
 	"Fredoka-Regular": require("./assets/fonts/Fredoka-Regular.ttf"),
 	"Fredoka-SemiBold": require("./assets/fonts/Fredoka-SemiBold.ttf"),
 }
 
-const preFetchImages = () => Promise.all(images.map((i) => Asset.loadAsync(i)))
+const preFetchImages = () =>
+	Promise.all(Object.values(images).map((i) => Asset.loadAsync(i)))
 
 export default function App() {
 	const [navigationContainerReady, setNavigationContainerReady] =
@@ -53,9 +63,12 @@ export default function App() {
 
 	return (
 		<SafeAreaProvider>
-			<NavigationContainer onReady={onNavigationContainerReady}>
+			<NavigationContainer
+				theme={navTheme}
+				onReady={onNavigationContainerReady}
+			>
 				<StatusBar style="dark" />
-				<NumCol onReady={onAppReady} />
+				<NumCol onReady={onAppReady} background={images.background} />
 			</NavigationContainer>
 		</SafeAreaProvider>
 	)

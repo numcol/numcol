@@ -4,12 +4,10 @@ import {
 	Dimensions,
 	Easing,
 	Image,
+	ImageURISource,
 	StyleSheet,
 	View,
 } from "react-native"
-
-// eslint-disable-next-line @typescript-eslint/no-var-requires
-const image = require("../../../../assets/seamless-memphis-geometric-lines-pattern.png")
 
 const screenHeight = Dimensions.get("window").height
 
@@ -42,7 +40,11 @@ const interpolateCircularMotionOverY = () => {
 	return { inputRange, outputRange }
 }
 
-export const Background = () => {
+interface BackgroundProps {
+	image: ImageURISource
+}
+
+export const Background = ({ image }: BackgroundProps) => {
 	const translateValue = useRef(new Animated.Value(initialValue))
 
 	useEffect(() => {

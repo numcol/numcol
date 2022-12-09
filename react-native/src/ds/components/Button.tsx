@@ -1,7 +1,7 @@
 import FontAwesome from "@expo/vector-icons/FontAwesome5"
 import { ComponentType, memo, MemoExoticComponent } from "react"
 import { Pressable, StyleSheet, Text, View } from "react-native"
-import { colors, fonts } from "../../constants"
+import { colors, fonts } from "../constants"
 
 export enum ButtonColor {
 	Red = "Red",

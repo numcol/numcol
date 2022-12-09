@@ -9,6 +9,7 @@ import { Animated } from "react-native"
 
 interface ShakeViewProps {
 	children: ReactNode
+	vertical?: boolean
 }
 
 export interface ShakeViewRef {
@@ -16,7 +17,7 @@ export interface ShakeViewRef {
 }
 
 export const ShakeView = forwardRef<ShakeViewRef, ShakeViewProps>(
-	({ children }, ref) => {
+	({ children, vertical }, ref) => {
 		useImperativeHandle(ref, () => ({
 			shake: () => {
 				shake()
@@ -29,34 +30,32 @@ export const ShakeView = forwardRef<ShakeViewRef, ShakeViewProps>(
 			Animated.sequence([
 				Animated.timing(shakeAnimationValue.current, {
 					toValue: 10,
-					duration: 100,
+					duration: 50,
 					useNativeDriver: true,
 				}),
 				Animated.timing(shakeAnimationValue.current, {
 					toValue: -10,
-					duration: 100,
+					duration: 50,
 					useNativeDriver: true,
 				}),
 				Animated.timing(shakeAnimationValue.current, {
 					toValue: 10,
-					duration: 100,
+					duration: 50,
 					useNativeDriver: true,
 				}),
 				Animated.timing(shakeAnimationValue.current, {
 					toValue: 0,
-					duration: 100,
+					duration: 50,
 					useNativeDriver: true,
 				}),
 			]).start()
 		}, [])
 
-		return (
-			<Animated.View
-				style={{ transform: [{ translateX: shakeAnimationValue.current }] }}
-			>
-				{children}
-			</Animated.View>
-		)
+		const transform = vertical
+			? [{ translateY: shakeAnimationValue.current }]
+			: [{ translateX: shakeAnimationValue.current }]
+
+		return <Animated.View style={{ transform }}>{children}</Animated.View>
 	},
 )
 

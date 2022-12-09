@@ -1,6 +1,7 @@
 import { useCallback, useEffect, useRef, useState } from "react"
 import { Answer } from "../../../../domain/game/answer"
 import { Game } from "../../../../domain/game/game"
+import { randomBoolean } from "../../../../domain/game/randomGenerator"
 import { useLogger } from "../../../../infrastructure/logger"
 import { AnswerGrid } from "../components/AnswerGrid"
 import { Question } from "../components/Question"
@@ -10,6 +11,7 @@ import { ShakeView, ShakeViewRef } from "./ShakeView"
 export const GameBoard = () => {
 	const [game, setGame] = useState(Game.create())
 	const [answer, setAnswer] = useState<Answer | undefined>()
+	const [colorFirst, setColorFirst] = useState(randomBoolean())
 	const shakeView = useRef<ShakeViewRef>(null)
 	const { info } = useLogger()
 
@@ -29,6 +31,7 @@ export const GameBoard = () => {
 
 		if (answer.isCorrectFor(game.question)) {
 			info(`Correct answer: ${logInfo}`)
+			setColorFirst(randomBoolean())
 		} else {
 			info(`Incorrect answer: ${logInfo}`)
 			shakeView.current?.shake()
@@ -45,7 +48,11 @@ export const GameBoard = () => {
 	return (
 		<>
 			<ScoreBoard score={game.score} />
-			<Question question={game.question} />
+			<Question
+				color={game.question.color}
+				number={game.question.number}
+				colorFirst={colorFirst}
+			/>
 			<ShakeView ref={shakeView}>
 				<AnswerGrid answers={game.answers} reply={reply} />
 			</ShakeView>

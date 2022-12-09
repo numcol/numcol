@@ -1,7 +1,9 @@
 import { colors, fonts } from "@numcol/ds"
+import { StackActions } from "@react-navigation/native"
 import { useCallback, useEffect, useMemo, useRef, useState } from "react"
 import { Animated, Dimensions, StyleSheet, Text } from "react-native"
 import { SafeAreaView } from "react-native-safe-area-context"
+import { useLogger } from "../../../infrastructure/logger"
 import { Routes, ScreenProps } from "../../routes"
 
 const duration = 500
@@ -18,6 +20,8 @@ export const CountDownScreen = ({
 	const [starting2Text, setStarting2Text] = useState(String(starting2.current))
 	const fromUpToMiddleValue = useRef(new Animated.Value(0))
 	const fromMiddleToDownValue = useRef(new Animated.Value(-windowHeight))
+
+	useLogger("Countdown screen")
 
 	const fromUpToMiddle = useMemo(
 		() =>
@@ -74,7 +78,8 @@ export const CountDownScreen = ({
 					}
 					fromUpToMiddle.stop()
 					fromMiddleToDown.stop()
-					navigation.navigate(Routes.Game)
+					// navigation.navigate(Routes.Game)
+					navigation.dispatch(StackActions.replace(Routes.Game))
 					return
 				}
 				isGoingOut.current = !isGoingOut.current

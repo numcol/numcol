@@ -2,6 +2,7 @@ import { Button, colors, fonts } from "@numcol/ds"
 import { useTranslation } from "@numcol/infra"
 import { Dimensions, StyleSheet, Text, View } from "react-native"
 import { SafeAreaView } from "react-native-safe-area-context"
+import { useLogger } from "../../../infrastructure/logger"
 import { useSettings } from "../../providers/SettingsProvider"
 import { Routes, ScreenProps } from "../../routes"
 
@@ -10,6 +11,7 @@ import { Routes, ScreenProps } from "../../routes"
 export const HomeScreen = ({ navigation }: ScreenProps<Routes.Home>) => {
 	const { t } = useTranslation()
 	const { language, audio, setAudio } = useSettings()
+	useLogger("Home screen")
 
 	return (
 		<View style={styles.background}>

@@ -66,6 +66,7 @@ const styles = StyleSheet.create({
 	},
 	textGrow: {
 		flex: 1,
+		letterSpacing: 1,
 	},
 	textCenter: {
 		textAlign: "center",

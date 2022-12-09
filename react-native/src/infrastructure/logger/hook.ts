@@ -1,4 +1,4 @@
-import { useCallback } from "react"
+import { useCallback, useEffect } from "react"
 
 import * as FileSystem from "expo-file-system"
 import { consoleTransport, fileAsyncTransport, logger } from "react-native-logs"
@@ -27,7 +27,9 @@ const LOG = logger.createLogger<"debug" | "info" | "warn" | "error">(config)
 type LogFunction = (message: string | Record<string, unknown>) => void
 type LogErrorFunction = (error: Error | Record<string, unknown>) => void
 
-export const useLogger = (): {
+export const useLogger = (
+	onRenderDebug?: string,
+): {
 	debug: LogFunction
 	info: LogFunction
 	warn: LogFunction
@@ -43,6 +45,12 @@ export const useLogger = (): {
 	const warn = useCallback((message: string | Record<string, unknown>) => {
 		LOG.warn(message)
 	}, [])
+
+	useEffect(() => {
+		if (onRenderDebug) {
+			debug(onRenderDebug)
+		}
+	}, [debug, onRenderDebug])
 
 	const error = useCallback((error: Error | Record<string, unknown>) => {
 		if (error instanceof Error) {

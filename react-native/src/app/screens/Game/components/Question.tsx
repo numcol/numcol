@@ -60,7 +60,7 @@ const styles = StyleSheet.create({
 	text: {
 		color: colors.main.black,
 		fontFamily: fonts.fredokaBold,
-		fontSize: 28,
+		fontSize: 24,
 		textTransform: "uppercase",
 	},
 	textGrow: {

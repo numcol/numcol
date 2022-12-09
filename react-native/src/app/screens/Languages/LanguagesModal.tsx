@@ -1,9 +1,11 @@
 import { Language } from "@numcol/domain"
-import { Button, Modal, PageTitle } from "@numcol/ds"
+import { Modal, PageTitle } from "@numcol/ds"
 import { useTranslation } from "@numcol/infra"
+import { useCallback } from "react"
 import { StyleSheet, View } from "react-native"
 import { useSettings } from "../../providers/SettingsProvider"
 import { Routes, ScreenProps } from "../../routes"
+import { LanguageButton } from "./components/LanguageButton"
 
 const availableLanguages = [
 	Language.En,
@@ -18,12 +20,15 @@ export const LanguagesModal = ({
 	navigation,
 }: ScreenProps<Routes.Languages>) => {
 	const { t } = useTranslation()
-	const { language, setLanguage } = useSettings()
+	const { setLanguage } = useSettings()
 
-	const selectLanguage = (lng: Language) => {
-		setLanguage(lng)
-		navigation.goBack()
-	}
+	const selectLanguage = useCallback(
+		(lng: Language) => {
+			setLanguage(lng)
+			navigation.goBack()
+		},
+		[navigation, setLanguage],
+	)
 
 	return (
 		<Modal close={() => navigation.goBack()} closeText={t("back_to_menu")}>
@@ -34,16 +39,11 @@ export const LanguagesModal = ({
 
 				<View style={styles.buttonContainer}>
 					{availableLanguages.map((lng) => (
-						<View key={`lng_button_${lng}`} style={styles.fieldContainer}>
-							<Button
-								onPress={() => selectLanguage(lng)}
-								color={Button.Color.Blue}
-								fixedHeight
-								icon={language === lng ? "check-circle" : "circle"}
-							>
-								{t(`language_${lng}`)}
-							</Button>
-						</View>
+						<LanguageButton
+							key={`lng_button_${lng}`}
+							lng={lng}
+							selectLanguage={selectLanguage}
+						/>
 					))}
 				</View>
 			</View>
@@ -63,12 +63,6 @@ const styles = StyleSheet.create({
 		width: "100%",
 		alignItems: "center",
 		justifyContent: "center",
-	},
-	fieldContainer: {
-		width: "100%",
-		alignItems: "center",
-		justifyContent: "center",
-		paddingBottom: 5,
 	},
 	buttonContainer: {
 		alignItems: "center",

@@ -1,6 +1,7 @@
 import { useCallback, useEffect, useRef, useState } from "react"
 import { Answer } from "../../../../domain/game/answer"
 import { Game } from "../../../../domain/game/game"
+import { useLogger } from "../../../../infrastructure/logger"
 import { AnswerGrid } from "../components/AnswerGrid"
 import { Question } from "../components/Question"
 import { ScoreBoard } from "../components/ScoreBoard"
@@ -10,19 +11,32 @@ export const GameBoard = () => {
 	const [game, setGame] = useState(Game.create())
 	const [answer, setAnswer] = useState<Answer | undefined>()
 	const shakeView = useRef<ShakeViewRef>(null)
+	const { info } = useLogger()
+
+	useEffect(() => {
+		info("Game start")
+	}, [info])
 
 	useEffect(() => {
 		if (!answer) {
 			return
 		}
 
-		if (!answer.isCorrectFor(game.question)) {
+		const logInfo = JSON.stringify({
+			question: game.question.toString(),
+			answer: answer.numcol.toString(),
+		})
+
+		if (answer.isCorrectFor(game.question)) {
+			info(`Correct answer: ${logInfo}`)
+		} else {
+			info(`Incorrect answer: ${logInfo}`)
 			shakeView.current?.shake()
 		}
 
 		setGame(game.reply(answer))
 		setAnswer(undefined)
-	}, [answer, game])
+	}, [answer, game, info])
 
 	const reply = useCallback((nanswer: Answer) => {
 		setAnswer(nanswer)

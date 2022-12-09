@@ -30,6 +30,7 @@ specifiers:
   react: 18.1.0
   react-i18next: ^12.0.0
   react-native: 0.70.5
+  react-native-logs: ^5.0.1
   react-native-safe-area-context: 4.4.1
   react-native-screens: ~3.18.0
   react-native-svg: 13.4.0
@@ -52,6 +53,7 @@ dependencies:
   react: 18.1.0
   react-i18next: 12.0.0_idebtfutoeavdd62rgs47uwije
   react-native: 0.70.5_54md7p3jw3ru3lahxqgw5vptci
+  react-native-logs: 5.0.1
   react-native-safe-area-context: 4.4.1_tj3nonr5gneraukzjkxpsiy7yu
   react-native-screens: 3.18.2_tj3nonr5gneraukzjkxpsiy7yu
   react-native-svg: 13.4.0_tj3nonr5gneraukzjkxpsiy7yu
@@ -7664,6 +7666,10 @@ packages:
 
   /react-native-gradle-plugin/0.70.3:
     resolution: {integrity: sha512-oOanj84fJEXUg9FoEAQomA8ISG+DVIrTZ3qF7m69VQUJyOGYyDZmPqKcjvRku4KXlEH6hWO9i4ACLzNBh8gC0A==}
+    dev: false
+
+  /react-native-logs/5.0.1:
+    resolution: {integrity: sha512-30aQugeLFfcBEKd6U4I75SKc5q5fb9Qrwv0Vnsy3jwpC716xON9SxRbBEnxoPSDJjzK527r4zi+qYqzig6lPlQ==}
     dev: false
 
   /react-native-safe-area-context/4.4.1_tj3nonr5gneraukzjkxpsiy7yu:

@@ -10,4 +10,8 @@ export class Numcol {
 	public equals(numcol: Numcol): boolean {
 		return this.number === numcol.number && this.color === numcol.color
 	}
+
+	public toString(): string {
+		return `${this.color}-${this.number}`
+	}
 }

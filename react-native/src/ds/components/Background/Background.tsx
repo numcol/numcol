@@ -43,14 +43,14 @@ const interpolateCircularMotionOverY = () => {
 }
 
 export const Background = () => {
-	const translateValue = useRef(new Animated.Value(initialValue)).current
+	const translateValue = useRef(new Animated.Value(initialValue))
 
 	useEffect(() => {
 		const translate = () => {
-			translateValue.setValue(initialValue)
-			Animated.timing(translateValue, {
+			translateValue.current.setValue(initialValue)
+			Animated.timing(translateValue.current, {
 				toValue: initialToValue,
-				duration: 40000,
+				duration: 60000,
 				easing: Easing.linear,
 				useNativeDriver: true,
 			}).start(() => {
@@ -59,13 +59,13 @@ export const Background = () => {
 		}
 
 		translate()
-	}, [translateValue])
+	}, [])
 
-	const translateAnimationX = translateValue.interpolate(
+	const translateAnimationX = translateValue.current.interpolate(
 		interpolateCircularMotionOverX(),
 	)
 
-	const translateAnimationY = translateValue.interpolate(
+	const translateAnimationY = translateValue.current.interpolate(
 		interpolateCircularMotionOverY(),
 	)
 

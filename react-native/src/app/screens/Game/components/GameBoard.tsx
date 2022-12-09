@@ -1,33 +1,31 @@
-import { StyleSheet, View } from "react-native"
+import { useCallback, useEffect, useState } from "react"
 import { Answer } from "../../../../domain/game/answer"
 import { Game } from "../../../../domain/game/game"
-import { AnswerButton } from "./AnswerButton"
+import { AnswerGrid } from "../components/AnswerGrid"
+import { Question } from "../components/Question"
+import { ScoreBoard } from "../components/ScoreBoard"
 
-interface GameBoardProps {
-	game: Game
-	onReply: (answer: Answer) => void
-}
+export const GameBoard = () => {
+	const [game, setGame] = useState(Game.create())
+	const [answer, setAnswer] = useState<Answer | undefined>()
 
-export const GameBoard = ({ game, onReply }: GameBoardProps) => {
+	useEffect(() => {
+		if (!answer) {
+			return
+		}
+
+		setGame(game.reply(answer))
+	}, [answer, game])
+
+	const reply = useCallback((nanswer: Answer) => {
+		setAnswer(nanswer)
+	}, [])
+
 	return (
-		<View style={styles.container}>
-			{game.answers.map((answer) => (
-				<AnswerButton
-					key={`answer${answer.id}`}
-					answer={answer}
-					onPress={() => onReply(answer)}
-				/>
-			))}
-		</View>
+		<>
+			<ScoreBoard score={game.score} />
+			<Question question={game.question} />
+			<AnswerGrid answers={game.answers} reply={reply} />
+		</>
 	)
 }
-
-const styles = StyleSheet.create({
-	container: {
-		overflow: "hidden",
-		width: "100%",
-		flexDirection: "row",
-		flexWrap: "wrap",
-		justifyContent: "space-between",
-	},
-})

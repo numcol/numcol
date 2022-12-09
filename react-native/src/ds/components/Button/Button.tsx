@@ -1,5 +1,5 @@
 import FontAwesome from "@expo/vector-icons/FontAwesome5"
-import { forwardRef, ForwardRefExoticComponent, RefAttributes } from "react"
+import { ComponentType, memo, MemoExoticComponent } from "react"
 import { Pressable, StyleSheet, Text, View } from "react-native"
 import { colors, fonts } from "../../constants"
 
@@ -18,18 +18,16 @@ interface ButtonProps {
 	icon?: string
 }
 
-interface Button
-	extends ForwardRefExoticComponent<ButtonProps & RefAttributes<View>> {
+interface Button extends MemoExoticComponent<ComponentType<ButtonProps>> {
 	Color: typeof ButtonColor
 }
 
-export const Button = forwardRef<View, ButtonProps>(
-	({ onPress, children, color, fixedHeight, icon }, ref) => {
+export const Button = memo(
+	({ onPress, children, color, fixedHeight, icon }: ButtonProps) => {
 		const buttonColor = buttonColors[color]
 
 		return (
 			<Pressable
-				ref={ref}
 				onPress={onPress}
 				unstable_pressDelay={0}
 				style={[styles.container, fixedHeight && styles.fixedHeight]}
@@ -100,7 +98,6 @@ export const Button = forwardRef<View, ButtonProps>(
 ) as Button
 
 Button.displayName = "Button"
-
 Button.Color = ButtonColor
 
 const styles = StyleSheet.create({

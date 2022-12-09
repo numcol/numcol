@@ -1,6 +1,5 @@
 import { createNativeStackNavigator } from "@react-navigation/native-stack"
 import { useEffect } from "react"
-import { colors } from "../ds/constants"
 import { useTranslation } from "../infrastructure/i18n"
 import { useSettings } from "./providers/SettingsProvider"
 import { RootStackParamList, Routes } from "./routes"
@@ -35,7 +34,7 @@ export const AppNavigator = ({ onReady }: AppNavigatorProps) => {
 			initialRouteName={Routes.Home}
 			screenOptions={{
 				headerShown: false,
-				contentStyle: { backgroundColor: colors.main.white },
+				contentStyle: { backgroundColor: "transparent" },
 			}}
 		>
 			<Group>

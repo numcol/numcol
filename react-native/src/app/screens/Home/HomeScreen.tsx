@@ -1,4 +1,4 @@
-import { Background, Button, colors, fonts } from "@numcol/ds"
+import { Button, colors, fonts } from "@numcol/ds"
 import { useTranslation } from "@numcol/infra"
 import { Dimensions, StyleSheet, Text, View } from "react-native"
 import { SafeAreaView } from "react-native-safe-area-context"
@@ -13,7 +13,6 @@ export const HomeScreen = ({ navigation }: ScreenProps<Routes.Home>) => {
 
 	return (
 		<View style={styles.background}>
-			<Background />
 			<SafeAreaView style={styles.container}>
 				<View style={styles.titleContainer}>
 					<Text style={styles.title}>NumCol</Text>

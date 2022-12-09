@@ -1,3 +1,4 @@
+import { memo } from "react"
 import { Dimensions, StyleSheet, Text, View } from "react-native"
 import { useTranslation } from "../../../../infrastructure/i18n"
 
@@ -7,7 +8,7 @@ interface ScoreBoardProps {
 	score: number
 }
 
-export const ScoreBoard = ({ score }: ScoreBoardProps) => {
+export const ScoreBoard = memo(({ score }: ScoreBoardProps) => {
 	const { t } = useTranslation()
 	return (
 		<View style={styles.container}>
@@ -15,7 +16,9 @@ export const ScoreBoard = ({ score }: ScoreBoardProps) => {
 			<Text>{score}</Text>
 		</View>
 	)
-}
+})
+
+ScoreBoard.displayName = "ScoreBoard"
 
 const styles = StyleSheet.create({
 	container: {

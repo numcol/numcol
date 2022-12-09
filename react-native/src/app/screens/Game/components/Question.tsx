@@ -51,10 +51,11 @@ const styles = StyleSheet.create({
 		marginBottom: 5,
 		padding: 20,
 		borderRadius: 15,
-		borderColor: colors.main.lightGrey,
+		borderColor: colors.main.black,
 		borderWidth: 2,
 		backgroundColor: colors.main.white,
 		flexDirection: "row",
+		overflow: "hidden",
 	},
 	text: {
 		color: colors.main.black,

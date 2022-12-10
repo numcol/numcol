@@ -1,3 +1,0 @@
-v2.1.0
-- Cambiado el modo de juego por rondas a modo de juego infinito.
-- Añadidos catalán y gallego.

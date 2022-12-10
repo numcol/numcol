@@ -1,8 +1,0 @@
-v1.2.0
-- Añadidos efectos de sonido
-- Ya no marca fallo cuando se pulsa en espacios en blanco
-- Añadida analítica anónima de la app con Google Analytics
-
-v1.1.0
-- Corregido bug que mostraba publicidad durante la partida
-- Cambios menores de diseño

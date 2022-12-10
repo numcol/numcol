@@ -1,3 +1,0 @@
-v2.1.0
-- Cambiou o modo de xogo ao modo de xogo infinito.
-- Engadido catalán e galego.

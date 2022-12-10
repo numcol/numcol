@@ -1,3 +1,0 @@
-v2.1.0
-- Changement du mode de jeu.
-- Ajout du catalan et du galicien.

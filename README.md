@@ -2,61 +2,65 @@
 
 The Brain Training Game About Matching Numbers And Colours.
 
-[![Build Status](https://api.cirrus-ci.com/github/numcol/numcol.svg)](https://cirrus-ci.com/github/numcol/numcol)
-[![AUR](https://img.shields.io/aur/license/yaourt.svg)](LICENSE)
-[![Coverage Status](https://coveralls.io/repos/github/numcol/numcol/badge.svg?branch=master)](https://coveralls.io/github/numcol/numcol?branch=master)
+![License](https://img.shields.io/github/license/numcol/numcol)
 
-This repo contains the source code of the latest versions of the [NumCol][0] Android Game.
+This repo contains the source code of the latest versions of the [NumCol](https://play.google.com/store/apps/details?id=com.numcol.free) Android Game.
 
 ## Get Started
 
 ### Pre-requisites
 
-- [Flutter][1]
-
-For help getting started with Flutter, view the online
-[documentation][1].
+- Node.js ^18.12.1
+- PNPM ^7.0.0
+- Dev environment already set up for React Native development using Expo Go. [More info](https://reactnative.dev/docs/environment-setup).
 
 ### Installation
 
 ```sh
-git clone https://github.com/numcol/numcol.git
-cd numcol
+pnpm install
 ```
 
 ### Run project locally
 
 ```sh
-flutter run
+pnpm start
 ```
-
-Or use VSCode/Itenllij to debug.
 
 ### Test
 
 ```sh
-flutter test .
+pnpm test
 ```
 
 ### Release
 
 ```sh
-# Ensure key info is stored in android/key.properties
-flutter build apk --release
-# Install on device
-flutter install
+TBD
 ```
 
 ### Deploy
 
 Pre-requisites:
 
-- [Fastlane][2]
+- [Fastlane](https://docs.fastlane.tools/)
 
 ```sh
 # Ensure google play api service credentials are stored in fastlane-playstore.json
 fastlane beta
 ```
+
+## New version in progress
+
+This project is being migrated from Flutter to React Native, TO DO list:
+
+- [ ] Normal Game Mode
+- [ ] App Rating
+- [ ] Share your score
+- [ ] Top Score Board?
+- [ ] Webpage update
+- [ ] Deploy with Fastlane o similar
+- [ ] CI/CD
+- [ ] Logs/Crashes with Crashlytics/Sentry/Firebase/Whatever
 
 ## License
 
@@ -86,32 +90,33 @@ Copyright 2016 The Fredoka Project Authors (<https://github.com/hafontia/Fredoka
 
 License: [SIL OPEN FONT LICENSE Version 1.1 - 26 February 2007](https://scripts.sil.org/cms/scripts/page.php?site_id=nrsi&id=OFL)
 
-### Poired One
+## Music Licensing
 
-Copyright (c) 2011, Denis Masharov (denis.masharov@gmail.com)
+### Background music
 
-License: [SIL OPEN FONT LICENSE Version 1.1 - 26 February 2007](https://scripts.sil.org/cms/scripts/page.php?site_id=nrsi&id=OFL)
+The files included in this software that are considered background music are:
 
-### Raleway
+- `assets/audio/POL-star-way-short.wav`
+- `assets/audio/POL-two-fat-gangsters-short.wav`
 
-Copyright (c) 2010, Matt McInerney (matt@pixelspread.com),  
-Copyright (c) 2011, Pablo Impallari (www.impallari.com|impallari@gmail.com),  
-Copyright (c) 2011, Rodrigo Fuenzalida (www.rfuenzalida.com|hello@rfuenzalida.com), with Reserved Font Name Raleway
+Background music is not authored by Alberto Varela and it is authored and licensed as described below:
 
-License: [SIL Open Font License](https://www.fontsquirrel.com/license/raleway)
+Background music from [PlayOnLoop.com](https://www.playonloop.com).
 
-### Lemon Milk
+Licensed under [Creative Commons by Attribution 4.0](https://creativecommons.org/licenses/by/4.0/)
 
-Copyright (c) 2014-2018, MARSNEV (marsnev@marsnev.com)
+### Sound effects
 
-License: [Donationware](https://blog.marsnev.com/p/faq.html)
+Sound effects are not authored by Alberto Varela and they are licensed as Public Domain.
 
-### Roboto Mono
+## Image Licensing
 
-Copyright (c) 2015, Google Inc.
+The files included in this software that are considered background pattern are:
 
-License: [Apache License](https://github.com/google/fonts/blob/master/apache/robotomono/LICENSE.txt)
+- `assets/seamless-memphis-geometric-lines-pattern.png`
 
-[0]: https://play.google.com/store/apps/details?id=com.numcol.free
-[1]: https://flutter.io/
-[2]: https://docs.fastlane.tools/
+Background patterns are not authored by Alberto Varela and it is authored and licensed as described below:
+
+[Pattern Vectors by Vecteezy](https://www.vecteezy.com/free-vector/pattern).
+
+Downloaded from [here](https://www.vecteezy.com/vector-art/1255504-seamlelss-memphis-geometric-lines-pattern) and licensed under the [Vecteezy Free License](https://www.vecteezy.com/licensing-agreement)

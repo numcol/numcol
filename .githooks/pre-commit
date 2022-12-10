@@ -1,2 +1,2 @@
 #!/bin/sh
-cd react-native && pnpm run lint-staged
+pnpm run lint-staged

@@ -1,3 +1,0 @@
-v2.1.0
-- Mode game changed (changed rounds by infinite mode)
-- Galician and Catalan languages added.

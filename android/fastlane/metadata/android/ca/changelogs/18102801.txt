@@ -1,3 +1,0 @@
-v2.1.0
-- Canviat la manera de joc per rondes a manera de joc infinit.
-- Afegits català i gallec.

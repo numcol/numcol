@@ -3,6 +3,7 @@ import { ShakeView, ShakeViewRef } from "@numcol/ds"
 import { randomBoolean, useLogger } from "@numcol/infra"
 import { useCallback, useEffect, useRef, useState } from "react"
 import { StyleSheet, View } from "react-native"
+import { useSound } from "../../../hooks/useSound"
 import { AnswerGrid } from "./AnswerGrid"
 import { Question } from "./Question"
 import { ScoreBoard } from "./ScoreBoard"
@@ -13,6 +14,15 @@ export const GameBoard = () => {
 	const [colorFirst, setColorFirst] = useState(randomBoolean())
 	const shakeView = useRef<ShakeViewRef>(null)
 	const { info } = useLogger()
+	const { gameBackground, click, wrong } = useSound()
+
+	useEffect(() => {
+		void gameBackground.play()
+
+		return () => {
+			void gameBackground.stop()
+		}
+	}, [gameBackground])
 
 	useEffect(() => {
 		info("Game start")
@@ -23,12 +33,20 @@ export const GameBoard = () => {
 			return
 		}
 
+		const isCorrect = answer.isCorrectFor(game.question)
+
+		if (isCorrect) {
+			void click.play()
+		} else {
+			void wrong.play()
+		}
+
 		const logInfo = JSON.stringify({
 			question: game.question.toString(),
 			answer: answer.numcol.toString(),
 		})
 
-		if (answer.isCorrectFor(game.question)) {
+		if (isCorrect) {
 			info(`Correct answer: ${logInfo}`)
 			setColorFirst(randomBoolean())
 		} else {
@@ -38,7 +56,7 @@ export const GameBoard = () => {
 
 		setGame(game.reply(answer))
 		setAnswer(undefined)
-	}, [answer, game, info])
+	}, [answer, game, info, click, wrong])
 
 	const reply = useCallback((nanswer: Answer) => {
 		setAnswer(nanswer)

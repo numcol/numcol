@@ -2,29 +2,45 @@ import { createContext, ReactNode, useContext } from "react"
 
 export type AudioObject = {
 	play: () => Promise<void>
+	stop: () => Promise<void>
 }
 
 export const fallbackAudioObject: AudioObject = {
 	play: () => Promise.resolve(),
+	stop: () => Promise.resolve(),
 }
 
 export const enum Audios {
+	HomeBackground = "homeBackground",
 	GameBackground = "gameBackground",
+	Click = "click",
+	Wrong = "wrong",
+	CountDown = "countDown",
+	Start = "start",
 }
 
+export type AppAudios = Record<Audios, AudioObject>
+
 interface AudioContextProps {
-	audios: Record<Audios, AudioObject>
+	audios: AppAudios
+}
+
+export const mutedAudios: AppAudios = {
+	homeBackground: fallbackAudioObject,
+	gameBackground: fallbackAudioObject,
+	click: fallbackAudioObject,
+	wrong: fallbackAudioObject,
+	countDown: fallbackAudioObject,
+	start: fallbackAudioObject,
 }
 
 const AudioContext = createContext<AudioContextProps>({
-	audios: {
-		gameBackground: fallbackAudioObject,
-	},
+	audios: { ...mutedAudios },
 })
 
 interface AudioProviderProps {
 	children: ReactNode
-	audios: Record<Audios, AudioObject>
+	audios: AppAudios
 }
 
 export const AudioProvider = ({ children, audios }: AudioProviderProps) => {

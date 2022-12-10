@@ -1,13 +1,13 @@
 import { ImageURISource } from "react-native"
 import { AppNavigator } from "./AppNavigator"
 import { Background } from "./Background"
-import { AudioObject, AudioProvider, Audios } from "./providers/AudioProvider"
+import { AppAudios, AudioProvider } from "./providers/AudioProvider"
 import { SettingsProvider } from "./providers/SettingsProvider"
 
 interface NumColProps {
 	onReady?: () => void
 	background: ImageURISource
-	audios: Record<Audios, AudioObject>
+	audios: AppAudios
 }
 
 export const NumCol = ({ onReady, background, audios }: NumColProps) => {

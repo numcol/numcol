@@ -20,7 +20,7 @@ interface SettingsContextProps {
 	language: Language
 	audio: boolean
 	setLanguage: (language: Language) => void
-	setAudio: (audio: boolean) => void
+	toggleAudio: () => void
 }
 
 const SettingsContext = createContext<SettingsContextProps>({
@@ -28,7 +28,7 @@ const SettingsContext = createContext<SettingsContextProps>({
 	audio: true,
 	language: detectLanguage(),
 	setLanguage: () => undefined,
-	setAudio: () => undefined,
+	toggleAudio: () => undefined,
 })
 
 interface SettingsState {
@@ -80,16 +80,16 @@ export const SettingsProvider = ({ children }: SettingsProviderProps) => {
 		[setItem],
 	)
 
-	const setAudio = useCallback(
-		(audio: boolean) => {
-			setState((prev) => {
-				const newSettings: Settings = { ...prev.settings, audio }
-				void setItem(settingsKey, JSON.stringify(newSettings))
-				return { settings: newSettings, loaded: prev.loaded }
-			})
-		},
-		[setItem],
-	)
+	const toggleAudio = useCallback(() => {
+		setState((prev) => {
+			const newSettings: Settings = {
+				...prev.settings,
+				audio: !prev.settings.audio,
+			}
+			void setItem(settingsKey, JSON.stringify(newSettings))
+			return { settings: newSettings, loaded: prev.loaded }
+		})
+	}, [setItem])
 
 	return (
 		<SettingsContext.Provider
@@ -98,7 +98,7 @@ export const SettingsProvider = ({ children }: SettingsProviderProps) => {
 				language: state.settings.language,
 				audio: state.settings.audio,
 				setLanguage,
-				setAudio,
+				toggleAudio,
 			}}
 		>
 			{children}

@@ -3,6 +3,7 @@ import { Modal, PageTitle } from "@numcol/ds"
 import { useTranslation } from "@numcol/infra"
 import { useCallback } from "react"
 import { StyleSheet, View } from "react-native"
+import { useSound } from "../../hooks/useSound"
 import { useSettings } from "../../providers/SettingsProvider"
 import { Routes, ScreenProps } from "../../routes"
 import { LanguageButton } from "./components/LanguageButton"
@@ -21,17 +22,24 @@ export const LanguagesModal = ({
 }: ScreenProps<Routes.Languages>) => {
 	const { t } = useTranslation()
 	const { setLanguage } = useSettings()
+	const { click } = useSound()
 
 	const selectLanguage = useCallback(
 		(lng: Language) => {
+			void click.play()
 			setLanguage(lng)
 			navigation.goBack()
 		},
-		[navigation, setLanguage],
+		[navigation, setLanguage, click],
 	)
 
+	const close = useCallback(() => {
+		void click.play()
+		navigation.goBack()
+	}, [navigation, click])
+
 	return (
-		<Modal close={() => navigation.goBack()} closeText={t("back_to_menu")}>
+		<Modal close={close} closeText={t("back_to_menu")}>
 			<View style={styles.container}>
 				<View style={styles.titleContainer}>
 					<PageTitle>{t("language")}</PageTitle>

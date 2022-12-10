@@ -1,16 +1,45 @@
 import { Button, colors, fonts } from "@numcol/ds"
 import { useLogger, useTranslation } from "@numcol/infra"
+import { useCallback, useEffect } from "react"
 import { Dimensions, StyleSheet, Text, View } from "react-native"
 import { SafeAreaView } from "react-native-safe-area-context"
+import { useSound } from "../../hooks/useSound"
 import { useSettings } from "../../providers/SettingsProvider"
 import { Routes, ScreenProps } from "../../routes"
-
-// eslint-disable-next-line @typescript-eslint/no-var-requires
+import { SoundButton } from "./components/SoundButton"
 
 export const HomeScreen = ({ navigation }: ScreenProps<Routes.Home>) => {
 	const { t } = useTranslation()
-	const { language, audio, setAudio } = useSettings()
+	const { language } = useSettings()
+	const { homeBackground, click, countDown } = useSound()
 	useLogger("Home screen")
+
+	useEffect(() => {
+		void homeBackground.play()
+
+		return () => {
+			void homeBackground.stop()
+		}
+	}, [homeBackground])
+
+	useEffect(() => {
+		const unsubscribe = navigation.addListener("focus", () => {
+			void homeBackground.play()
+		})
+
+		return unsubscribe
+	}, [navigation, homeBackground])
+
+	const startGame = useCallback(() => {
+		void homeBackground.stop()
+		void countDown.play()
+		navigation.navigate(Routes.CountDown)
+	}, [navigation, homeBackground, countDown])
+
+	const changeLanguage = useCallback(() => {
+		void click.play()
+		navigation.navigate(Routes.Languages)
+	}, [navigation, click])
 
 	return (
 		<View style={styles.background}>
@@ -23,7 +52,7 @@ export const HomeScreen = ({ navigation }: ScreenProps<Routes.Home>) => {
 				</View>
 				<View style={styles.buttonsContainer}>
 					<Button
-						onPress={() => undefined}
+						onPress={() => void click.play()}
 						color={Button.Color.Red}
 						icon="play"
 						fixedHeight
@@ -31,23 +60,16 @@ export const HomeScreen = ({ navigation }: ScreenProps<Routes.Home>) => {
 						{t("play")}
 					</Button>
 					<Button
-						onPress={() => navigation.navigate(Routes.CountDown)}
+						onPress={startGame}
 						color={Button.Color.Green}
 						fixedHeight
 						icon="child"
 					>
 						{t("kids_level")}
 					</Button>
+					<SoundButton />
 					<Button
-						onPress={() => setAudio(!audio)}
-						color={Button.Color.Blue}
-						fixedHeight
-						icon={audio ? "volume-up" : "volume-mute"}
-					>
-						{t("sound")}
-					</Button>
-					<Button
-						onPress={() => navigation.navigate(Routes.Languages)}
+						onPress={changeLanguage}
 						color={Button.Color.Yellow}
 						fixedHeight
 						icon="language"

@@ -4,6 +4,7 @@ import { StackActions } from "@react-navigation/native"
 import { useCallback, useEffect, useMemo, useRef, useState } from "react"
 import { Animated, Dimensions, StyleSheet, Text } from "react-native"
 import { SafeAreaView } from "react-native-safe-area-context"
+import { useSound } from "../../hooks/useSound"
 import { Routes, ScreenProps } from "../../routes"
 
 const duration = 500
@@ -20,6 +21,7 @@ export const CountDownScreen = ({
 	const [starting2Text, setStarting2Text] = useState(String(starting2.current))
 	const fromUpToMiddleValue = useRef(new Animated.Value(0))
 	const fromMiddleToDownValue = useRef(new Animated.Value(-windowHeight))
+	const { countDown, start } = useSound()
 
 	useLogger("Countdown screen")
 
@@ -56,7 +58,6 @@ export const CountDownScreen = ({
 			if (!finished) {
 				return
 			}
-
 			if (isGoingOut.current) {
 				starting2.current = starting2.current - 2
 			} else {
@@ -68,10 +69,12 @@ export const CountDownScreen = ({
 	useEffect(() => {
 		let interval: NodeJS.Timer
 		const timer = setTimeout(() => {
+			void countDown.play()
 			animate()
 
 			interval = setInterval(() => {
 				if (starting3.current <= 0) {
+					void start.play()
 					clearTimeout(timer)
 					if (interval) {
 						clearInterval(interval)
@@ -82,10 +85,12 @@ export const CountDownScreen = ({
 					navigation.dispatch(StackActions.replace(Routes.Game))
 					return
 				}
+
+				void countDown.play()
 				isGoingOut.current = !isGoingOut.current
 				animate()
 			}, 1000)
-		}, 700)
+		}, 1000)
 
 		return () => {
 			clearTimeout(timer)
@@ -95,7 +100,7 @@ export const CountDownScreen = ({
 			fromUpToMiddle.stop()
 			fromMiddleToDown.stop()
 		}
-	}, [fromUpToMiddle, fromMiddleToDown, animate, navigation])
+	}, [fromUpToMiddle, fromMiddleToDown, animate, navigation, countDown, start])
 
 	return (
 		<SafeAreaView style={styles.container}>

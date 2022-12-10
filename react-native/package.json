@@ -21,6 +21,7 @@
 		"@types/react": "~18.0.24",
 		"@types/react-native": "~0.70.6",
 		"expo": "~47.0.8",
+		"expo-av": "~13.0.2",
 		"expo-font": "~11.0.1",
 		"expo-modules-autolinking": "^1.0.0",
 		"expo-splash-screen": "~0.17.5",

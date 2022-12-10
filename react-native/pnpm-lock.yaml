@@ -19,6 +19,7 @@ specifiers:
   eslint-plugin-react: ^7.31.11
   eslint-plugin-react-hooks: ^4.6.0
   expo: ~47.0.8
+  expo-av: ~13.0.2
   expo-font: ~11.0.1
   expo-modules-autolinking: ^1.0.0
   expo-splash-screen: ~0.17.5
@@ -47,6 +48,7 @@ dependencies:
   '@types/react': 18.0.25
   '@types/react-native': 0.70.6
   expo: 47.0.8_@babel+core@7.20.2
+  expo-av: 13.0.2_expo@47.0.8
   expo-font: 11.0.1_expo@47.0.8
   expo-modules-autolinking: 1.0.0
   expo-splash-screen: 0.17.5_ttpbecuw2g3p276ehchke7rusu
@@ -4452,6 +4454,14 @@ packages:
     transitivePeerDependencies:
       - expo
       - supports-color
+    dev: false
+
+  /expo-av/13.0.2_expo@47.0.8:
+    resolution: {integrity: sha512-u+y9wUBodp08UjRZYckNWzr9zEQHK6eScRBkhdTd9Rq48SEZ7eN6xXn79hubvk0P5nj7lFS+hdKjmx9T5XHGww==}
+    peerDependencies:
+      expo: '*'
+    dependencies:
+      expo: 47.0.8_@babel+core@7.20.2
     dev: false
 
   /expo-constants/14.0.2_expo@47.0.8:

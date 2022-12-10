@@ -5,6 +5,7 @@ import {
 	TransitionPresets,
 } from "@react-navigation/stack"
 import { useEffect } from "react"
+import { useAudio } from "./providers/AudioProvider"
 import { useSettings } from "./providers/SettingsProvider"
 import { RootStackParamList, Routes } from "./routes"
 import { CountDownScreen } from "./screens/CountDown/CountDownScreen"
@@ -21,10 +22,17 @@ interface AppNavigatorProps {
 export const AppNavigator = ({ onReady }: AppNavigatorProps) => {
 	const { loaded, language } = useSettings()
 	const { changeLanguage } = useTranslation()
+	const {
+		audios: { gameBackground },
+	} = useAudio()
 
 	useEffect(() => {
 		changeLanguage(language)
 	}, [language, changeLanguage])
+
+	useEffect(() => {
+		void gameBackground.play()
+	}, [gameBackground])
 
 	useEffect(() => {
 		if (loaded) {

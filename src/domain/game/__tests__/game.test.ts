@@ -2,21 +2,17 @@ import { Answer } from "../answer"
 import { Game } from "../game"
 
 describe("Game", () => {
+	let answers: Answer[]
+
+	beforeEach(() => {
+		answers = new Array(36)
+			.fill(undefined)
+			.map((_, i) => Answer.randomAnswer(i))
+	})
+
 	describe("creates a new game", () => {
-		test("with 36 answers", () => {
-			const game = Game.create()
-			expect(game.answers.length).toBe(36)
-		})
-
-		test("with 36 answers with ids from 1 to 36", () => {
-			const game = Game.create()
-			expect(game.answers.map((answer) => answer.id)).toEqual(
-				[...Array(36).keys()].map((value) => value + 1),
-			)
-		})
-
 		test("with an answerable question", () => {
-			const game = Game.create()
+			const game = Game.create(answers)
 			expect(
 				game.answers
 					.map((answer) => answer.isCorrectFor(game.question))
@@ -29,14 +25,14 @@ describe("Game", () => {
 		let game: Game
 
 		beforeEach(() => {
-			game = Game.create()
+			game = Game.create(answers)
 		})
 
 		describe("if it is correct", () => {
 			let correctAnswer: Answer
 
 			beforeEach(() => {
-				game = Game.create()
+				game = Game.create(answers)
 				correctAnswer = game.answers.find(
 					(answer) =>
 						answer.numcol.color === game.question.color &&
@@ -75,7 +71,7 @@ describe("Game", () => {
 			let incorrectAnswer: Answer
 
 			beforeEach(() => {
-				game = Game.create()
+				game = Game.create(answers)
 				incorrectAnswer = game.answers.find((answer) => {
 					return (
 						answer.numcol.color !== game.question.color ||

@@ -1,6 +1,6 @@
 import { Answer } from "./answer"
 import { Numcol } from "./numcol"
-import { randomQuestion } from "./randomGenerator"
+import { randomItem } from "./randomGenerator"
 
 const scoreIncreaseByCorrectAnswer = 10
 
@@ -11,8 +11,7 @@ export class Game {
 		public readonly score: number,
 	) {}
 
-	public static create(): Game {
-		const answers = randomAnswers()
+	public static create(answers: Answer[]): Game {
 		return new Game(answers, randomQuestion(answers), 0)
 	}
 
@@ -45,12 +44,4 @@ export class Game {
 	}
 }
 
-const randomAnswers = (): Answer[] => {
-	const answers: Answer[] = []
-
-	for (let i = 1; i <= 36; i++) {
-		answers.push(Answer.randomAnswer(i))
-	}
-
-	return answers
-}
+const randomQuestion = (answers: Answer[]) => randomItem(answers).numcol

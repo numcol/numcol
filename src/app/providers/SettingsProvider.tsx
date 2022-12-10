@@ -106,6 +106,4 @@ export const SettingsProvider = ({ children }: SettingsProviderProps) => {
 	)
 }
 
-export const useSettings = (): SettingsContextProps => {
-	return useContext(SettingsContext)
-}
+export const useSettings = () => useContext(SettingsContext)

@@ -16,6 +16,11 @@ module.exports = {
 	rules: {
 		"no-console": ["error"],
 	},
+	settings: {
+		react: {
+			version: "detect",
+		},
+	},
 	overrides: [
 		{
 			files: ["*.ts", "*.tsx"], // Your TypeScript files extension

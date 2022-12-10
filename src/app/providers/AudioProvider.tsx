@@ -55,6 +55,4 @@ export const AudioProvider = ({ children, audios }: AudioProviderProps) => {
 	)
 }
 
-export const useAudio = (): AudioContextProps => {
-	return useContext(AudioContext)
-}
+export const useAudio = () => useContext(AudioContext)

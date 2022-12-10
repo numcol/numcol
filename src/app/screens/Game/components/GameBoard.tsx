@@ -1,15 +1,17 @@
-import { Answer, Game } from "@numcol/domain"
+import { Answer, GameFactory } from "@numcol/domain"
 import { ShakeView, ShakeViewRef } from "@numcol/ds"
 import { randomBoolean, useLogger } from "@numcol/infra"
 import { useCallback, useEffect, useRef, useState } from "react"
 import { StyleSheet, View } from "react-native"
 import { useSound } from "../../../hooks/useSound"
+import { useService } from "../../../providers/DependencyInjectionProvider"
 import { AnswerGrid } from "./AnswerGrid"
 import { Question } from "./Question"
 import { ScoreBoard } from "./ScoreBoard"
 
 export const GameBoard = () => {
-	const [game, setGame] = useState(Game.create())
+	const gameFactory = useService(GameFactory)
+	const [game, setGame] = useState(gameFactory.create())
 	const [answer, setAnswer] = useState<Answer | undefined>()
 	const [colorFirst, setColorFirst] = useState(randomBoolean())
 	const shakeView = useRef<ShakeViewRef>(null)

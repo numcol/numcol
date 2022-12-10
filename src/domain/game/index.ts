@@ -1,5 +1,6 @@
 export * from "./answer"
 export * from "./color"
 export * from "./game"
+export * from "./gameFactory"
 export * from "./number"
 export * from "./numcol"

@@ -86,6 +86,11 @@ Fonts are not authored by Alberto Varela and they are authored and licensed as d
 
 ### Fredoka
 
+Files:
+
+- `assets/fonts/Fredoka-Regular.ttf`
+- `assets/fonts/Fredoka-SemiBold.ttf`
+
 Copyright 2016 The Fredoka Project Authors (<https://github.com/hafontia/Fredoka-One>)
 
 License: [SIL OPEN FONT LICENSE Version 1.1 - 26 February 2007](https://scripts.sil.org/cms/scripts/page.php?site_id=nrsi&id=OFL)

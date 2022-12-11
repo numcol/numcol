@@ -23,7 +23,7 @@ module.exports = {
 	},
 	overrides: [
 		{
-			files: ["*.ts", "*.tsx"], // Your TypeScript files extension
+			files: ["*.ts", "*.tsx"],
 			parserOptions: {
 				project: ["./tsconfig.json"],
 			},
@@ -37,6 +37,25 @@ module.exports = {
 					{
 						argsIgnorePattern: "^_",
 						destructuredArrayIgnorePattern: "^_",
+					},
+				],
+			},
+		},
+		{
+			files: ["src/ds/**/*"],
+			rules: {
+				"@typescript-eslint/no-restricted-imports": [
+					"error",
+					{
+						paths: ["@numcol/infra", "@numcol/app", "@numcol/domain"],
+						patterns: [
+							"**/infrastructure/**/*",
+							"**/infrastructure",
+							"**/app/**/*",
+							"**/app",
+							"**/domain/**/*",
+							"**/domain",
+						],
 					},
 				],
 			},

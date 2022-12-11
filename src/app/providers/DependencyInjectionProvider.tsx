@@ -1,8 +1,10 @@
-import { ContainerBuilder, Identifier } from "diod"
-import { createContext, ReactNode, useContext } from "react"
+import { createContext, ReactNode, useContext, useMemo } from "react"
 
-const builder = new ContainerBuilder()
-const container = builder.build({ autowire: false })
+const container = {
+	get: () => {
+		throw new Error("DependencyInjectionContext must be initialized")
+	},
+}
 
 const DependencyInjectionContext = createContext<{
 	get<T>(identifier: Identifier<T>): T
@@ -28,5 +30,11 @@ export const DependencyInjectionProvider = ({
 
 export const useService = <T,>(identifier: Identifier<T>): T => {
 	const container = useContext(DependencyInjectionContext)
-	return container.get(identifier)
+
+	const service = useMemo(
+		() => container.get(identifier),
+		[container, identifier],
+	)
+
+	return service
 }

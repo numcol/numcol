@@ -1,4 +1,4 @@
-import { Identifier } from "diod"
+import { Settings } from "@numcol/domain"
 import { ImageURISource } from "react-native"
 import { AppNavigator } from "./AppNavigator"
 import { Background } from "./Background"
@@ -10,6 +10,7 @@ interface NumColProps {
 	onReady?: () => void
 	background: ImageURISource
 	audios: AppAudios
+	defaultSettings: Settings
 	container: {
 		get<T>(identifier: Identifier<T>): T
 	}
@@ -19,11 +20,12 @@ export const NumCol = ({
 	onReady,
 	background,
 	audios,
+	defaultSettings,
 	container,
 }: NumColProps) => {
 	return (
 		<DependencyInjectionProvider container={container}>
-			<SettingsProvider>
+			<SettingsProvider defaultSettings={defaultSettings}>
 				<AudioProvider audios={audios}>
 					<Background image={background} />
 					<AppNavigator onReady={onReady} />

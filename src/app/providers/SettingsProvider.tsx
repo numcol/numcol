@@ -1,5 +1,4 @@
 import { Language, Settings } from "@numcol/domain"
-import { detectLanguage, useStorage } from "@numcol/infra"
 import {
 	createContext,
 	ReactNode,
@@ -8,12 +7,10 @@ import {
 	useEffect,
 	useState,
 } from "react"
+import { Storage } from "../services"
+import { useService } from "./DependencyInjectionProvider"
 
 const settingsKey = "@numcol_settings"
-const defaultSettings: Settings = {
-	language: detectLanguage(),
-	audio: true,
-}
 
 interface SettingsContextProps {
 	loaded: boolean
@@ -26,7 +23,7 @@ interface SettingsContextProps {
 const SettingsContext = createContext<SettingsContextProps>({
 	loaded: false,
 	audio: true,
-	language: detectLanguage(),
+	language: Language.En,
 	setLanguage: () => undefined,
 	toggleAudio: () => undefined,
 })
@@ -38,17 +35,21 @@ interface SettingsState {
 
 interface SettingsProviderProps {
 	children: ReactNode
+	defaultSettings: Settings
 }
 
-export const SettingsProvider = ({ children }: SettingsProviderProps) => {
-	const { getItem, setItem } = useStorage()
+export const SettingsProvider = ({
+	children,
+	defaultSettings,
+}: SettingsProviderProps) => {
+	const storage = useService(Storage)
 	const [state, setState] = useState<SettingsState>({
 		loaded: false,
 		settings: defaultSettings,
 	})
 
 	useEffect(() => {
-		void getItem(settingsKey).then((saved) => {
+		void storage.getItem(settingsKey).then((saved) => {
 			try {
 				if (!saved) {
 					setState((prev) => ({ ...prev, loaded: true }))
@@ -67,17 +68,17 @@ export const SettingsProvider = ({ children }: SettingsProviderProps) => {
 				setState((prev) => ({ ...prev, loaded: true }))
 			}
 		})
-	}, [getItem])
+	}, [storage])
 
 	const setLanguage = useCallback(
 		(language: Language) => {
 			setState((prev) => {
 				const newSettings: Settings = { ...prev.settings, language }
-				void setItem(settingsKey, JSON.stringify(newSettings))
+				void storage.setItem(settingsKey, JSON.stringify(newSettings))
 				return { settings: newSettings, loaded: prev.loaded }
 			})
 		},
-		[setItem],
+		[storage],
 	)
 
 	const toggleAudio = useCallback(() => {
@@ -86,10 +87,10 @@ export const SettingsProvider = ({ children }: SettingsProviderProps) => {
 				...prev.settings,
 				audio: !prev.settings.audio,
 			}
-			void setItem(settingsKey, JSON.stringify(newSettings))
+			void storage.setItem(settingsKey, JSON.stringify(newSettings))
 			return { settings: newSettings, loaded: prev.loaded }
 		})
-	}, [setItem])
+	}, [storage])
 
 	return (
 		<SettingsContext.Provider

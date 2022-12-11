@@ -1,9 +1,9 @@
 import { Language } from "@numcol/domain"
 import { Modal, PageTitle } from "@numcol/ds"
-import { useTranslation } from "@numcol/infra"
 import { useCallback } from "react"
 import { StyleSheet, View } from "react-native"
 import { useSound } from "../../hooks/useSound"
+import { useTranslate } from "../../hooks/useTranslate"
 import { useSettings } from "../../providers/SettingsProvider"
 import { Routes, ScreenProps } from "../../routes"
 import { LanguageButton } from "./components/LanguageButton"
@@ -20,7 +20,7 @@ const availableLanguages = [
 export const LanguagesModal = ({
 	navigation,
 }: ScreenProps<Routes.Languages>) => {
-	const { t } = useTranslation()
+	const { t } = useTranslate()
 	const { setLanguage } = useSettings()
 	const { click } = useSound()
 

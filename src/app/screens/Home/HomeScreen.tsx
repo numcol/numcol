@@ -1,15 +1,16 @@
 import { Button, colors, fonts } from "@numcol/ds"
-import { useLogger, useTranslation } from "@numcol/infra"
 import { useCallback, useEffect } from "react"
 import { Dimensions, StyleSheet, Text, View } from "react-native"
 import { SafeAreaView } from "react-native-safe-area-context"
+import { useLogger } from "../../hooks/useLogger"
 import { useSound } from "../../hooks/useSound"
+import { useTranslate } from "../../hooks/useTranslate"
 import { useSettings } from "../../providers/SettingsProvider"
 import { Routes, ScreenProps } from "../../routes"
 import { SoundButton } from "./components/SoundButton"
 
 export const HomeScreen = ({ navigation }: ScreenProps<Routes.Home>) => {
-	const { t } = useTranslation()
+	const { t } = useTranslate()
 	const { language } = useSettings()
 	const { homeBackground, click, countDown } = useSound()
 	useLogger("Home screen")

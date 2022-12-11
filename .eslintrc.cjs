@@ -28,6 +28,7 @@ module.exports = {
 				project: ["./tsconfig.json"],
 			},
 			rules: {
+				"@typescript-eslint/explicit-member-accessibility": "error",
 				"@typescript-eslint/no-floating-promises": [
 					"error",
 					{ ignoreVoid: true },
@@ -62,6 +63,7 @@ module.exports = {
 							"**/domain",
 							"**/ds/**/*",
 							"**/ds",
+							"@react-navigation/*",
 						],
 					},
 				],
@@ -80,6 +82,7 @@ module.exports = {
 							"@numcol/ds",
 							"react",
 							"react-native",
+							"@react-navigation/*",
 						],
 						patterns: [
 							"**/infrastructure/**/*",
@@ -91,6 +94,41 @@ module.exports = {
 							"**/ds/**/*",
 							"**/ds",
 						],
+					},
+				],
+			},
+		},
+		{
+			files: ["src/app/**/*"],
+			rules: {
+				"@typescript-eslint/no-restricted-imports": [
+					"error",
+					{
+						paths: [
+							"@numcol/infra",
+							"@numcol/app",
+							"diod",
+							"react-native-logs",
+						],
+						patterns: [
+							"**/infrastructure/**/*",
+							"**/infrastructure",
+							"**/app/**/*",
+							"**/app",
+							"expo-*",
+						],
+					},
+				],
+			},
+		},
+		{
+			files: ["src/infrastructure/**/*"],
+			rules: {
+				"@typescript-eslint/no-restricted-imports": [
+					"error",
+					{
+						paths: ["@numcol/infra"],
+						patterns: ["**/infrastructure/**/*", "**/infrastructure"],
 					},
 				],
 			},

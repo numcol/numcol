@@ -1,7 +1,11 @@
-import { useLogger } from "@numcol/infra"
 import { Audio } from "expo-av"
 import { useEffect, useState } from "react"
-import { AudioObject, Audios, mutedAudios } from "../providers/AudioProvider"
+import {
+	AudioObject,
+	Audios,
+	mutedAudios,
+} from "../../app/providers/AudioProvider"
+import { ReactNativeLogger } from "../adapters"
 
 const audios = { ...mutedAudios }
 
@@ -11,8 +15,10 @@ interface FetchedAudio {
 	isLooping: boolean
 }
 
+const logger = new ReactNativeLogger()
+const { error, debug } = logger
+
 export const useFetchAudios = () => {
-	const { error, debug } = useLogger()
 	const [loaded, setLoaded] = useState(false)
 
 	useEffect(() => {
@@ -121,7 +127,7 @@ export const useFetchAudios = () => {
 		}
 
 		void fetchAudios()
-	}, [debug, error])
+	}, [])
 
 	return {
 		audios,

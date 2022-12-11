@@ -1,8 +1,8 @@
 import { Answer, GameFactory } from "@numcol/domain"
 import { ShakeView, ShakeViewRef } from "@numcol/ds"
-import { randomBoolean, useLogger } from "@numcol/infra"
 import { useCallback, useEffect, useRef, useState } from "react"
 import { StyleSheet, View } from "react-native"
+import { useLogger } from "../../../hooks/useLogger"
 import { useSound } from "../../../hooks/useSound"
 import { useService } from "../../../providers/DependencyInjectionProvider"
 import { AnswerGrid } from "./AnswerGrid"
@@ -96,3 +96,5 @@ const styles = StyleSheet.create({
 		width: "100%",
 	},
 })
+
+const randomBoolean = (): boolean => Math.random() > 0.5

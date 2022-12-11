@@ -1,8 +1,8 @@
 import { NumcolColor, NumcolNumber } from "@numcol/domain"
 import { colors, FlipView, FlipViewRef, fonts } from "@numcol/ds"
-import { useTranslation } from "@numcol/infra"
 import { memo, useEffect, useRef } from "react"
 import { StyleSheet, Text, View } from "react-native"
+import { useTranslate } from "../../../hooks/useTranslate"
 
 interface QuestionProps {
 	color: NumcolColor
@@ -11,7 +11,7 @@ interface QuestionProps {
 }
 
 export const Question = memo(({ color, number, colorFirst }: QuestionProps) => {
-	const { t } = useTranslation()
+	const { t } = useTranslate()
 	const flipView = useRef<FlipViewRef>(null)
 
 	const questionTuple: [string, string] = colorFirst

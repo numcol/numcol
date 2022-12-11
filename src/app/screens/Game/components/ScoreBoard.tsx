@@ -1,14 +1,14 @@
 import { Box } from "@numcol/ds"
-import { useTranslation } from "@numcol/infra"
 import { memo } from "react"
 import { StyleSheet, View } from "react-native"
+import { useTranslate } from "../../../hooks/useTranslate"
 
 interface ScoreBoardProps {
 	score: number
 }
 
 export const ScoreBoard = memo(({ score }: ScoreBoardProps) => {
-	const { t } = useTranslation()
+	const { t } = useTranslate()
 	return (
 		<View style={styles.container}>
 			<View style={styles.item}>

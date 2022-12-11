@@ -1,5 +1,5 @@
 import { NumCol } from "@numcol/app"
-import { initI18n } from "@numcol/infra"
+import { builder, detectLanguage, initI18n } from "@numcol/infra"
 import { DefaultTheme, NavigationContainer } from "@react-navigation/native"
 import { Asset } from "expo-asset"
 import { useFonts } from "expo-font"
@@ -9,8 +9,7 @@ import "intl-pluralrules"
 import { useCallback, useEffect, useState } from "react"
 import "react-native-gesture-handler"
 import { SafeAreaProvider } from "react-native-safe-area-context"
-import { builder } from "./src/app/di"
-import { useFetchAudios } from "./src/app/hooks/useFetchAudios"
+import { useFetchAudios } from "./src/infrastructure/audio/useFetchAudios"
 
 const navTheme = {
 	...DefaultTheme,
@@ -35,6 +34,11 @@ const preFetchImages = () =>
 	Promise.all(Object.values(images).map((i) => Asset.loadAsync(i)))
 
 const container = builder.build({ autowire: false })
+
+const defaultSettings = {
+	language: detectLanguage(),
+	audio: true,
+}
 
 export default function App() {
 	const [navigationContainerReady, setNavigationContainerReady] =
@@ -89,6 +93,7 @@ export default function App() {
 					onReady={onAppReady}
 					background={images.background}
 					audios={audios}
+					defaultSettings={defaultSettings}
 					container={container}
 				/>
 			</NavigationContainer>

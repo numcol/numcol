@@ -1,8 +1,8 @@
 import { Language } from "@numcol/domain"
 import { Button } from "@numcol/ds"
-import { useTranslation } from "@numcol/infra"
 import { memo } from "react"
 import { StyleSheet, View } from "react-native"
+import { useTranslate } from "../../../hooks/useTranslate"
 import { useSettings } from "../../../providers/SettingsProvider"
 
 interface LanguageButtonProps {
@@ -12,7 +12,7 @@ interface LanguageButtonProps {
 
 export const LanguageButton = memo(
 	({ lng, selectLanguage }: LanguageButtonProps) => {
-		const { t } = useTranslation()
+		const { t } = useTranslate()
 		const { language } = useSettings()
 
 		return (

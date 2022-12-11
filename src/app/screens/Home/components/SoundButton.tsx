@@ -1,11 +1,11 @@
 import { Button } from "@numcol/ds"
-import { useTranslation } from "@numcol/infra"
 import { memo, useCallback } from "react"
 import { useSound } from "../../../hooks/useSound"
+import { useTranslate } from "../../../hooks/useTranslate"
 import { useSettings } from "../../../providers/SettingsProvider"
 
 export const SoundButton = memo(() => {
-	const { t } = useTranslation()
+	const { t } = useTranslate()
 	const { audio, toggleAudio } = useSettings()
 	const { click } = useSound()
 

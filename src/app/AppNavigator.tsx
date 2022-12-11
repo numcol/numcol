@@ -1,10 +1,10 @@
-import { useTranslation } from "@numcol/infra"
 import {
 	CardStyleInterpolators,
 	createStackNavigator,
 	TransitionPresets,
 } from "@react-navigation/stack"
 import { useEffect } from "react"
+import { useTranslate } from "./hooks/useTranslate"
 import { useSettings } from "./providers/SettingsProvider"
 import { RootStackParamList, Routes } from "./routes"
 import { CountDownScreen } from "./screens/CountDown/CountDownScreen"
@@ -20,7 +20,7 @@ interface AppNavigatorProps {
 
 export const AppNavigator = ({ onReady }: AppNavigatorProps) => {
 	const { loaded, language } = useSettings()
-	const { changeLanguage } = useTranslation()
+	const { changeLanguage } = useTranslate()
 
 	useEffect(() => {
 		changeLanguage(language)

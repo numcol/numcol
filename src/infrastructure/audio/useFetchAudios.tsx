@@ -4,7 +4,7 @@ import {
 	AudioObject,
 	Audios,
 	mutedAudios,
-} from "../../app/providers/AudioProvider"
+} from "../../ui/providers/AudioProvider"
 import { ReactNativeLogger } from "../adapters"
 
 const audios = { ...mutedAudios }

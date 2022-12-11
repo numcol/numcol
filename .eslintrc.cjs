@@ -50,15 +50,15 @@ module.exports = {
 					{
 						paths: [
 							"@numcol/infra",
-							"@numcol/app",
+							"@numcol/ui",
 							"@numcol/domain",
 							"@numcol/ds",
 						],
 						patterns: [
 							"**/infrastructure/**/*",
 							"**/infrastructure",
-							"**/app/**/*",
-							"**/app",
+							"**/ui/**/*",
+							"**/ui",
 							"**/domain/**/*",
 							"**/domain",
 							"**/ds/**/*",
@@ -77,8 +77,7 @@ module.exports = {
 					{
 						paths: [
 							"@numcol/infra",
-							"@numcol/app",
-							"@numcol/ds",
+							"@numcol/ui",
 							"@numcol/ds",
 							"react",
 							"react-native",
@@ -87,8 +86,8 @@ module.exports = {
 						patterns: [
 							"**/infrastructure/**/*",
 							"**/infrastructure",
-							"**/app/**/*",
-							"**/app",
+							"**/ui/**/*",
+							"**/ui",
 							"**/domain/**/*",
 							"**/domain",
 							"**/ds/**/*",
@@ -99,22 +98,17 @@ module.exports = {
 			},
 		},
 		{
-			files: ["src/app/**/*"],
+			files: ["src/ui/**/*"],
 			rules: {
 				"@typescript-eslint/no-restricted-imports": [
 					"error",
 					{
-						paths: [
-							"@numcol/infra",
-							"@numcol/app",
-							"diod",
-							"react-native-logs",
-						],
+						paths: ["@numcol/infra", "@numcol/ui", "diod", "react-native-logs"],
 						patterns: [
 							"**/infrastructure/**/*",
 							"**/infrastructure",
-							"**/app/**/*",
-							"**/app",
+							"**/ui/**/*",
+							"**/ui",
 							"expo-*",
 						],
 					},

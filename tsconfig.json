@@ -13,7 +13,7 @@
 		"paths": {
 			// This needs to be mirrored in babel.config.js
 			"@numcol/ds": ["./src/ds"],
-			"@numcol/app": ["./src/app"],
+			"@numcol/ui": ["./src/ui"],
 			"@numcol/infra": ["./src/infrastructure"],
 			"@numcol/domain": ["./src/domain"]
 		}

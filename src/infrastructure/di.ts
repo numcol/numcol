@@ -1,4 +1,4 @@
-import { Logger, Storage } from "@numcol/app"
+import { Logger, Storage } from "@numcol/ui"
 import { GameFactory } from "@numcol/domain"
 import { ContainerBuilder } from "diod"
 import {

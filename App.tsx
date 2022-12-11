@@ -1,4 +1,4 @@
-import { NumCol } from "@numcol/app"
+import { NumCol } from "@numcol/ui"
 import { builder, detectLanguage, initI18n } from "@numcol/infra"
 import { DefaultTheme, NavigationContainer } from "@react-navigation/native"
 import { Asset } from "expo-asset"

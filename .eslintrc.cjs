@@ -47,7 +47,12 @@ module.exports = {
 				"@typescript-eslint/no-restricted-imports": [
 					"error",
 					{
-						paths: ["@numcol/infra", "@numcol/app", "@numcol/domain"],
+						paths: [
+							"@numcol/infra",
+							"@numcol/app",
+							"@numcol/domain",
+							"@numcol/ds",
+						],
 						patterns: [
 							"**/infrastructure/**/*",
 							"**/infrastructure",
@@ -55,6 +60,36 @@ module.exports = {
 							"**/app",
 							"**/domain/**/*",
 							"**/domain",
+							"**/ds/**/*",
+							"**/ds",
+						],
+					},
+				],
+			},
+		},
+		{
+			files: ["src/domain/**/*"],
+			rules: {
+				"@typescript-eslint/no-restricted-imports": [
+					"error",
+					{
+						paths: [
+							"@numcol/infra",
+							"@numcol/app",
+							"@numcol/ds",
+							"@numcol/ds",
+							"react",
+							"react-native",
+						],
+						patterns: [
+							"**/infrastructure/**/*",
+							"**/infrastructure",
+							"**/app/**/*",
+							"**/app",
+							"**/domain/**/*",
+							"**/domain",
+							"**/ds/**/*",
+							"**/ds",
 						],
 					},
 				],

@@ -1,6 +1,4 @@
-import { Uuid } from "../../domain/crosscutting/uuid"
-import { Game } from "../../domain/game"
-import { GameRepository } from "../../domain/game/services/GameRepository"
+import { Game, GameRepository, Uuid } from "@numcol/domain"
 
 export class InMemoryGameRepository extends GameRepository {
 	private currentGame: Game | undefined

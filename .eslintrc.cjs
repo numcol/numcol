@@ -1,3 +1,14 @@
+const commonForbiddenImportPatterns = [
+	"**/../infrastructure/**/*",
+	"**/../infrastructure",
+	"**/../application/**/*",
+	"**/../application",
+	"**/../domain/**/*",
+	"**/../domain",
+	"**/../design-system/**/*",
+	"**/../design-system",
+]
+
 module.exports = {
 	extends: [
 		"eslint:recommended",
@@ -40,10 +51,11 @@ module.exports = {
 						destructuredArrayIgnorePattern: "^_",
 					},
 				],
+				"react-hooks/exhaustive-deps": ["error"],
 			},
 		},
 		{
-			files: ["src/ui/ds/**/*"],
+			files: ["src/design-system/**/*"],
 			rules: {
 				"@typescript-eslint/no-restricted-imports": [
 					"error",
@@ -54,17 +66,7 @@ module.exports = {
 							"@numcol/domain",
 							"@numcol/ds",
 						],
-						patterns: [
-							"**/infrastructure/**/*",
-							"**/infrastructure",
-							"**/app/**/*",
-							"**/app",
-							"**/domain/**/*",
-							"**/domain",
-							"**/ds/**/*",
-							"**/ds",
-							"@react-navigation/*",
-						],
+						patterns: [...commonForbiddenImportPatterns, "@react-navigation/*"],
 					},
 				],
 			},
@@ -79,20 +81,13 @@ module.exports = {
 							"@numcol/infra",
 							"@numcol/ui",
 							"@numcol/ds",
+							"@numcol/domain",
+							"@numcol/app",
 							"react",
 							"react-native",
 							"@react-navigation/*",
 						],
-						patterns: [
-							"**/infrastructure/**/*",
-							"**/infrastructure",
-							"**/ui/**/*",
-							"**/ui",
-							"**/domain/**/*",
-							"**/domain",
-							"**/ds/**/*",
-							"**/ds",
-						],
+						patterns: [...commonForbiddenImportPatterns],
 					},
 				],
 			},
@@ -104,13 +99,7 @@ module.exports = {
 					"error",
 					{
 						paths: ["@numcol/infra", "@numcol/ui", "diod", "react-native-logs"],
-						patterns: [
-							"**/infrastructure/**/*",
-							"**/infrastructure",
-							"**/ui/**/*",
-							"**/ui",
-							"expo-*",
-						],
+						patterns: [...commonForbiddenImportPatterns, "expo-*"],
 					},
 				],
 			},
@@ -122,7 +111,7 @@ module.exports = {
 					"error",
 					{
 						paths: ["@numcol/infra"],
-						patterns: ["**/infrastructure/**/*", "**/infrastructure"],
+						patterns: [...commonForbiddenImportPatterns],
 					},
 				],
 			},

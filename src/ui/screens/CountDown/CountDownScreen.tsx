@@ -102,7 +102,15 @@ export const CountDownScreen = ({
 			fromUpToMiddle.stop()
 			fromMiddleToDown.stop()
 		}
-	}, [fromUpToMiddle, fromMiddleToDown, animate, navigation, countDown, start])
+	}, [
+		fromUpToMiddle,
+		fromMiddleToDown,
+		animate,
+		navigation,
+		countDown,
+		start,
+		route.params.gameId,
+	])
 
 	return (
 		<SafeAreaView style={styles.container}>

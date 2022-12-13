@@ -2,17 +2,19 @@
 	"name": "numcol",
 	"description": "The Brain Training Game About Matching Numbers And Colours",
 	"version": "1.0.0",
-	"main": "node_modules/expo/AppEntry.js",
+	"main": "src/main.ts",
 	"scripts": {
 		"start": "expo start",
 		"android": "expo start --android",
 		"ios": "expo start --ios",
 		"web": "expo start --web",
-		"lint": "tsc --noEmit -p tsconfig.json && eslint .",
+		"check-types": "tsc --noEmit -p tsconfig.json",
+		"lint": "eslint .",
 		"prepare": "git config core.hooksPath ./.githooks",
 		"lint-staged": "lint-staged",
 		"test": "jest",
-		"coverage": "jest --coverage"
+		"coverage": "jest --coverage",
+		"qa": "pnpm run check-types && pnpm run lint && pnpm run test"
 	},
 	"dependencies": {
 		"@react-native-async-storage/async-storage": "~1.17.11",

@@ -5,12 +5,11 @@ import { Asset } from "expo-asset"
 import { useFonts } from "expo-font"
 import * as SplashScreen from "expo-splash-screen"
 import { StatusBar } from "expo-status-bar"
-import "intl-pluralrules"
 import { useCallback, useEffect, useState } from "react"
 import "react-native-gesture-handler"
 import "react-native-get-random-values"
 import { SafeAreaProvider } from "react-native-safe-area-context"
-import { useFetchAudios } from "./src/infrastructure/audio/useFetchAudios"
+import { useFetchAudios } from "./ui/hooks/useFetchAudios"
 
 const navTheme = {
 	...DefaultTheme,
@@ -20,21 +19,21 @@ const navTheme = {
 	},
 }
 
+const container = builder.build({ autowire: false })
+
 void initI18n()
 void SplashScreen.preventAutoHideAsync()
 
 const images = {
-	background: require("./assets/seamless-memphis-geometric-lines-pattern.png"),
+	background: require("../assets/seamless-memphis-geometric-lines-pattern.png"),
 }
 const fonts = {
-	"Fredoka-Regular": require("./assets/fonts/Fredoka-Regular.ttf"),
-	"Fredoka-SemiBold": require("./assets/fonts/Fredoka-SemiBold.ttf"),
+	"Fredoka-Regular": require("../assets/fonts/Fredoka-Regular.ttf"),
+	"Fredoka-SemiBold": require("../assets/fonts/Fredoka-SemiBold.ttf"),
 }
 
 const preFetchImages = () =>
 	Promise.all(Object.values(images).map((i) => Asset.loadAsync(i)))
-
-const container = builder.build({ autowire: false })
 
 const defaultSettings = {
 	language: detectLanguage(),

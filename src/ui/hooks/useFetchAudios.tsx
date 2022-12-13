@@ -1,11 +1,9 @@
+// eslint-disable-next-line @typescript-eslint/no-restricted-imports
 import { Audio } from "expo-av"
 import { useEffect, useState } from "react"
-import {
-	AudioObject,
-	Audios,
-	mutedAudios,
-} from "../../ui/app/providers/AudioProvider"
-import { ReactNativeLogger } from "../adapters"
+// eslint-disable-next-line @typescript-eslint/no-restricted-imports
+import { ReactNativeLogger } from "../../infrastructure/adapters"
+import { AudioObject, Audios, mutedAudios } from "../providers/AudioProvider"
 
 const audios = { ...mutedAudios }
 
@@ -15,8 +13,7 @@ interface FetchedAudio {
 	isLooping: boolean
 }
 
-const logger = new ReactNativeLogger()
-const { error, debug } = logger
+const { debug, error } = new ReactNativeLogger()
 
 export const useFetchAudios = () => {
 	const [loaded, setLoaded] = useState(false)

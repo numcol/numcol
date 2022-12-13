@@ -1,9 +1,7 @@
+import { CreateGameUseCase, GetGameUseCase, ReplyUseCase } from "@numcol/app"
 import { GameRepository } from "@numcol/domain"
 import { Logger, Storage } from "@numcol/ui"
 import { ContainerBuilder } from "diod"
-import { CreateGameUseCase } from "../application/game/createGameUseCase"
-import { GetGameUseCase } from "../application/game/getGameUseCase"
-import { ReplyUseCase } from "../application/game/replyUseCase"
 import {
 	InMemoryGameRepository,
 	ReactNativeAsyncStorage,

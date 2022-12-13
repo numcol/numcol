@@ -43,7 +43,7 @@ module.exports = {
 			},
 		},
 		{
-			files: ["src/ds/**/*"],
+			files: ["src/ui/ds/**/*"],
 			rules: {
 				"@typescript-eslint/no-restricted-imports": [
 					"error",
@@ -57,8 +57,8 @@ module.exports = {
 						patterns: [
 							"**/infrastructure/**/*",
 							"**/infrastructure",
-							"**/ui/**/*",
-							"**/ui",
+							"**/app/**/*",
+							"**/app",
 							"**/domain/**/*",
 							"**/domain",
 							"**/ds/**/*",

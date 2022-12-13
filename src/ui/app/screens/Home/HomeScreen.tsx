@@ -1,10 +1,13 @@
+import { CreateGameUseCase } from "@numcol/app"
 import { Button, colors, fonts } from "@numcol/ds"
+import { nanoid } from "nanoid"
 import { useCallback, useEffect } from "react"
 import { Dimensions, StyleSheet, Text, View } from "react-native"
 import { SafeAreaView } from "react-native-safe-area-context"
 import { useLogger } from "../../hooks/useLogger"
 import { useSound } from "../../hooks/useSound"
 import { useTranslate } from "../../hooks/useTranslate"
+import { useService } from "../../providers/DependencyInjectionProvider"
 import { useSettings } from "../../providers/SettingsProvider"
 import { Routes, ScreenProps } from "../../routes"
 import { SoundButton } from "./components/SoundButton"
@@ -13,6 +16,7 @@ export const HomeScreen = ({ navigation }: ScreenProps<Routes.Home>) => {
 	const { t } = useTranslate()
 	const { language } = useSettings()
 	const { homeBackground, click, countDown } = useSound()
+	const createGameUseCase = useService(CreateGameUseCase)
 	useLogger("Home screen")
 
 	useEffect(() => {
@@ -32,10 +36,12 @@ export const HomeScreen = ({ navigation }: ScreenProps<Routes.Home>) => {
 	}, [navigation, homeBackground])
 
 	const startGame = useCallback(() => {
+		const gameId = nanoid()
+		void createGameUseCase.invoke({ gameId })
 		void homeBackground.stop()
 		void countDown.play()
-		navigation.navigate(Routes.CountDown)
-	}, [navigation, homeBackground, countDown])
+		navigation.navigate(Routes.CountDown, { gameId })
+	}, [navigation, homeBackground, countDown, createGameUseCase])
 
 	const changeLanguage = useCallback(() => {
 		void click.play()

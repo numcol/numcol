@@ -1,4 +1,4 @@
-import { Answer, NumcolColor, NumcolNumber } from "@numcol/domain"
+import { NumcolColor, NumcolNumber } from "@numcol/domain"
 import { Button, ButtonColor } from "@numcol/ds"
 import { memo, useCallback } from "react"
 import { Dimensions, StyleSheet, View } from "react-native"
@@ -8,15 +8,15 @@ const size = (Dimensions.get("window").width - 20 - 25) / 6
 interface AnsweButtonProps {
 	color: NumcolColor
 	number: NumcolNumber
-	id: number
-	reply: (answer: Answer) => void
+	id: string
+	reply: (id: string) => void
 }
 
 export const AnswerButton = memo(
 	({ id, color, number, reply }: AnsweButtonProps) => {
 		const onPress = useCallback(() => {
-			reply(Answer.fromValues(id, color, number))
-		}, [color, id, number, reply])
+			reply(id)
+		}, [id, reply])
 
 		return (
 			<View style={styles.container}>

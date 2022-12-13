@@ -1,7 +1,8 @@
+import { ValueObject } from "../../crosscutting/valueObject"
 import { NumcolColor } from "./color"
 import { NumcolNumber } from "./number"
 
-export class Numcol {
+export class Numcol implements ValueObject<Numcol> {
 	public constructor(
 		public readonly color: NumcolColor,
 		public readonly number: NumcolNumber,

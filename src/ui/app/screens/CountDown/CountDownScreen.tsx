@@ -13,6 +13,7 @@ const windowHeight = Dimensions.get("window").height
 
 export const CountDownScreen = ({
 	navigation,
+	route,
 }: ScreenProps<Routes.CountDown>) => {
 	const isGoingOut = useRef(false)
 	const starting3 = useRef(3)
@@ -81,8 +82,9 @@ export const CountDownScreen = ({
 					}
 					fromUpToMiddle.stop()
 					fromMiddleToDown.stop()
-					// navigation.navigate(Routes.Game)
-					navigation.dispatch(StackActions.replace(Routes.Game))
+					navigation.dispatch(
+						StackActions.replace(Routes.Game, { gameId: route.params.gameId }),
+					)
 					return
 				}
 

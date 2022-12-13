@@ -1,4 +1,5 @@
-import { Answer, GameFactory } from "@numcol/domain"
+import { ReplyUseCase } from "@numcol/app"
+import { Game } from "@numcol/domain"
 import { ShakeView, ShakeViewRef } from "@numcol/ds"
 import { useCallback, useEffect, useRef, useState } from "react"
 import { StyleSheet, View } from "react-native"
@@ -9,14 +10,16 @@ import { AnswerGrid } from "./AnswerGrid"
 import { Question } from "./Question"
 import { ScoreBoard } from "./ScoreBoard"
 
-export const GameBoard = () => {
-	const gameFactory = useService(GameFactory)
-	const [game, setGame] = useState(gameFactory.create())
-	const [answer, setAnswer] = useState<Answer | undefined>()
-	const [colorFirst, setColorFirst] = useState(randomBoolean())
+interface GameBoardProps {
+	game: Game
+}
+
+export const GameBoard = ({ game }: GameBoardProps) => {
+	const replyUseCase = useService(ReplyUseCase)
+	const [colorFirst, _setColorFirst] = useState(randomBoolean())
 	const shakeView = useRef<ShakeViewRef>(null)
 	const { info } = useLogger()
-	const { gameBackground, click, wrong } = useSound()
+	const { gameBackground } = useSound()
 
 	useEffect(() => {
 		void gameBackground.play()
@@ -30,39 +33,42 @@ export const GameBoard = () => {
 		info("Game start")
 	}, [info])
 
-	useEffect(() => {
-		if (!answer) {
-			return
-		}
+	// useEffect(() => {
+	// 	if (!answer) {
+	// 		return
+	// 	}
 
-		const isCorrect = answer.isCorrectFor(game.question)
+	// 	const isCorrect = answer.isCorrectFor(game.question)
 
-		if (isCorrect) {
-			void click.play()
-		} else {
-			void wrong.play()
-		}
+	// 	if (isCorrect) {
+	// 		void click.play()
+	// 	} else {
+	// 		void wrong.play()
+	// 	}
 
-		const logInfo = JSON.stringify({
-			question: game.question.toString(),
-			answer: answer.numcol.toString(),
-		})
+	// 	const logInfo = JSON.stringify({
+	// 		question: game.question.toString(),
+	// 		answer: answer.numcol.toString(),
+	// 	})
 
-		if (isCorrect) {
-			info(`Correct answer: ${logInfo}`)
-			setColorFirst(randomBoolean())
-		} else {
-			info(`Incorrect answer: ${logInfo}`)
-			shakeView.current?.shake()
-		}
+	// 	if (isCorrect) {
+	// 		info(`Correct answer: ${logInfo}`)
+	// 		setColorFirst(randomBoolean())
+	// 	} else {
+	// 		info(`Incorrect answer: ${logInfo}`)
+	// 		shakeView.current?.shake()
+	// 	}
 
-		setGame(game.reply(answer))
-		setAnswer(undefined)
-	}, [answer, game, info, click, wrong])
+	// 	setGame(game.reply(answer))
+	// 	setAnswer(undefined)
+	// }, [answer, game, info, click, wrong])
 
-	const reply = useCallback((nanswer: Answer) => {
-		setAnswer(nanswer)
-	}, [])
+	const reply = useCallback(
+		(answerId: string) => {
+			void replyUseCase.invoke({ gameId: game.id.id, answerId })
+		},
+		[game.id.id, replyUseCase],
+	)
 
 	return (
 		<View style={styles.container}>

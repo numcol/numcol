@@ -4,7 +4,7 @@ import { AnswerButton } from "./AnswerButton"
 
 interface AnswerGridProps {
 	answers: Answer[]
-	reply: (answer: Answer) => void
+	reply: (id: string) => void
 }
 
 export const AnswerGrid = ({ answers, reply }: AnswerGridProps) => {
@@ -12,8 +12,8 @@ export const AnswerGrid = ({ answers, reply }: AnswerGridProps) => {
 		<View style={styles.container}>
 			{answers.map((answer) => (
 				<AnswerButton
-					key={`answer${answer.id}`}
-					id={answer.id}
+					key={`answer${answer.id.id}`}
+					id={answer.id.id}
 					number={answer.numcol.number}
 					color={answer.numcol.color}
 					reply={reply}

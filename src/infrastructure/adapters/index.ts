@@ -1,3 +1,3 @@
-export * from "./randomGameFactory"
+export * from "./inMemoryGameRepository"
 export * from "./reactNativeLogger"
 export * from "./reactNativeAsyncStorage"

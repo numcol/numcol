@@ -1,8 +1,14 @@
 import { Uuid } from "../../../crosscutting/uuid"
+import { GameCorrectlyAnswered } from "../../events/gameCorrectlyAnswered"
+import { GameWronglyAnswered } from "../../events/gameWronglyAnswered"
 import { Answer } from "../answer"
 import { Game } from "../game"
 
 describe("Game", () => {
+	afterEach(() => {
+		jest.useRealTimers()
+	})
+
 	describe("creates a new game", () => {
 		test("with an answerable question", () => {
 			const game = Game.create(Uuid.fromString("uuid"))
@@ -16,6 +22,19 @@ describe("Game", () => {
 		test("with zero score", () => {
 			const game = Game.create(Uuid.fromString("uuid"))
 			expect(game.score).toBe(0)
+		})
+
+		test("and fires a domain event", () => {
+			jest.useFakeTimers()
+			jest.setSystemTime(new Date("2020-02-19T00:00:00.000Z"))
+
+			const game = Game.create(Uuid.fromString("uuid"))
+			expect(game.domainEvents.length).toBe(1)
+			expect(game.domainEvents[0]).toEqual({
+				name: "numcol.game.created",
+				createdAt: new Date("2020-02-19T00:00:00.000Z"),
+				aggregateId: "uuid",
+			})
 		})
 	})
 
@@ -69,6 +88,24 @@ describe("Game", () => {
 						.numcol.equals(prevCorrectAnswerValue),
 				).toBe(false)
 			})
+
+			test("triggers a domain event", () => {
+				jest.useFakeTimers()
+				jest.setSystemTime(new Date("2020-02-19T00:00:00.000Z"))
+
+				game.reply(correctAnswer.id)
+				expect(game.domainEvents.length).toBeGreaterThanOrEqual(1)
+				const domainEvent = game.domainEvents.pop() as GameCorrectlyAnswered
+				expect(domainEvent.name).toBe("numcol.game.correctly-answered")
+				expect(domainEvent.createdAt.toISOString()).toBe(
+					"2020-02-19T00:00:00.000Z",
+				)
+				expect(domainEvent.aggregateId).toBe("uuid")
+				expect(domainEvent.answerId).toBe(correctAnswer.id.id)
+				expect(domainEvent.newAnswerValue).toBeDefined()
+				expect(domainEvent.newQuestion).toEqual(game.question)
+				expect(domainEvent.score).toEqual(game.score)
+			})
 		})
 
 		describe("if it is not correct", () => {
@@ -107,6 +144,22 @@ describe("Game", () => {
 						.find((answer) => answer.id === prevIncorrectAnswerId)!
 						.numcol.equals(prevIncorrectAnswerValue),
 				).toBe(true)
+			})
+
+			test("triggers a domain event", () => {
+				jest.useFakeTimers()
+				jest.setSystemTime(new Date("2020-02-19T00:00:00.000Z"))
+
+				game.reply(incorrectAnswer.id)
+				expect(game.domainEvents.length).toBeGreaterThanOrEqual(1)
+				const domainEvent = game.domainEvents.pop() as GameWronglyAnswered
+				expect(domainEvent.name).toBe("numcol.game.wrongly-answered")
+				expect(domainEvent.createdAt.toISOString()).toBe(
+					"2020-02-19T00:00:00.000Z",
+				)
+				expect(domainEvent.aggregateId).toBe("uuid")
+				expect(domainEvent.answerId).toBe(incorrectAnswer.id.id)
+				expect(domainEvent.answerValue).toEqual(incorrectAnswer.numcol)
 			})
 		})
 	})

@@ -1,22 +1,25 @@
-import { ReplyUseCase } from "@numcol/app"
-import { Game } from "@numcol/domain"
+import { GameDto, ReplyUseCase } from "@numcol/app"
+import { GameCorrectlyAnswered, GameWronglyAnswered } from "@numcol/domain"
 import { ShakeView, ShakeViewRef } from "@numcol/ds"
 import { useCallback, useEffect, useRef, useState } from "react"
 import { StyleSheet, View } from "react-native"
 import { useLogger } from "../../../hooks/useLogger"
 import { useSound } from "../../../hooks/useSound"
+import { useSubscribeTo } from "../../../hooks/useSubscribeTo"
 import { useService } from "../../../providers/DependencyInjectionProvider"
 import { AnswerGrid } from "./AnswerGrid"
 import { Question } from "./Question"
 import { ScoreBoard } from "./ScoreBoard"
 
 interface GameBoardProps {
-	game: Game
+	game: GameDto
 }
 
 export const GameBoard = ({ game }: GameBoardProps) => {
 	const replyUseCase = useService(ReplyUseCase)
-	const [colorFirst, _setColorFirst] = useState(randomBoolean())
+	const [colorFirst, setColorFirst] = useState(randomBoolean())
+	const [question, setQuestion] = useState(game.question)
+	const [score, setScore] = useState(game.score)
 	const shakeView = useRef<ShakeViewRef>(null)
 	const { info } = useLogger()
 	const { gameBackground } = useSound()
@@ -32,6 +35,32 @@ export const GameBoard = ({ game }: GameBoardProps) => {
 	useEffect(() => {
 		info("Game start")
 	}, [info])
+
+	const { on: onGameWronglyAnswered } = useSubscribeTo(GameWronglyAnswered)
+	onGameWronglyAnswered((ev) => {
+		info(
+			`Incorrect answer: ${JSON.stringify({
+				question: question.toString(),
+				answer: ev.answerValue.toString(),
+			})}`,
+		)
+		shakeView.current?.shake()
+	})
+
+	const { on: onGameCorrectlyAnswered } = useSubscribeTo(GameCorrectlyAnswered)
+	onGameCorrectlyAnswered((ev) => {
+		info(
+			`Correct answer: ${JSON.stringify({
+				question: question.toString(),
+				newQuestion: ev.newQuestion.toString(),
+				newAnswer: ev.newAnswerValue.toString(),
+			})}`,
+		)
+		setColorFirst(randomBoolean())
+		setQuestion(ev.newQuestion)
+		setScore(ev.score)
+	})
+	// eslint-disable-next-line no-console
 
 	// useEffect(() => {
 	// 	if (!answer) {
@@ -65,18 +94,18 @@ export const GameBoard = ({ game }: GameBoardProps) => {
 
 	const reply = useCallback(
 		(answerId: string) => {
-			void replyUseCase.invoke({ gameId: game.id.id, answerId })
+			void replyUseCase.invoke({ gameId: game.id, answerId })
 		},
-		[game.id.id, replyUseCase],
+		[game.id, replyUseCase],
 	)
 
 	return (
 		<View style={styles.container}>
-			<ScoreBoard score={game.score} />
+			<ScoreBoard score={score} />
 			<View style={styles.bottom}>
 				<Question
-					color={game.question.color}
-					number={game.question.number}
+					color={question.color}
+					number={question.number}
 					colorFirst={colorFirst}
 				/>
 				<ShakeView ref={shakeView}>

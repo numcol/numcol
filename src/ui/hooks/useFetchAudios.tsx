@@ -117,7 +117,7 @@ export const useFetchAudios = () => {
 					return
 				}
 
-				audios[audio.value.audio] = mapAudio(audio.value, { debug, error })
+				audios[audio.value.audio] = mapAudio(audio.value)
 			})
 
 			setLoaded(true)
@@ -132,16 +132,9 @@ export const useFetchAudios = () => {
 	}
 }
 
-const mapAudio = (
-	obj: FetchedAudio,
-	args: {
-		debug: (msg: string) => void
-		error: (err: Error) => void
-	},
-): AudioObject => {
+const mapAudio = (obj: FetchedAudio): AudioObject => {
 	const audioType = obj.audio
 	const sound = obj.sound.sound
-	const { debug, error } = args
 	const play = obj.isLooping
 		? () => sound.playAsync()
 		: () => sound.playFromPositionAsync(0)

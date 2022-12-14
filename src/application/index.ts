@@ -1,3 +1,6 @@
 export * from "./game/createGameUseCase"
+export * from "./game/dtos/AnswerDto"
+export * from "./game/dtos/GameDto"
+export * from "./game/dtos/NumcolDto"
 export * from "./game/getGameUseCase"
 export * from "./game/replyUseCase"

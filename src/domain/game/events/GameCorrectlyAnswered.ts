@@ -1,15 +1,22 @@
 import { DomainEvent } from "../../crosscutting/domainEvent"
-import { Uuid } from "../../crosscutting/uuid"
-import { Numcol } from "../model/numcol"
+import { NumcolColor } from "../model/color"
+import { NumcolNumber } from "../model/number"
 
 export class GameCorrectlyAnswered implements DomainEvent {
 	public readonly name = "game.correctly-answered"
 	public readonly createdAt = new Date()
 
 	public constructor(
-		public readonly aggregateId: Uuid,
-		public readonly answerId: Uuid,
-		public readonly newNumcol: Numcol,
-		public readonly newQUestion: Numcol,
+		public readonly aggregateId: string,
+		public readonly answerId: string,
+		public readonly newAnswerValue: {
+			color: NumcolColor
+			number: NumcolNumber
+		},
+		public readonly newQuestion: {
+			color: NumcolColor
+			number: NumcolNumber
+		},
+		public readonly score: number,
 	) {}
 }

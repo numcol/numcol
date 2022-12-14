@@ -1,6 +1,8 @@
-import { Game, GameRepository } from "@numcol/domain"
+import { GameRepository } from "@numcol/domain"
 import { Uuid } from "../../domain/crosscutting/uuid"
 import { UseCase } from "../useCase"
+import { GameDto } from "./dtos/GameDto"
+import { mapGameDto } from "./dtos/gameDtoMapper"
 
 interface GetGameUseCaseParams {
 	gameId: string
@@ -8,16 +10,14 @@ interface GetGameUseCaseParams {
 
 export class GetGameUseCase extends UseCase<
 	GetGameUseCaseParams,
-	Game | undefined
+	GameDto | undefined
 > {
 	public constructor(private readonly gameRepository: GameRepository) {
 		super()
 	}
 
-	protected async exec({
-		gameId,
-	}: GetGameUseCaseParams): Promise<Game | undefined> {
+	protected async exec({ gameId }: GetGameUseCaseParams) {
 		const game = await this.gameRepository.getById(Uuid.fromString(gameId))
-		return game
+		return game ? mapGameDto(game) : undefined
 	}
 }

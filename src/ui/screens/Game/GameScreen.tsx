@@ -1,5 +1,4 @@
-import { GetGameUseCase } from "@numcol/app"
-import { Game } from "@numcol/domain"
+import { GameDto, GetGameUseCase } from "@numcol/app"
 import { useEffect, useState } from "react"
 import { StyleSheet } from "react-native"
 import { SafeAreaView } from "react-native-safe-area-context"
@@ -10,7 +9,7 @@ import { GameBoard } from "./components/GameBoard"
 
 export const GameScreen = ({ navigation, route }: ScreenProps<Routes.Game>) => {
 	useLogger("Game screen")
-	const [game, setGame] = useState<Game | undefined>()
+	const [game, setGame] = useState<GameDto | undefined>()
 	const getGameUseCase = useService(GetGameUseCase)
 
 	useEffect(() => {

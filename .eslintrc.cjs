@@ -52,6 +52,7 @@ module.exports = {
 					},
 				],
 				"react-hooks/exhaustive-deps": ["error"],
+				"@typescript-eslint/no-shadow": ["error"],
 			},
 		},
 		{

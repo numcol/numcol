@@ -1,32 +1,43 @@
-import { NumcolColor, NumcolNumber } from "@numcol/domain"
+import { AnswerDto } from "@numcol/app"
+import {
+	GameCorrectlyAnswered,
+	NumcolColor,
+	NumcolNumber,
+} from "@numcol/domain"
 import { Button, ButtonColor } from "@numcol/ds"
-import { memo, useCallback } from "react"
+import { memo, useCallback, useState } from "react"
 import { Dimensions, StyleSheet, View } from "react-native"
+import { useSubscribeTo } from "../../../hooks/useSubscribeTo"
 
 const size = (Dimensions.get("window").width - 20 - 25) / 6
 
 interface AnsweButtonProps {
-	color: NumcolColor
-	number: NumcolNumber
-	id: string
+	answer: AnswerDto
 	reply: (id: string) => void
 }
 
-export const AnswerButton = memo(
-	({ id, color, number, reply }: AnsweButtonProps) => {
-		const onPress = useCallback(() => {
-			reply(id)
-		}, [id, reply])
+export const AnswerButton = memo(({ answer, reply }: AnsweButtonProps) => {
+	const [numcol, setNumcol] = useState(answer.numcol)
+	const { on: onGameCorrectlyAnswered } = useSubscribeTo(GameCorrectlyAnswered)
+	onGameCorrectlyAnswered((ev) => {
+		if (ev.answerId !== answer.id) {
+			return
+		}
+		setNumcol(ev.newAnswerValue)
+	})
 
-		return (
-			<View style={styles.container}>
-				<Button onPress={onPress} color={colorMapping[color]}>
-					{numbers[number].toString()}
-				</Button>
-			</View>
-		)
-	},
-)
+	const onPress = useCallback(() => {
+		reply(answer.id)
+	}, [answer.id, reply])
+
+	return (
+		<View style={styles.container}>
+			<Button onPress={onPress} color={colorMapping[numcol.color]}>
+				{numbers[numcol.number].toString()}
+			</Button>
+		</View>
+	)
+})
 
 AnswerButton.displayName = "AnswerButton"
 

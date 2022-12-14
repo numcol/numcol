@@ -1,6 +1,6 @@
 import { createContext, ReactNode, useContext, useMemo } from "react"
 
-const container = {
+const defaultContainer = {
 	get: () => {
 		throw new Error("DependencyInjectionContext must be initialized")
 	},
@@ -8,7 +8,7 @@ const container = {
 
 const DependencyInjectionContext = createContext<{
 	get<T>(identifier: Identifier<T>): T
-}>(container)
+}>(defaultContainer)
 
 interface AudioProviderProps {
 	children: ReactNode

@@ -35,7 +35,7 @@ export class Game extends AggregateRoot {
 	public static create(id: Uuid): Game {
 		const answers = randomAnswers(id)
 		const game = new Game(id, answers, randomQuestion(answers), 0)
-		game.triggerEvent(new GameCreated(game.id))
+		game.triggerEvent(new GameCreated(game.id.id))
 		return game
 	}
 
@@ -51,16 +51,19 @@ export class Game extends AggregateRoot {
 			this.renewQuestion()
 			this.triggerEvent(
 				new GameCorrectlyAnswered(
-					this.id,
-					answer.id,
+					this.id.id,
+					answer.id.id,
 					answer.numcol,
 					this.question,
+					this.score,
 				),
 			)
 			return
 		}
 
-		this.triggerEvent(new GameWronglyAnswered(this.id, answer.id))
+		this.triggerEvent(
+			new GameWronglyAnswered(this.id.id, answer.id.id, answer.numcol),
+		)
 	}
 
 	private renewQuestion(): void {
@@ -77,4 +80,4 @@ const randomQuestion = (answers: Answer[]) => randomItem(answers).numcol
 const randomAnswers = (gameId: Uuid) =>
 	new Array(36)
 		.fill(undefined)
-		.map((_, i) => Answer.create(Uuid.fromString(`${gameId}-${i}`)))
+		.map((_, i) => Answer.create(Uuid.fromString(`${gameId.id}-${i}`)))

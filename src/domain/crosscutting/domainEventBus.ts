@@ -19,6 +19,18 @@ export class DomainEventBus {
 		])
 	}
 
+	public static unregisterHandler<T extends DomainEvent>(
+		handler: (event: T) => void,
+		identifier: Identifier<T>,
+	): void {
+		const currentHandlers = [...(this.handlersMap.get(identifier) ?? [])]
+		const index = currentHandlers.indexOf(handler as DomainEventHandler)
+		if (index > -1) {
+			currentHandlers.splice(index, 1) // 2nd parameter means remove one item only
+		}
+		this.handlersMap.set(identifier, currentHandlers)
+	}
+
 	public static clearHandlers(): void {
 		this.handlersMap = new Map()
 	}

@@ -1,5 +1,9 @@
 import { GameDto, ReplyUseCase } from "@numcol/app"
-import { GameCorrectlyAnswered, GameWronglyAnswered } from "@numcol/domain"
+import {
+	GameCorrectlyAnswered,
+	GameEventNames,
+	GameWronglyAnswered,
+} from "@numcol/domain"
 import { ShakeView, ShakeViewRef } from "@numcol/ds"
 import { useCallback, useEffect, useRef, useState } from "react"
 import { StyleSheet, View } from "react-native"
@@ -36,7 +40,9 @@ export const GameBoard = ({ game }: GameBoardProps) => {
 		info("Game start")
 	}, [info])
 
-	const { on: onGameWronglyAnswered } = useSubscribeTo(GameWronglyAnswered)
+	const { on: onGameWronglyAnswered } = useSubscribeTo<GameWronglyAnswered>(
+		GameEventNames.GameWronglyAnswered,
+	)
 	onGameWronglyAnswered((ev) => {
 		info(
 			`Incorrect answer: ${JSON.stringify({
@@ -47,7 +53,9 @@ export const GameBoard = ({ game }: GameBoardProps) => {
 		shakeView.current?.shake()
 	})
 
-	const { on: onGameCorrectlyAnswered } = useSubscribeTo(GameCorrectlyAnswered)
+	const { on: onGameCorrectlyAnswered } = useSubscribeTo<GameCorrectlyAnswered>(
+		GameEventNames.GameCorrectlyAnswered,
+	)
 	onGameCorrectlyAnswered((ev) => {
 		info(
 			`Correct answer: ${JSON.stringify({

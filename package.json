@@ -24,6 +24,7 @@
 		"@types/react": "~18.0.26",
 		"@types/react-native": "~0.70.8",
 		"diod": "^2.0.0",
+		"eventemitter3": "^5.0.0",
 		"expo": "~47.0.8",
 		"expo-av": "~13.0.2",
 		"expo-font": "~11.0.1",

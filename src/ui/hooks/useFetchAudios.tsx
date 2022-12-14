@@ -96,7 +96,7 @@ export const useFetchAudios = () => {
 				})),
 			])
 
-			audioObjects.forEach((audio) => {
+			for (const audio of audioObjects) {
 				if (audio.status === "rejected") {
 					error(
 						audio.reason instanceof Error
@@ -118,7 +118,7 @@ export const useFetchAudios = () => {
 				}
 
 				audios[audio.value.audio] = mapAudio(audio.value)
-			})
+			}
 
 			setLoaded(true)
 		}

@@ -1,4 +1,5 @@
-import { Logger, Storage } from "@numcol/ui"
+import { Logger } from "@numcol/app"
+import { Storage } from "@numcol/ui"
 import AsyncStorage from "@react-native-async-storage/async-storage"
 
 export class ReactNativeAsyncStorage implements Storage {

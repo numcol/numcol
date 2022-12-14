@@ -1,9 +1,10 @@
 import { DomainEvent } from "../../crosscutting/domainEvent"
 import { NumcolColor } from "../model/color"
 import { NumcolNumber } from "../model/number"
+import { GameEventNames } from "./gameEventNames"
 
 export class GameWronglyAnswered implements DomainEvent {
-	public readonly name = "game.wrongly-answered"
+	public readonly name = GameEventNames.GameWronglyAnswered
 	public readonly createdAt = new Date()
 
 	public constructor(

@@ -1,24 +1,31 @@
-import { DomainEvent, DomainEventBus } from "@numcol/domain"
-import { useCallback, useEffect, useRef } from "react"
+import { DomainEvent, DomainEventBus, DomainEventHandler } from "@numcol/domain"
+import { useCallback, useEffect, useMemo, useRef } from "react"
+import { useService } from "../providers/DependencyInjectionProvider"
 
-export const useSubscribeTo = <T extends DomainEvent>(event: Identifier<T>) => {
+export const useSubscribeTo = <T extends DomainEvent>(eventName: string) => {
 	const handlerRef = useRef<((ev: T) => void) | null>(null)
+	const domainEventBus = useService(DomainEventBus)
 
 	const on = useCallback((handler: (ev: T) => void) => {
 		handlerRef.current = handler
 	}, [])
 
-	const handler = useCallback((ev: T) => {
-		handlerRef.current?.(ev)
-	}, [])
+	const handler = useMemo<DomainEventHandler<T>>(
+		() => ({
+			subscribeTo: eventName,
+			invoke: (ev) => {
+				handlerRef.current?.(ev)
+			},
+		}),
+		[eventName],
+	)
 
 	useEffect(() => {
-		DomainEventBus.registerHandler(handler, event)
-
+		domainEventBus.registerHandler(handler)
 		return () => {
-			DomainEventBus.unregisterHandler(handler, event)
+			domainEventBus.unregisterHandler(handler)
 		}
-	}, [handler, event])
+	}, [handler, domainEventBus])
 
 	return { on }
 }

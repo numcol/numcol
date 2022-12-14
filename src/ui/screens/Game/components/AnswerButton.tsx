@@ -1,6 +1,7 @@
 import { AnswerDto } from "@numcol/app"
 import {
 	GameCorrectlyAnswered,
+	GameEventNames,
 	NumcolColor,
 	NumcolNumber,
 } from "@numcol/domain"
@@ -18,7 +19,9 @@ interface AnsweButtonProps {
 
 export const AnswerButton = memo(({ answer, reply }: AnsweButtonProps) => {
 	const [numcol, setNumcol] = useState(answer.numcol)
-	const { on: onGameCorrectlyAnswered } = useSubscribeTo(GameCorrectlyAnswered)
+	const { on: onGameCorrectlyAnswered } = useSubscribeTo<GameCorrectlyAnswered>(
+		GameEventNames.GameCorrectlyAnswered,
+	)
 	onGameCorrectlyAnswered((ev) => {
 		if (ev.answerId !== answer.id) {
 			return

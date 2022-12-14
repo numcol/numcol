@@ -1,51 +1,14 @@
 import { DomainEvent } from "./domainEvent"
+import { DomainEventHandler } from "./domainEventHandler"
 
-type DomainEventHandler = (event: DomainEvent) => void
+export abstract class DomainEventBus {
+	public abstract registerHandler<T extends DomainEvent>(
+		handler: DomainEventHandler<T>,
+	): void
 
-export class DomainEventBus {
-	private static handlersMap = new Map<
-		Identifier<DomainEvent>,
-		Array<DomainEventHandler>
-	>()
+	public abstract unregisterHandler<T extends DomainEvent>(
+		handler: DomainEventHandler<T>,
+	): void
 
-	public static registerHandler<T extends DomainEvent>(
-		handler: (event: T) => void,
-		identifier: Identifier<T>,
-	): void {
-		const currentHandlers = this.handlersMap.get(identifier) ?? []
-		this.handlersMap.set(identifier, [
-			...currentHandlers,
-			handler as DomainEventHandler,
-		])
-	}
-
-	public static unregisterHandler<T extends DomainEvent>(
-		handler: (event: T) => void,
-		identifier: Identifier<T>,
-	): void {
-		const currentHandlers = [...(this.handlersMap.get(identifier) ?? [])]
-		const index = currentHandlers.indexOf(handler as DomainEventHandler)
-		if (index > -1) {
-			currentHandlers.splice(index, 1) // 2nd parameter means remove one item only
-		}
-		this.handlersMap.set(identifier, currentHandlers)
-	}
-
-	public static clearHandlers(): void {
-		this.handlersMap = new Map()
-	}
-
-	public static dispatchEvents(events: DomainEvent[]): void {
-		events.forEach((event: DomainEvent) => DomainEventBus.dispatch(event))
-	}
-
-	private static dispatch(event: DomainEvent): void {
-		const handlers = this.handlersMap.get(event.constructor)
-
-		if (handlers) {
-			for (const handler of handlers) {
-				handler(event)
-			}
-		}
-	}
+	public abstract dispatchEvents(events: DomainEvent[]): void
 }

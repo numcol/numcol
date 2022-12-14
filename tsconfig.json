@@ -10,6 +10,7 @@
 		"noUncheckedIndexedAccess": true,
 		"noUnusedLocals": true,
 		"noUnusedParameters": true,
+		"forceConsistentCasingInFileNames": true,
 		"paths": {
 			// This needs to be mirrored in babel.config.js
 			"@numcol/ds": ["./src/design-system"],

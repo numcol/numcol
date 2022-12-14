@@ -1,4 +1,4 @@
-import { Logger } from "@numcol/ui"
+import { Logger } from "@numcol/app"
 
 import { consoleTransport, logger } from "react-native-logs"
 

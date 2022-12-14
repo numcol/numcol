@@ -1,5 +1,5 @@
 export interface DomainEvent {
-	name: string
-	createdAt: Date
-	aggregateId: string
+	readonly name: string
+	readonly createdAt: Date
+	readonly aggregateId: string
 }

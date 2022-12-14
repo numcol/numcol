@@ -1,3 +1,4 @@
+export * from "./crosscutting/logger"
 export * from "./game/createGameUseCase"
 export * from "./game/dtos/AnswerDto"
 export * from "./game/dtos/GameDto"

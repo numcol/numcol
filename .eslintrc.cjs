@@ -39,6 +39,13 @@ module.exports = {
 				project: ["./tsconfig.json"],
 			},
 			rules: {
+				"no-restricted-syntax": [
+					"error",
+					{
+						selector: "CallExpression[callee.property.name='forEach']",
+						message: "Do not use `forEach()`, use `for/of` instead",
+					},
+				],
 				"@typescript-eslint/explicit-member-accessibility": "error",
 				"@typescript-eslint/no-floating-promises": [
 					"error",
@@ -53,6 +60,7 @@ module.exports = {
 				],
 				"react-hooks/exhaustive-deps": ["error"],
 				"@typescript-eslint/no-shadow": ["error"],
+				"@typescript-eslint/prefer-for-of": ["error"],
 			},
 		},
 		{

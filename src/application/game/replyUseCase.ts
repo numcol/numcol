@@ -1,6 +1,6 @@
 import { GameRepository } from "@numcol/domain"
 import { Uuid } from "../../domain/crosscutting/uuid"
-import { UseCase } from "../useCase"
+import { UseCase } from "../crosscutting/useCase"
 
 interface ReplyUseCaseParams {
 	gameId: string

@@ -19,6 +19,7 @@ specifiers:
   eslint-config-prettier: ^8.5.0
   eslint-plugin-react: ^7.31.11
   eslint-plugin-react-hooks: ^4.6.0
+  eventemitter3: ^5.0.0
   expo: ~47.0.8
   expo-av: ~13.0.2
   expo-font: ~11.0.1
@@ -51,6 +52,7 @@ dependencies:
   '@types/react': 18.0.26
   '@types/react-native': 0.70.8
   diod: 2.0.0
+  eventemitter3: 5.0.0
   expo: 47.0.8_@babel+core@7.20.5
   expo-av: 13.0.2_expo@47.0.8
   expo-font: 11.0.1_expo@47.0.8
@@ -4355,6 +4357,10 @@ packages:
   /event-target-shim/5.0.1:
     resolution: {integrity: sha512-i/2XbnSz/uxRCU6+NdVJgKWDTM427+MqYbkQzD321DuCQJUqOuJKIA0IM2+W2xtYHdKOmZ4dR6fExsd4SXL+WQ==}
     engines: {node: '>=6'}
+    dev: false
+
+  /eventemitter3/5.0.0:
+    resolution: {integrity: sha512-riuVbElZZNXLeLEoprfNYoDSwTBRR44X3mnhdI1YcnENpWTCsTTVZ2zFuqQcpoyqPQIUXdiPEU0ECAq0KQRaHg==}
     dev: false
 
   /exec-async/2.2.0:
